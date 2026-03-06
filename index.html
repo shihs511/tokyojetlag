@@ -575,6 +575,16 @@
       opacity: 0.3;
     }
 
+    /* ─── CANVAS ANIMATION LAYER ─── */
+    #cityCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.85;
+    }
+
     /* ─── VIDEO / IMAGE BACKGROUND ─── */
     .hero-video {
       position: absolute;
@@ -646,6 +656,9 @@
 
   <!-- HERO -->
   <div class="hero">
+
+    <!-- ★ CANVAS ANIMATION: 窓点滅 + ネオン光 -->
+    <canvas id="cityCanvas"></canvas>
 
     <!-- ★ VIDEO BACKGROUND: hero-video.mp4を用意したらここが自動で使われる -->
     <video class="hero-video" id="heroVideo" autoplay muted loop playsinline
@@ -916,6 +929,155 @@
   </footer>
 
   <script>
+    // ─── CANVAS: 窓点滅 + ネオン光ストリーク ───
+    const canvas = document.getElementById('cityCanvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // 建物の窓
+    const windows = [];
+    const WINDOW_COUNT = 180;
+    const COLORS = ['#00f0ff', '#bf00ff', '#ff0080', '#ffe000', '#ffffff', '#ff6600'];
+
+    for (let i = 0; i < WINDOW_COUNT; i++) {
+      windows.push({
+        x: Math.random(),
+        y: 0.35 + Math.random() * 0.55,
+        w: 2 + Math.random() * 5,
+        h: 2 + Math.random() * 4,
+        color: COLORS[Math.floor(Math.random() * COLORS.length)],
+        alpha: Math.random(),
+        speed: 0.002 + Math.random() * 0.015,
+        phase: Math.random() * Math.PI * 2,
+        // たまに長時間オフになる
+        offChance: Math.random() < 0.3,
+        offTimer: 0,
+        offDuration: 60 + Math.random() * 200,
+      });
+    }
+
+    // ネオン光ストリーク
+    const streaks = [];
+    const STREAK_COUNT = 12;
+
+    for (let i = 0; i < STREAK_COUNT; i++) {
+      streaks.push(createStreak());
+    }
+
+    function createStreak() {
+      const isHorizontal = Math.random() < 0.4;
+      return {
+        x: Math.random(),
+        y: 0.5 + Math.random() * 0.5,
+        length: 0.05 + Math.random() * 0.15,
+        speed: (0.001 + Math.random() * 0.003) * (Math.random() < 0.5 ? 1 : -1),
+        color: COLORS[Math.floor(Math.random() * 3)], // blue/purple/pink only
+        alpha: 0,
+        fadeIn: true,
+        maxAlpha: 0.3 + Math.random() * 0.5,
+        fadeSpeed: 0.008 + Math.random() * 0.015,
+        horizontal: isHorizontal,
+        done: false,
+      };
+    }
+
+    let frame = 0;
+
+    function drawFrame() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const W = canvas.width;
+      const H = canvas.height;
+      frame++;
+
+      // ── 窓を描画 ──
+      windows.forEach(w => {
+        // オフタイマー処理
+        if (w.offChance && w.offTimer > 0) {
+          w.offTimer--;
+          return;
+        }
+        if (w.offChance && Math.random() < 0.0005) {
+          w.offTimer = w.offDuration;
+          return;
+        }
+
+        // アルファをsin波で変化
+        w.phase += w.speed;
+        const a = (Math.sin(w.phase) * 0.4 + 0.6) * 0.9;
+
+        ctx.save();
+        ctx.globalAlpha = a;
+        ctx.fillStyle = w.color;
+        ctx.shadowColor = w.color;
+        ctx.shadowBlur = 4;
+        ctx.fillRect(w.x * W, w.y * H, w.w, w.h);
+        ctx.restore();
+      });
+
+      // ── ネオンストリーク ──
+      streaks.forEach((s, i) => {
+        if (s.done) {
+          streaks[i] = createStreak();
+          return;
+        }
+
+        // フェードイン/アウト
+        if (s.fadeIn) {
+          s.alpha += s.fadeSpeed;
+          if (s.alpha >= s.maxAlpha) s.fadeIn = false;
+        } else {
+          s.alpha -= s.fadeSpeed * 0.5;
+          if (s.alpha <= 0) { s.done = true; return; }
+        }
+
+        // 移動
+        s.x += s.speed;
+        if (s.x < -s.length || s.x > 1 + s.length) s.done = true;
+
+        const x1 = s.x * W;
+        const y1 = s.y * H;
+        const len = s.length * W;
+
+        ctx.save();
+        ctx.globalAlpha = s.alpha;
+
+        const grad = ctx.createLinearGradient(
+          x1, y1,
+          s.horizontal ? x1 + len : x1,
+          s.horizontal ? y1 : y1 + len * 0.3
+        );
+        grad.addColorStop(0, 'transparent');
+        grad.addColorStop(0.3, s.color);
+        grad.addColorStop(0.7, s.color);
+        grad.addColorStop(1, 'transparent');
+
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.5;
+        ctx.shadowColor = s.color;
+        ctx.shadowBlur = 8;
+
+        ctx.beginPath();
+        if (s.horizontal) {
+          ctx.moveTo(x1, y1);
+          ctx.lineTo(x1 + len, y1);
+        } else {
+          ctx.moveTo(x1, y1);
+          ctx.lineTo(x1 + len * 0.1, y1 + len * 0.3);
+        }
+        ctx.stroke();
+        ctx.restore();
+      });
+
+      requestAnimationFrame(drawFrame);
+    }
+    drawFrame();
+
     // Custom cursor
     const cursor = document.getElementById('cursor');
     const ring = document.getElementById('cursorRing');
