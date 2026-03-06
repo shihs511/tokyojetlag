@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tokyo Jet Lag — It's 2AM. Now What?</title>
+  <meta name="description" content="You're wide awake at 2AM in Tokyo. We've got you. Real venues, real hours, real night life for jet-lagged travelers." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --neon-blue: #00f0ff;
+      --neon-purple: #bf00ff;
+      --neon-pink: #ff0080;
+      --neon-yellow: #ffe000;
+      --bg-dark: #04040f;
+      --bg-card: #0a0a1e;
+      --text-main: #e8e8f0;
+      --text-dim: #7070a0;
+      --glow-blue: 0 0 8px #00f0ff, 0 0 20px #00f0ff44;
+      --glow-purple: 0 0 8px #bf00ff, 0 0 20px #bf00ff44;
+      --glow-pink: 0 0 8px #ff0080, 0 0 20px #ff008044;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Space Mono', monospace;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* Custom cursor */
+    .cursor {
+      position: fixed;
+      width: 12px; height: 12px;
+      background: var(--neon-blue);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s, width 0.2s, height 0.2s;
+      box-shadow: var(--glow-blue);
+    }
+    .cursor-ring {
+      position: fixed;
+      width: 36px; height: 36px;
+      border: 1px solid var(--neon-blue);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.15s ease, opacity 0.2s;
+      opacity: 0.5;
+    }
+
+    /* Scanline overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.08) 2px,
+        rgba(0,0,0,0.08) 4px
+      );
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      padding: 1.2rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+      background: rgba(4, 4, 15, 0.85);
+      backdrop-filter: blur(12px);
+    }
+
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.1em;
+      color: var(--neon-blue);
+      text-shadow: var(--glow-blue);
+      text-decoration: none;
+    }
+    .logo span { color: var(--neon-pink); text-shadow: var(--glow-pink); }
+
+    nav a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-left: 2rem;
+      transition: color 0.2s, text-shadow 0.2s;
+    }
+    nav a:hover { color: var(--neon-blue); text-shadow: var(--glow-blue); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* City skyline silhouette */
+    .skyline {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 280px;
+      background:
+        /* Tokyo Tower */
+        linear-gradient(var(--bg-dark), var(--bg-dark)) 5% 60% / 3px 40% no-repeat,
+        linear-gradient(var(--bg-dark), var(--bg-dark)) 3.5% 45% / 30px 55% no-repeat,
+        /* Skyscrapers */
+        linear-gradient(var(--bg-dark), var(--bg-dark)) 12% 30% / 60px 70% no-repeat,
+        linear-gradient(var(--bg-dark), var(--bg-dark)) 20% 40% / 45px 60% no-repeat,
+        linear-gradient(var(--bg-dark), var(--bg-dark)) 28% 20% / 55px 80% no-repeat,
+        linear-gradient(var(--bg-dark), var(--bg-dark)) 38% 35% / 40px 65% no-repeat,
+        linear-gradient(var(--bg-dark), var(--bg-dark)) 46% 15% / 65px 85% no-repeat,
+        linear-gradient(var(--bg-dark), var(--bg-dark)) 57% 30% / 50px 70% no-repeat,
+        linear-gradient(var(--bg-dark), var(--bg-dark)) 66% 40% / 35px 60% no-repeat,
+        linear-gradient(var(--bg-dark), var(--bg-dark)) 74% 25% / 70px 75% no-repeat,
+        linear-gradient(var(--bg-dark), var(--bg-dark)) 84% 35% / 45px 65% no-repeat,
+        linear-gradient(var(--bg-dark), var(--bg-dark)) 92% 20% / 55px 80% no-repeat;
+      z-index: 1;
+    }
+
+    /* Neon ground glow */
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--neon-blue), var(--neon-purple), var(--neon-pink), transparent);
+      box-shadow: 0 0 30px var(--neon-blue), 0 0 60px var(--neon-purple);
+    }
+
+    /* Animated grid background */
+    .grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,240,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,240,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: grid-scroll 20s linear infinite;
+    }
+    @keyframes grid-scroll {
+      0% { transform: perspective(500px) rotateX(30deg) translateY(0); }
+      100% { transform: perspective(500px) rotateX(30deg) translateY(60px); }
+    }
+
+    /* Floating particles */
+    .particles {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .particle {
+      position: absolute;
+      width: 2px; height: 2px;
+      background: var(--neon-blue);
+      border-radius: 50%;
+      animation: float-up linear infinite;
+      opacity: 0;
+    }
+    @keyframes float-up {
+      0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 0.5; }
+      100% { transform: translateY(-10vh) translateX(var(--drift)); opacity: 0; }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+    }
+
+    .clock-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      border: 1px solid var(--neon-blue);
+      padding: 0.4rem 1rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--neon-blue);
+      margin-bottom: 2rem;
+      animation: pulse-border 3s ease-in-out infinite;
+    }
+    @keyframes pulse-border {
+      0%, 100% { border-color: var(--neon-blue); box-shadow: var(--glow-blue); }
+      50% { border-color: var(--neon-purple); box-shadow: var(--glow-purple); }
+    }
+    .clock-dot {
+      width: 6px; height: 6px;
+      background: var(--neon-blue);
+      border-radius: 50%;
+      animation: blink 1s step-end infinite;
+      box-shadow: var(--glow-blue);
+    }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+    h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 12vw, 10rem);
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+
+    .h1-line1 {
+      color: var(--text-main);
+      display: block;
+    }
+    .h1-line2 {
+      color: var(--neon-blue);
+      text-shadow: var(--glow-blue);
+      display: block;
+      animation: flicker 8s ease-in-out infinite;
+    }
+    .h1-line3 {
+      color: var(--neon-pink);
+      text-shadow: var(--glow-pink);
+      display: block;
+      font-size: clamp(2rem, 6vw, 5rem);
+    }
+
+    @keyframes flicker {
+      0%, 95%, 100% { opacity: 1; text-shadow: var(--glow-blue); }
+      96% { opacity: 0.8; text-shadow: none; }
+      97% { opacity: 1; text-shadow: var(--glow-blue); }
+      98% { opacity: 0.6; text-shadow: none; }
+      99% { opacity: 1; text-shadow: var(--glow-blue); }
+    }
+
+    .hero-sub {
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      line-height: 1.8;
+      color: var(--text-dim);
+      max-width: 500px;
+      border-left: 2px solid var(--neon-purple);
+      padding-left: 1rem;
+    }
+
+    /* World clock strip */
+    .world-clock {
+      margin-top: 3rem;
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .clock-city {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .clock-city-name {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
+    .clock-city-time {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.05em;
+      line-height: 1;
+    }
+    .clock-city-time.tokyo { color: var(--neon-blue); text-shadow: var(--glow-blue); }
+    .clock-city-time.la { color: var(--neon-purple); text-shadow: var(--glow-purple); }
+    .clock-city-time.nyc { color: var(--neon-pink); text-shadow: var(--glow-pink); }
+    .clock-city-time.london { color: var(--neon-yellow); text-shadow: 0 0 8px var(--neon-yellow); }
+    .clock-city-status {
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+    }
+    .status-awake { color: #ff4444; }
+    .status-sleep { color: #44ff88; }
+
+    /* ─── SECTION COMMON ─── */
+    section {
+      padding: 6rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--neon-purple);
+      text-shadow: var(--glow-purple);
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      line-height: 1;
+      margin-bottom: 3rem;
+      color: var(--text-main);
+    }
+    .section-title span { color: var(--neon-blue); text-shadow: var(--glow-blue); }
+
+    /* ─── JET LAG EXPLAINER ─── */
+    .jetlag-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5px;
+      background: rgba(0,240,255,0.1);
+      border: 1px solid rgba(0,240,255,0.1);
+    }
+    .jetlag-card {
+      background: var(--bg-card);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .jetlag-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 0;
+      background: var(--neon-blue);
+      transition: height 0.4s ease;
+    }
+    .jetlag-card:hover { background: #0d0d25; }
+    .jetlag-card:hover::before { height: 100%; }
+
+    .jetlag-time {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 4rem;
+      color: var(--neon-blue);
+      text-shadow: var(--glow-blue);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .jetlag-from {
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+    .jetlag-feeling {
+      font-size: 0.8rem;
+      color: var(--text-main);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+    .jetlag-action {
+      font-size: 0.65rem;
+      color: var(--neon-pink);
+      text-shadow: var(--glow-pink);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ─── VENUES ─── */
+    .venues-intro {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      line-height: 1.8;
+      max-width: 600px;
+      margin-bottom: 3rem;
+    }
+
+    .venue-filters {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+    .filter-btn {
+      background: transparent;
+      border: 1px solid rgba(0,240,255,0.2);
+      color: var(--text-dim);
+      padding: 0.4rem 1rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      border-color: var(--neon-blue);
+      color: var(--neon-blue);
+      box-shadow: var(--glow-blue);
+      background: rgba(0,240,255,0.05);
+    }
+
+    .venues-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1px;
+      background: rgba(191,0,255,0.1);
+    }
+
+    .venue-card {
+      background: var(--bg-card);
+      padding: 2rem;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.3s;
+      border-top: 1px solid transparent;
+    }
+    .venue-card:hover {
+      background: #0d0d25;
+      border-top-color: var(--neon-purple);
+    }
+
+    .venue-tag {
+      display: inline-block;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      margin-bottom: 1rem;
+    }
+    .tag-ramen { background: rgba(255,0,128,0.1); color: var(--neon-pink); border: 1px solid rgba(255,0,128,0.3); }
+    .tag-bar { background: rgba(0,240,255,0.1); color: var(--neon-blue); border: 1px solid rgba(0,240,255,0.3); }
+    .tag-24h { background: rgba(191,0,255,0.1); color: var(--neon-purple); border: 1px solid rgba(191,0,255,0.3); }
+    .tag-walk { background: rgba(255,224,0,0.1); color: var(--neon-yellow); border: 1px solid rgba(255,224,0,0.3); }
+    .tag-onsen { background: rgba(0,240,255,0.1); color: #00ffcc; border: 1px solid rgba(0,255,200,0.3); }
+
+    .venue-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.05em;
+      color: var(--text-main);
+      margin-bottom: 0.3rem;
+      line-height: 1;
+    }
+    .venue-name-jp {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+      font-weight: 300;
+    }
+    .venue-hours {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.65rem;
+      color: var(--neon-blue);
+      margin-bottom: 0.8rem;
+    }
+    .venue-hours::before {
+      content: '●';
+      color: #00ff88;
+      font-size: 0.5rem;
+      animation: blink 2s step-end infinite;
+    }
+    .venue-area {
+      font-size: 0.6rem;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .venue-desc {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+    .venue-verify {
+      margin-top: 1rem;
+      font-size: 0.55rem;
+      color: rgba(255,160,0,0.7);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .venue-verify::before { content: '⚠ '; }
+
+    /* ─── SURVIVAL TIPS ─── */
+    .tips-section {
+      background: #060614;
+      border-top: 1px solid rgba(0,240,255,0.08);
+      border-bottom: 1px solid rgba(0,240,255,0.08);
+    }
+
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+    .tip-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .tip-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem;
+      color: rgba(0,240,255,0.12);
+      line-height: 1;
+    }
+    .tip-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .tip-body {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      line-height: 1.8;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 3rem 2rem;
+      border-top: 1px solid rgba(0,240,255,0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      text-align: center;
+    }
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: var(--neon-blue);
+      text-shadow: var(--glow-blue);
+    }
+    .footer-sub {
+      font-size: 0.6rem;
+      color: var(--text-dim);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      line-height: 2;
+    }
+    .footer-disclaimer {
+      font-size: 0.55rem;
+      color: rgba(112,112,160,0.5);
+      max-width: 500px;
+      line-height: 1.8;
+    }
+
+    /* Neon divider */
+    .neon-line {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+      margin: 0;
+      opacity: 0.3;
+    }
+
+    /* ─── VIDEO / IMAGE BACKGROUND ─── */
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.35;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .hero-img-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('images/hero-bg.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.3;
+      z-index: 0;
+      pointer-events: none;
+    }
+    /* 動画がロードされたら静止画を隠す */
+    .hero-video:not([src=""]) ~ .hero-img-bg { opacity: 0; }
+
+    /* Venue card images */
+    .venue-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      display: block;
+      margin-bottom: 1.2rem;
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+    .venue-card:hover .venue-img { opacity: 1; }
+
+    /* About / section bg image */
+    .section-bg-img {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.08;
+      pointer-events: none;
+    }
+
+    /* ─── VIDEO / IMAGE BACKGROUND ─── */
+    @media (max-width: 640px) {
+      header { padding: 1rem; }
+      nav { display: none; }
+      .hero { padding: 6rem 1rem 3rem; }
+      section { padding: 4rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- HEADER -->
+  <header>
+    <a href="#" class="logo">Tokyo<span>JetLag</span></a>
+    <nav>
+      <a href="#why">Why Awake</a>
+      <a href="#venues">Venues</a>
+      <a href="#survive">Survive</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero">
+
+    <!-- ★ VIDEO BACKGROUND: hero-video.mp4を用意したらここが自動で使われる -->
+    <video class="hero-video" id="heroVideo" autoplay muted loop playsinline
+           poster="images/hero-bg.jpg">
+      <source src="videos/hero-video.webm" type="video/webm">
+      <source src="videos/hero-video.mp4" type="video/mp4">
+      <!-- 動画なければposterの画像(hero-bg.jpg)がフォールバック表示 -->
+    </video>
+
+    <!-- ★ 動画がない場合の静止画背景 (images/hero-bg.jpgを置くと自動で表示) -->
+    <div class="hero-img-bg" id="heroImgBg"></div>
+
+    <div class="grid-bg"></div>
+    <div class="particles" id="particles"></div>
+    <div class="skyline"></div>
+
+    <div class="hero-content">
+      <div class="clock-badge">
+        <div class="clock-dot"></div>
+        Live from Tokyo — It's late somewhere
+      </div>
+
+      <h1>
+        <span class="h1-line1">YOU'RE AWAKE</span>
+        <span class="h1-line2">IN TOKYO</span>
+        <span class="h1-line3">at 2am. Good.</span>
+      </h1>
+
+      <p class="hero-sub">
+        Jet lag brought you here. Let us show you what Tokyo looks like when everyone else is asleep.
+        Real venues. Real hours. Verified open.
+      </p>
+
+      <!-- Live world clock -->
+      <div class="world-clock" id="worldClock">
+        <div class="clock-city">
+          <div class="clock-city-name">🗼 Tokyo</div>
+          <div class="clock-city-time tokyo" id="time-tokyo">--:--</div>
+          <div class="clock-city-status status-awake" id="status-tokyo"></div>
+        </div>
+        <div class="clock-city">
+          <div class="clock-city-name">🌁 Los Angeles</div>
+          <div class="clock-city-time la" id="time-la">--:--</div>
+          <div class="clock-city-status status-sleep" id="status-la"></div>
+        </div>
+        <div class="clock-city">
+          <div class="clock-city-name">🗽 New York</div>
+          <div class="clock-city-time nyc" id="time-nyc">--:--</div>
+          <div class="clock-city-status status-sleep" id="status-nyc"></div>
+        </div>
+        <div class="clock-city">
+          <div class="clock-city-name">🎡 London</div>
+          <div class="clock-city-time london" id="time-london">--:--</div>
+          <div class="clock-city-status status-sleep" id="status-london"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHY AWAKE -->
+  <section id="why" style="max-width:1100px;">
+    <div class="section-label">// the science of suffering</div>
+    <h2 class="section-title">Your Body <span>Has No Idea</span><br>Where It Is</h2>
+
+    <div class="jetlag-grid">
+      <div class="jetlag-card">
+        <div class="jetlag-time">1AM</div>
+        <div class="jetlag-from">If you flew from LA or SF</div>
+        <div class="jetlag-feeling">Your body thinks it's 9AM. You're fully awake, slightly confused, and weirdly hungry. This is peak jet lag hour — the gap between Tokyo night and your California morning.</div>
+        <div class="jetlag-action">→ Go for ramen. Walk Shinjuku.</div>
+      </div>
+      <div class="jetlag-card">
+        <div class="jetlag-time">2AM</div>
+        <div class="jetlag-from">If you flew from New York</div>
+        <div class="jetlag-feeling">Your brain says it's 1PM. You're alert, functional, maybe even productive. The streets are quiet but the convenience stores are open and the vending machines are eternal.</div>
+        <div class="jetlag-action">→ Konbini run. 7-Eleven onigiri.</div>
+      </div>
+      <div class="jetlag-card">
+        <div class="jetlag-time">4AM</div>
+        <div class="jetlag-from">If you flew from London or Europe</div>
+        <div class="jetlag-feeling">It's noon back home. You're not tired at all and slightly smug about it. This is when Tokyo transforms — the delivery trucks appear, the fishermen head to Tsukiji, the city exhales.</div>
+        <div class="jetlag-action">→ Catch sunrise at Ueno Park.</div>
+      </div>
+      <div class="jetlag-card">
+        <div class="jetlag-time">5AM</div>
+        <div class="jetlag-from">If you flew from the Middle East</div>
+        <div class="jetlag-feeling">Your clock says 11AM. The first trains start running. Old men do radio calisthenics in the park. The city's secret morning shift begins, and you're the only tourist allowed to see it.</div>
+        <div class="jetlag-action">→ Meiji Shrine before the crowds.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="neon-line"></div>
+
+  <!-- VENUES -->
+  <section id="venues" style="max-width:1100px;">
+    <div class="section-label">// verified late-night venues</div>
+    <h2 class="section-title">Where to Go<br><span>Right Now</span></h2>
+
+    <p class="venues-intro">
+      All venues below are open late or 24 hours. Hours are verified but always confirm before you go — Tokyo restaurants keep their own time.
+    </p>
+
+    <div class="venue-filters">
+      <button class="filter-btn active" onclick="filterVenues('all')">All</button>
+      <button class="filter-btn" onclick="filterVenues('ramen')">Ramen</button>
+      <button class="filter-btn" onclick="filterVenues('bar')">Bar</button>
+      <button class="filter-btn" onclick="filterVenues('24h')">24H</button>
+      <button class="filter-btn" onclick="filterVenues('walk')">Walk</button>
+      <button class="filter-btn" onclick="filterVenues('onsen')">Onsen</button>
+    </div>
+
+    <div class="venues-grid" id="venuesGrid">
+
+      <div class="venue-card" data-tag="ramen">
+        <img class="venue-img" src="images/venue-ramen.jpg" alt="Ramen shop at night" onerror="this.style.display='none'">
+        <span class="venue-tag tag-ramen">Ramen</span>
+        <div class="venue-name">Fuunji</div>
+        <div class="venue-name-jp">風神 — Shinjuku</div>
+        <div class="venue-hours">Open until late — check Google Maps</div>
+        <div class="venue-area">📍 Shinjuku · 5 min walk from station</div>
+        <div class="venue-desc">Tsukemen (dipping ramen) that people queue for at midnight. Rich, intense broth. Cash only. Small counter. Worth every minute of the line.</div>
+        <div class="venue-verify">Hours vary — verify before going</div>
+      </div>
+
+      <div class="venue-card" data-tag="ramen">
+        <span class="venue-tag tag-ramen">Ramen</span>
+        <div class="venue-name">Ichiran</div>
+        <div class="venue-name-jp">一蘭 — Multiple Locations</div>
+        <div class="venue-hours">Open 24 hours — most locations</div>
+        <div class="venue-area">📍 Shinjuku · Shibuya · Akihabara</div>
+        <div class="venue-desc">Solo booths designed for the lone, jet-lagged diner. Order by form. No eye contact required. The tonkotsu is consistent and deeply comforting at 3AM.</div>
+      </div>
+
+      <div class="venue-card" data-tag="bar">
+        <img class="venue-img" src="images/venue-bar.jpg" alt="Golden Gai bar" onerror="this.style.display='none'">
+        <span class="venue-tag tag-bar">Bar</span>
+        <div class="venue-name">Golden Gai</div>
+        <div class="venue-name-jp">新宿ゴールデン街</div>
+        <div class="venue-hours">Most bars open until 4–5AM</div>
+        <div class="venue-area">📍 Shinjuku · Behind Kabukicho</div>
+        <div class="venue-desc">200+ tiny bars in an alley frozen in 1970. Some seat 5 people. Some have themes. Some have cover charges. All are extraordinary. Follow your instincts or the music.</div>
+      </div>
+
+      <div class="venue-card" data-tag="bar">
+        <span class="venue-tag tag-bar">Bar</span>
+        <div class="venue-name">Albatross G</div>
+        <div class="venue-name-jp">アルバトロス — Golden Gai</div>
+        <div class="venue-hours">Open until 5AM most nights</div>
+        <div class="venue-area">📍 Shinjuku Golden Gai</div>
+        <div class="venue-desc">A narrow vertical bar with a spiral staircase and a gothic chandelier. Friendly to foreigners. One of the most photogenic bars in Tokyo. Arrive after midnight.</div>
+        <div class="venue-verify">Hours change — verify before going</div>
+      </div>
+
+      <div class="venue-card" data-tag="24h">
+        <span class="venue-tag tag-24h">24H</span>
+        <div class="venue-name">7-Eleven / Family Mart</div>
+        <div class="venue-name-jp">コンビニ — Everywhere</div>
+        <div class="venue-hours">Open 24 hours · Every block</div>
+        <div class="venue-area">📍 Literally everywhere in Tokyo</div>
+        <div class="venue-desc">The Japanese convenience store is a cultural institution. Fresh onigiri, hot oden, ATM that accepts foreign cards, free WiFi, clean bathrooms. Your midnight base camp.</div>
+      </div>
+
+      <div class="venue-card" data-tag="walk">
+        <img class="venue-img" src="images/venue-shibuya.jpg" alt="Shibuya crossing at night" onerror="this.style.display='none'">
+        <span class="venue-tag tag-walk">Walk</span>
+        <div class="venue-name">Shibuya Crossing</div>
+        <div class="venue-name-jp">渋谷スクランブル交差点</div>
+        <div class="venue-hours">Open always — trains stop ~1AM</div>
+        <div class="venue-area">📍 Shibuya · Hachiko Exit</div>
+        <div class="venue-desc">Still active at 2AM on weekends. After the last train the crowd shifts — less salary workers, more night creatures. The scramble crossing has a different energy after midnight.</div>
+      </div>
+
+      <div class="venue-card" data-tag="walk">
+        <span class="venue-tag tag-walk">Walk</span>
+        <div class="venue-name">Shinjuku Kabukicho</div>
+        <div class="venue-name-jp">歌舞伎町</div>
+        <div class="venue-hours">Never sleeps</div>
+        <div class="venue-area">📍 Shinjuku · East Exit</div>
+        <div class="venue-desc">Tokyo's entertainment district in full neon at 3AM. The Robot Restaurant is closed but everything around it is alive. Walk through for the spectacle — you don't need to spend money.</div>
+      </div>
+
+      <div class="venue-card" data-tag="onsen">
+        <img class="venue-img" src="images/venue-onsen.jpg" alt="Tokyo onsen at night" onerror="this.style.display='none'">
+        <span class="venue-tag tag-onsen">Onsen</span>
+        <div class="venue-name">Thermae-Yu</div>
+        <div class="venue-name-jp">テルマー湯 — Shinjuku</div>
+        <div class="venue-hours">Open 24 hours</div>
+        <div class="venue-area">📍 Shinjuku · 5 min from Kabukicho</div>
+        <div class="venue-desc">A proper onsen in central Shinjuku. Open all night. Natural hot spring water pumped from underground. The ultimate jet lag treatment — soak at 3AM, sleep like a baby.</div>
+      </div>
+
+      <div class="venue-card" data-tag="walk">
+        <span class="venue-tag tag-walk">Walk</span>
+        <div class="venue-name">Ueno Park at Dawn</div>
+        <div class="venue-name-jp">上野公園 — 5AM</div>
+        <div class="venue-hours">Park open 24h · Best at 5AM</div>
+        <div class="venue-area">📍 Ueno · Direct from JR station</div>
+        <div class="venue-desc">If you're still awake at 5AM, come here. Cherry blossom season aside, it's beautiful when empty. Old women do morning exercise. Crows are loud. Sunrise hits the pond perfectly.</div>
+      </div>
+
+      <div class="venue-card" data-tag="ramen">
+        <span class="venue-tag tag-ramen">Ramen</span>
+        <div class="venue-name">Nagi Shinjuku</div>
+        <div class="venue-name-jp">凪 — Golden Gai</div>
+        <div class="venue-hours">Until 7AM / 9AM weekends</div>
+        <div class="venue-area">📍 Shinjuku · Golden Gai</div>
+        <div class="venue-desc">Niboshi (dried sardine) based broth unlike anything you've had. Located above Golden Gai. The 4AM bowl after bar hopping is a rite of passage for the nocturnal in Shinjuku.</div>
+        <div class="venue-verify">Hours vary by season — verify</div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="neon-line"></div>
+
+  <!-- SURVIVAL TIPS -->
+  <section class="tips-section" id="survive" style="max-width:1100%; padding:6rem 2rem;">
+    <div style="max-width:1100px; margin:0 auto;">
+      <div class="section-label">// staying sane at 3am</div>
+      <h2 class="section-title">Jet Lag<br><span>Survival Guide</span></h2>
+
+      <div class="tips-grid">
+        <div class="tip-item">
+          <div class="tip-number">01</div>
+          <div class="tip-title">Don't fight it</div>
+          <div class="tip-body">The worst thing you can do is lie in bed angry at the ceiling. If you're awake, Tokyo wants you. Get dressed. Go outside. The city is different at night and you have earned this view.</div>
+        </div>
+        <div class="tip-item">
+          <div class="tip-number">02</div>
+          <div class="tip-title">Konbini is your friend</div>
+          <div class="tip-body">7-Eleven, Lawson, and Family Mart are not just convenience stores. They are restaurants, pharmacies, ATMs, and community centers. The onigiri is fresh every few hours. Get one at 2AM.</div>
+        </div>
+        <div class="tip-item">
+          <div class="tip-number">03</div>
+          <div class="tip-title">The Yamanote Loop</div>
+          <div class="tip-body">Trains stop around 12:30AM and restart around 5AM. If you're stuck out, the Yamanote Line all-night bus follows the same loop. Or just embrace the taxi — they're everywhere and metered.</div>
+        </div>
+        <div class="tip-item">
+          <div class="tip-number">04</div>
+          <div class="tip-title">Sunlight resets the clock</div>
+          <div class="tip-body">Get outside by 7AM. Sunlight is the most powerful circadian reset available. Even 20 minutes of morning sun — especially in a park — will shift your body clock faster than any supplement.</div>
+        </div>
+        <div class="tip-item">
+          <div class="tip-number">05</div>
+          <div class="tip-title">Avoid the nap trap</div>
+          <div class="tip-body">The long afternoon nap is tempting and catastrophic. If you must sleep, set an alarm for 20 minutes. Sleeping 2+ hours in the afternoon guarantees you'll be awake until 4AM again.</div>
+        </div>
+        <div class="tip-item">
+          <div class="tip-number">06</div>
+          <div class="tip-title">Eat on Tokyo time</div>
+          <div class="tip-body">Your body syncs to local time partly through meal timing. Even if you're not hungry, eat breakfast when Tokyo eats breakfast. Find a morning teishoku set. Signal to your body that this is now.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">TokyoJetLag.com</div>
+    <div class="footer-sub">
+      For the wide-awake, the displaced, and the thoroughly confused.<br>
+      Tokyo · 東京 · All hours · All nights
+    </div>
+    <div class="footer-disclaimer">
+      Hours and venue info are updated periodically but Tokyo never stops changing. Always verify hours directly before visiting. We are not responsible for closed restaurants at 3AM — that's between you and your jet lag.
+    </div>
+  </footer>
+
+  <script>
+    // Custom cursor
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    function animateCursor() {
+      cursor.style.left = mx + 'px';
+      cursor.style.top = my + 'px';
+      rx += (mx - rx) * 0.15;
+      ry += (my - ry) * 0.15;
+      ring.style.left = rx + 'px';
+      ring.style.top = ry + 'px';
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // World clock
+    function updateClocks() {
+      const now = new Date();
+      const fmt = tz => new Intl.DateTimeFormat('en-US', {
+        hour: '2-digit', minute: '2-digit', hour12: false, timeZone: tz
+      }).format(now);
+      const hr = tz => parseInt(new Intl.DateTimeFormat('en-US', {
+        hour: 'numeric', hour12: false, timeZone: tz
+      }).format(now));
+
+      const cities = [
+        { id: 'tokyo',  tz: 'Asia/Tokyo',        label: 'Your destination' },
+        { id: 'la',     tz: 'America/Los_Angeles', label: '' },
+        { id: 'nyc',    tz: 'America/New_York',    label: '' },
+        { id: 'london', tz: 'Europe/London',       label: '' },
+      ];
+
+      cities.forEach(c => {
+        document.getElementById('time-' + c.id).textContent = fmt(c.tz);
+        const h = hr(c.tz);
+        const sleeping = h >= 23 || h < 6;
+        const statusEl = document.getElementById('status-' + c.id);
+        if (c.id === 'tokyo') {
+          const jetlagged = h >= 1 && h <= 5;
+          statusEl.textContent = jetlagged ? '🌙 Prime jet lag hours' : h >= 6 && h < 10 ? '🌅 Early morning' : '🗼 Normal hours';
+          statusEl.className = 'clock-city-status status-awake';
+        } else {
+          statusEl.textContent = sleeping ? '😴 Probably asleep' : '☀️ Awake back home';
+          statusEl.className = 'clock-city-status ' + (sleeping ? 'status-sleep' : 'status-awake');
+        }
+      });
+    }
+    updateClocks();
+    setInterval(updateClocks, 30000);
+
+    // Particles
+    const particleContainer = document.getElementById('particles');
+    for (let i = 0; i < 30; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.animationDuration = (8 + Math.random() * 15) + 's';
+      p.style.animationDelay = (Math.random() * 15) + 's';
+      p.style.setProperty('--drift', (Math.random() * 100 - 50) + 'px');
+      if (Math.random() > 0.5) p.style.background = '#bf00ff';
+      if (Math.random() > 0.7) p.style.background = '#ff0080';
+      particleContainer.appendChild(p);
+    }
+
+    // Venue filter
+    function filterVenues(tag) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+      document.querySelectorAll('.venue-card').forEach(card => {
+        card.style.display = (tag === 'all' || card.dataset.tag === tag) ? 'block' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>
