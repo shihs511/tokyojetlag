@@ -5,6 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tokyo Jet Lag — It's 2AM. Now What?</title>
   <meta name="description" content="You're wide awake at 2AM in Tokyo. We've got you. Real venues, real hours, real night life for jet-lagged travelers." />
+
+  <!-- ★ GA4: Measurement IDをここに入れる（後述） -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script> -->
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet" />
@@ -917,6 +927,30 @@
   </section>
 
   <!-- FOOTER -->
+  <!-- TIME SLIDER -->
+  <div class="time-slider-section" id="now">
+    <div class="time-slider-inner">
+      <div class="section-label">// what can you do right now</div>
+      <h2 class="section-title">It's <span id="sliderTimeDisplay">--:--</span><br>in Tokyo</h2>
+
+      <div class="slider-wrap">
+        <input type="range" class="time-range" id="timeSlider" min="0" max="23" step="1" value="2">
+        <div class="slider-labels">
+          <span>12AM</span><span>3AM</span><span>6AM</span><span>9AM</span>
+          <span>12PM</span><span>3PM</span><span>6PM</span><span>9PM</span><span>11PM</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom:1.5rem;">
+        <span class="time-now-badge" onclick="setTokyoNow()">▶ SET TO TOKYO NOW</span>
+      </div>
+
+      <div class="tip-cards" id="timeTipCards"></div>
+    </div>
+  </div>
+
+  <div class="neon-line"></div>
+
   <footer>
     <div class="footer-logo">TokyoJetLag.com</div>
     <div class="footer-sub">
@@ -1151,6 +1185,187 @@
         card.style.display = (tag === 'all' || card.dataset.tag === tag) ? 'block' : 'none';
       });
     }
+
+    // ─── TIME SLIDER ───
+    const TIME_TIPS = {
+      0:  [
+        { icon: '🍜', title: 'Midnight Ramen', body: 'Ichiran is open 24h. Fuunji and Nagi in Golden Gai are still going strong at midnight.' },
+        { icon: '🏮', title: 'Golden Gai', body: 'The tiny bars of Shinjuku are in full swing. Follow the noise down any alley.' },
+        { icon: '🚕', title: 'Last Train Warning', body: 'Last trains leave around 12:30AM. Plan your route or budget for a taxi home.' },
+      ],
+      1:  [
+        { icon: '🍜', title: 'Deep Night Ramen', body: 'Nagi Shinjuku open until 7AM. Ichiran 24h. The quiet bowls of the city.' },
+        { icon: '🌃', title: 'Kabukicho Walk', body: 'The entertainment district never sleeps. Walk through for the spectacle.' },
+        { icon: '🏧', title: 'Konbini Run', body: '7-Eleven has fresh onigiri. ATMs accept foreign cards. Coffee is always hot.' },
+      ],
+      2:  [
+        { icon: '♨️', title: 'Thermae-Yu Onsen', body: 'Open 24h in Shinjuku. A hot spring soak at 2AM is deeply restorative.' },
+        { icon: '🍜', title: 'Ramen O\'Clock', body: 'This is peak ramen hour. Ichiran, Nagi, any open shop. You need this bowl.' },
+        { icon: '🌆', title: 'Empty Shibuya', body: 'Walk to Shibuya crossing. Weekend nights it\'s still alive. Weekdays: eerily beautiful.' },
+      ],
+      3:  [
+        { icon: '🏙️', title: 'City of Ghosts', body: 'The streets are yours. Walk anywhere. The silence of Tokyo at 3AM is extraordinary.' },
+        { icon: '♨️', title: 'Night Onsen', body: 'Thermae-Yu is still open. You\'ll have the rotenburo almost to yourself.' },
+        { icon: '☕', title: 'Konbini Coffee', body: 'All convenience stores have freshly brewed coffee. 100 yen. Surprisingly good.' },
+      ],
+      4:  [
+        { icon: '🚚', title: 'City Wakes Up', body: 'Delivery trucks appear. Tsukiji outer market vendors start setup. Tokyo\'s other shift begins.' },
+        { icon: '🌅', title: 'Pre-Dawn Walk', body: 'Head toward any park. The light before sunrise in Tokyo is unlike anywhere else.' },
+        { icon: '🍱', title: 'Early Breakfast', body: 'Some teishoku restaurants open at 5AM. Look for the ones with handwritten signs.' },
+      ],
+      5:  [
+        { icon: '🌅', title: 'Sunrise Time', body: 'Ueno Park, Shinjuku Gyoen, Yoyogi. Any open green space will reward you now.' },
+        { icon: '⛩️', title: 'Meiji Shrine', body: 'Enter the forest before anyone else arrives. The morning rituals begin at dawn.' },
+        { icon: '🚃', title: 'First Trains', body: 'Yamanote Line restarts around 5AM. You can go anywhere again. The city resets.' },
+      ],
+      6:  [
+        { icon: '🍳', title: 'Morning Set', body: 'Breakfast sets (モーニング) at kissaten coffee shops. Toast, egg, coffee for ¥500.' },
+        { icon: '🏯', title: 'Beat the Crowds', body: 'Senso-ji, Meiji Shrine, any temple. You have 2 hours before tour groups arrive.' },
+        { icon: '🐟', title: 'Tsukiji Outer Market', body: 'Breakfast sushi and tamagoyaki at the outer market stalls. Open from 5-6AM.' },
+      ],
+      7:  [
+        { icon: '☕', title: 'Coffee Culture', body: 'Kissaten old-school coffee shops are at their best at 7AM. Order the morning set.' },
+        { icon: '🌸', title: 'Park Walking', body: 'Tokyo parks are gorgeous in the morning light. Locals exercise, feed birds, read.' },
+        { icon: '🛍️', title: 'Early Konbini', body: 'Fresh deliveries just arrived. The best onigiri selection of the day is right now.' },
+      ],
+      8:  [
+        { icon: '🚇', title: 'Rush Hour', body: 'Trains are full. If you can avoid the subway from 8-9AM, do it. Walk instead.' },
+        { icon: '🍱', title: 'Breakfast Done Right', body: 'Hotel breakfast or a neighborhood kissaten. Set yourself up for the day.' },
+        { icon: '🗺️', title: 'Morning Museums', body: 'National museums open at 9AM. First hour is almost empty. Best time to visit.' },
+      ],
+      9:  [
+        { icon: '🏛️', title: 'Museums Open', body: 'Tokyo National Museum, teamLab, Mori Art Museum. Pick one, go early.' },
+        { icon: '🛒', title: 'Department Stores', body: 'Depachika (basement food halls) open at 10AM. Worth a visit just to look.' },
+        { icon: '🌿', title: 'Garden Time', body: 'Shinjuku Gyoen, Hamarikyu, Koishikawa Korakuen. Morning in a Japanese garden.' },
+      ],
+      10: [
+        { icon: '🏙️', title: 'City in Full Swing', body: 'Everything is open. This is the most normal hour of the Tokyo day.' },
+        { icon: '🍣', title: 'Sushi Breakfast', body: 'Tsukiji outer market is still going. Toyosu market has tours and sushi restaurants.' },
+        { icon: '📸', title: 'Photography Hour', body: 'Morning light in Yanaka, Shimokitazawa, or Koenji. Low-key neighborhoods at their best.' },
+      ],
+      11: [
+        { icon: '🍱', title: 'Pre-Lunch Window', body: 'The best ramen shops open at 11AM and run out by early afternoon. Go now.' },
+        { icon: '🛍️', title: 'Harajuku / Omotesando', body: 'Shops open, crowds manageable. The fashion district before the afternoon rush.' },
+        { icon: '🏯', title: 'Last Quiet Temple Hour', body: 'By noon, tour groups arrive. Visit Asakusa now if you want breathing room.' },
+      ],
+      12: [
+        { icon: '🍜', title: 'Lunch Rush', body: 'Every ramen, soba, and teishoku shop has a line. Avoid peak noon, eat at 11:30 or 1:30.' },
+        { icon: '🌳', title: 'Midday Park Break', body: 'Salary workers eat in parks. Join them. Buy something from a konbini and sit outside.' },
+        { icon: '☕', title: 'Afternoon Coffee', body: 'Blue Bottle, Sarutahiko, Onibus — Tokyo\'s specialty coffee scene is excellent.' },
+      ],
+      13: [
+        { icon: '🎌', title: 'Afternoon Temples', body: 'Crowds thin out slightly after lunch. Good time for a second temple visit.' },
+        { icon: '🎮', title: 'Akihabara', body: 'The electronics and anime district is fully alive in the afternoon.' },
+        { icon: '🍦', title: 'Soft Serve Tour', body: 'Matcha soft serve in Asakusa, sesame in Yanaka, wagyu in Ginza.' },
+      ],
+      14: [
+        { icon: '🏬', title: 'Shibuya Scramble', body: 'Afternoon is good for Shibuya. Crowds are manageable, shops are open, the crossing is busy.' },
+        { icon: '🎨', title: 'Art Galleries', body: 'Mori Art Museum, 21_21 Design Sight, or the Ginza galleries. Quiet on weekday afternoons.' },
+        { icon: '🏮', title: 'Planning Dinner', body: 'This is the time to figure out where you\'re eating tonight. Popular places fill up by 7PM.' },
+      ],
+      15: [
+        { icon: '🌅', title: 'Golden Hour Prep', body: 'Position yourself somewhere high or scenic before 5PM. Tokyo Skytree, Roppongi Hills.' },
+        { icon: '🍵', title: 'Afternoon Tea', body: 'Hotel lobby bars and tea rooms are at their best in the mid-afternoon.' },
+        { icon: '🛒', title: 'Department Store Peak', body: 'Depachika basement food halls are fully stocked. Best selection of the day.' },
+      ],
+      16: [
+        { icon: '🌆', title: 'Golden Hour', body: 'Get to any elevated spot. Tokyo Tower, Skytree, or just a rooftop konbini terrace.' },
+        { icon: '🍺', title: 'Happy Hour Starts', body: 'Standing bars (tachinomi) and izakayas start their early deals. Beer from ¥300.' },
+        { icon: '🚶', title: 'Evening Walk', body: 'Daikanyama, Nakameguro along the canal, or Shimokitazawa. Best in early evening.' },
+      ],
+      17: [
+        { icon: '🌅', title: 'Sunset Tokyo', body: 'Find the canal at Nakameguro or the shrine gate silhouette at sunset. Pure Tokyo.' },
+        { icon: '🍺', title: 'After-Work Drinks', body: 'Salary workers descend on izakayas. Join the energy. Standing bar near any station.' },
+        { icon: '🍣', title: 'Pre-Dinner Sushi', body: 'Conveyor belt sushi (kaitenzushi) before the dinner rush. Cheaper and still excellent.' },
+      ],
+      18: [
+        { icon: '🍖', title: 'Dinner Time', body: 'Yakitori under the train tracks, kushikatsu in a basement, or kaiseki if you planned ahead.' },
+        { icon: '🏮', title: 'Shinjuku Neon Wakes', body: 'The neon signs of Shinjuku fully illuminate after dark. Walk east from the station.' },
+        { icon: '🎭', title: 'Evening Entertainment', body: 'Kabuki, live music, standing comedy in English at some spots. Check what\'s on.' },
+      ],
+      19: [
+        { icon: '🍺', title: 'Izakaya Prime Time', body: 'The best hour at any izakaya. Groups are lively, food is flowing, beer is cold.' },
+        { icon: '🌃', title: 'Night Photography', body: 'Tokyo after dark is one of the most photogenic cities on earth. Walk anywhere.' },
+        { icon: '🎶', title: 'Live Music', body: 'Shimokitazawa has live houses for every genre. Shows typically start at 7-8PM.' },
+      ],
+      20: [
+        { icon: '🍶', title: 'Whisky Bar Time', body: 'Japan\'s whisky culture shines in small bars. Try a Bar High Five or any quiet counter.' },
+        { icon: '🌆', title: 'Night View', body: 'Tokyo at night from above. Skytree, observation decks, or any tall building.' },
+        { icon: '🎰', title: 'Pachinko Curiosity', body: 'Experience the sensory overload of a pachinko parlor. Loud, smoky, uniquely Japanese.' },
+      ],
+      21: [
+        { icon: '🍜', title: 'Ramen for Dinner', body: 'The lines have calmed. Evening ramen at a proper shop before the midnight rush.' },
+        { icon: '🏮', title: 'Golden Gai Warms Up', body: 'The tiny bars of Shinjuku are filling up. Good time to find your spot for the night.' },
+        { icon: '🚃', title: 'Train Window', body: 'Take any JR line for a few stops at night. The city from the train is pure cinema.' },
+      ],
+      22: [
+        { icon: '🍸', title: 'Bar Hopping Hour', body: 'Shinjuku, Roppongi, Shibuya or Shimokitazawa depending on your energy level.' },
+        { icon: '⏰', title: 'Last Train Awareness', body: 'Last trains leave around midnight. Know your route or plan to stay out until 5AM.' },
+        { icon: '🌃', title: 'Night Walk', body: 'The city is at its most cinematic between 10PM and midnight. Just walk.' },
+      ],
+      23: [
+        { icon: '🕛', title: 'Last Train Decision', body: 'In the next hour you\'re choosing: go home or stay until 5AM. Commit either way.' },
+        { icon: '🍜', title: 'Midnight Ramen Pre-Load', body: 'Eat ramen now before the midnight rush. You\'ll be glad you did.' },
+        { icon: '🏮', title: 'Night Owls Gathering', body: 'The people left out at midnight chose to be here. The city\'s nocturnal crowd emerges.' },
+      ],
+    };
+
+    function getTokyoHour() {
+      return parseInt(new Intl.DateTimeFormat('en-US', {
+        hour: 'numeric', hour12: false, timeZone: 'Asia/Tokyo'
+      }).format(new Date()));
+    }
+
+    function renderTimeTips(hour) {
+      const h = parseInt(hour);
+      const tips = TIME_TIPS[h] || TIME_TIPS[0];
+      const pad = h => String(h).padStart(2,'0');
+      document.getElementById('sliderTimeDisplay').textContent = `${pad(h)}:00`;
+
+      const container = document.getElementById('timeTipCards');
+      container.innerHTML = tips.map(t => `
+        <div class="tip-card">
+          <div class="tip-card-icon">${t.icon}</div>
+          <div class="tip-card-title">${t.title}</div>
+          <div class="tip-card-body">${t.body}</div>
+        </div>
+      `).join('');
+    }
+
+    function setTokyoNow() {
+      const h = getTokyoHour();
+      document.getElementById('timeSlider').value = h;
+      renderTimeTips(h);
+    }
+
+    document.getElementById('timeSlider').addEventListener('input', e => {
+      renderTimeTips(e.target.value);
+    });
+
+    // 初期表示：東京の現在時刻
+    setTokyoNow();
+
+    // ─── BG ROTATION ───
+    const bgImages = [
+      'images/hero-bg.jpg',
+      'images/hero-bg-alt.jpg',
+      'images/about-bg.jpg',
+    ];
+    let bgIndex = 0;
+    const heroBg = document.getElementById('heroImgBg');
+
+    function rotateBg() {
+      bgIndex = (bgIndex + 1) % bgImages.length;
+      heroBg.classList.add('fading');
+      setTimeout(() => {
+        heroBg.style.backgroundImage = `url('${bgImages[bgIndex]}')`;
+        heroBg.classList.remove('fading');
+      }, 1500);
+    }
+
+    // 3分ごとに背景切り替え
+    setInterval(rotateBg, 180000);
+
   </script>
 </body>
 </html>
