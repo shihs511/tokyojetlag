@@ -429,22 +429,14 @@
     }
 
     .venues-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      display: flex;
+      flex-wrap: wrap;
       gap: 1px;
       background: rgba(0,240,255,0.06);
-      align-items: start;
     }
 
     .venue-card:last-child {
-      grid-column: auto;
-    }
-
-    @media (max-width: 900px) {
-      .venues-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 600px) {
-      .venues-grid { grid-template-columns: 1fr; }
+      flex: none;
     }
 
     .venue-card {
@@ -455,7 +447,12 @@
       transition: all 0.3s;
       border-top: 1px solid transparent;
       height: auto;
+      width: calc(33.333% - 1px);
+      box-sizing: border-box;
     }
+
+    @media (max-width: 900px) { .venue-card { width: calc(50% - 1px); } }
+    @media (max-width: 600px) { .venue-card { width: 100%; } }
     .venue-card:hover {
       background: #0d0d25;
       border-top-color: var(--neon-purple);
@@ -1467,8 +1464,11 @@
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       event.target.classList.add('active');
       document.querySelectorAll('.venue-card').forEach(card => {
-        card.style.display = (tag === 'all' || card.dataset.tag === tag) ? 'block' : 'none';
+        const show = tag === 'all' || card.dataset.tag === tag;
+        card.style.display = show ? '' : 'none';
       });
+      // Re-apply last-card rule after filter
+      const visible = document.querySelectorAll('.venue-card[style=""], .venue-card:not([style])');
     }
 
     // ─── TIME SLIDER ───
