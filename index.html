@@ -340,11 +340,13 @@
     /* ─── JET LAG EXPLAINER ─── */
     .jetlag-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(4, 1fr);
       gap: 1.5px;
       background: rgba(0,240,255,0.1);
       border: 1px solid rgba(0,240,255,0.1);
     }
+    @media (max-width: 900px) { .jetlag-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 500px) { .jetlag-grid { grid-template-columns: 1fr; } }
     .jetlag-card {
       background: var(--bg-card);
       padding: 2.5rem;
@@ -430,7 +432,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1px;
-      background: rgba(191,0,255,0.1);
+      background: rgba(0,240,255,0.06);
       align-items: start;
     }
 
@@ -532,9 +534,11 @@
 
     .tips-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 2rem;
     }
+    @media (max-width: 900px) { .tips-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .tips-grid { grid-template-columns: 1fr; } }
     .tip-item {
       display: flex;
       flex-direction: column;
@@ -558,6 +562,37 @@
       color: var(--text-dim);
       line-height: 1.8;
     }
+
+    /* ─── TIME SLIDER TIP CARDS ─── */
+    #timeTipCards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .tip-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(0,240,255,0.1);
+      padding: 1.5rem;
+      border-top: 2px solid var(--neon-blue);
+    }
+    .tip-card-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+    }
+    .tip-card-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+    }
+    .tip-card-body {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+    @media (max-width: 700px) { #timeTipCards { grid-template-columns: 1fr; } }
 
     /* ─── FOOTER ─── */
     footer {
@@ -660,6 +695,92 @@
       padding: 5rem 2rem;
     }
     .map-inner { max-width: 1100px; margin: 0 auto; }
+
+    /* ─── TIME SLIDER SECTION ─── */
+    .time-slider-section {
+      background: #060614;
+      border-top: 1px solid rgba(0,240,255,0.08);
+      padding: 5rem 2rem;
+    }
+    .time-slider-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .slider-wrap {
+      margin: 2rem 0 1rem;
+    }
+    .time-range {
+      width: 100%;
+      -webkit-appearance: none;
+      height: 2px;
+      background: rgba(0,240,255,0.2);
+      outline: none;
+      cursor: pointer;
+    }
+    .time-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: var(--neon-blue);
+      box-shadow: var(--glow-blue);
+      cursor: pointer;
+    }
+    .slider-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.6rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+    }
+    .time-now-badge {
+      display: inline-block;
+      border: 1px solid rgba(0,240,255,0.3);
+      color: var(--neon-blue);
+      padding: 0.4rem 1rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-bottom: 2rem;
+    }
+    .time-now-badge:hover {
+      background: rgba(0,240,255,0.08);
+      box-shadow: var(--glow-blue);
+    }
+    .tip-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    .tip-card {
+      background: var(--bg-card);
+      padding: 1.5rem;
+      border-top: 2px solid rgba(0,240,255,0.15);
+    }
+    .tip-card-icon {
+      font-size: 1.4rem;
+      margin-bottom: 0.6rem;
+    }
+    .tip-card-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text-main);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+    .tip-card-body {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+    @media (max-width: 700px) {
+      .tip-cards { grid-template-columns: 1fr; }
+    }
     .map-embed-wrap {
       position: relative;
       width: 100%;
