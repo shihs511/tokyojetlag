@@ -640,6 +640,66 @@
       pointer-events: none;
     }
 
+    /* ─── MAP SECTION ─── */
+    .map-section {
+      background: #060614;
+      border-top: 1px solid rgba(0,240,255,0.08);
+      padding: 5rem 2rem;
+    }
+    .map-inner { max-width: 1100px; margin: 0 auto; }
+    .map-embed-wrap {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      border: 1px solid rgba(0,240,255,0.15);
+      overflow: hidden;
+      margin-top: 2rem;
+    }
+    .map-embed-wrap iframe {
+      width: 100%; height: 100%;
+      border: none;
+      filter: invert(90%) hue-rotate(180deg) saturate(0.7);
+      opacity: 0.9;
+    }
+    .map-spots {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin: 1.5rem 0 0;
+    }
+    .map-spot-btn {
+      background: transparent;
+      border: 1px solid rgba(0,240,255,0.2);
+      color: var(--text-dim);
+      padding: 0.4rem 1rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .map-spot-btn:hover, .map-spot-btn.active {
+      border-color: var(--neon-blue);
+      color: var(--neon-blue);
+      box-shadow: var(--glow-blue);
+      background: rgba(0,240,255,0.05);
+    }
+    .venue-map-link {
+      display: inline-block;
+      margin-top: 0.8rem;
+      font-size: 0.58rem;
+      color: var(--neon-blue);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(0,240,255,0.2);
+      padding-bottom: 1px;
+      transition: all 0.2s;
+    }
+    .venue-map-link:hover { color: var(--neon-pink); border-color: var(--neon-pink); }
+
     /* ─── VIDEO / IMAGE BACKGROUND ─── */
     @media (max-width: 640px) {
       header { padding: 1rem; }
@@ -701,6 +761,9 @@
         Jet lag brought you here. Let us show you what Tokyo looks like when everyone else is asleep.
         Real venues. Real hours. Verified open.
       </p>
+
+      <!-- 訪問者の現在時刻自動表示 -->
+      <div id="visitorClock" style="margin-top:1.5rem; font-size:0.7rem; color:var(--text-dim); line-height:2; border-left: 2px solid rgba(191,0,255,0.4); padding-left:1rem;"></div>
 
       <!-- Live world clock -->
       <div class="world-clock" id="worldClock">
@@ -792,6 +855,7 @@
         <div class="venue-area">📍 Shinjuku · 5 min walk from station</div>
         <div class="venue-desc">Tsukemen (dipping ramen) that people queue for at midnight. Rich, intense broth. Cash only. Small counter. Worth every minute of the line.</div>
         <div class="venue-verify">Hours vary — verify before going</div>
+        <a class="venue-map-link" href="https://maps.google.com/?q=風次+Fuunji+Shinjuku+Tokyo" target="_blank">→ Open in Google Maps</a>
       </div>
 
       <div class="venue-card" data-tag="ramen">
@@ -801,7 +865,7 @@
         <div class="venue-hours">Open 24 hours — most locations</div>
         <div class="venue-area">📍 Shinjuku · Shibuya · Akihabara</div>
         <div class="venue-desc">Solo booths designed for the lone, jet-lagged diner. Order by form. No eye contact required. The tonkotsu is consistent and deeply comforting at 3AM.</div>
-      </div>
+        <a class="venue-map-link" href="https://maps.google.com/?q=Ichiran+Ramen+Shinjuku+Tokyo" target="_blank">→ Open in Google Maps</a>
 
       <div class="venue-card" data-tag="bar">
         <img class="venue-img" src="images/venue-bar.jpg" alt="Golden Gai bar" onerror="this.style.display='none'">
@@ -811,7 +875,7 @@
         <div class="venue-hours">Most bars open until 4–5AM</div>
         <div class="venue-area">📍 Shinjuku · Behind Kabukicho</div>
         <div class="venue-desc">200+ tiny bars in an alley frozen in 1970. Some seat 5 people. Some have themes. Some have cover charges. All are extraordinary. Follow your instincts or the music.</div>
-      </div>
+        <a class="venue-map-link" href="https://maps.google.com/?q=Golden+Gai+Shinjuku+Tokyo" target="_blank">→ Open in Google Maps</a>
 
       <div class="venue-card" data-tag="bar">
         <span class="venue-tag tag-bar">Bar</span>
@@ -821,6 +885,7 @@
         <div class="venue-area">📍 Shinjuku Golden Gai</div>
         <div class="venue-desc">A narrow vertical bar with a spiral staircase and a gothic chandelier. Friendly to foreigners. One of the most photogenic bars in Tokyo. Arrive after midnight.</div>
         <div class="venue-verify">Hours change — verify before going</div>
+        <a class="venue-map-link" href="https://maps.google.com/?q=Albatross+G+Golden+Gai+Shinjuku" target="_blank">→ Open in Google Maps</a>
       </div>
 
       <div class="venue-card" data-tag="24h">
@@ -840,7 +905,7 @@
         <div class="venue-hours">Open always — trains stop ~1AM</div>
         <div class="venue-area">📍 Shibuya · Hachiko Exit</div>
         <div class="venue-desc">Still active at 2AM on weekends. After the last train the crowd shifts — less salary workers, more night creatures. The scramble crossing has a different energy after midnight.</div>
-      </div>
+        <a class="venue-map-link" href="https://maps.google.com/?q=Shibuya+Scramble+Crossing+Tokyo" target="_blank">→ Open in Google Maps</a>
 
       <div class="venue-card" data-tag="walk">
         <span class="venue-tag tag-walk">Walk</span>
@@ -849,7 +914,7 @@
         <div class="venue-hours">Never sleeps</div>
         <div class="venue-area">📍 Shinjuku · East Exit</div>
         <div class="venue-desc">Tokyo's entertainment district in full neon at 3AM. The Robot Restaurant is closed but everything around it is alive. Walk through for the spectacle — you don't need to spend money.</div>
-      </div>
+        <a class="venue-map-link" href="https://maps.google.com/?q=Kabukicho+Shinjuku+Tokyo" target="_blank">→ Open in Google Maps</a>
 
       <div class="venue-card" data-tag="onsen">
         <img class="venue-img" src="images/venue-onsen.jpg" alt="Tokyo onsen at night" onerror="this.style.display='none'">
@@ -859,7 +924,7 @@
         <div class="venue-hours">Open 24 hours</div>
         <div class="venue-area">📍 Shinjuku · 5 min from Kabukicho</div>
         <div class="venue-desc">A proper onsen in central Shinjuku. Open all night. Natural hot spring water pumped from underground. The ultimate jet lag treatment — soak at 3AM, sleep like a baby.</div>
-      </div>
+        <a class="venue-map-link" href="https://maps.google.com/?q=Thermae-Yu+Shinjuku+Tokyo" target="_blank">→ Open in Google Maps</a>
 
       <div class="venue-card" data-tag="walk">
         <span class="venue-tag tag-walk">Walk</span>
@@ -868,7 +933,7 @@
         <div class="venue-hours">Park open 24h · Best at 5AM</div>
         <div class="venue-area">📍 Ueno · Direct from JR station</div>
         <div class="venue-desc">If you're still awake at 5AM, come here. Cherry blossom season aside, it's beautiful when empty. Old women do morning exercise. Crows are loud. Sunrise hits the pond perfectly.</div>
-      </div>
+        <a class="venue-map-link" href="https://maps.google.com/?q=Ueno+Park+Tokyo" target="_blank">→ Open in Google Maps</a>
 
       <div class="venue-card" data-tag="ramen">
         <span class="venue-tag tag-ramen">Ramen</span>
@@ -878,10 +943,45 @@
         <div class="venue-area">📍 Shinjuku · Golden Gai</div>
         <div class="venue-desc">Niboshi (dried sardine) based broth unlike anything you've had. Located above Golden Gai. The 4AM bowl after bar hopping is a rite of passage for the nocturnal in Shinjuku.</div>
         <div class="venue-verify">Hours vary by season — verify</div>
+        <a class="venue-map-link" href="https://maps.google.com/?q=Ramen+Nagi+Golden+Gai+Shinjuku" target="_blank">→ Open in Google Maps</a>
       </div>
 
     </div>
   </section>
+
+  <div class="neon-line"></div>
+
+  <!-- MAP SECTION -->
+  <div class="map-section" id="map">
+    <div class="map-inner">
+      <div class="section-label">// find it on the map</div>
+      <h2 class="section-title">Late Night<br><span>Tokyo Map</span></h2>
+
+      <div class="map-spots">
+        <a class="map-spot-btn" href="https://maps.google.com/?q=Ichiran+Ramen+Shinjuku+Tokyo" target="_blank">🍜 Ichiran Shinjuku</a>
+        <a class="map-spot-btn" href="https://maps.google.com/?q=Golden+Gai+Shinjuku+Tokyo" target="_blank">🏮 Golden Gai</a>
+        <a class="map-spot-btn" href="https://maps.google.com/?q=Thermae-Yu+Shinjuku+Tokyo" target="_blank">♨️ Thermae-Yu</a>
+        <a class="map-spot-btn" href="https://maps.google.com/?q=Shibuya+Scramble+Crossing+Tokyo" target="_blank">🚶 Shibuya Crossing</a>
+        <a class="map-spot-btn" href="https://maps.google.com/?q=Kabukicho+Shinjuku+Tokyo" target="_blank">🌃 Kabukicho</a>
+        <a class="map-spot-btn" href="https://maps.google.com/?q=Ueno+Park+Tokyo" target="_blank">🌅 Ueno Park</a>
+        <a class="map-spot-btn" href="https://maps.google.com/?q=Ramen+Nagi+Golden+Gai+Shinjuku" target="_blank">🍜 Nagi Ramen</a>
+        <a class="map-spot-btn" href="https://maps.google.com/?q=Albatross+G+Golden+Gai+Shinjuku" target="_blank">🥃 Albatross G</a>
+      </div>
+
+      <div class="map-embed-wrap">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d25928.27!2d139.6917!3d35.6895!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sjp!4v1"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Tokyo Late Night Map">
+        </iframe>
+      </div>
+      <p style="font-size:0.6rem; color:var(--text-dim); margin-top:0.8rem; letter-spacing:0.08em;">
+        Click any spot above to open exact location in Google Maps → get directions from your hotel
+      </p>
+    </div>
+  </div>
 
   <div class="neon-line"></div>
 
@@ -963,6 +1063,50 @@
   </footer>
 
   <script>
+    // ─── 訪問者タイムゾーン自動検知 ───
+    (function() {
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      const now = new Date();
+      const fmtLocal = new Intl.DateTimeFormat('en-US', {
+        hour: '2-digit', minute: '2-digit', hour12: true, timeZone: tz
+      }).format(now);
+      const fmtTokyo = new Intl.DateTimeFormat('en-US', {
+        hour: '2-digit', minute: '2-digit', hour12: true, timeZone: 'Asia/Tokyo'
+      }).format(now);
+      const tokyoH = parseInt(new Intl.DateTimeFormat('en-US', {
+        hour: 'numeric', hour12: false, timeZone: 'Asia/Tokyo'
+      }).format(now));
+
+      // タイムゾーンから都市名を推定
+      const tzCity = {
+        'America/Los_Angeles': 'Los Angeles', 'America/New_York': 'New York',
+        'America/Chicago': 'Chicago', 'America/Denver': 'Denver',
+        'America/Vancouver': 'Vancouver', 'America/Toronto': 'Toronto',
+        'Europe/London': 'London', 'Europe/Paris': 'Paris',
+        'Europe/Berlin': 'Berlin', 'Europe/Rome': 'Rome',
+        'Asia/Seoul': 'Seoul', 'Asia/Shanghai': 'Shanghai',
+        'Asia/Singapore': 'Singapore', 'Asia/Bangkok': 'Bangkok',
+        'Asia/Dubai': 'Dubai', 'Australia/Sydney': 'Sydney',
+      };
+      const city = tzCity[tz] || tz.split('/').pop().replace('_', ' ');
+
+      const tokyoMsg = tokyoH >= 22 || tokyoH <= 5
+        ? '🌙 Prime jet lag hours in Tokyo right now.'
+        : tokyoH <= 8 ? '🌅 Early morning in Tokyo.'
+        : '🗼 Tokyo is fully awake.';
+
+      const el = document.getElementById('visitorClock');
+      if (el) {
+        el.innerHTML = `
+          <span style="color:#7070a0">Your time (${city}):</span>
+          <span style="color:#e8e8f0; font-weight:700"> ${fmtLocal}</span><br>
+          <span style="color:#7070a0">Tokyo time:</span>
+          <span style="color:#00f0ff; font-weight:700; text-shadow: 0 0 8px #00f0ff44;"> ${fmtTokyo}</span><br>
+          <span style="color:#bf00ff; font-size:0.65rem;">${tokyoMsg}</span>
+        `;
+      }
+    })();
+
     // ─── CANVAS: 窓点滅 + ネオン光ストリーク ───
     const canvas = document.getElementById('cityCanvas');
     const ctx = canvas.getContext('2d');
@@ -1363,8 +1507,8 @@
       }, 1500);
     }
 
-    // 3分ごとに背景切り替え
-    setInterval(rotateBg, 180000);
+    // 1分ごとに背景切り替え
+    setInterval(rotateBg, 60000);
 
   </script>
 </body>
