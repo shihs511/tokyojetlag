@@ -28,9 +28,9 @@
       --bg-card: #0a0a1e;
       --text-main: #e8e8f0;
       --text-dim: #7070a0;
-      --glow-blue: 0 0 8px #00f0ff, 0 0 20px #00f0ff44;
-      --glow-purple: 0 0 8px #bf00ff, 0 0 20px #bf00ff44;
-      --glow-pink: 0 0 8px #ff0080, 0 0 20px #ff008044;
+      --glow-blue: 0 0 6px #00f0ff88, 0 0 12px #00f0ff22;
+      --glow-purple: 0 0 6px #bf00ff88, 0 0 12px #bf00ff22;
+      --glow-pink: 0 0 6px #ff008088, 0 0 12px #ff008022;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -42,34 +42,12 @@
       color: var(--text-main);
       font-family: 'Space Mono', monospace;
       overflow-x: hidden;
-      cursor: none;
     }
 
-    /* Custom cursor */
-    .cursor {
-      position: fixed;
-      width: 12px; height: 12px;
-      background: var(--neon-blue);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-      transition: transform 0.1s, width 0.2s, height 0.2s;
-      box-shadow: var(--glow-blue);
-    }
-    .cursor-ring {
-      position: fixed;
-      width: 36px; height: 36px;
-      border: 1px solid var(--neon-blue);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9998;
-      transform: translate(-50%, -50%);
-      transition: transform 0.15s ease, opacity 0.2s;
-      opacity: 0.5;
-    }
+    /* Custom cursor — disabled for better usability */
+    .cursor, .cursor-ring { display: none; }
 
-    /* Scanline overlay */
+    /* Scanline overlay — subtler for readability */
     body::before {
       content: '';
       position: fixed;
@@ -78,9 +56,9 @@
       background: repeating-linear-gradient(
         0deg,
         transparent,
-        transparent 2px,
-        rgba(0,0,0,0.08) 2px,
-        rgba(0,0,0,0.08) 4px
+        transparent 3px,
+        rgba(0,0,0,0.03) 3px,
+        rgba(0,0,0,0.03) 6px
       );
       pointer-events: none;
       z-index: 100;
@@ -155,14 +133,15 @@
       z-index: 1;
     }
 
-    /* Neon ground glow */
+    /* Neon ground glow — softened */
     .hero::after {
       content: '';
       position: absolute;
       bottom: 0; left: 0; right: 0;
-      height: 2px;
+      height: 1px;
       background: linear-gradient(90deg, transparent, var(--neon-blue), var(--neon-purple), var(--neon-pink), transparent);
-      box-shadow: 0 0 30px var(--neon-blue), 0 0 60px var(--neon-purple);
+      box-shadow: 0 0 15px var(--neon-blue), 0 0 30px var(--neon-purple);
+      opacity: 0.7;
     }
 
     /* Animated grid background */
@@ -589,6 +568,86 @@
     }
     @media (max-width: 700px) { #timeTipCards { grid-template-columns: 1fr; } }
 
+    /* ─── TAXI APP SECTION ─── */
+    .taxi-section {
+      background: #060614;
+      border-top: 1px solid rgba(0,240,255,0.08);
+      border-bottom: 1px solid rgba(0,240,255,0.08);
+      padding: 5rem 2rem;
+    }
+    .taxi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    @media (max-width: 900px) { .taxi-grid { grid-template-columns: 1fr; } }
+    .taxi-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(0,240,255,0.1);
+      padding: 2rem;
+      border-top: 3px solid var(--neon-blue);
+      transition: border-color 0.3s;
+    }
+    .taxi-card:hover { border-top-color: var(--neon-pink); }
+    .taxi-card-rank {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--neon-blue);
+      margin-bottom: 0.8rem;
+    }
+    .taxi-card-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 0.05em;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+    }
+    .taxi-card-tagline {
+      font-size: 0.7rem;
+      color: var(--neon-pink);
+      margin-bottom: 1.2rem;
+    }
+    .taxi-card-body {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+    .taxi-card-links {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .taxi-card-links a {
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--neon-blue);
+      text-decoration: none;
+      border: 1px solid rgba(0,240,255,0.2);
+      padding: 0.4rem 0.8rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .taxi-card-links a:hover {
+      background: rgba(0,240,255,0.1);
+      color: var(--text-main);
+    }
+    .taxi-tip {
+      max-width: 1100px;
+      margin: 2.5rem auto 0;
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      line-height: 1.8;
+      border: 1px solid rgba(0,240,255,0.08);
+      padding: 1.5rem 2rem;
+      background: rgba(0,240,255,0.02);
+    }
+    .taxi-tip strong { color: var(--neon-blue); }
+
     /* ─── FOOTER ─── */
     footer {
       padding: 3rem 2rem;
@@ -625,7 +684,7 @@
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
       margin: 0;
-      opacity: 0.3;
+      opacity: 0.15;
     }
 
     /* ─── CANVAS ANIMATION LAYER ─── */
@@ -849,6 +908,7 @@
     <nav>
       <a href="#why">Why Awake</a>
       <a href="#venues">Venues</a>
+      <a href="#taxi">Taxi</a>
       <a href="#survive">Survive</a>
     </nav>
   </header>
@@ -988,7 +1048,7 @@
       </div>
 
       <div class="venue-card" data-tag="ramen">
-        <img class="venue-img" src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600&h=300&fit=crop" alt="Ichiran solo booth ramen" onerror="this.style.display='none'">
+        <img class="venue-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Ichiran_Ramen.JPG/600px-Ichiran_Ramen.JPG" alt="Ichiran ramen bowl" onerror="this.style.display='none'">
         <span class="venue-tag tag-ramen">Ramen</span>
         <div class="venue-name">Ichiran</div>
         <div class="venue-name-jp">一蘭 — Multiple Locations</div>
@@ -1000,7 +1060,7 @@
       </div>
 
       <div class="venue-card" data-tag="bar">
-        <img class="venue-img" src="https://images.unsplash.com/photo-1554797589-7241bb691973?w=600&h=300&fit=crop" alt="Golden Gai narrow alley at night" onerror="this.style.display='none'">
+        <img class="venue-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Golden_Gai_%283741285627%29.jpg/600px-Golden_Gai_%283741285627%29.jpg" alt="Shinjuku Golden Gai alley at night" onerror="this.style.display='none'">
         <span class="venue-tag tag-bar">Bar</span>
         <div class="venue-name">Golden Gai</div>
         <div class="venue-name-jp">新宿ゴールデン街</div>
@@ -1034,7 +1094,7 @@
       </div>
 
       <div class="venue-card" data-tag="walk">
-        <img class="venue-img" src="https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=600&h=300&fit=crop" alt="Shibuya crossing at night with neon lights" onerror="this.style.display='none'">
+        <img class="venue-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Shibuya_at_night.JPG/600px-Shibuya_at_night.JPG" alt="Shibuya at night" onerror="this.style.display='none'">
         <span class="venue-tag tag-walk">Walk</span>
         <div class="venue-name">Shibuya Crossing</div>
         <div class="venue-name-jp">渋谷スクランブル交差点</div>
@@ -1046,7 +1106,7 @@
       </div>
 
       <div class="venue-card" data-tag="walk">
-        <img class="venue-img" src="https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=600&h=300&fit=crop" alt="Kabukicho neon at night" onerror="this.style.display='none'">
+        <img class="venue-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Kabukicho_at_night_01.JPG/600px-Kabukicho_at_night_01.JPG" alt="Kabukicho neon streets at night" onerror="this.style.display='none'">
         <span class="venue-tag tag-walk">Walk</span>
         <div class="venue-name">Shinjuku Kabukicho</div>
         <div class="venue-name-jp">歌舞伎町</div>
@@ -1058,7 +1118,7 @@
       </div>
 
       <div class="venue-card" data-tag="onsen">
-        <img class="venue-img" src="https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=600&h=300&fit=crop&q=80" alt="Japanese onsen hot spring" onerror="this.style.display='none'">
+        <img class="venue-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Kabukicho-Sinjyuku-Tokyo.JPG/600px-Kabukicho-Sinjyuku-Tokyo.JPG" alt="Kabukicho Shinjuku area near Thermae-Yu" onerror="this.style.display='none'">
         <span class="venue-tag tag-onsen">Onsen</span>
         <div class="venue-name">Thermae-Yu</div>
         <div class="venue-name-jp">テルマー湯 — Shinjuku</div>
@@ -1070,7 +1130,7 @@
       </div>
 
       <div class="venue-card" data-tag="walk">
-        <img class="venue-img" src="https://images.unsplash.com/photo-1624601573012-efb68f3f150d?w=600&h=300&fit=crop" alt="Ueno Park at dawn" onerror="this.style.display='none'">
+        <img class="venue-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Boats_on_Shinobazu_Pond_-_Ueno_Park%2C_Tokyo%2C_Japan_-_DSC02033.JPG/600px-Boats_on_Shinobazu_Pond_-_Ueno_Park%2C_Tokyo%2C_Japan_-_DSC02033.JPG" alt="Shinobazu Pond at Ueno Park, Tokyo" onerror="this.style.display='none'">
         <span class="venue-tag tag-walk">Walk</span>
         <div class="venue-name">Ueno Park at Dawn</div>
         <div class="venue-name-jp">上野公園 — 5AM</div>
@@ -1173,7 +1233,64 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <div class="neon-line"></div>
+
+  <!-- TAXI APP SECTION -->
+  <section class="taxi-section" id="taxi">
+    <div style="max-width:1100px; margin:0 auto;">
+      <div class="section-label">// getting around after midnight</div>
+      <h2 class="section-title">Taxi Apps<br><span>for 2AM</span></h2>
+      <p style="font-size:0.75rem; color:var(--text-dim); max-width:600px; line-height:1.8; margin-bottom:3rem;">
+        Trains stop around 12:30AM and don't restart until 5AM. No night buses in central Tokyo. These apps are your lifeline.
+      </p>
+
+      <div class="taxi-grid">
+        <div class="taxi-card">
+          <div class="taxi-card-rank">// #1 recommended</div>
+          <div class="taxi-card-name">GO</div>
+          <div class="taxi-card-tagline">Japan's most popular taxi app</div>
+          <div class="taxi-card-body">
+            Largest fleet in Japan. AI-powered dispatch finds the nearest cab in seconds. Pay with credit card in-app — no cash needed. Available nationwide. <strong style="color:var(--neon-blue)">Download before your trip.</strong> Interface available in English.
+          </div>
+          <div class="taxi-card-links">
+            <a href="https://apps.apple.com/app/go-taxi/id1476075498" target="_blank">App Store</a>
+            <a href="https://play.google.com/store/apps/details?id=jp.goinc.s2" target="_blank">Google Play</a>
+          </div>
+        </div>
+
+        <div class="taxi-card">
+          <div class="taxi-card-rank">// tokyo specialist</div>
+          <div class="taxi-card-name">S.RIDE</div>
+          <div class="taxi-card-tagline">One-slide hailing, big in Tokyo</div>
+          <div class="taxi-card-body">
+            Slide to hail — literally one gesture. Backed by Sony. Strong coverage in central Tokyo, especially Shinjuku/Shibuya/Roppongi. Credit card payment in-app. English support. Often faster than GO in the Shinjuku area.
+          </div>
+          <div class="taxi-card-links">
+            <a href="https://apps.apple.com/app/s-ride/id1456498047" target="_blank">App Store</a>
+            <a href="https://play.google.com/store/apps/details?id=jp.sride.app" target="_blank">Google Play</a>
+          </div>
+        </div>
+
+        <div class="taxi-card">
+          <div class="taxi-card-rank">// backup option</div>
+          <div class="taxi-card-name">Uber</div>
+          <div class="taxi-card-tagline">You know it. It works here too.</div>
+          <div class="taxi-card-body">
+            Familiar interface, no new app to learn. Works in Tokyo but has fewer cars than GO or S.RIDE — expect longer wait times after midnight. Prices tend to run slightly higher. Good as a backup if the other two are surging.
+          </div>
+          <div class="taxi-card-links">
+            <a href="https://apps.apple.com/app/uber/id368677368" target="_blank">App Store</a>
+            <a href="https://play.google.com/store/apps/details?id=com.ubercab" target="_blank">Google Play</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="taxi-tip">
+        <strong>Pro tip:</strong> Budget <strong>&#165;3,000-5,000</strong> for a late-night ride across central Tokyo. Shinjuku to Shibuya is about &#165;2,000. Late-night surcharge (22:00-05:00) adds ~20%. Download GO and S.RIDE before you land — setup requires SMS verification which works better on hotel WiFi than airport data. If all apps fail at 3AM, walk to any major hotel entrance — taxis queue there.
+      </div>
+    </div>
+  </section>
+
   <!-- TIME SLIDER -->
   <div class="time-slider-section" id="now">
     <div class="time-slider-inner">
@@ -1267,7 +1384,7 @@
 
     // 建物の窓
     const windows = [];
-    const WINDOW_COUNT = 180;
+    const WINDOW_COUNT = 100;
     const COLORS = ['#00f0ff', '#bf00ff', '#ff0080', '#ffe000', '#ffffff', '#ff6600'];
 
     for (let i = 0; i < WINDOW_COUNT; i++) {
@@ -1289,7 +1406,7 @@
 
     // ネオン光ストリーク
     const streaks = [];
-    const STREAK_COUNT = 12;
+    const STREAK_COUNT = 6;
 
     for (let i = 0; i < STREAK_COUNT; i++) {
       streaks.push(createStreak());
@@ -1456,7 +1573,7 @@
 
     // Particles
     const particleContainer = document.getElementById('particles');
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 12; i++) {
       const p = document.createElement('div');
       p.className = 'particle';
       p.style.left = Math.random() * 100 + '%';
