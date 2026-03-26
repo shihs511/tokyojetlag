@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tokyo Jet Lag Site - Test Suite</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00f0ff;
+            --secondary: #ff0080;
+            --dark-bg: #0a0e27;
+            --card-bg: #1a1f3a;
+            --border-color: #2a3050;
+            --text-primary: #e0e6ff;
+            --text-secondary: #a0a6b8;
+            --success: #00ff88;
+            --warning: #ffb000;
+            --error: #ff3366;
+            --pass-light: rgba(0, 255, 136, 0.1);
+            --warning-light: rgba(255, 176, 0, 0.1);
+            --error-light: rgba(255, 51, 102, 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #0f1433 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(90deg, var(--card-bg) 0%, rgba(26, 31, 58, 0.8) 100%);
+            border-bottom: 2px solid var(--primary);
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 240, 255, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Summary Stats */
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 16px rgba(0, 240, 255, 0.2);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value.pass {
+            color: var(--success);
+        }
+
+        .stat-value.warning {
+            color: var(--warning);
+        }
+
+        .stat-value.error {
+            color: var(--error);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Progress Bar */
+        .progress-wrapper {
+            margin-bottom: 2rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: var(--border-color);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            width: 0%;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.8);
+        }
+
+        .progress-text {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-align: right;
+        }
+
+        /* Test Categories */
+        .test-category {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .test-category:hover {
+            border-color: var(--primary);
+        }
+
+        .category-header {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(90deg, rgba(0, 240, 255, 0.05), transparent);
+            user-select: none;
+            transition: all 0.3s ease;
+        }
+
+        .category-header:hover {
+            background: linear-gradient(90deg, rgba(0, 240, 255, 0.1), transparent);
+        }
+
+        .category-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .category-icon {
+            font-size: 1.5rem;
+            width: 2rem;
+            text-align: center;
+        }
+
+        .category-badge {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .badge.pass {
+            background: var(--pass-light);
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+
+        .badge.warning {
+            background: var(--warning-light);
+            color: var(--warning);
+            border: 1px solid var(--warning);
+        }
+
+        .badge.error {
+            background: var(--error-light);
+            color: var(--error);
+            border: 1px solid var(--error);
+        }
+
+        .toggle-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-icon.collapsed {
+            transform: rotate(-90deg);
+        }
+
+        .category-content {
+            padding: 1.5rem;
+            border-top: 1px solid var(--border-color);
+            max-height: 2000px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .category-content.collapsed {
+            max-height: 0;
+            padding: 0 1.5rem;
+            overflow: hidden;
+        }
+
+        /* File Results */
+        .file-result {
+            background: var(--dark-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .file-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+
+        .file-header:hover {
+            background: rgba(0, 240, 255, 0.05);
+        }
+
+        .file-name {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .file-size {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .file-details {
+            display: none;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .file-details.expanded {
+            display: block;
+        }
+
+        /* Test Results */
+        .test-result {
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 4px;
+            border-left: 4px solid;
+            font-size: 0.95rem;
+        }
+
+        .test-result.pass {
+            background: var(--pass-light);
+            border-left-color: var(--success);
+            color: var(--text-primary);
+        }
+
+        .test-result.warning {
+            background: var(--warning-light);
+            border-left-color: var(--warning);
+            color: var(--text-primary);
+        }
+
+        .test-result.error {
+            background: var(--error-light);
+            border-left-color: var(--error);
+            color: var(--text-primary);
+        }
+
+        .test-result-icon {
+            margin-right: 0.5rem;
+            font-weight: bold;
+        }
+
+        .test-details {
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 3px;
+            font-size: 0.85rem;
+            font-family: 'Courier New', monospace;
+            color: var(--text-secondary);
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .test-details ul {
+            margin-left: 1.5rem;
+        }
+
+        .test-details li {
+            margin: 0.25rem 0;
+        }
+
+        /* Control Buttons */
+        .controls {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: #000;
+            border: 2px solid var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 240, 255, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Status Messages */
+        .status-message {
+            text-align: center;
+            padding: 2rem;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        .status-message.loading {
+            color: var(--primary);
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid var(--border-color);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+            margin-top: 3rem;
+        }
+
+        .footer p {
+            font-size: 0.85rem;
+        }
+
+        /* Utility Classes */
+        .hidden {
+            display: none;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .summary-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .category-header {
+                flex-wrap: wrap;
+            }
+
+            .btn {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* JSON Display */
+        .json-display {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: var(--primary);
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .json-key {
+            color: var(--primary);
+        }
+
+        .json-string {
+            color: var(--success);
+        }
+
+        .json-number {
+            color: var(--warning);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <h1>🌏 Tokyo Jet Lag Site</h1>
+            <p>Test Suite - Comprehensive HTML Validation & Analysis</p>
+
+            <div class="summary-stats">
+                <div class="stat-card">
+                    <div class="stat-label">Tests Passed</div>
+                    <div class="stat-value pass" id="statPass">0</div>
+                    <div class="stat-label" style="font-size: 0.7rem;">of <span id="statTotal">0</span></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Warnings</div>
+                    <div class="stat-value warning" id="statWarning">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Errors</div>
+                    <div class="stat-value error" id="statError">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Files Tested</div>
+                    <div class="stat-value" id="statFiles" style="color: var(--primary);">0</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="progressSection" class="progress-wrapper hidden">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text" id="progressText">0%</div>
+        </div>
+
+        <div id="statusSection" class="status-message hidden">
+            <span class="loading-spinner"></span>
+            <span id="statusText">Initializing tests...</span>
+        </div>
+
+        <div id="resultsContainer" class="hidden">
+            <!-- Test categories will be inserted here -->
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-primary" id="rerunBtn" onclick="location.reload()">Re-run Tests</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Test Suite v1.0 | Analyzing Tokyo Jet Lag Site Structure & Quality</p>
+    </div>
+
+    <script>
+        // ============================================================================
+        // TEST SUITE CONFIGURATION & UTILITIES
+        // ============================================================================
+
+        const CONFIG = {
+            files: [
+                'index.html',
+                'index-updated.html',
+                'dist/index.html'
+            ],
+            timeout: 10000,
+            basePath: './'
+        };
+
+        const RESULTS = {
+            passed: 0,
+            warnings: 0,
+            errors: 0,
+            files: 0,
+            tests: {}
+        };
+
+        const ICONS = {
+            htmlValidation: '✓',
+            linkChecker: '🔗',
+            accessibility: '♿',
+            responsiveness: '📱',
+            performance: '⚡',
+            javascript: '⚙️'
+        };
+
+        // ============================================================================
+        // DOM UTILITIES
+        // ============================================================================
+
+        function createElement(tag, classes = '', html = '') {
+            const el = document.createElement(tag);
+            if (classes) el.className = classes;
+            if (html) el.innerHTML = html;
+            return el;
+        }
+
+        function updateStats() {
+            document.getElementById('statPass').textContent = RESULTS.passed;
+            document.getElementById('statWarning').textContent = RESULTS.warnings;
+            document.getElementById('statError').textContent = RESULTS.errors;
+            document.getElementById('statFiles').textContent = RESULTS.files;
+            document.getElementById('statTotal').textContent =
+                RESULTS.passed + RESULTS.warnings + RESULTS.errors;
+        }
+
+        function updateProgress(current, total) {
+            const percent = Math.round((current / total) * 100);
+            document.getElementById('progressFill').style.width = percent + '%';
+            document.getElementById('progressText').textContent = percent + '%';
+        }
+
+        function showStatus(message, isLoading = true) {
+            const section = document.getElementById('statusSection');
+            section.classList.remove('hidden');
+            document.getElementById('statusText').textContent = message;
+            if (isLoading) {
+                section.querySelector('.loading-spinner').style.display = 'inline-block';
+            } else {
+                section.querySelector('.loading-spinner').style.display = 'none';
+            }
+        }
+
+        function hideStatus() {
+            document.getElementById('statusSection').classList.add('hidden');
+        }
+
+        function showResults() {
+            document.getElementById('progressSection').classList.add('hidden');
+            document.getElementById('resultsContainer').classList.remove('hidden');
+        }
+
+        // ============================================================================
+        // FILE LOADING & PARSING
+        // ============================================================================
+
+        async function loadFile(filePath) {
+            try {
+                const response = await fetch(filePath);
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                return {
+                    content: await response.text(),
+                    size: response.headers.get('content-length') || 0,
+                    success: true
+                };
+            } catch (error) {
+                return {
+                    content: '',
+                    size: 0,
+                    success: false,
+                    error: error.message
+                };
+            }
+        }
+
+        function parseHTML(htmlContent) {
+            const parser = new DOMParser();
+            return parser.parseFromString(htmlContent, 'text/html');
+        }
+
+        // ============================================================================
+        // HTML VALIDATION TESTS
+        // ============================================================================
+
+        function validateHTML(html, filePath) {
+            const results = {
+                category: 'HTML Validation',
+                icon: ICONS.htmlValidation,
+                tests: []
+            };
+
+            // 1. Check DOCTYPE
+            const doctype = html.match(/<!DOCTYPE\s+html>/i);
+            results.tests.push({
+                name: 'DOCTYPE Declaration',
+                status: doctype ? 'pass' : 'error',
+                message: doctype ? 'Valid DOCTYPE found' : 'Missing DOCTYPE declaration',
+                severity: 'error'
+            });
+
+            const doc = parseHTML(html);
+
+            // 2. Check for unclosed tags
+            const tagsToCheck = ['p', 'div', 'span', 'li', 'td', 'th', 'tr', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+            const unclosedTags = [];
+            tagsToCheck.forEach(tag => {
+                const openTags = (html.match(new RegExp(`<${tag}[^>]*>`, 'gi')) || []).length;
+                const closeTags = (html.match(new RegExp(`</${tag}>`, 'gi')) || []).length;
+                if (openTags > closeTags) {
+                    unclosedTags.push(`<${tag}>: ${openTags} open, ${closeTags} closed`);
+                }
+            });
+
+            results.tests.push({
+                name: 'Tag Closure',
+                status: unclosedTags.length === 0 ? 'pass' : 'warning',
+                message: unclosedTags.length === 0 ? 'All tags properly closed' : `Potential unclosed tags detected`,
+                details: unclosedTags.length > 0 ? unclosedTags : null,
+                severity: 'warning'
+            });
+
+            // 3. Check for duplicate IDs
+            const idMatches = html.match(/\bid=["']([^"']+)["']/gi) || [];
+            const idMap = {};
+            const duplicateIds = [];
+            idMatches.forEach(match => {
+                const id = match.match(/id=["']([^"']+)["']/i)[1];
+                idMap[id] = (idMap[id] || 0) + 1;
+                if (idMap[id] > 1) {
+                    duplicateIds.push(id);
+                }
+            });
+
+            results.tests.push({
+                name: 'Duplicate IDs',
+                status: duplicateIds.length === 0 ? 'pass' : 'error',
+                message: duplicateIds.length === 0 ? 'No duplicate IDs found' : `${duplicateIds.length} duplicate IDs found`,
+                details: duplicateIds.length > 0 ? [...new Set(duplicateIds)] : null,
+                severity: 'error'
+            });
+
+            // 4. Check required attributes
+            const issues = [];
+            doc.querySelectorAll('img').forEach(img => {
+                if (!img.hasAttribute('src')) issues.push('img without src');
+                if (!img.hasAttribute('alt')) issues.push('img without alt');
+            });
+            doc.querySelectorAll('a').forEach(a => {
+                if (!a.hasAttribute('href')) issues.push('a without href');
+            });
+
+            const requiredAttrStatus = issues.length === 0 ? 'pass' : (issues.length < 5 ? 'warning' : 'error');
+            results.tests.push({
+                name: 'Required Attributes',
+                status: requiredAttrStatus,
+                message: issues.length === 0 ? 'All required attributes present' : `${issues.length} missing required attributes`,
+                details: issues.length > 0 ? issues.slice(0, 10) : null,
+                severity: requiredAttrStatus
+            });
+
+            // 5. Check root HTML tag
+            const htmlTag = doc.documentElement;
+            const hasLang = htmlTag.hasAttribute('lang');
+            results.tests.push({
+                name: 'HTML Root Attributes',
+                status: hasLang ? 'pass' : 'warning',
+                message: hasLang ? 'HTML lang attribute present' : 'Missing lang attribute on <html>',
+                severity: 'warning'
+            });
+
+            return results;
+        }
+
+        // ============================================================================
+        // LINK CHECKER
+        // ============================================================================
+
+        function extractLinks(html) {
+            const doc = parseHTML(html);
+            const links = {
+                hrefs: [],
+                srcs: []
+            };
+
+            doc.querySelectorAll('a[href]').forEach(a => {
+                const href = a.getAttribute('href');
+                if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
+                    links.hrefs.push({
+                        url: href,
+                        text: a.textContent.substring(0, 50),
+                        type: 'link'
+                    });
+                }
+            });
+
+            doc.querySelectorAll('img[src]').forEach(img => {
+                links.srcs.push({
+                    url: img.getAttribute('src'),
+                    text: img.getAttribute('alt') || '(no alt)',
+                    type: 'image'
+                });
+            });
+
+            return links;
+        }
+
+        async function checkLinks(html, filePath) {
+            const results = {
+                category: 'Link Checker',
+                icon: ICONS.linkChecker,
+                tests: []
+            };
+
+            const links = extractLinks(html);
+            const allLinks = [...links.hrefs, ...links.srcs];
+
+            if (allLinks.length === 0) {
+                results.tests.push({
+                    name: 'Links Found',
+                    status: 'warning',
+                    message: 'No external links or images found',
+                    severity: 'warning'
+                });
+                return results;
+            }
+
+            // Check relative links
+            const brokenLinks = [];
+            const checkedLinks = new Set();
+
+            for (const link of allLinks) {
+                if (checkedLinks.has(link.url)) continue;
+                checkedLinks.add(link.url);
+
+                // Skip external links for now (they require CORS)
+                if (link.url.startsWith('http') || link.url.startsWith('//')) {
+                    continue;
+                }
+
+                // Check relative paths
+                try {
+                    const response = await fetch(link.url, { method: 'HEAD' });
+                    if (!response.ok && response.status !== 405) {
+                        brokenLinks.push(`${link.url} (${response.status})`);
+                    }
+                } catch (error) {
+                    brokenLinks.push(`${link.url} (unreachable)`);
+                }
+            }
+
+            const status = brokenLinks.length === 0 ? 'pass' : (brokenLinks.length < 3 ? 'warning' : 'error');
+            results.tests.push({
+                name: 'Link Integrity',
+                status: status,
+                message: `${allLinks.length} links found, ${brokenLinks.length} broken`,
+                details: brokenLinks.length > 0 ? brokenLinks : null,
+                severity: status
+            });
+
+            return results;
+        }
+
+        // ============================================================================
+        // ACCESSIBILITY CHECKS
+        // ============================================================================
+
+        function checkAccessibility(html) {
+            const results = {
+                category: 'Accessibility',
+                icon: ICONS.accessibility,
+                tests: []
+            };
+
+            const doc = parseHTML(html);
+            const issues = [];
+
+            // 1. Images without alt text
+            const imgsWithoutAlt = doc.querySelectorAll('img:not([alt])').length;
+            if (imgsWithoutAlt > 0) {
+                issues.push(`${imgsWithoutAlt} images missing alt text`);
+            }
+
+            // 2. Heading hierarchy
+            const headings = doc.querySelectorAll('h1, h2, h3, h4, h5, h6');
+            let previousLevel = 0;
+            const headingIssues = [];
+            headings.forEach(h => {
+                const level = parseInt(h.tagName[1]);
+                if (level > previousLevel + 1) {
+                    headingIssues.push(`Heading jump from H${previousLevel} to H${level}`);
+                }
+                previousLevel = level;
+            });
+            if (headingIssues.length > 0) {
+                issues.push(...headingIssues);
+            }
+
+            // 3. Form labels
+            const inputs = doc.querySelectorAll('input[type="text"], input[type="email"], textarea, select');
+            const inputsWithoutLabel = [];
+            inputs.forEach(input => {
+                const hasLabel = input.hasAttribute('aria-label') ||
+                                doc.querySelector(`label[for="${input.id}"]`) ||
+                                input.closest('label');
+                if (!hasLabel) {
+                    inputsWithoutLabel.push(input.id || input.name || 'unnamed');
+                }
+            });
+            if (inputsWithoutLabel.length > 0) {
+                issues.push(`${inputsWithoutLabel.length} form inputs without proper labels`);
+            }
+
+            // 4. Skip navigation link
+            const hasSkipLink = !!doc.querySelector('a[href="#main"], a[href="#content"], a.skip-link');
+            if (!hasSkipLink) {
+                issues.push('No skip navigation link found');
+            }
+
+            // 5. ARIA roles
+            const elementsWithAriaRole = doc.querySelectorAll('[role]').length;
+
+            results.tests.push({
+                name: 'Images Alt Text',
+                status: imgsWithoutAlt === 0 ? 'pass' : 'warning',
+                message: imgsWithoutAlt === 0 ? 'All images have alt text' : `${imgsWithoutAlt} images missing alt text`,
+                severity: 'warning'
+            });
+
+            results.tests.push({
+                name: 'Heading Hierarchy',
+                status: headingIssues.length === 0 ? 'pass' : 'warning',
+                message: headingIssues.length === 0 ? 'Heading hierarchy is correct' : `${headingIssues.length} hierarchy issues found`,
+                details: headingIssues.length > 0 ? headingIssues : null,
+                severity: 'warning'
+            });
+
+            results.tests.push({
+                name: 'Form Labels',
+                status: inputsWithoutLabel.length === 0 ? 'pass' : 'warning',
+                message: inputsWithoutLabel.length === 0 ? 'All form inputs have labels' : `${inputsWithoutLabel.length} inputs missing labels`,
+                severity: 'warning'
+            });
+
+            results.tests.push({
+                name: 'Skip Navigation',
+                status: hasSkipLink ? 'pass' : 'warning',
+                message: hasSkipLink ? 'Skip navigation link present' : 'No skip navigation link found',
+                severity: 'warning'
+            });
+
+            results.tests.push({
+                name: 'ARIA Support',
+                status: elementsWithAriaRole > 0 ? 'pass' : 'warning',
+                message: elementsWithAriaRole > 0 ? `${elementsWithAriaRole} elements with ARIA roles` : 'No ARIA roles found',
+                severity: 'warning'
+            });
+
+            return results;
+        }
+
+        // ============================================================================
+        // RESPONSIVE DESIGN CHECK
+        // ============================================================================
+
+        function checkResponsiveness(html) {
+            const results = {
+                category: 'Responsive Design',
+                icon: ICONS.responsiveness,
+                tests: []
+            };
+
+            const doc = parseHTML(html);
+
+            // 1. Viewport meta tag
+            const viewport = doc.querySelector('meta[name="viewport"]');
+            results.tests.push({
+                name: 'Viewport Meta Tag',
+                status: viewport ? 'pass' : 'error',
+                message: viewport ? 'Viewport meta tag present' : 'Missing viewport meta tag',
+                details: viewport ? [viewport.getAttribute('content')] : null,
+                severity: viewport ? 'pass' : 'error'
+            });
+
+            // 2. Media queries in style tags
+            const styleTags = doc.querySelectorAll('style');
+            let mediaQueryCount = 0;
+            styleTags.forEach(style => {
+                mediaQueryCount += (style.textContent.match(/@media/g) || []).length;
+            });
+
+            // 3. Responsive units
+            const cssContent = Array.from(styleTags).map(s => s.textContent).join('');
+            const respUnits = (cssContent.match(/%|vw|vh|rem|em/g) || []).length;
+            const fixedUnits = (cssContent.match(/\d+px/g) || []).length;
+
+            results.tests.push({
+                name: 'Media Queries',
+                status: mediaQueryCount > 0 ? 'pass' : 'warning',
+                message: mediaQueryCount > 0 ? `${mediaQueryCount} media queries found` : 'No media queries detected',
+                severity: mediaQueryCount > 0 ? 'pass' : 'warning'
+            });
+
+            results.tests.push({
+                name: 'Responsive Units',
+                status: respUnits > 0 ? 'pass' : 'warning',
+                message: `${respUnits} responsive units, ${fixedUnits} fixed units detected`,
+                severity: respUnits > fixedUnits ? 'pass' : 'warning'
+            });
+
+            return results;
+        }
+
+        // ============================================================================
+        // PERFORMANCE METRICS
+        // ============================================================================
+
+        function analyzePerformance(html, size) {
+            const results = {
+                category: 'Performance Metrics',
+                icon: ICONS.performance,
+                tests: []
+            };
+
+            const doc = parseHTML(html);
+
+            // File size
+            const sizeKb = (size / 1024).toFixed(2);
+            const sizeStatus = sizeKb > 500 ? 'warning' : 'pass';
+            results.tests.push({
+                name: 'File Size',
+                status: sizeStatus,
+                message: `${sizeKb} KB`,
+                severity: sizeStatus
+            });
+
+            // Images
+            const imgCount = doc.querySelectorAll('img').length;
+            results.tests.push({
+                name: 'Image Count',
+                status: 'pass',
+                message: `${imgCount} images found`,
+                severity: 'pass'
+            });
+
+            // External resources
+            const scripts = doc.querySelectorAll('script[src]').length;
+            const stylesheets = doc.querySelectorAll('link[rel="stylesheet"]').length;
+            const fonts = doc.querySelectorAll('link[href*="font"]').length;
+            const totalExternal = scripts + stylesheets + fonts;
+
+            results.tests.push({
+                name: 'External Resources',
+                status: totalExternal < 10 ? 'pass' : 'warning',
+                message: `${scripts} scripts, ${stylesheets} stylesheets, ${fonts} fonts (${totalExternal} total)`,
+                severity: totalExternal < 10 ? 'pass' : 'warning'
+            });
+
+            // Inline CSS & JS
+            const inlineCss = Array.from(doc.querySelectorAll('style')).reduce((sum, s) => sum + s.textContent.length, 0);
+            const inlineJs = Array.from(doc.querySelectorAll('script:not([src])')).reduce((sum, s) => sum + s.textContent.length, 0);
+
+            results.tests.push({
+                name: 'Inline Code',
+                status: (inlineCss + inlineJs) > 50000 ? 'warning' : 'pass',
+                message: `${(inlineCss / 1024).toFixed(1)} KB CSS, ${(inlineJs / 1024).toFixed(1)} KB JS inline`,
+                severity: (inlineCss + inlineJs) > 50000 ? 'warning' : 'pass'
+            });
+
+            return results;
+        }
+
+        // ============================================================================
+        // JAVASCRIPT ERROR CHECK
+        // ============================================================================
+
+        function checkJavaScriptErrors(html) {
+            const results = {
+                category: 'JavaScript Validation',
+                icon: ICONS.javascript,
+                tests: []
+            };
+
+            const doc = parseHTML(html);
+            const scripts = doc.querySelectorAll('script:not([src])');
+            const errors = [];
+
+            scripts.forEach((script, index) => {
+                try {
+                    new Function(script.textContent);
+                } catch (error) {
+                    errors.push(`Script ${index}: ${error.message}`);
+                }
+            });
+
+            const status = errors.length === 0 ? 'pass' : (errors.length < 3 ? 'warning' : 'error');
+            results.tests.push({
+                name: 'Inline Script Syntax',
+                status: status,
+                message: `${scripts.length} inline scripts, ${errors.length} syntax errors`,
+                details: errors.length > 0 ? errors : null,
+                severity: status
+            });
+
+            // Check for console errors in event handlers
+            const elementsWithHandlers = doc.querySelectorAll('[onclick], [onload], [onerror]').length;
+            results.tests.push({
+                name: 'Event Handlers',
+                status: elementsWithHandlers > 0 ? 'warning' : 'pass',
+                message: elementsWithHandlers > 0 ? `${elementsWithHandlers} inline event handlers found (consider using addEventListener)` : 'No inline event handlers',
+                severity: elementsWithHandlers > 0 ? 'warning' : 'pass'
+            });
+
+            return results;
+        }
+
+        // ============================================================================
+        // TEST RENDERING
+        // ============================================================================
+
+        function renderTestResult(test) {
+            const resultEl = createElement('div', `test-result ${test.status}`);
+
+            let html = `<span class="test-result-icon">${
+                test.status === 'pass' ? '✓' :
+                test.status === 'warning' ? '⚠' :
+                test.status === 'error' ? '✕' : '−'
+            }</span> <strong>${test.name}:</strong> ${test.message}`;
+
+            if (test.details && test.details.length > 0) {
+                html += `<div class="test-details"><ul>`;
+                test.details.slice(0, 10).forEach(detail => {
+                    html += `<li>${detail}</li>`;
+                });
+                if (test.details.length > 10) {
+                    html += `<li><em>...and ${test.details.length - 10} more</em></li>`;
+                }
+                html += `</ul></div>`;
+            }
+
+            resultEl.innerHTML = html;
+            return resultEl;
+        }
+
+        function renderTestCategory(categoryName, tests, fileResults) {
+            const categoryEl = createElement('div', 'test-category');
+
+            let passCount = 0, warningCount = 0, errorCount = 0;
+            tests.forEach(test => {
+                if (test.status === 'pass') passCount++;
+                else if (test.status === 'warning') warningCount++;
+                else if (test.status === 'error') errorCount++;
+            });
+
+            const headerEl = createElement('div', 'category-header');
+            headerEl.innerHTML = `
+                <div class="category-title">
+                    <span class="category-icon">${ICONS[categoryName.replace(/\s+/g, '')] || '◈'}</span>
+                    <span>${categoryName}</span>
+                </div>
+                <div class="category-badge">
+                    ${passCount > 0 ? `<span class="badge pass">✓ ${passCount}</span>` : ''}
+                    ${warningCount > 0 ? `<span class="badge warning">⚠ ${warningCount}</span>` : ''}
+                    ${errorCount > 0 ? `<span class="badge error">✕ ${errorCount}</span>` : ''}
+                    <span class="toggle-icon">▶</span>
+                </div>
+            `;
+
+            let isCollapsed = errorCount === 0 && warningCount === 0;
+
+            headerEl.addEventListener('click', (e) => {
+                contentEl.classList.toggle('collapsed');
+                headerEl.querySelector('.toggle-icon').classList.toggle('collapsed');
+            });
+
+            const contentEl = createElement('div', `category-content${isCollapsed ? ' collapsed' : ''}`);
+            tests.forEach(test => {
+                contentEl.appendChild(renderTestResult(test));
+            });
+
+            categoryEl.appendChild(headerEl);
+            categoryEl.appendChild(contentEl);
+
+            return categoryEl;
+        }
+
+        function renderFileResult(filePath, testResults) {
+            const fileEl = createElement('div', 'file-result');
+
+            let totalTests = 0, passTests = 0, warningTests = 0, errorTests = 0;
+            testResults.forEach(cat => {
+                cat.tests.forEach(test => {
+                    totalTests++;
+                    if (test.status === 'pass') passTests++;
+                    else if (test.status === 'warning') warningTests++;
+                    else if (test.status === 'error') errorTests++;
+                });
+            });
+
+            const headerEl = createElement('div', 'file-header');
+            headerEl.innerHTML = `
+                <div>
+                    <div class="file-name">${filePath}</div>
+                    <div class="file-size">${totalTests} tests • ${passTests} passed • ${warningTests} warnings • ${errorTests} errors</div>
+                </div>
+                <div style="font-size: 1.5rem;">▼</div>
+            `;
+
+            const detailsEl = createElement('div', 'file-details expanded');
+            testResults.forEach(categoryResults => {
+                const categoryName = categoryResults.category.replace(/\s+/g, '');
+                detailsEl.appendChild(renderTestCategory(categoryResults.category, categoryResults.tests));
+            });
+
+            headerEl.addEventListener('click', () => {
+                detailsEl.classList.toggle('expanded');
+                const arrow = headerEl.querySelector('div:last-child');
+                arrow.style.transform = detailsEl.classList.contains('expanded') ? 'rotate(0deg)' : 'rotate(-90deg)';
+            });
+
+            fileEl.appendChild(headerEl);
+            fileEl.appendChild(detailsEl);
+
+            return fileEl;
+        }
+
+        // ============================================================================
+        // MAIN TEST RUNNER
+        // ============================================================================
+
+        async function runTests() {
+            showStatus('Loading HTML files...', true);
+            document.getElementById('progressSection').classList.remove('hidden');
+            document.getElementById('resultsContainer').innerHTML = '';
+
+            const files = CONFIG.files;
+            let currentFile = 0;
+
+            for (const filePath of files) {
+                updateProgress(currentFile, files.length);
+                showStatus(`Testing: ${filePath}`, true);
+
+                const fileData = await loadFile(filePath);
+                RESULTS.files++;
+
+                if (!fileData.success) {
+                    const container = document.getElementById('resultsContainer');
+                    const errorEl = createElement('div', 'file-result');
+                    errorEl.innerHTML = `
+                        <div style="color: var(--error); padding: 1rem;">
+                            <strong>⚠ ${filePath}</strong><br>
+                            Failed to load: ${fileData.error}
+                        </div>
+                    `;
+                    container.appendChild(errorEl);
+                    currentFile++;
+                    continue;
+                }
+
+                // Run all tests
+                const testResults = [
+                    validateHTML(fileData.content, filePath),
+                    await checkLinks(fileData.content, filePath),
+                    checkAccessibility(fileData.content),
+                    checkResponsiveness(fileData.content),
+                    analyzePerformance(fileData.content, fileData.size),
+                    checkJavaScriptErrors(fileData.content)
+                ];
+
+                // Count results
+                testResults.forEach(cat => {
+                    cat.tests.forEach(test => {
+                        if (test.status === 'pass') RESULTS.passed++;
+                        else if (test.status === 'warning') RESULTS.warnings++;
+                        else if (test.status === 'error') RESULTS.errors++;
+                    });
+                });
+
+                // Render file result
+                const container = document.getElementById('resultsContainer');
+                container.appendChild(renderFileResult(filePath, testResults));
+
+                updateStats();
+                currentFile++;
+            }
+
+            updateProgress(files.length, files.length);
+            hideStatus();
+            showResults();
+            updateStats();
+        }
+
+        // ============================================================================
+        // INITIALIZATION
+        // ============================================================================
+
+        document.addEventListener('DOMContentLoaded', () => {
+            runTests();
+        });
+    </script>
+</body>
+</html>

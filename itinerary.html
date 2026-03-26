@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Itinerary Builder — Tokyo Jet Lag</title>
+  <meta name="description" content="Plan your Tokyo trip day by day. Drag & drop venues, auto-calculate travel times and budget." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --neon-blue: #00f0ff;
+      --neon-purple: #bf00ff;
+      --neon-pink: #ff0080;
+      --neon-yellow: #ffe000;
+      --neon-green: #00ff88;
+      --bg-dark: #04040f;
+      --bg-card: #0a0a1e;
+      --bg-card-hover: #0f0f2a;
+      --text-main: #e8e8f0;
+      --text-dim: #7070a0;
+      --text-bright: #ffffff;
+      --glow-blue: 0 0 6px #00f0ff88, 0 0 12px #00f0ff22;
+      --glow-pink: 0 0 6px #ff008088, 0 0 12px #ff008022;
+      --glow-purple: 0 0 6px #bf00ff88, 0 0 12px #bf00ff22;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Inter', 'Space Mono', sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.02) 3px, rgba(0,0,0,0.02) 6px);
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      padding: 1rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(0, 240, 255, 0.08);
+      background: rgba(4, 4, 15, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.1em;
+      color: var(--neon-blue);
+      text-shadow: var(--glow-blue);
+      text-decoration: none;
+    }
+    .logo span { color: var(--neon-pink); text-shadow: var(--glow-pink); }
+
+    nav { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    nav a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      transition: all 0.2s;
+      font-family: 'Space Mono', monospace;
+    }
+    nav a:hover, nav a.active {
+      color: var(--neon-blue);
+      background: rgba(0,240,255,0.06);
+    }
+    nav a.active {
+      color: var(--neon-blue);
+      background: rgba(0,240,255,0.1);
+      text-shadow: var(--glow-blue);
+    }
+
+    /* ─── MAIN CONTENT ─── */
+    main {
+      padding: 6rem 2rem 3rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--neon-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--text-bright);
+      letter-spacing: 0.05em;
+      line-height: 1.1;
+    }
+    .section-title span {
+      color: var(--neon-pink);
+      text-shadow: var(--glow-pink);
+    }
+
+    .section-desc {
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    /* ─── TOOLBAR ─── */
+    .toolbar {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2rem;
+      padding: 1rem;
+      background: var(--bg-card);
+      border: 1px solid rgba(0,240,255,0.08);
+      border-radius: 8px;
+    }
+
+    .toolbar label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+    }
+
+    .toolbar select, .toolbar button {
+      background: rgba(0,240,255,0.05);
+      border: 1px solid rgba(0,240,255,0.15);
+      color: var(--text-main);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .toolbar select:hover, .toolbar button:hover {
+      border-color: var(--neon-blue);
+      background: rgba(0,240,255,0.1);
+    }
+
+    .btn-primary {
+      background: rgba(0,240,255,0.15) !important;
+      border-color: var(--neon-blue) !important;
+      color: var(--neon-blue) !important;
+      text-shadow: var(--glow-blue);
+    }
+    .btn-primary:hover {
+      background: rgba(0,240,255,0.25) !important;
+    }
+
+    .btn-pink {
+      background: rgba(255,0,128,0.15) !important;
+      border-color: var(--neon-pink) !important;
+      color: var(--neon-pink) !important;
+      text-shadow: var(--glow-pink);
+    }
+    .btn-pink:hover {
+      background: rgba(255,0,128,0.25) !important;
+    }
+
+    .btn-green {
+      background: rgba(0,255,136,0.1) !important;
+      border-color: var(--neon-green) !important;
+      color: var(--neon-green) !important;
+    }
+
+    /* ─── STATS BAR ─── */
+    .stats-bar {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+      padding: 1rem;
+      background: var(--bg-card);
+      border: 1px solid rgba(0,240,255,0.08);
+      border-radius: 8px;
+    }
+
+    .stat {
+      text-align: center;
+    }
+    .stat-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      color: var(--neon-blue);
+      text-shadow: var(--glow-blue);
+    }
+    .stat-value.pink { color: var(--neon-pink); text-shadow: var(--glow-pink); }
+    .stat-value.green { color: var(--neon-green); }
+    .stat-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-dim);
+    }
+
+    /* ─── LAYOUT ─── */
+    .builder-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .builder-layout { grid-template-columns: 1fr; }
+      .venue-pool { max-height: 300px; }
+    }
+
+    /* ─── VENUE POOL (LEFT) ─── */
+    .venue-pool {
+      background: var(--bg-card);
+      border: 1px solid rgba(0,240,255,0.08);
+      border-radius: 8px;
+      padding: 1rem;
+      overflow-y: auto;
+      max-height: calc(100vh - 250px);
+      position: sticky;
+      top: 5rem;
+    }
+
+    .pool-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--neon-blue);
+      margin-bottom: 0.5rem;
+    }
+
+    .pool-filter {
+      width: 100%;
+      background: rgba(0,240,255,0.05);
+      border: 1px solid rgba(0,240,255,0.1);
+      color: var(--text-main);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      padding: 0.5rem;
+      border-radius: 4px;
+      margin-bottom: 0.75rem;
+      outline: none;
+    }
+    .pool-filter:focus {
+      border-color: var(--neon-blue);
+    }
+    .pool-filter::placeholder { color: var(--text-dim); }
+
+    .pool-area-filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .pool-area-btn {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.25rem 0.5rem;
+      border-radius: 3px;
+      border: 1px solid rgba(0,240,255,0.1);
+      background: transparent;
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .pool-area-btn:hover, .pool-area-btn.active {
+      border-color: var(--neon-blue);
+      color: var(--neon-blue);
+      background: rgba(0,240,255,0.08);
+    }
+
+    /* Draggable venue items */
+    .pool-venue {
+      padding: 0.6rem;
+      margin-bottom: 0.4rem;
+      background: rgba(0,240,255,0.03);
+      border: 1px solid rgba(0,240,255,0.06);
+      border-radius: 4px;
+      cursor: grab;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .pool-venue:active { cursor: grabbing; }
+    .pool-venue:hover {
+      border-color: rgba(0,240,255,0.2);
+      background: rgba(0,240,255,0.06);
+    }
+    .pool-venue.dragging {
+      opacity: 0.5;
+      border-color: var(--neon-blue);
+    }
+
+    .pool-venue-name {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-bright);
+    }
+    .pool-venue-meta {
+      font-size: 0.6rem;
+      color: var(--text-dim);
+      margin-top: 0.15rem;
+    }
+    .pool-venue-tag {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.1rem 0.35rem;
+      border-radius: 2px;
+      background: rgba(0,240,255,0.1);
+      color: var(--neon-blue);
+      margin-top: 0.2rem;
+    }
+
+    /* ─── ITINERARY GRID (RIGHT) ─── */
+    .itinerary-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .day-column {
+      background: var(--bg-card);
+      border: 1px solid rgba(0,240,255,0.08);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .day-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      background: rgba(0,240,255,0.04);
+      border-bottom: 1px solid rgba(0,240,255,0.06);
+    }
+
+    .day-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.05em;
+      color: var(--text-bright);
+    }
+    .day-title span { color: var(--neon-pink); }
+
+    .day-budget {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--neon-green);
+    }
+
+    .time-slots {
+      padding: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .time-slot {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      min-height: 60px;
+    }
+
+    .slot-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+      width: 70px;
+      flex-shrink: 0;
+      padding-top: 0.6rem;
+    }
+    .slot-label .slot-icon {
+      font-size: 0.9rem;
+      display: block;
+      margin-bottom: 0.15rem;
+    }
+
+    .slot-dropzone {
+      flex: 1;
+      min-height: 55px;
+      border: 1px dashed rgba(0,240,255,0.12);
+      border-radius: 6px;
+      padding: 0.4rem;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .slot-dropzone.drag-over {
+      border-color: var(--neon-blue);
+      background: rgba(0,240,255,0.06);
+      box-shadow: inset 0 0 15px rgba(0,240,255,0.05);
+    }
+    .slot-dropzone.empty::after {
+      content: 'Drop venue here';
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      min-height: 45px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--text-dim);
+      opacity: 0.4;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* Travel time indicator */
+    .travel-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.2rem 0.5rem;
+      margin-left: 70px;
+    }
+    .travel-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(191,0,255,0.3), rgba(191,0,255,0.05));
+    }
+    .travel-time {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem;
+      color: var(--neon-purple);
+      white-space: nowrap;
+    }
+
+    /* ─── SCHEDULED VENUE CARD ─── */
+    .scheduled-venue {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.5rem;
+      background: rgba(0,240,255,0.04);
+      border: 1px solid rgba(0,240,255,0.1);
+      border-radius: 5px;
+      cursor: grab;
+      transition: all 0.2s;
+    }
+    .scheduled-venue:hover {
+      border-color: rgba(0,240,255,0.25);
+      background: rgba(0,240,255,0.08);
+    }
+    .scheduled-venue.dragging {
+      opacity: 0.4;
+    }
+
+    .sv-info { flex: 1; min-width: 0; }
+    .sv-name {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-bright);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .sv-detail {
+      font-size: 0.6rem;
+      color: var(--text-dim);
+    }
+    .sv-price {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--neon-green);
+      white-space: nowrap;
+    }
+    .sv-remove {
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      cursor: pointer;
+      font-size: 0.8rem;
+      padding: 0.2rem;
+      transition: color 0.2s;
+    }
+    .sv-remove:hover { color: var(--neon-pink); }
+
+    /* ─── PRINT / PDF ─── */
+    .print-section { display: none; }
+
+    @media print {
+      body { background: #fff !important; color: #222 !important; }
+      body::before { display: none !important; }
+      header, .toolbar, .venue-pool, .stats-bar, .pool-venue, .sv-remove { display: none !important; }
+      .print-section { display: block !important; margin-bottom: 1rem; }
+      .print-title {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 2rem;
+        color: #00f0ff;
+        border-bottom: 2px solid #00f0ff;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
+      }
+      .builder-layout { grid-template-columns: 1fr !important; }
+      main { padding: 0 !important; }
+      .day-column { break-inside: avoid; border-color: #ddd !important; margin-bottom: 1rem; }
+      .day-header { background: #f0f0f0 !important; }
+      .day-title { color: #222 !important; }
+      .day-title span { color: #ff0080 !important; }
+      .slot-dropzone { border-style: solid !important; border-color: #ddd !important; }
+      .slot-dropzone.empty::after { content: '—'; }
+      .scheduled-venue { background: #f8f8f8 !important; border-color: #ddd !important; }
+      .sv-name { color: #222 !important; }
+      .itinerary-grid { gap: 0.5rem !important; }
+      .travel-indicator { margin-left: 0 !important; }
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid rgba(0,240,255,0.06);
+      margin-top: 3rem;
+    }
+    footer p {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+    }
+    footer a { color: var(--neon-blue); text-decoration: none; }
+    footer a:hover { text-shadow: var(--glow-blue); }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(0,240,255,0.15); border-radius: 3px; }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 768px) {
+      header { padding: 0.75rem 1rem; }
+      nav { display: none; }
+      main { padding: 5rem 1rem 2rem; }
+      .toolbar { flex-direction: column; gap: 0.5rem; }
+      .stats-bar { gap: 0.75rem; }
+      .builder-layout { grid-template-columns: 1fr; }
+      .venue-pool { position: static; max-height: 250px; }
+      .time-slot { flex-direction: column; gap: 0.3rem; }
+      .slot-label { width: auto; padding-top: 0; }
+      .travel-indicator { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <header role="banner">
+    <a href="index.html" class="logo" aria-label="Tokyo Jet Lag — Home">Tokyo<span>JetLag</span></a>
+    <nav aria-label="Main navigation">
+      <a href="index.html#venues">Venues</a>
+      <a href="itinerary.html" class="active">Itinerary</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="index.html#jetlag-tips">Jet Lag Tips</a>
+      <a href="index.html#getting-around">Getting Around</a>
+      <a href="index.html#faq">FAQ</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="print-section">
+      <div class="print-title">Tokyo Jet Lag — My Itinerary</div>
+    </div>
+
+    <div class="page-header">
+      <div class="section-label">// build your tokyo adventure</div>
+      <h1 class="section-title">Itinerary<br><span>Builder</span></h1>
+      <p class="section-desc">Drag venues into your daily plan. We'll calculate travel times & budget.</p>
+    </div>
+
+    <!-- TOOLBAR -->
+    <div class="toolbar">
+      <div>
+        <label for="templateSelect">Template</label><br>
+        <select id="templateSelect">
+          <option value="3">3 Days</option>
+          <option value="5" selected>5 Days</option>
+          <option value="7">7 Days</option>
+        </select>
+      </div>
+      <button class="btn-primary" id="applyTemplate">Apply Template</button>
+      <button class="btn-green" id="saveBtn">💾 Save</button>
+      <button id="loadBtn">📂 Load</button>
+      <button class="btn-pink" id="exportPDF">🖨 Export PDF</button>
+      <button id="clearBtn">🗑 Clear All</button>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-bar">
+      <div class="stat">
+        <div class="stat-value" id="statDays">5</div>
+        <div class="stat-label">Days</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value pink" id="statVenues">0</div>
+        <div class="stat-label">Venues</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value green" id="statBudget">¥0</div>
+        <div class="stat-label">Est. Budget</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="statTravel">0 min</div>
+        <div class="stat-label">Travel Time</div>
+      </div>
+    </div>
+
+    <!-- BUILDER LAYOUT -->
+    <div class="builder-layout">
+      <!-- Venue Pool -->
+      <div class="venue-pool">
+        <div class="pool-title">📍 Venue Pool</div>
+        <input type="text" class="pool-filter" id="poolFilter" placeholder="Search venues..." />
+        <div class="pool-area-filter" id="poolAreaFilter"></div>
+        <div id="poolList"></div>
+      </div>
+
+      <!-- Itinerary Grid -->
+      <div class="itinerary-grid" id="itineraryGrid"></div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Built with ♡ for sleepless travelers — <a href="index.html">Tokyo Jet Lag</a></p>
+  </footer>
+
+<script>
+/* ═══════════════════════════════════════════
+   TOKYO JET LAG — ITINERARY BUILDER
+   ═══════════════════════════════════════════ */
+
+// ─── VENUE DATA ───
+const VENUES = [
+  // Shinjuku
+  { id: 'fuunji', name: 'Fuunji', nameJp: '風雲児', area: 'Shinjuku', tag: 'Ramen', price: 1000, hours: '11AM–9PM' },
+  { id: 'ichiran-shinjuku', name: 'Ichiran Shinjuku', nameJp: '一蘭', area: 'Shinjuku', tag: 'Ramen · 24H', price: 1500, hours: '24H' },
+  { id: 'nagi', name: 'Nagi Golden Gai', nameJp: '凪', area: 'Shinjuku', tag: 'Ramen · 24H', price: 1500, hours: '24H' },
+  { id: 'golden-gai', name: 'Golden Gai', nameJp: 'ゴールデン街', area: 'Shinjuku', tag: 'Bar', price: 2000, hours: 'Evening–Late' },
+  { id: 'omoide', name: 'Omoide Yokocho', nameJp: '思い出横丁', area: 'Shinjuku', tag: 'Izakaya', price: 2500, hours: 'Until Late' },
+  { id: 'thermae-yu', name: 'Thermae-Yu', nameJp: 'テルマー湯', area: 'Shinjuku', tag: 'Onsen · 24H', price: 2600, hours: '24H' },
+  { id: 'robot-restaurant', name: 'Robot Restaurant', nameJp: 'ロボットレストラン', area: 'Shinjuku', tag: 'Entertainment', price: 5000, hours: 'Evening Shows' },
+  { id: 'don-quijote-shinjuku', name: 'Don Quijote Shinjuku', nameJp: 'ドン・キホーテ', area: 'Shinjuku', tag: 'Shopping · 24H', price: 3000, hours: '24H' },
+
+  // Shibuya
+  { id: 'womb', name: 'WOMB', nameJp: 'ウーム', area: 'Shibuya', tag: 'Club', price: 3500, hours: 'Night' },
+  { id: 'shibuya-crossing', name: 'Shibuya Crossing', nameJp: '渋谷スクランブル交差点', area: 'Shibuya', tag: 'Landmark', price: 0, hours: 'Always' },
+  { id: 'shibuya-sky', name: 'Shibuya Sky', nameJp: '渋谷スカイ', area: 'Shibuya', tag: 'Observation', price: 2000, hours: '10AM–10:30PM' },
+  { id: 'nonbei-yokocho', name: 'Nonbei Yokocho', nameJp: 'のんべい横丁', area: 'Shibuya', tag: 'Bar', price: 2000, hours: 'Evening–Late' },
+  { id: 'gen-shibuya', name: 'GEN Ramen', nameJp: '源', area: 'Shibuya', tag: 'Ramen', price: 1200, hours: 'Until Late' },
+
+  // Roppongi
+  { id: 'v2-tokyo', name: 'V2 Tokyo', nameJp: 'V2東京', area: 'Roppongi', tag: 'Club', price: 4000, hours: 'Night' },
+  { id: 'mori-art', name: 'Mori Art Museum', nameJp: '森美術館', area: 'Roppongi', tag: 'Museum', price: 1800, hours: '10AM–10PM' },
+  { id: 'tokyo-tower', name: 'Tokyo Tower', nameJp: '東京タワー', area: 'Roppongi', tag: 'Landmark', price: 1200, hours: '9AM–11PM' },
+  { id: 'roppongi-hills', name: 'Roppongi Hills', nameJp: '六本木ヒルズ', area: 'Roppongi', tag: 'Shopping', price: 0, hours: '11AM–9PM' },
+
+  // Harajuku / Omotesando
+  { id: 'takeshita', name: 'Takeshita Street', nameJp: '竹下通り', area: 'Harajuku', tag: 'Shopping', price: 2000, hours: '~10AM–8PM' },
+  { id: 'meiji-shrine', name: 'Meiji Shrine', nameJp: '明治神宮', area: 'Harajuku', tag: 'Temple', price: 0, hours: 'Sunrise–Sunset' },
+  { id: 'afuri', name: 'AFURI Harajuku', nameJp: 'あふり', area: 'Harajuku', tag: 'Ramen', price: 1200, hours: '11AM–Late' },
+  { id: 'design-festa', name: 'Design Festa Gallery', nameJp: 'デザインフェスタ', area: 'Harajuku', tag: 'Gallery', price: 0, hours: '11AM–8PM' },
+
+  // Shimokitazawa
+  { id: 'bear-pond', name: 'Bear Pond Espresso', nameJp: 'ベアポンド', area: 'Shimokitazawa', tag: 'Cafe', price: 800, hours: '10AM–6PM' },
+  { id: 'shimokita-vintage', name: 'Shimokita Vintage Shops', nameJp: '下北沢古着', area: 'Shimokitazawa', tag: 'Shopping', price: 3000, hours: '12PM–8PM' },
+  { id: 'bonus-track', name: 'Bonus Track', nameJp: 'ボーナストラック', area: 'Shimokitazawa', tag: 'Shopping · Food', price: 1500, hours: '11AM–9PM' },
+
+  // Nakameguro
+  { id: 'nakameguro-canal', name: 'Meguro River Walk', nameJp: '目黒川', area: 'Nakameguro', tag: 'Walk', price: 0, hours: 'Always' },
+  { id: 'starbucks-reserve', name: 'Starbucks Reserve Roastery', nameJp: 'スタバ リザーブ', area: 'Nakameguro', tag: 'Cafe', price: 1000, hours: '7AM–11PM' },
+
+  // Ebisu
+  { id: 'yebisu-garden', name: 'Yebisu Garden Place', nameJp: '恵比寿ガーデンプレイス', area: 'Ebisu', tag: 'Complex', price: 0, hours: 'Varies' },
+  { id: 'ebisu-yokocho', name: 'Ebisu Yokocho', nameJp: '恵比寿横丁', area: 'Ebisu', tag: 'Izakaya', price: 2500, hours: '5PM–Late' },
+
+  // Ginza
+  { id: 'tsukiji-outer', name: 'Tsukiji Outer Market', nameJp: '築地場外市場', area: 'Ginza', tag: 'Food Market', price: 2000, hours: '5AM–2PM' },
+  { id: 'ginza-six', name: 'GINZA SIX', nameJp: 'ギンザシックス', area: 'Ginza', tag: 'Shopping', price: 0, hours: '10:30AM–8:30PM' },
+  { id: 'sushi-dai', name: 'Sushi Dai', nameJp: '寿司大', area: 'Ginza', tag: 'Sushi', price: 4000, hours: '5AM–2PM' },
+
+  // Asakusa
+  { id: 'senso-ji', name: 'Senso-ji Temple', nameJp: '浅草寺', area: 'Asakusa', tag: 'Temple', price: 0, hours: 'Always Open' },
+  { id: 'hoppy-dori', name: 'Hoppy Street', nameJp: 'ホッピー通り', area: 'Asakusa', tag: 'Izakaya', price: 1500, hours: '10AM–Late' },
+  { id: 'asakusa-underground', name: 'Asakusa Underground', nameJp: '浅草地下街', area: 'Asakusa', tag: 'Shopping', price: 1000, hours: '10AM–8PM' },
+
+  // Akihabara
+  { id: 'akihabara-electric', name: 'Akihabara Electric Town', nameJp: '秋葉原電気街', area: 'Akihabara', tag: 'Shopping', price: 5000, hours: '10AM–9PM' },
+  { id: 'maid-cafe', name: 'Maid Cafe Experience', nameJp: 'メイドカフェ', area: 'Akihabara', tag: 'Cafe', price: 2000, hours: '11AM–10PM' },
+  { id: 'super-potato', name: 'Super Potato', nameJp: 'スーパーポテト', area: 'Akihabara', tag: 'Retro Gaming', price: 2000, hours: '11AM–8PM' },
+
+  // Ueno
+  { id: 'ueno-park', name: 'Ueno Park', nameJp: '上野公園', area: 'Ueno', tag: 'Park', price: 0, hours: '5AM–11PM' },
+  { id: 'ameyoko', name: 'Ameyoko Market', nameJp: 'アメ横', area: 'Ueno', tag: 'Market', price: 2000, hours: '10AM–7PM' },
+
+  // Odaiba
+  { id: 'teamlab', name: 'teamLab Borderless', nameJp: 'チームラボ', area: 'Odaiba', tag: 'Art Museum', price: 3200, hours: '10AM–7PM' },
+  { id: 'gundam-base', name: 'Gundam Base Tokyo', nameJp: 'ガンダムベース', area: 'Odaiba', tag: 'Entertainment', price: 0, hours: '10AM–8PM' },
+];
+
+// ─── AREA TRAVEL TIMES (minutes, approximate) ───
+const TRAVEL_TIMES = {
+  'Shinjuku-Shibuya': 8, 'Shinjuku-Roppongi': 12, 'Shinjuku-Harajuku': 5,
+  'Shinjuku-Shimokitazawa': 10, 'Shinjuku-Nakameguro': 15, 'Shinjuku-Ebisu': 12,
+  'Shinjuku-Ginza': 20, 'Shinjuku-Asakusa': 30, 'Shinjuku-Akihabara': 20,
+  'Shinjuku-Ueno': 25, 'Shinjuku-Odaiba': 40,
+  'Shibuya-Roppongi': 10, 'Shibuya-Harajuku': 5, 'Shibuya-Shimokitazawa': 5,
+  'Shibuya-Nakameguro': 5, 'Shibuya-Ebisu': 3, 'Shibuya-Ginza': 15,
+  'Shibuya-Asakusa': 30, 'Shibuya-Akihabara': 25, 'Shibuya-Ueno': 25,
+  'Shibuya-Odaiba': 35,
+  'Roppongi-Harajuku': 15, 'Roppongi-Shimokitazawa': 20, 'Roppongi-Nakameguro': 12,
+  'Roppongi-Ebisu': 10, 'Roppongi-Ginza': 12, 'Roppongi-Asakusa': 25,
+  'Roppongi-Akihabara': 20, 'Roppongi-Ueno': 22, 'Roppongi-Odaiba': 25,
+  'Harajuku-Shimokitazawa': 10, 'Harajuku-Nakameguro': 12, 'Harajuku-Ebisu': 10,
+  'Harajuku-Ginza': 18, 'Harajuku-Asakusa': 30, 'Harajuku-Akihabara': 25,
+  'Harajuku-Ueno': 25, 'Harajuku-Odaiba': 35,
+  'Shimokitazawa-Nakameguro': 10, 'Shimokitazawa-Ebisu': 12,
+  'Shimokitazawa-Ginza': 25, 'Shimokitazawa-Asakusa': 35,
+  'Shimokitazawa-Akihabara': 30, 'Shimokitazawa-Ueno': 30, 'Shimokitazawa-Odaiba': 40,
+  'Nakameguro-Ebisu': 3, 'Nakameguro-Ginza': 15, 'Nakameguro-Asakusa': 30,
+  'Nakameguro-Akihabara': 25, 'Nakameguro-Ueno': 25, 'Nakameguro-Odaiba': 35,
+  'Ebisu-Ginza': 15, 'Ebisu-Asakusa': 30, 'Ebisu-Akihabara': 22,
+  'Ebisu-Ueno': 25, 'Ebisu-Odaiba': 30,
+  'Ginza-Asakusa': 15, 'Ginza-Akihabara': 8, 'Ginza-Ueno': 10, 'Ginza-Odaiba': 20,
+  'Asakusa-Akihabara': 10, 'Asakusa-Ueno': 5, 'Asakusa-Odaiba': 25,
+  'Akihabara-Ueno': 5, 'Akihabara-Odaiba': 30,
+  'Ueno-Odaiba': 35,
+};
+
+function getTravelTime(area1, area2) {
+  if (area1 === area2) return 5; // Same area, short walk
+  const key1 = `${area1}-${area2}`;
+  const key2 = `${area2}-${area1}`;
+  return TRAVEL_TIMES[key1] || TRAVEL_TIMES[key2] || 20;
+}
+
+// ─── TIME SLOTS ───
+const TIME_SLOTS = [
+  { id: 'morning', label: 'Morning', icon: '🌅', time: '7AM–12PM' },
+  { id: 'afternoon', label: 'Afternoon', icon: '☀️', time: '12PM–6PM' },
+  { id: 'evening', label: 'Evening', icon: '🌙', time: '6PM–12AM' },
+  { id: 'latenight', label: 'Late Night', icon: '🦉', time: '12AM–5AM' },
+];
+
+// ─── STATE ───
+let numDays = 5;
+let itinerary = {}; // { 'day1-morning': ['venue-id', ...], ... }
+let dragData = null;
+
+// ─── INIT ───
+document.addEventListener('DOMContentLoaded', () => {
+  buildPool();
+  buildItinerary(numDays);
+  bindToolbar();
+  autoLoad();
+});
+
+// ─── BUILD VENUE POOL ───
+function buildPool() {
+  const areas = [...new Set(VENUES.map(v => v.area))];
+  const filterDiv = document.getElementById('poolAreaFilter');
+  filterDiv.innerHTML = `<button class="pool-area-btn active" data-area="all">All</button>` +
+    areas.map(a => `<button class="pool-area-btn" data-area="${a}">${a}</button>`).join('');
+
+  filterDiv.addEventListener('click', e => {
+    if (!e.target.classList.contains('pool-area-btn')) return;
+    filterDiv.querySelectorAll('.pool-area-btn').forEach(b => b.classList.remove('active'));
+    e.target.classList.add('active');
+    renderPool();
+  });
+
+  document.getElementById('poolFilter').addEventListener('input', renderPool);
+  renderPool();
+}
+
+function renderPool() {
+  const search = document.getElementById('poolFilter').value.toLowerCase();
+  const activeArea = document.querySelector('.pool-area-btn.active')?.dataset.area || 'all';
+
+  const filtered = VENUES.filter(v => {
+    const matchSearch = !search || v.name.toLowerCase().includes(search) || v.tag.toLowerCase().includes(search) || v.area.toLowerCase().includes(search);
+    const matchArea = activeArea === 'all' || v.area === activeArea;
+    return matchSearch && matchArea;
+  });
+
+  const poolList = document.getElementById('poolList');
+  poolList.innerHTML = filtered.map(v => `
+    <div class="pool-venue" draggable="true" data-venue-id="${v.id}">
+      <div class="pool-venue-name">${v.name}</div>
+      <div class="pool-venue-meta">${v.area} · ${v.hours} · ¥${v.price.toLocaleString()}</div>
+      <span class="pool-venue-tag">${v.tag}</span>
+    </div>
+  `).join('');
+
+  // Bind drag events
+  poolList.querySelectorAll('.pool-venue').forEach(el => {
+    el.addEventListener('dragstart', e => {
+      dragData = { venueId: el.dataset.venueId, source: null };
+      el.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', el.dataset.venueId);
+    });
+    el.addEventListener('dragend', () => {
+      el.classList.remove('dragging');
+      dragData = null;
+    });
+  });
+}
+
+// ─── BUILD ITINERARY ───
+function buildItinerary(days) {
+  numDays = days;
+  const grid = document.getElementById('itineraryGrid');
+  grid.innerHTML = '';
+
+  for (let d = 1; d <= days; d++) {
+    const dayEl = document.createElement('div');
+    dayEl.className = 'day-column';
+    dayEl.innerHTML = `
+      <div class="day-header">
+        <div class="day-title">Day <span>${d}</span></div>
+        <div class="day-budget" id="budget-day${d}">¥0</div>
+      </div>
+      <div class="time-slots">
+        ${TIME_SLOTS.map((slot, idx) => `
+          ${idx > 0 ? `<div class="travel-indicator" id="travel-day${d}-${TIME_SLOTS[idx-1].id}-${slot.id}"><div class="travel-line"></div><span class="travel-time"></span></div>` : ''}
+          <div class="time-slot">
+            <div class="slot-label">
+              <span class="slot-icon">${slot.icon}</span>
+              ${slot.label}
+            </div>
+            <div class="slot-dropzone empty" id="slot-day${d}-${slot.id}" data-day="${d}" data-slot="${slot.id}">
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+    grid.appendChild(dayEl);
+  }
+
+  // Init itinerary state for new slots
+  for (let d = 1; d <= days; d++) {
+    for (const slot of TIME_SLOTS) {
+      const key = `day${d}-${slot.id}`;
+      if (!itinerary[key]) itinerary[key] = [];
+    }
+  }
+
+  bindDropZones();
+  renderAllSlots();
+  updateStats();
+}
+
+// ─── BIND DROP ZONES ───
+function bindDropZones() {
+  document.querySelectorAll('.slot-dropzone').forEach(zone => {
+    zone.addEventListener('dragover', e => {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      zone.classList.add('drag-over');
+    });
+    zone.addEventListener('dragleave', () => {
+      zone.classList.remove('drag-over');
+    });
+    zone.addEventListener('drop', e => {
+      e.preventDefault();
+      zone.classList.remove('drag-over');
+      const venueId = e.dataTransfer.getData('text/plain') || dragData?.venueId;
+      if (!venueId) return;
+
+      const day = zone.dataset.day;
+      const slot = zone.dataset.slot;
+      const key = `day${day}-${slot}`;
+
+      // If moving from another slot, remove from source
+      if (dragData?.source) {
+        const srcArr = itinerary[dragData.source];
+        const srcIdx = srcArr.indexOf(venueId);
+        if (srcIdx > -1) srcArr.splice(srcIdx, 1);
+        renderSlot(dragData.source);
+      }
+
+      if (!itinerary[key]) itinerary[key] = [];
+      if (!itinerary[key].includes(venueId)) {
+        itinerary[key].push(venueId);
+      }
+
+      renderSlot(key);
+      updateStats();
+    });
+  });
+}
+
+// ─── RENDER SLOT ───
+function renderSlot(key) {
+  const zone = document.getElementById(`slot-${key}`);
+  if (!zone) return;
+  const venues = itinerary[key] || [];
+
+  if (venues.length === 0) {
+    zone.innerHTML = '';
+    zone.classList.add('empty');
+    return;
+  }
+
+  zone.classList.remove('empty');
+  zone.innerHTML = venues.map(vid => {
+    const v = VENUES.find(x => x.id === vid);
+    if (!v) return '';
+    return `
+      <div class="scheduled-venue" draggable="true" data-venue-id="${v.id}" data-source="${key}">
+        <div class="sv-info">
+          <div class="sv-name">${v.name}</div>
+          <div class="sv-detail">${v.area} · ${v.tag}</div>
+        </div>
+        <div class="sv-price">¥${v.price.toLocaleString()}</div>
+        <button class="sv-remove" data-venue-id="${v.id}" data-key="${key}" title="Remove">✕</button>
+      </div>
+    `;
+  }).join('');
+
+  // Bind drag on scheduled venues
+  zone.querySelectorAll('.scheduled-venue').forEach(el => {
+    el.addEventListener('dragstart', e => {
+      dragData = { venueId: el.dataset.venueId, source: el.dataset.source };
+      el.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', el.dataset.venueId);
+    });
+    el.addEventListener('dragend', () => {
+      el.classList.remove('dragging');
+      dragData = null;
+    });
+  });
+
+  // Bind remove buttons
+  zone.querySelectorAll('.sv-remove').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const vid = btn.dataset.venueId;
+      const k = btn.dataset.key;
+      itinerary[k] = itinerary[k].filter(id => id !== vid);
+      renderSlot(k);
+      updateStats();
+    });
+  });
+}
+
+function renderAllSlots() {
+  Object.keys(itinerary).forEach(renderSlot);
+}
+
+// ─── UPDATE STATS ───
+function updateStats() {
+  let totalVenues = 0;
+  let totalBudget = 0;
+  let totalTravel = 0;
+
+  for (let d = 1; d <= numDays; d++) {
+    let dayBudget = 0;
+    let dayVenues = [];
+
+    for (const slot of TIME_SLOTS) {
+      const key = `day${d}-${slot.id}`;
+      const venues = itinerary[key] || [];
+      venues.forEach(vid => {
+        const v = VENUES.find(x => x.id === vid);
+        if (v) {
+          dayBudget += v.price;
+          dayVenues.push(v);
+          totalVenues++;
+        }
+      });
+    }
+
+    totalBudget += dayBudget;
+    const budgetEl = document.getElementById(`budget-day${d}`);
+    if (budgetEl) budgetEl.textContent = `¥${dayBudget.toLocaleString()}`;
+
+    // Calculate travel times between consecutive slots
+    for (let i = 0; i < TIME_SLOTS.length - 1; i++) {
+      const key1 = `day${d}-${TIME_SLOTS[i].id}`;
+      const key2 = `day${d}-${TIME_SLOTS[i+1].id}`;
+      const v1 = itinerary[key1] || [];
+      const v2 = itinerary[key2] || [];
+      const travelId = `travel-day${d}-${TIME_SLOTS[i].id}-${TIME_SLOTS[i+1].id}`;
+      const travelEl = document.getElementById(travelId);
+
+      if (travelEl) {
+        const timeSpan = travelEl.querySelector('.travel-time');
+        if (v1.length > 0 && v2.length > 0) {
+          const lastV1 = VENUES.find(x => x.id === v1[v1.length - 1]);
+          const firstV2 = VENUES.find(x => x.id === v2[0]);
+          if (lastV1 && firstV2) {
+            const mins = getTravelTime(lastV1.area, firstV2.area);
+            totalTravel += mins;
+            timeSpan.textContent = `🚃 ~${mins} min`;
+          }
+        } else {
+          timeSpan.textContent = '';
+        }
+      }
+    }
+  }
+
+  document.getElementById('statDays').textContent = numDays;
+  document.getElementById('statVenues').textContent = totalVenues;
+  document.getElementById('statBudget').textContent = `¥${totalBudget.toLocaleString()}`;
+  document.getElementById('statTravel').textContent = `${totalTravel} min`;
+}
+
+// ─── TOOLBAR ───
+function bindToolbar() {
+  document.getElementById('applyTemplate').addEventListener('click', () => {
+    numDays = parseInt(document.getElementById('templateSelect').value);
+    // Preserve existing data for matching days
+    const oldItinerary = { ...itinerary };
+    itinerary = {};
+    for (let d = 1; d <= numDays; d++) {
+      for (const slot of TIME_SLOTS) {
+        const key = `day${d}-${slot.id}`;
+        itinerary[key] = oldItinerary[key] || [];
+      }
+    }
+    buildItinerary(numDays);
+  });
+
+  document.getElementById('saveBtn').addEventListener('click', saveItinerary);
+  document.getElementById('loadBtn').addEventListener('click', loadItinerary);
+  document.getElementById('clearBtn').addEventListener('click', () => {
+    if (confirm('Clear all venues from your itinerary?')) {
+      Object.keys(itinerary).forEach(k => itinerary[k] = []);
+      renderAllSlots();
+      updateStats();
+      try { localStorage.removeItem('tjl-itinerary'); } catch(e) {}
+    }
+  });
+  document.getElementById('exportPDF').addEventListener('click', () => {
+    window.print();
+  });
+}
+
+// ─── LOCAL STORAGE ───
+function saveItinerary() {
+  try {
+    const data = { numDays, itinerary, savedAt: new Date().toISOString() };
+    localStorage.setItem('tjl-itinerary', JSON.stringify(data));
+    const btn = document.getElementById('saveBtn');
+    btn.textContent = '✓ Saved!';
+    setTimeout(() => btn.textContent = '💾 Save', 1500);
+  } catch(e) {
+    alert('Could not save — localStorage may be unavailable.');
+  }
+}
+
+function loadItinerary() {
+  try {
+    const raw = localStorage.getItem('tjl-itinerary');
+    if (!raw) { alert('No saved itinerary found.'); return; }
+    const data = JSON.parse(raw);
+    numDays = data.numDays || 5;
+    itinerary = data.itinerary || {};
+    document.getElementById('templateSelect').value = numDays;
+    buildItinerary(numDays);
+    const btn = document.getElementById('loadBtn');
+    btn.textContent = '✓ Loaded!';
+    setTimeout(() => btn.textContent = '📂 Load', 1500);
+  } catch(e) {
+    alert('Error loading itinerary.');
+  }
+}
+
+function autoLoad() {
+  try {
+    const raw = localStorage.getItem('tjl-itinerary');
+    if (raw) {
+      const data = JSON.parse(raw);
+      numDays = data.numDays || 5;
+      itinerary = data.itinerary || {};
+      document.getElementById('templateSelect').value = numDays;
+      buildItinerary(numDays);
+    }
+  } catch(e) { /* ignore */ }
+}
+</script>
+</body>
+</html>

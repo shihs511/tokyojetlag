@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photo Gallery — Tokyo Jet Lag</title>
+  <meta name="description" content="Stunning photography of Tokyo's neighborhoods — from neon-lit Shinjuku to tranquil Asakusa." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --neon-blue: #00f0ff;
+      --neon-purple: #bf00ff;
+      --neon-pink: #ff0080;
+      --neon-yellow: #ffe000;
+      --neon-green: #00ff88;
+      --bg-dark: #04040f;
+      --bg-card: #0a0a1e;
+      --bg-card-hover: #0f0f2a;
+      --text-main: #e8e8f0;
+      --text-dim: #7070a0;
+      --text-bright: #ffffff;
+      --glow-blue: 0 0 6px #00f0ff88, 0 0 12px #00f0ff22;
+      --glow-pink: 0 0 6px #ff008088, 0 0 12px #ff008022;
+      --glow-purple: 0 0 6px #bf00ff88, 0 0 12px #bf00ff22;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Inter', 'Space Mono', sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.02) 3px, rgba(0,0,0,0.02) 6px);
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      padding: 1rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(0, 240, 255, 0.08);
+      background: rgba(4, 4, 15, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.1em;
+      color: var(--neon-blue);
+      text-shadow: var(--glow-blue);
+      text-decoration: none;
+    }
+    .logo span { color: var(--neon-pink); text-shadow: var(--glow-pink); }
+
+    nav { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    nav a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      transition: all 0.2s;
+      font-family: 'Space Mono', monospace;
+    }
+    nav a:hover, nav a.active {
+      color: var(--neon-blue);
+      background: rgba(0,240,255,0.06);
+    }
+    nav a.active {
+      background: rgba(0,240,255,0.1);
+      text-shadow: var(--glow-blue);
+    }
+
+    /* ─── MAIN ─── */
+    main {
+      padding: 6rem 2rem 3rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--neon-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--text-bright);
+      letter-spacing: 0.05em;
+      line-height: 1.1;
+    }
+    .section-title span {
+      color: var(--neon-pink);
+      text-shadow: var(--glow-pink);
+    }
+
+    .section-desc {
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    /* ─── FILTER BAR ─── */
+    .filter-bar {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 2rem;
+      padding: 1rem;
+      background: var(--bg-card);
+      border: 1px solid rgba(0,240,255,0.08);
+      border-radius: 8px;
+    }
+
+    .filter-btn {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      border: 1px solid rgba(0,240,255,0.12);
+      background: transparent;
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover {
+      border-color: rgba(0,240,255,0.3);
+      color: var(--neon-blue);
+      background: rgba(0,240,255,0.05);
+    }
+    .filter-btn.active {
+      border-color: var(--neon-blue);
+      color: var(--neon-blue);
+      background: rgba(0,240,255,0.1);
+      text-shadow: var(--glow-blue);
+    }
+
+    .photo-count {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .photo-count span { color: var(--neon-blue); }
+
+    /* ─── MASONRY GRID ─── */
+    .masonry {
+      columns: 4;
+      column-gap: 0.75rem;
+    }
+
+    @media (max-width: 1100px) { .masonry { columns: 3; } }
+    @media (max-width: 768px) { .masonry { columns: 2; } }
+    @media (max-width: 480px) { .masonry { columns: 1; } }
+
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 0.75rem;
+      position: relative;
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .gallery-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,240,255,0.15);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.4s;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.03);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 2rem 0.75rem 0.75rem;
+      background: linear-gradient(transparent, rgba(4,4,15,0.85));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    .gallery-overlay-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--text-bright);
+      font-weight: 600;
+    }
+    .gallery-overlay-area {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem;
+      color: var(--neon-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-top: 0.2rem;
+    }
+
+    /* ─── LIGHTBOX ─── */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(4,4,15,0.95);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 2rem;
+      animation: fadeIn 0.2s;
+    }
+    .lightbox.open { display: flex; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 2rem;
+      background: none;
+      border: none;
+      color: var(--text-main);
+      font-size: 2rem;
+      cursor: pointer;
+      z-index: 10;
+      transition: color 0.2s;
+      font-family: 'Space Mono', monospace;
+    }
+    .lightbox-close:hover { color: var(--neon-pink); }
+
+    .lightbox-img-wrap {
+      position: relative;
+      max-width: 90vw;
+      max-height: 75vh;
+    }
+
+    .lightbox-img {
+      max-width: 90vw;
+      max-height: 75vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 0 40px rgba(0,240,255,0.1);
+    }
+
+    .lightbox-info {
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .lightbox-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      color: var(--text-bright);
+      letter-spacing: 0.05em;
+    }
+    .lightbox-area {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--neon-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-top: 0.3rem;
+    }
+    .lightbox-desc {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      margin-top: 0.5rem;
+      max-width: 500px;
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,240,255,0.1);
+      border: 1px solid rgba(0,240,255,0.2);
+      color: var(--neon-blue);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      font-family: 'Space Mono', monospace;
+    }
+    .lightbox-nav:hover {
+      background: rgba(0,240,255,0.2);
+      border-color: var(--neon-blue);
+    }
+    .lightbox-prev { left: 1.5rem; }
+    .lightbox-next { right: 1.5rem; }
+
+    .lightbox-counter {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--text-dim);
+      margin-top: 0.5rem;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid rgba(0,240,255,0.06);
+      margin-top: 3rem;
+    }
+    footer p {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+    }
+    footer a { color: var(--neon-blue); text-decoration: none; }
+    footer a:hover { text-shadow: var(--glow-blue); }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(0,240,255,0.15); border-radius: 3px; }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 768px) {
+      header { padding: 0.75rem 1rem; }
+      nav { display: none; }
+      main { padding: 5rem 0.75rem 2rem; }
+      .lightbox-nav { width: 36px; height: 36px; font-size: 0.9rem; }
+      .lightbox-prev { left: 0.5rem; }
+      .lightbox-next { right: 0.5rem; }
+    }
+
+    /* ─── LOADING SKELETON ─── */
+    .skeleton {
+      background: linear-gradient(90deg, var(--bg-card) 25%, var(--bg-card-hover) 50%, var(--bg-card) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: 6px;
+    }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <header role="banner">
+    <a href="index.html" class="logo" aria-label="Tokyo Jet Lag — Home">Tokyo<span>JetLag</span></a>
+    <nav aria-label="Main navigation">
+      <a href="index.html#venues">Venues</a>
+      <a href="itinerary.html">Itinerary</a>
+      <a href="gallery.html" class="active">Gallery</a>
+      <a href="index.html#jetlag-tips">Jet Lag Tips</a>
+      <a href="index.html#getting-around">Getting Around</a>
+      <a href="index.html#faq">FAQ</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <div class="section-label">// 東京の街角 — scenes from the city</div>
+      <h1 class="section-title">Photo<br><span>Gallery</span></h1>
+      <p class="section-desc">Explore Tokyo through the lens — from midnight neon to morning shrines.</p>
+    </div>
+
+    <div class="filter-bar" id="filterBar"></div>
+    <div class="photo-count" id="photoCount"></div>
+    <div class="masonry" id="masonryGrid"></div>
+  </main>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-label="Photo lightbox">
+    <button class="lightbox-close" id="lbClose" aria-label="Close lightbox">✕</button>
+    <button class="lightbox-nav lightbox-prev" id="lbPrev" aria-label="Previous photo">‹</button>
+    <button class="lightbox-nav lightbox-next" id="lbNext" aria-label="Next photo">›</button>
+    <div class="lightbox-img-wrap">
+      <img class="lightbox-img" id="lbImg" src="" alt="" />
+    </div>
+    <div class="lightbox-info">
+      <div class="lightbox-title" id="lbTitle"></div>
+      <div class="lightbox-area" id="lbArea"></div>
+      <div class="lightbox-desc" id="lbDesc"></div>
+      <div class="lightbox-counter" id="lbCounter"></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Photos via <a href="https://unsplash.com" target="_blank" rel="noopener">Unsplash</a> — <a href="index.html">Tokyo Jet Lag</a></p>
+  </footer>
+
+<script>
+/* ═══════════════════════════════════════════
+   TOKYO JET LAG — PHOTO GALLERY
+   ═══════════════════════════════════════════ */
+
+const PHOTOS = [
+  // Shinjuku
+  { id: 1, title: 'Shinjuku Neon Canyon', area: 'Shinjuku', desc: 'The electric glow of Kabukicho at night — Tokyo\'s entertainment district in full blaze.',
+    src: 'https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=600&q=80', height: 'tall' },
+  { id: 2, title: 'Golden Gai Alley', area: 'Shinjuku', desc: 'Narrow lanes packed with tiny bars, each seating barely six people.',
+    src: 'https://images.unsplash.com/photo-1577593980286-2fc63b35d575?w=600&q=80', height: 'medium' },
+  { id: 3, title: 'Late Night Ramen', area: 'Shinjuku', desc: 'A steaming bowl at 3AM — the jet-lagged traveler\'s best friend.',
+    src: 'https://images.unsplash.com/photo-1557872943-16a5ac26437e?w=600&q=80', height: 'short' },
+  { id: 4, title: 'Omoide Yokocho', area: 'Shinjuku', desc: 'Memory Lane\'s smoke-filled yakitori stalls under the train tracks.',
+    src: 'https://images.unsplash.com/photo-1554797589-7241bb691973?w=600&q=80', height: 'medium' },
+  { id: 5, title: 'Shinjuku Station Rush', area: 'Shinjuku', desc: '3.5 million daily passengers — the world\'s busiest station.',
+    src: 'https://images.unsplash.com/photo-1532236204992-f5e85c024202?w=600&q=80', height: 'short' },
+
+  // Shibuya
+  { id: 6, title: 'Shibuya Crossing', area: 'Shibuya', desc: 'The world\'s most famous pedestrian scramble — up to 3,000 people per light change.',
+    src: 'https://images.unsplash.com/photo-1542931287-023b922fa89b?w=600&q=80', height: 'tall' },
+  { id: 7, title: 'Shibuya at Dusk', area: 'Shibuya', desc: 'The moment when daylight fades and the neon takes over.',
+    src: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80', height: 'medium' },
+  { id: 8, title: 'Center-gai Night', area: 'Shibuya', desc: 'Young Tokyo\'s main street buzzing with energy after dark.',
+    src: 'https://images.unsplash.com/photo-1551641506-ee5bf4cb45f1?w=600&q=80', height: 'short' },
+  { id: 9, title: 'Hachiko Square', area: 'Shibuya', desc: 'The loyal dog\'s statue — Tokyo\'s most popular meeting spot.',
+    src: 'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=600&q=80', height: 'medium' },
+
+  // Roppongi
+  { id: 10, title: 'Tokyo Tower Glow', area: 'Roppongi', desc: 'The iconic 333-meter tower bathed in orange light against the night sky.',
+    src: 'https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?w=600&q=80', height: 'tall' },
+  { id: 11, title: 'Roppongi Hills View', area: 'Roppongi', desc: 'City panorama from Mori Tower\'s observation deck.',
+    src: 'https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?w=600&q=80', height: 'medium' },
+  { id: 12, title: 'Mori Art Museum', area: 'Roppongi', desc: 'Contemporary art 53 floors above the city.',
+    src: 'https://images.unsplash.com/photo-1513407030348-c983a97b98d8?w=600&q=80', height: 'short' },
+
+  // Harajuku
+  { id: 13, title: 'Takeshita Street', area: 'Harajuku', desc: 'Tokyo\'s kawaii culture epicenter — cotton candy and crepes everywhere.',
+    src: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80', height: 'tall' },
+  { id: 14, title: 'Meiji Shrine Forest', area: 'Harajuku', desc: 'An ancient forest oasis in the heart of the city.',
+    src: 'https://images.unsplash.com/photo-1583766395091-2eb9994ed094?w=600&q=80', height: 'medium' },
+  { id: 15, title: 'Omotesando Avenue', area: 'Harajuku', desc: 'Tokyo\'s Champs-Élysées — designer boutiques under zelkova trees.',
+    src: 'https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?w=600&q=80', height: 'short' },
+
+  // Asakusa
+  { id: 16, title: 'Senso-ji Thunder Gate', area: 'Asakusa', desc: 'Kaminarimon — Tokyo\'s most photographed gate, stunning after dark.',
+    src: 'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=600&q=80', height: 'tall' },
+  { id: 17, title: 'Nakamise-dori', area: 'Asakusa', desc: 'The traditional shopping street leading to Senso-ji temple.',
+    src: 'https://images.unsplash.com/photo-1528164344885-47b1492b4879?w=600&q=80', height: 'medium' },
+  { id: 18, title: 'Sumida River View', area: 'Asakusa', desc: 'Tokyo Skytree rising above the Sumida River at twilight.',
+    src: 'https://images.unsplash.com/photo-1480796927426-f609979314bd?w=600&q=80', height: 'medium' },
+
+  // Ginza
+  { id: 19, title: 'Ginza Lights', area: 'Ginza', desc: 'Luxury shopping district glowing with elegant illumination.',
+    src: 'https://images.unsplash.com/photo-1549693578-d683be217e58?w=600&q=80', height: 'medium' },
+  { id: 20, title: 'Tsukiji Market Dawn', area: 'Ginza', desc: 'The outer market comes alive before sunrise — fresh tuna and tamagoyaki.',
+    src: 'https://images.unsplash.com/photo-1553621042-f6e147245754?w=600&q=80', height: 'short' },
+
+  // Akihabara
+  { id: 21, title: 'Akihabara Electric Town', area: 'Akihabara', desc: 'Anime billboards and electronics shops stacked floor to ceiling.',
+    src: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&q=80', height: 'tall' },
+  { id: 22, title: 'Retro Gaming Paradise', area: 'Akihabara', desc: 'Vintage game shops and arcades — a gamer\'s pilgrimage site.',
+    src: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&q=80', height: 'short' },
+
+  // Shimokitazawa
+  { id: 23, title: 'Shimokitazawa Vintage', area: 'Shimokitazawa', desc: 'Bohemian streets lined with thrift shops and indie cafes.',
+    src: 'https://images.unsplash.com/photo-1493780474015-ba834fd0ce2f?w=600&q=80', height: 'medium' },
+  { id: 24, title: 'Bonus Track Complex', area: 'Shimokitazawa', desc: 'A modern commercial strip along the old Odakyu Line tracks.',
+    src: 'https://images.unsplash.com/photo-1517732306149-e8f829eb588a?w=600&q=80', height: 'short' },
+
+  // Nakameguro / Ebisu
+  { id: 25, title: 'Meguro River', area: 'Nakameguro', desc: 'Cherry blossom-lined canals in spring — magical at night.',
+    src: 'https://images.unsplash.com/photo-1522383225653-ed111181a951?w=600&q=80', height: 'tall' },
+  { id: 26, title: 'Ebisu Garden Place', area: 'Ebisu', desc: 'European-style plaza with Baccarat chandeliers in winter.',
+    src: 'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=600&q=80', height: 'medium' },
+
+  // Citywide / Iconic
+  { id: 27, title: 'Tokyo Skyline', area: 'Citywide', desc: 'The sprawling metropolis stretching to the horizon — 14 million dreams.',
+    src: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&q=80', height: 'tall' },
+  { id: 28, title: 'Skytree at Night', area: 'Citywide', desc: 'The 634-meter tower illuminated in blue — visible from across the city.',
+    src: 'https://images.unsplash.com/photo-1513407030348-c983a97b98d8?w=800&q=80', height: 'tall' },
+  { id: 29, title: 'Cherry Blossoms & Tradition', area: 'Citywide', desc: 'Sakura season transforms Tokyo into a pink wonderland.',
+    src: 'https://images.unsplash.com/photo-1522383225653-ed111181a951?w=600&q=80', height: 'medium' },
+  { id: 30, title: 'Rain-soaked Streets', area: 'Citywide', desc: 'Neon reflections on wet pavement — the most photogenic Tokyo moments.',
+    src: 'https://images.unsplash.com/photo-1601042879364-f3947d3f9c16?w=600&q=80', height: 'medium' },
+];
+
+let currentFilter = 'All';
+let filteredPhotos = [...PHOTOS];
+let lightboxIndex = 0;
+
+// ─── INIT ───
+document.addEventListener('DOMContentLoaded', () => {
+  buildFilters();
+  renderGallery();
+  bindLightbox();
+});
+
+// ─── FILTERS ───
+function buildFilters() {
+  const areas = ['All', ...new Set(PHOTOS.map(p => p.area))];
+  const bar = document.getElementById('filterBar');
+  bar.innerHTML = areas.map(a =>
+    `<button class="filter-btn${a === 'All' ? ' active' : ''}" data-area="${a}">${a}</button>`
+  ).join('');
+
+  bar.addEventListener('click', e => {
+    if (!e.target.classList.contains('filter-btn')) return;
+    bar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    e.target.classList.add('active');
+    currentFilter = e.target.dataset.area;
+    renderGallery();
+  });
+}
+
+// ─── RENDER GALLERY ───
+function renderGallery() {
+  filteredPhotos = currentFilter === 'All' ? [...PHOTOS] : PHOTOS.filter(p => p.area === currentFilter);
+
+  document.getElementById('photoCount').innerHTML = `Showing <span>${filteredPhotos.length}</span> photos${currentFilter !== 'All' ? ` in ${currentFilter}` : ''}`;
+
+  const grid = document.getElementById('masonryGrid');
+  grid.innerHTML = filteredPhotos.map((photo, idx) => `
+    <div class="gallery-item" data-index="${idx}" role="button" tabindex="0" aria-label="View ${photo.title}">
+      <img src="${photo.src}" alt="${photo.title} — ${photo.area}" loading="lazy"
+           onerror="this.parentElement.style.display='none'" />
+      <div class="gallery-overlay">
+        <div class="gallery-overlay-title">${photo.title}</div>
+        <div class="gallery-overlay-area">${photo.area}</div>
+      </div>
+    </div>
+  `).join('');
+
+  // Bind click to open lightbox
+  grid.querySelectorAll('.gallery-item').forEach(el => {
+    el.addEventListener('click', () => openLightbox(parseInt(el.dataset.index)));
+    el.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openLightbox(parseInt(el.dataset.index));
+      }
+    });
+  });
+}
+
+// ─── LIGHTBOX ───
+function bindLightbox() {
+  document.getElementById('lbClose').addEventListener('click', closeLightbox);
+  document.getElementById('lbPrev').addEventListener('click', () => navigateLightbox(-1));
+  document.getElementById('lbNext').addEventListener('click', () => navigateLightbox(1));
+
+  document.getElementById('lightbox').addEventListener('click', e => {
+    if (e.target.id === 'lightbox') closeLightbox();
+  });
+
+  document.addEventListener('keydown', e => {
+    const lb = document.getElementById('lightbox');
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') navigateLightbox(-1);
+    if (e.key === 'ArrowRight') navigateLightbox(1);
+  });
+}
+
+function openLightbox(index) {
+  lightboxIndex = index;
+  updateLightbox();
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function navigateLightbox(dir) {
+  lightboxIndex = (lightboxIndex + dir + filteredPhotos.length) % filteredPhotos.length;
+  updateLightbox();
+}
+
+function updateLightbox() {
+  const photo = filteredPhotos[lightboxIndex];
+  if (!photo) return;
+  // Use higher-res for lightbox
+  const hiRes = photo.src.replace('w=600', 'w=1200').replace('w=400', 'w=1200').replace('w=800', 'w=1200');
+  document.getElementById('lbImg').src = hiRes;
+  document.getElementById('lbImg').alt = photo.title;
+  document.getElementById('lbTitle').textContent = photo.title;
+  document.getElementById('lbArea').textContent = photo.area;
+  document.getElementById('lbDesc').textContent = photo.desc;
+  document.getElementById('lbCounter').textContent = `${lightboxIndex + 1} / ${filteredPhotos.length}`;
+}
+</script>
+</body>
+</html>

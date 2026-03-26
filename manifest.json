@@ -1,0 +1,47 @@
+{
+  "name": "Tokyo Jet Lag — It's 2AM. Now What?",
+  "short_name": "Tokyo Jet Lag",
+  "description": "Your survival guide for sleepless nights in Tokyo. Real venues, real hours, verified open.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#04040f",
+  "theme_color": "#04040f",
+  "orientation": "portrait-primary",
+  "categories": ["travel", "lifestyle"],
+  "lang": "en",
+  "icons": [
+    {
+      "src": "icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Late Night Venues",
+      "short_name": "Venues",
+      "url": "/#venues",
+      "description": "Find open venues right now"
+    },
+    {
+      "name": "My Jet Lag Plan",
+      "short_name": "My Plan",
+      "url": "/#jetlag-plan",
+      "description": "Generate your personalized jet lag plan"
+    },
+    {
+      "name": "Tokyo After Dark",
+      "short_name": "After Dark",
+      "url": "/#after-dark",
+      "description": "Hour-by-hour late night guide"
+    }
+  ]
+}
