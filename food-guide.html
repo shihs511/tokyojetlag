@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tokyo Food Guide - Tokyo Jet Lag</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --neon-blue: #00f0ff;
+            --neon-purple: #bf00ff;
+            --neon-pink: #ff0080;
+            --neon-yellow: #ffe000;
+            --neon-green: #00ff88;
+            --bg-dark: #04040f;
+            --bg-card: #0a0a1e;
+            --bg-card-hover: #0f0f2a;
+            --text-main: #e8e8f0;
+            --text-dim: #7070a0;
+            --text-bright: #ffffff;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Scanline overlay effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background-image:
+                linear-gradient(0deg, transparent 24%, rgba(255, 0, 0, 0.02) 25%, rgba(255, 0, 0, 0.02) 26%, transparent 27%, transparent 74%, rgba(255, 0, 0, 0.02) 75%, rgba(255, 0, 0, 0.02) 76%, transparent 77%, transparent);
+            background-size: 100% 4px;
+            z-index: 9999;
+        }
+
+        /* Header/Navigation */
+        header {
+            background-color: rgba(4, 4, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--neon-blue);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 0.15em;
+            color: var(--text-bright);
+            text-decoration: none;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+        }
+
+        .logo span {
+            color: var(--neon-pink);
+            display: inline;
+        }
+
+        nav {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-cyan);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--neon-blue);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        nav a.active::before {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), rgba(191, 0, 255, 0.1));
+            border-bottom: 2px solid var(--neon-blue);
+            padding: 4rem 2rem;
+            text-align: center;
+            box-shadow: inset 0 0 30px rgba(0, 240, 255, 0.2);
+        }
+
+        .hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            color: var(--neon-blue);
+            text-shadow: 0 0 30px rgba(0, 240, 255, 0.8), 0 0 60px rgba(191, 0, 255, 0.4);
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 3vw, 1.25rem);
+            color: var(--text-dim);
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* Filters Section */
+        .filters-section {
+            background-color: var(--bg-card);
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid var(--text-dim);
+            border-radius: 8px;
+        }
+
+        .filters-header {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.25rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            color: var(--neon-green);
+            text-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+        }
+
+        .filter-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            letter-spacing: 0.1em;
+            display: block;
+            margin-bottom: 0.75rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .filter-btn {
+            font-family: 'Space Mono', monospace;
+            padding: 0.6rem 1.2rem;
+            border: 1px solid var(--text-dim);
+            background-color: transparent;
+            color: var(--text-main);
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--neon-blue);
+            color: var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+        }
+
+        .filter-btn.active {
+            background-color: var(--neon-blue);
+            border-color: var(--neon-blue);
+            color: var(--bg-dark);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.8);
+            font-weight: 600;
+        }
+
+        .filter-btn.tag-ramen.active {
+            background-color: var(--neon-red, #ff4444);
+            border-color: var(--neon-red, #ff4444);
+            color: var(--bg-dark);
+            box-shadow: 0 0 20px rgba(255, 68, 68, 0.8);
+        }
+
+        .filter-btn.tag-sushi.active {
+            background-color: var(--neon-orange, #ff8800);
+            border-color: var(--neon-orange, #ff8800);
+            color: var(--bg-dark);
+            box-shadow: 0 0 20px rgba(255, 136, 0, 0.8);
+        }
+
+        .filter-btn.tag-yakiniku.active {
+            background-color: var(--neon-pink);
+            border-color: var(--neon-pink);
+            color: var(--bg-dark);
+            box-shadow: 0 0 20px rgba(255, 0, 128, 0.8);
+        }
+
+        .filter-btn.tag-izakaya.active {
+            background-color: var(--neon-purple);
+            border-color: var(--neon-purple);
+            color: var(--bg-dark);
+            box-shadow: 0 0 20px rgba(191, 0, 255, 0.8);
+        }
+
+        .filter-btn.tag-cafe.active {
+            background-color: var(--neon-yellow);
+            border-color: var(--neon-yellow);
+            color: var(--bg-dark);
+            box-shadow: 0 0 20px rgba(255, 224, 0, 0.8);
+        }
+
+        /* Content Area */
+        .content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Restaurant Grid */
+        .restaurants-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .restaurant-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--text-dim);
+            border-radius: 6px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .restaurant-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .restaurant-card:hover {
+            background-color: var(--bg-card-hover);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.4), inset 0 0 20px rgba(0, 240, 255, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .restaurant-card:hover::before {
+            opacity: 1;
+        }
+
+        .restaurant-card.hidden {
+            display: none;
+        }
+
+        .restaurant-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .restaurant-name {
+            flex: 1;
+        }
+
+        .restaurant-name-en {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.15rem;
+            letter-spacing: 0.05em;
+            color: var(--text-bright);
+            margin-bottom: 0.25rem;
+            font-weight: 600;
+        }
+
+        .restaurant-name-jp {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-dim);
+            font-weight: 500;
+        }
+
+        .restaurant-tag {
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .tag-ramen {
+            border: 1px solid var(--neon-red, #ff4444);
+            color: var(--neon-red, #ff4444);
+            background-color: rgba(255, 68, 68, 0.1);
+        }
+
+        .tag-sushi {
+            border: 1px solid var(--neon-orange, #ff8800);
+            color: var(--neon-orange, #ff8800);
+            background-color: rgba(255, 136, 0, 0.1);
+        }
+
+        .tag-yakiniku {
+            border: 1px solid var(--neon-pink);
+            color: var(--neon-pink);
+            background-color: rgba(255, 0, 128, 0.1);
+        }
+
+        .tag-izakaya {
+            border: 1px solid var(--neon-purple);
+            color: var(--neon-purple);
+            background-color: rgba(191, 0, 255, 0.1);
+        }
+
+        .tag-cafe {
+            border: 1px solid var(--neon-yellow);
+            color: var(--neon-yellow);
+            background-color: rgba(255, 224, 0, 0.1);
+        }
+
+        .tag-late-night {
+            border: 1px solid var(--neon-green);
+            color: var(--neon-green);
+            background-color: rgba(0, 255, 136, 0.1);
+        }
+
+        .restaurant-info {
+            margin: 1rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .info-row {
+            display: flex;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .info-label {
+            font-family: 'Space Mono', monospace;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            min-width: 50px;
+            font-weight: 600;
+        }
+
+        .info-value {
+            color: var(--text-main);
+            flex: 1;
+        }
+
+        .info-value.area {
+            color: var(--neon-blue);
+        }
+
+        .info-value.hours {
+            color: var(--neon-green);
+        }
+
+        .restaurant-description {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--text-dim);
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        .price-range {
+            display: flex;
+            gap: 0.25rem;
+            margin-top: 0.75rem;
+        }
+
+        .yen {
+            color: var(--neon-yellow);
+            font-weight: 600;
+        }
+
+        /* Pro Tips Section */
+        .pro-tips {
+            background: linear-gradient(135deg, rgba(191, 0, 255, 0.1), rgba(0, 240, 255, 0.1));
+            border: 1px solid var(--neon-purple);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 4rem 0;
+            box-shadow: inset 0 0 20px rgba(191, 0, 255, 0.1);
+        }
+
+        .pro-tips h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            color: var(--neon-purple);
+            text-shadow: 0 0 15px rgba(191, 0, 255, 0.5);
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tip-card {
+            background-color: var(--bg-card);
+            padding: 1.5rem;
+            border: 1px solid var(--neon-purple);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .tip-card:hover {
+            background-color: var(--bg-card-hover);
+            box-shadow: 0 0 15px rgba(191, 0, 255, 0.4);
+        }
+
+        .tip-card h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 0.05em;
+            color: var(--neon-purple);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .tip-card p {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgba(4, 4, 15, 0.95);
+            border-top: 1px solid var(--neon-purple);
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(191, 0, 255, 0.2);
+        }
+
+        .footer-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 0.1em;
+            color: var(--neon-purple);
+            text-shadow: 0 0 15px rgba(191, 0, 255, 0.5);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .footer-sub {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-social a {
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-social a:hover {
+            transform: scale(1.2);
+            filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.5));
+        }
+
+        .footer-contact {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        .footer-contact a {
+            color: var(--neon-blue);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-contact a:hover {
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        /* Search Bar */
+        .search-container {
+            margin: 1.5rem 0;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background-color: var(--bg-card);
+            border: 1px solid var(--text-dim);
+            color: var(--text-main);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+            background-color: var(--bg-card-hover);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav {
+                flex-direction: column;
+                width: 100%;
+                gap: 0.5rem;
+            }
+
+            nav a {
+                width: 100%;
+                text-align: center;
+            }
+
+            .hero {
+                padding: 2rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .restaurants-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .filters-section {
+                padding: 1.5rem 1rem;
+            }
+
+            .filter-buttons {
+                gap: 0.5rem;
+            }
+
+            .filter-btn {
+                padding: 0.5rem 0.9rem;
+                font-size: 0.75rem;
+            }
+
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content {
+                padding: 0 1rem;
+            }
+        }
+
+        /* Empty State */
+        .no-results {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-dim);
+        }
+
+        .no-results h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--neon-blue);
+        }
+    </style>
+</head>
+<body>
+    <header role="banner">
+        <a href="index.html" class="logo">Tokyo<span>JetLag</span></a>
+        <nav aria-label="Main navigation">
+            <a href="index.html">Home</a>
+            <a href="index.html#venues">Venues</a>
+            <a href="index.html#seasonal">Seasonal</a>
+            <a href="food-guide.html" class="active">Food Guide</a>
+            <a href="nightlife.html">Nightlife</a>
+            <a href="index.html#day-trips">Day Trips</a>
+            <a href="apps.html">Apps</a>
+            <a href="itinerary.html">Itinerary</a>
+            <a href="index.html#faq">FAQ</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>TOKYO FOOD GUIDE</h1>
+        <p>Eat your way through Tokyo's neon-lit streets. From late-night ramen counters to Michelin-starred sushi, discover where to find the city's best food at any hour.</p>
+    </section>
+
+    <div class="content">
+        <div class="filters-section">
+            <div class="filters-header">FILTER YOUR FEAST</div>
+
+            <div class="filter-group">
+                <span class="filter-label">Category</span>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All Cuisines</button>
+                    <button class="filter-btn tag-ramen" data-filter="ramen">🍜 Ramen</button>
+                    <button class="filter-btn tag-sushi" data-filter="sushi">🍣 Sushi</button>
+                    <button class="filter-btn tag-yakiniku" data-filter="yakiniku">🥩 Yakiniku</button>
+                    <button class="filter-btn tag-izakaya" data-filter="izakaya">🍶 Izakaya</button>
+                    <button class="filter-btn tag-cafe" data-filter="cafe">☕ Cafe</button>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <span class="filter-label">Special Filter</span>
+                <div class="filter-buttons">
+                    <button class="filter-btn tag-late-night" data-filter="late-night">🌙 Late Night</button>
+                </div>
+            </div>
+
+            <div class="search-container">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search by restaurant name, area, or description...">
+            </div>
+        </div>
+
+        <div id="restaurantContainer" class="restaurants-grid">
+            <!-- Restaurants will be populated here -->
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="pro-tips">
+            <h2>Pro Tips: Tokyo Dining Etiquette</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h3>Slurp Your Ramen</h3>
+                    <p>Loudly slurping noodles is not just acceptable—it's encouraged! It cools the noodles and aerates the broth, enhancing flavor. You're being respectful by showing your appreciation.</p>
+                </div>
+                <div class="tip-card">
+                    <h3>Itadakimasu & Gochisousama</h3>
+                    <p>Say "itadakimasu" (いただきます) before eating to express gratitude for the meal, and "gochisousama deshita" (ごちそうさまでした) after. It's polite and appreciated.</p>
+                </div>
+                <div class="tip-card">
+                    <h3>Cash is King</h3>
+                    <p>Many traditional restaurants and hole-in-the-wall shops are cash-only. Always have yen on hand. ATMs at convenience stores accept foreign cards and are widely available.</p>
+                </div>
+                <div class="tip-card">
+                    <h3>Don't Pour for Yourself</h3>
+                    <p>At izakayas, it's customary to pour drinks for others and let them pour for you. If you want more, empty your glass slightly—someone will notice and refill it.</p>
+                </div>
+                <div class="tip-card">
+                    <h3>Reservations Matter</h3>
+                    <p>Popular restaurants, especially high-end sushi and yakiniku, require reservations weeks in advance. Use Tabelog or ask your hotel concierge for help booking. Arrive on time.</p>
+                </div>
+                <div class="tip-card">
+                    <h3>Tipping Not Needed</h3>
+                    <p>Tipping is not customary in Japan and may even be considered offensive. Service charges are included. Just pay the bill and say "thank you"—service staff appreciate genuine gratitude.</p>
+                </div>
+                <div class="tip-card">
+                    <h3>Order at the Machine</h3>
+                    <p>Many casual restaurants use ticket machines at the entrance. Study the menu pictures, insert cash or card, press your order, take the ticket, and hand it to staff. It's fast and efficient.</p>
+                </div>
+                <div class="tip-card">
+                    <h3>Respect Quiet Spaces</h3>
+                    <p>While ramen shops are lively, upscale restaurants and cafes expect quiet conversation. Keep your voice down, phones on silent, and photos discrete unless explicitly permitted.</p>
+                </div>
+                <div class="tip-card">
+                    <h3>Peak Hours Are Chaos</h3>
+                    <p>Lunch (12-1pm) and dinner (6-7pm) are packed. Visit outside these windows for shorter waits, especially at popular spots. Late-night runs (after 10pm) often have shorter queues.</p>
+                </div>
+                <div class="tip-card">
+                    <h3>Read Tabelog Reviews</h3>
+                    <p>Tabelog (食べログ) is Japan's Yelp. Check ratings, recent reviews, and photos before visiting. Many restaurants publish their specialty dishes—try those recommendations first.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer role="contentinfo">
+        <div class="footer-logo">TokyoJetLag.com</div>
+        <div class="footer-sub">For the wide-awake, the displaced, and the thoroughly confused.<br>Tokyo · 東京 · All hours · All nights</div>
+        <div class="footer-social" aria-label="Social media links">
+            <a href="#" aria-label="Instagram">📷</a>
+            <a href="#" aria-label="Twitter / X">𝕏</a>
+            <a href="#" aria-label="TikTok">🎵</a>
+            <a href="#" aria-label="YouTube">▶</a>
+        </div>
+        <div class="footer-contact"><a href="mailto:hello@tokyojetlag.com">hello@tokyojetlag.com</a> · Tokyo, Japan</div>
+    </footer>
+
+    <script>
+        // Restaurant data
+        const restaurants = [
+            // RAMEN (20)
+            { name: "Ichiran Shibuya", jp: "一蘭渋谷店", category: "ramen", area: "Shinjuku", hours: "24h", price: "¥¥", description: "Solo-booth tonkotsu heaven. Perfect for late-night solo dining.", lateNight: true },
+            { name: "Fuunji", jp: "風雲児", category: "ramen", area: "Shinjuku", hours: "11:00-15:00,17:00-21:00", price: "¥¥", description: "Tsukemen legend with thick, dippable noodles.", lateNight: false },
+            { name: "Rokurinsha", jp: "六厘舎", category: "ramen", area: "Tokyo Station", hours: "7:30-21:00", price: "¥¥", description: "Thick tsukemen that changed the game.", lateNight: false },
+            { name: "Afuri", jp: "阿夫利", category: "ramen", area: "Ebisu", hours: "11:00-23:00", price: "¥¥", description: "Yuzu shio ramen with citrus brightness.", lateNight: true },
+            { name: "Nakiryu", jp: "鳴龍", category: "ramen", area: "Otsuka", hours: "11:30-15:00", price: "¥¥¥", description: "Michelin-starred tantanmen with perfect spice.", lateNight: false },
+            { name: "Fuunji Shinjuku", jp: "風雲児新宿", category: "ramen", area: "Shinjuku", hours: "11:00-15:00,17:00-21:00", price: "¥¥", description: "Thick fish broth tsukemen flagship.", lateNight: false },
+            { name: "Soranoiro", jp: "ソラノイロ", category: "ramen", area: "Tokyo Station", hours: "10:30-22:00", price: "¥¥", description: "Veggie ramen option available, clean broths.", lateNight: false },
+            { name: "Mutekiya", jp: "無敵家", category: "ramen", area: "Ikebukuro", hours: "10:30-4:00", price: "¥¥", description: "Rich tonkotsu for insomniacs.", lateNight: true },
+            { name: "Menya Musashi", jp: "麺屋武蔵", category: "ramen", area: "Shinjuku", hours: "11:00-22:00", price: "¥¥", description: "Double soup style with depth and complexity.", lateNight: false },
+            { name: "Tsuta", jp: "蔦", category: "ramen", area: "Yoyogi-Uehara", hours: "11:00-16:00", price: "¥¥¥", description: "First Michelin-starred ramen shop ever.", lateNight: false },
+            { name: "Hayashi", jp: "林", category: "ramen", area: "Shibuya", hours: "11:30-15:00,18:00-20:30", price: "¥¥", description: "Chicken chintan broth—pure umami.", lateNight: false },
+            { name: "Tomita", jp: "富田", category: "ramen", area: "Matsudo", hours: "11:00-sold out", price: "¥¥", description: "Tsukemen master, often sells out by lunch.", lateNight: false },
+            { name: "Kagari Ginza", jp: "銀座篝", category: "ramen", area: "Ginza", hours: "11:00-15:00,17:00-22:00", price: "¥¥", description: "Chicken paitan with golden, creamy broth.", lateNight: false },
+            { name: "Nagi", jp: "凪", category: "ramen", area: "Golden Gai", hours: "24h", price: "¥¥", description: "Niboshi (sardine) ramen in legendary alley.", lateNight: true },
+            { name: "Ippudo", jp: "一風堂", category: "ramen", area: "Ebisu", hours: "11:00-4:00", price: "¥", description: "Classic Hakata-style tonkotsu, reliable chain.", lateNight: true },
+            { name: "Mensho", jp: "麺庄", category: "ramen", area: "Gaienmae", hours: "11:00-15:00,17:00-21:00", price: "¥¥", description: "Lamb ramen—unique and bold flavors.", lateNight: false },
+            { name: "Konjiki Hototogisu", jp: "金色不如帰", category: "ramen", area: "Shinjuku", hours: "11:30-15:00,18:30-21:00", price: "¥¥", description: "Truffle shoyu with luxe aromatic oil.", lateNight: false },
+            { name: "Ramen Jiro", jp: "ラーメン二郎", category: "ramen", area: "Mita", hours: "8:30-15:00", price: "¥", description: "Mega-portions for serious appetite. Arrive early.", lateNight: false },
+            { name: "Kikanbo", jp: "鬼金棒", category: "ramen", area: "Kanda", hours: "11:00-15:00,17:00-21:00", price: "¥¥", description: "Spicy miso ramen with serious heat.", lateNight: false },
+            { name: "Shinpuku Saikan", jp: "新福菜館", category: "ramen", area: "Tokyo", hours: "11:00-22:00", price: "¥", description: "Black soy sauce ramen, Kyoto original.", lateNight: false },
+
+            // SUSHI (20)
+            { name: "Sushi Saito", jp: "鮨さいとう", category: "sushi", area: "Roppongi", hours: "Reservation only", price: "¥¥¥", description: "3-Michelin stars. Book months ahead.", lateNight: false },
+            { name: "Sukiyabashi Jiro", jp: "次郎", category: "sushi", area: "Ginza", hours: "Reservation only", price: "¥¥¥", description: "World's most famous sushi. The documentary restaurant.", lateNight: false },
+            { name: "Sushi Dai", jp: "寿司大", category: "sushi", area: "Toyosu", hours: "5:00-13:00", price: "¥¥¥", description: "Market legend. Wake up early or wait in line.", lateNight: false },
+            { name: "Daiwa Sushi", jp: "大和寿司", category: "sushi", area: "Toyosu", hours: "5:30-13:00", price: "¥¥¥", description: "Market rival to Sushi Dai. Fresh competition.", lateNight: false },
+            { name: "Sushi no Midori", jp: "美登利寿司", category: "sushi", area: "Shibuya", hours: "11:00-22:00", price: "¥¥", description: "Great value omakase, accessible prices.", lateNight: false },
+            { name: "Genki Sushi", jp: "元気寿司", category: "sushi", area: "Multiple", hours: "11:00-23:00", price: "¥", description: "Fun conveyor belt sushi, casual vibe.", lateNight: false },
+            { name: "Sushi Zanmai", jp: "すしざんまい", category: "sushi", area: "Tsukiji", hours: "24h", price: "¥¥", description: "Late-night sushi fix near old market.", lateNight: true },
+            { name: "Harutaka", jp: "はる鷹", category: "sushi", area: "Ginza", hours: "Reservation only", price: "¥¥¥", description: "Counter sushi art form, intimate seating.", lateNight: false },
+            { name: "Kyubey", jp: "久兵衛", category: "sushi", area: "Ginza", hours: "11:30-14:00,17:00-22:00", price: "¥¥¥", description: "Classic Ginza institution since 1936.", lateNight: false },
+            { name: "Numazuko", jp: "沼津港", category: "sushi", area: "Shinjuku", hours: "11:00-23:00", price: "¥", description: "Budget standing sushi bar. Quick and tasty.", lateNight: false },
+            { name: "Katsu Midori", jp: "回し寿司活美登利", category: "sushi", area: "Shinagawa", hours: "11:00-22:00", price: "¥¥", description: "Quality kaiten belt, better than average chain.", lateNight: false },
+            { name: "Tsukiji Sushi Sei", jp: "築地寿司清", category: "sushi", area: "Multiple", hours: "11:00-22:00", price: "¥¥", description: "Reliable chain with market connections.", lateNight: false },
+            { name: "Sushiro", jp: "スシロー", category: "sushi", area: "Multiple", hours: "11:00-23:00", price: "¥", description: "Best value ¥100 sushi nationwide.", lateNight: false },
+            { name: "Kurosaki", jp: "黒崎", category: "sushi", area: "Asakusa", hours: "11:30-14:00,17:00-21:30", price: "¥¥", description: "Neighborhood gem near sensoji temple.", lateNight: false },
+            { name: "Omasa", jp: "大政", category: "sushi", area: "Toyosu", hours: "5:00-13:00", price: "¥¥¥", description: "Toyosu market local favorite.", lateNight: false },
+            { name: "Hashiguchi", jp: "はしぐち", category: "sushi", area: "Shinbashi", hours: "17:00-23:00", price: "¥¥", description: "Salary-man favorite near train station.", lateNight: false },
+            { name: "Sushi Iwa", jp: "鮨いわ", category: "sushi", area: "Ginza", hours: "11:30-14:00,17:30-22:00", price: "¥¥¥", description: "Excellent edomae-style sushi.", lateNight: false },
+            { name: "Kizuna", jp: "絆", category: "sushi", area: "Shinjuku", hours: "17:00-23:00", price: "¥¥¥", description: "Modern omakase experience, creative.", lateNight: false },
+            { name: "Uogashi Nihon-ichi", jp: "魚がし日本一", category: "sushi", area: "Shibuya", hours: "11:00-22:00", price: "¥¥", description: "Standing sushi bar, quick and fresh.", lateNight: false },
+            { name: "Hina Sushi", jp: "雛鮨", category: "sushi", area: "Shinjuku", hours: "17:00-23:00", price: "¥¥", description: "All-you-can-eat premium sushi option.", lateNight: false },
+
+            // YAKINIKU (20)
+            { name: "Yoroniku", jp: "焼肉よろにく", category: "yakiniku", area: "Omotesando", hours: "17:00-23:00", price: "¥¥¥", description: "Best wagyu in Tokyo, premium cuts only.", lateNight: false },
+            { name: "Ushigoro", jp: "牛蔵", category: "yakiniku", area: "Nishi-Azabu", hours: "17:00-23:30", price: "¥¥¥", description: "Premium A5 wagyu, expensive but worth it.", lateNight: false },
+            { name: "Stamina-en", jp: "スタミナ苑", category: "yakiniku", area: "Adachi", hours: "17:00-23:00", price: "¥¥", description: "Legendary offal specialist, adventurous eaters.", lateNight: false },
+            { name: "Gyukaku", jp: "牛角", category: "yakiniku", area: "Multiple", hours: "17:00-24:00", price: "¥¥", description: "All-you-can-eat yakiniku chain, great value.", lateNight: true },
+            { name: "Han no Daidokoro", jp: "韓の台所", category: "yakiniku", area: "Shinjuku", hours: "11:30-23:00", price: "¥¥", description: "Korean-style BBQ with banchan sides.", lateNight: false },
+            { name: "Jojoen", jp: "叙々苑", category: "yakiniku", area: "Multiple", hours: "11:30-23:00", price: "¥¥¥", description: "Upscale classic chain, reliable quality.", lateNight: false },
+            { name: "Nikuya no Susume", jp: "肉屋のすゝめ", category: "yakiniku", area: "Shibuya", hours: "12:00-23:00", price: "¥¥¥", description: "Butcher shop style, house cuts exclusive.", lateNight: false },
+            { name: "Yakiniku Like", jp: "焼肉ライク", category: "yakiniku", area: "Multiple", hours: "11:00-23:00", price: "¥¥", description: "Solo yakiniku, individual portions.", lateNight: false },
+            { name: "Toraji", jp: "トラジ", category: "yakiniku", area: "Multiple", hours: "11:30-23:00", price: "¥¥¥", description: "Korean BBQ fusion, marinated specialties.", lateNight: false },
+            { name: "Romei", jp: "老明", category: "yakiniku", area: "Roppongi", hours: "17:00-5:00", price: "¥¥¥", description: "Late night wagyu for night owls.", lateNight: true },
+            { name: "Anzu", jp: "杏", category: "yakiniku", area: "Ginza", hours: "17:00-23:00", price: "¥¥¥", description: "Elegant wagyu, refined atmosphere.", lateNight: false },
+            { name: "Aging Beef", jp: "エイジングビーフ", category: "yakiniku", area: "Roppongi", hours: "17:00-23:00", price: "¥¥¥", description: "Dry-aged wagyu, complex flavors.", lateNight: false },
+            { name: "Futago", jp: "大阪焼肉・ホルモンふたご", category: "yakiniku", area: "Shibuya", hours: "17:00-24:00", price: "¥¥", description: "Horumon (offal) specialist, bold flavors.", lateNight: true },
+            { name: "Ponga", jp: "ポンガ", category: "yakiniku", area: "Shinjuku", hours: "17:00-23:00", price: "¥¥", description: "Thick-cut tongue, melt-in-mouth texture.", lateNight: false },
+            { name: "Kinnikuya", jp: "近肉屋", category: "yakiniku", area: "Ebisu", hours: "17:00-23:00", price: "¥¥¥", description: "Premium cuts selected by masters.", lateNight: false },
+            { name: "Sato Buriand", jp: "サトーブリアン", category: "yakiniku", area: "Roppongi", hours: "17:00-23:00", price: "¥¥¥", description: "Wagyu specialty, butter-finished meat.", lateNight: false },
+            { name: "Heijoen", jp: "平城苑", category: "yakiniku", area: "Multiple", hours: "11:30-23:00", price: "¥¥", description: "Family-friendly yakiniku, great for groups.", lateNight: false },
+            { name: "Don Don", jp: "ドンドン", category: "yakiniku", area: "Shinjuku", hours: "17:00-2:00", price: "¥", description: "Late night budget yakiniku hole-in-wall.", lateNight: true },
+            { name: "Kingu", jp: "焼肉キング", category: "yakiniku", area: "Multiple", hours: "17:00-24:00", price: "¥¥", description: "All-you-can-eat premium yakiniku.", lateNight: true },
+            { name: "Reimen Kan", jp: "冷麺館", category: "yakiniku", area: "Shinjuku", hours: "11:30-23:00", price: "¥¥", description: "Cold noodles + yakiniku combo perfect in summer.", lateNight: false },
+
+            // IZAKAYA (20)
+            { name: "Torikizoku", jp: "鳥貴族", category: "izakaya", area: "Multiple", hours: "17:00-24:00", price: "¥", description: "¥350 everything chain. Budget izakaya king.", lateNight: true },
+            { name: "Gonpachi", jp: "権八", category: "izakaya", area: "Nishi-Azabu", hours: "11:30-3:00", price: "¥¥", description: "The 'Kill Bill' restaurant. Massive and energetic.", lateNight: true },
+            { name: "Uoshin", jp: "魚真", category: "izakaya", area: "Shibuya", hours: "17:00-24:00", price: "¥¥", description: "Fresh seafood izakaya, daily catches.", lateNight: true },
+            { name: "Torishiki", jp: "鳥しき", category: "izakaya", area: "Meguro", hours: "17:00-23:00", price: "¥¥¥", description: "Michelin yakitori. Perfection on skewers.", lateNight: false },
+            { name: "Birdland", jp: "バードランド", category: "izakaya", area: "Ginza", hours: "17:00-21:30", price: "¥¥¥", description: "Legendary yakitori, book ahead always.", lateNight: false },
+            { name: "Andy's Shin Hinomoto", jp: "アンディス新日ノ本", category: "izakaya", area: "Yurakucho", hours: "17:00-24:00", price: "¥", description: "Under-the-tracks classic. Salarymen heaven.", lateNight: true },
+            { name: "Watami", jp: "和民", category: "izakaya", area: "Multiple", hours: "17:00-24:00", price: "¥", description: "Reliable chain izakaya everywhere.", lateNight: true },
+            { name: "Uotami", jp: "魚民", category: "izakaya", area: "Multiple", hours: "17:00-5:00", price: "¥", description: "Late-night fish izakaya chain. Open very late.", lateNight: true },
+            { name: "Yakitori Alley", jp: "やきとり横丁", category: "izakaya", area: "Yurakucho", hours: "16:00-24:00", price: "¥¥", description: "Under railway arches yakitori paradise.", lateNight: true },
+            { name: "Shirube", jp: "しるべ", category: "izakaya", area: "Shibuya", hours: "18:00-2:00", price: "¥¥", description: "Hidden gem izakaya, local crowd.", lateNight: true },
+            { name: "Tachinomi Nagi", jp: "立飲みなぎ", category: "izakaya", area: "Shinjuku", hours: "17:00-23:00", price: "¥", description: "Standing bar, standing prices too.", lateNight: true },
+            { name: "Omoide Yokocho", jp: "思い出横丁", category: "izakaya", area: "Shinjuku", hours: "varies", price: "¥", description: "Smoky yakitori alley, retro vibe.", lateNight: true },
+            { name: "Nonbei Yokocho", jp: "のんべい横丁", category: "izakaya", area: "Shibuya", hours: "varies", price: "¥¥", description: "Hidden alley bars, local favorites.", lateNight: true },
+            { name: "Iseya", jp: "いせや", category: "izakaya", area: "Kichijoji", hours: "12:00-22:00", price: "¥", description: "¥90 yakitori legend. Unbeatable value.", lateNight: false },
+            { name: "Daimon", jp: "だいもん", category: "izakaya", area: "Roppongi", hours: "17:00-5:00", price: "¥¥", description: "Late night haven for night owls.", lateNight: true },
+            { name: "Tsunahachi", jp: "つな八", category: "izakaya", area: "Shinjuku", hours: "11:00-22:00", price: "¥¥", description: "Tempura izakaya since 1924. Classic.", lateNight: false },
+            { name: "Kushi Tanaka", jp: "串田中", category: "izakaya", area: "Ginza", hours: "17:00-23:00", price: "¥¥", description: "Premium kushiyaki, refined skewers.", lateNight: false },
+            { name: "Uoharu", jp: "魚はる", category: "izakaya", area: "Azabu-Juban", hours: "17:00-23:00", price: "¥¥", description: "Fresh catch daily, neighborhood gem.", lateNight: false },
+            { name: "Tengu", jp: "テング", category: "izakaya", area: "Multiple", hours: "11:00-24:00", price: "¥", description: "Classic chain, reliable and everywhere.", lateNight: true },
+            { name: "Doma Doma", jp: "土間土間", category: "izakaya", area: "Multiple", hours: "17:00-5:00", price: "¥", description: "Open late everywhere. Dependable.", lateNight: true },
+
+            // CAFE (20)
+            { name: "Blue Bottle Coffee", jp: "ブルーボトル", category: "cafe", area: "Kiyosumi", hours: "8:00-19:00", price: "¥¥", description: "Tokyo flagship of third wave coffee.", lateNight: false },
+            { name: "Fuglen", jp: "フグレン", category: "cafe", area: "Yoyogi", hours: "7:00-22:00", price: "¥¥", description: "Norwegian third wave roasters. Excellent.", lateNight: false },
+            { name: "Onibus Coffee", jp: "オニバス", category: "cafe", area: "Nakameguro", hours: "9:00-18:00", price: "¥¥", description: "Single origin focus, rotating selections.", lateNight: false },
+            { name: "Bear Pond Espresso", jp: "ベアポンド", category: "cafe", area: "Shimokitazawa", hours: "11:00-17:00", price: "¥¥", description: "Cult following for precise espresso.", lateNight: false },
+            { name: "Streamer Coffee", jp: "ストリーマー", category: "cafe", area: "Shibuya", hours: "8:00-18:00", price: "¥¥", description: "Latte art pioneer. Beautiful drinks.", lateNight: false },
+            { name: "Sarutahiko", jp: "サルタヒコ", category: "cafe", area: "Ebisu", hours: "8:00-22:00", price: "¥¥", description: "Specialty coffee, knowledgeable staff.", lateNight: false },
+            { name: "Koffee Mameya", jp: "コーヒーマメヤ", category: "cafe", area: "Omotesando", hours: "10:00-18:00", price: "¥¥", description: "Bean consultation service available.", lateNight: false },
+            { name: "Switch Coffee", jp: "スイッチコーヒー", category: "cafe", area: "Meguro", hours: "10:00-18:00", price: "¥¥", description: "Minimal aesthetic, maximum flavor.", lateNight: false },
+            { name: "Turret Coffee", jp: "タレットコーヒー", category: "cafe", area: "Tsukiji", hours: "7:00-18:00", price: "¥¥", description: "Tiny space, mighty coffee quality.", lateNight: false },
+            { name: "Chatei Hatou", jp: "茶亭羽當", category: "cafe", area: "Shibuya", hours: "10:30-23:30", price: "¥¥", description: "Old-school kissaten vibes and mood.", lateNight: false },
+            { name: "Kayaba Coffee", jp: "カヤバ珈琲", category: "cafe", area: "Yanaka", hours: "8:00-18:00", price: "¥", description: "Retro Showa-era kissaten, nostalgic.", lateNight: false },
+            { name: "Cafe de l'Ambre", jp: "カフェドランブル", category: "cafe", area: "Ginza", hours: "12:00-22:00", price: "¥¥", description: "Operating since 1948. Historic café.", lateNight: false },
+            { name: "Glitch Coffee", jp: "グリッチコーヒー", category: "cafe", area: "Jinbocho", hours: "7:30-20:00", price: "¥¥", description: "Light roast perfection, Nordic style.", lateNight: false },
+            { name: "About Life Coffee", jp: "ライフコーヒー", category: "cafe", area: "Shibuya", hours: "9:00-21:00", price: "¥", description: "Takeaway window concept. Grab and go.", lateNight: false },
+            { name: "Little Nap Coffee Stand", jp: "リトルナップコーヒースタンド", category: "cafe", area: "Yoyogi", hours: "9:00-19:00", price: "¥", description: "Park-side vibes, simple but quality.", lateNight: false },
+            { name: "Sarutahiko Omotesando", jp: "サルタヒコ表参道", category: "cafe", area: "Omotesando", hours: "8:00-21:00", price: "¥¥", description: "Flagship location, spacious and bright.", lateNight: false },
+            { name: "Unlimited Coffee Bar", jp: "アンリミテッド", category: "cafe", area: "Oshiage", hours: "9:00-19:00", price: "¥¥", description: "Latte art heaven, Instagram worthy.", lateNight: false },
+            { name: "Mia Mia", jp: "ミアミア", category: "cafe", area: "Jiyugaoka", hours: "11:00-18:00", price: "¥¥", description: "Dessert & coffee pairing heaven.", lateNight: false },
+            { name: "Nozy Coffee", jp: "ノージーコーヒー", category: "cafe", area: "Sangenjaya", hours: "10:00-18:00", price: "¥¥", description: "Farm-to-cup philosophy, transparent sourcing.", lateNight: false },
+            { name: "Counterpart Coffee", jp: "カウンターパートコーヒー", category: "cafe", area: "Nishi-Shinjuku", hours: "8:00-20:00", price: "¥¥", description: "Local roaster with dedication to craft.", lateNight: false }
+        ];
+
+        // DOM elements
+        const restaurantContainer = document.getElementById('restaurantContainer');
+        const searchInput = document.getElementById('searchInput');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+
+        let currentFilter = 'all';
+        let currentLateNightFilter = false;
+
+        // Render restaurants
+        function renderRestaurants(restaurantsToShow) {
+            restaurantContainer.innerHTML = '';
+
+            if (restaurantsToShow.length === 0) {
+                restaurantContainer.innerHTML = '<div class="no-results" style="grid-column: 1/-1;"><h3>No restaurants found</h3><p>Try adjusting your filters or search terms</p></div>';
+                return;
+            }
+
+            restaurantsToShow.forEach(restaurant => {
+                const card = document.createElement('div');
+                card.className = 'restaurant-card';
+                card.setAttribute('data-category', restaurant.category);
+                card.setAttribute('data-late-night', restaurant.lateNight);
+
+                const tagClass = `tag-${restaurant.category}`;
+                const lateNightTag = restaurant.lateNight ? '<span class="restaurant-tag tag-late-night">🌙 Late Night</span>' : '';
+
+                card.innerHTML = `
+                    <div class="restaurant-header">
+                        <div class="restaurant-name">
+                            <div class="restaurant-name-en">${restaurant.name}</div>
+                            <div class="restaurant-name-jp">${restaurant.jp}</div>
+                        </div>
+                        <span class="restaurant-tag ${tagClass}">${restaurant.category.toUpperCase()}</span>
+                    </div>
+                    ${lateNightTag}
+                    <div class="restaurant-info">
+                        <div class="info-row">
+                            <span class="info-label">Area</span>
+                            <span class="info-value area">${restaurant.area}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Hours</span>
+                            <span class="info-value hours">${restaurant.hours}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Price</span>
+                            <span class="info-value">
+                                <span class="yen">${restaurant.price}</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="restaurant-description">
+                        "${restaurant.description}"
+                    </div>
+                `;
+
+                restaurantContainer.appendChild(card);
+            });
+        }
+
+        // Filter logic
+        function filterRestaurants() {
+            let filtered = restaurants;
+
+            // Apply category filter
+            if (currentFilter !== 'all') {
+                if (currentFilter === 'late-night') {
+                    filtered = filtered.filter(r => r.lateNight);
+                } else {
+                    filtered = filtered.filter(r => r.category === currentFilter);
+                }
+            }
+
+            // Apply search filter
+            const searchTerm = searchInput.value.toLowerCase();
+            if (searchTerm) {
+                filtered = filtered.filter(r =>
+                    r.name.toLowerCase().includes(searchTerm) ||
+                    r.jp.toLowerCase().includes(searchTerm) ||
+                    r.area.toLowerCase().includes(searchTerm) ||
+                    r.description.toLowerCase().includes(searchTerm)
+                );
+            }
+
+            renderRestaurants(filtered);
+        }
+
+        // Event listeners
+        filterButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                // Remove active from all buttons in this group
+                const group = button.parentElement;
+                group.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+
+                // Add active to clicked button
+                button.classList.add('active');
+
+                // Update filter
+                currentFilter = button.getAttribute('data-filter');
+                filterRestaurants();
+            });
+        });
+
+        searchInput.addEventListener('input', filterRestaurants);
+
+        // Initial render
+        renderRestaurants(restaurants);
+    </script>
+</body>
+</html>

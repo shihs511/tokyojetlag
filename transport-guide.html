@@ -1,0 +1,3024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Transport Guide | Tokyo Jet Lag</title>
+    <meta name="description" content="The ultimate guide to navigating Tokyo's transport network — JR, Metro, Toei, private railways, buses, taxis, cycling, and more.">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-blue: #00f0ff;
+            --neon-purple: #bf00ff;
+            --neon-pink: #ff0080;
+            --neon-yellow: #ffe000;
+            --neon-green: #00ff88;
+            --neon-orange: #ff6b35;
+            --neon-red: #ff2040;
+            --bg-dark: #04040f;
+            --bg-card: #0a0a1e;
+            --bg-card-hover: #0f0f2a;
+            --bg-section: #060618;
+            --text-main: #e8e8f0;
+            --text-dim: #7070a0;
+            --text-bright: #ffffff;
+            --jr-green: #80d41e;
+            --metro-silver: #9caab7;
+            --toei-leaf: #b5b5ac;
+            --train-yamanote: #80d41e;
+            --train-chuo: #ff4500;
+            --train-ginza: #ff9500;
+            --train-marunouchi: #f62e36;
+            --train-hibiya: #b5b5ac;
+            --train-tozai: #009bbf;
+            --train-chiyoda: #00bb85;
+            --train-yurakucho: #c1a470;
+            --train-hanzomon: #8f76d6;
+            --train-namboku: #00ac9b;
+            --train-fukutoshin: #9c5e31;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.7;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Scanline overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.12),
+                rgba(0, 0, 0, 0.12) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            z-index: 999;
+        }
+
+        /* ═══════════════════════════════════════
+           HEADER / NAV
+        ═══════════════════════════════════════ */
+        header {
+            background-color: rgba(4, 4, 15, 0.95);
+            border-bottom: 2px solid var(--neon-blue);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 2rem;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--text-bright);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            position: relative;
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--neon-blue);
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.8);
+        }
+
+        nav {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-blue);
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        nav a.active {
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
+        }
+
+        /* ═══════════════════════════════════════
+           HERO SECTION
+        ═══════════════════════════════════════ */
+        .hero {
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.08), rgba(191, 0, 255, 0.08));
+            border-bottom: 3px solid var(--neon-blue);
+            padding: 5rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(0,240,255,0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 50%, rgba(191,0,255,0.05) 0%, transparent 50%);
+            animation: heroGlow 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroGlow {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-5%, 5%); }
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero .badge {
+            display: inline-block;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+            padding: 0.3rem 1rem;
+            margin-bottom: 1.5rem;
+            background: rgba(0, 255, 136, 0.05);
+        }
+
+        .hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(3rem, 10vw, 5.5rem);
+            letter-spacing: 0.08em;
+            color: var(--text-bright);
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 em {
+            font-style: normal;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .subtitle {
+            font-size: 1.15rem;
+            color: var(--text-dim);
+            max-width: 650px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        .hero .subtitle strong {
+            color: var(--neon-blue);
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat .num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            color: var(--neon-blue);
+            text-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+            display: block;
+        }
+
+        .hero-stat .label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-dim);
+        }
+
+        /* ═══════════════════════════════════════
+           TABLE OF CONTENTS
+        ═══════════════════════════════════════ */
+        .toc-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1rem;
+        }
+
+        .toc-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 1.25rem;
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            border-radius: 4px;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .toc-item:hover {
+            border-color: var(--neon-blue);
+            background: var(--bg-card-hover);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .toc-icon {
+            font-size: 1.5rem;
+            width: 2rem;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .toc-label {
+            font-weight: 500;
+        }
+
+        .toc-label small {
+            display: block;
+            font-size: 0.72rem;
+            color: var(--text-dim);
+            font-weight: 400;
+            margin-top: 2px;
+        }
+
+        /* ═══════════════════════════════════════
+           SHARED SECTION STYLES
+        ═══════════════════════════════════════ */
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-alt {
+            background: var(--bg-section);
+        }
+
+        .section-header {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-header .tag {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--neon-green);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            letter-spacing: 0.06em;
+            color: var(--text-bright);
+            text-transform: uppercase;
+            line-height: 1.1;
+        }
+
+        .section-header h2 em {
+            font-style: normal;
+            color: var(--neon-blue);
+            text-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
+        }
+
+        .section-header p {
+            color: var(--text-dim);
+            margin-top: 0.75rem;
+            max-width: 700px;
+            font-size: 0.95rem;
+        }
+
+        .section-header h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.6rem;
+            letter-spacing: 0.05em;
+            color: var(--text-bright);
+            text-transform: uppercase;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.15);
+        }
+
+        /* Content Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 240, 255, 0.08);
+            border-radius: 6px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(0, 240, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.08);
+        }
+
+        .card h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 0.05em;
+            color: var(--text-bright);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card h4 {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--neon-blue);
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        .card p {
+            color: var(--text-main);
+            margin-bottom: 0.75rem;
+            font-size: 0.92rem;
+        }
+
+        .card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .card ul li {
+            padding: 0.4rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.9rem;
+            color: var(--text-main);
+        }
+
+        .card ul li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--neon-blue);
+        }
+
+        /* Info pill/tag */
+        .pill {
+            display: inline-block;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.2rem 0.6rem;
+            border-radius: 3px;
+            margin-right: 0.4rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .pill-blue { background: rgba(0,240,255,0.15); color: var(--neon-blue); }
+        .pill-green { background: rgba(0,255,136,0.15); color: var(--neon-green); }
+        .pill-pink { background: rgba(255,0,128,0.15); color: var(--neon-pink); }
+        .pill-yellow { background: rgba(255,224,0,0.15); color: var(--neon-yellow); }
+        .pill-purple { background: rgba(191,0,255,0.15); color: var(--neon-purple); }
+        .pill-orange { background: rgba(255,107,53,0.15); color: var(--neon-orange); }
+        .pill-red { background: rgba(255,32,64,0.15); color: var(--neon-red); }
+
+        /* ═══════════════════════════════════════
+           DATA TABLES
+        ═══════════════════════════════════════ */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            border-radius: 6px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        thead {
+            background: rgba(0, 240, 255, 0.06);
+        }
+
+        th {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--neon-blue);
+            padding: 0.85rem 1rem;
+            text-align: left;
+            white-space: nowrap;
+            border-bottom: 2px solid rgba(0, 240, 255, 0.2);
+        }
+
+        td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.05);
+            color: var(--text-main);
+            vertical-align: top;
+        }
+
+        tbody tr:hover {
+            background: rgba(0, 240, 255, 0.03);
+        }
+
+        td .line-badge {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 6px;
+            vertical-align: middle;
+        }
+
+        /* ═══════════════════════════════════════
+           LINE BADGES / COLORS
+        ═══════════════════════════════════════ */
+        .line-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.72rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 3px;
+            margin: 0.15rem 0.2rem;
+            white-space: nowrap;
+        }
+
+        .line-tag .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* ═══════════════════════════════════════
+           COMPARISON GRID
+        ═══════════════════════════════════════ */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .compare-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            border-radius: 6px;
+            padding: 1.75rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .compare-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+        }
+
+        .compare-card.recommended {
+            border-color: var(--neon-green);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+        }
+
+        .compare-card.recommended::after {
+            content: 'RECOMMENDED';
+            position: absolute;
+            top: 12px;
+            right: -28px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.55rem;
+            letter-spacing: 0.15em;
+            background: var(--neon-green);
+            color: var(--bg-dark);
+            padding: 0.2rem 2rem;
+            transform: rotate(45deg);
+            font-weight: 700;
+        }
+
+        .compare-card h4 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.4rem;
+            letter-spacing: 0.05em;
+            color: var(--text-bright);
+            margin-bottom: 0.5rem;
+        }
+
+        .compare-card .price {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--neon-blue);
+        }
+
+        .compare-card .price small {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
+
+        .compare-card .meta {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--text-dim);
+            margin: 0.5rem 0;
+        }
+
+        .compare-card ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 1rem;
+        }
+
+        .compare-card ul li {
+            padding: 0.35rem 0;
+            padding-left: 1.2rem;
+            position: relative;
+            font-size: 0.85rem;
+        }
+
+        .compare-card ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--neon-green);
+            font-size: 0.75rem;
+        }
+
+        .compare-card ul li.con::before {
+            content: '✗';
+            color: var(--neon-red);
+        }
+
+        /* ═══════════════════════════════════════
+           TIPS / CALLOUT BOXES
+        ═══════════════════════════════════════ */
+        .tip-box {
+            background: rgba(0, 255, 136, 0.05);
+            border-left: 3px solid var(--neon-green);
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .tip-box.warning {
+            background: rgba(255, 224, 0, 0.05);
+            border-left-color: var(--neon-yellow);
+        }
+
+        .tip-box.danger {
+            background: rgba(255, 0, 128, 0.05);
+            border-left-color: var(--neon-pink);
+        }
+
+        .tip-box .tip-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--neon-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .tip-box.warning .tip-title { color: var(--neon-yellow); }
+        .tip-box.danger .tip-title { color: var(--neon-pink); }
+
+        .tip-box p {
+            font-size: 0.88rem;
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* ═══════════════════════════════════════
+           SVG MAP
+        ═══════════════════════════════════════ */
+        .map-container {
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 240, 255, 0.15);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+            overflow-x: auto;
+        }
+
+        .map-container svg {
+            width: 100%;
+            height: auto;
+            min-width: 700px;
+        }
+
+        .map-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(0, 240, 255, 0.1);
+        }
+
+        .map-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+        }
+
+        .map-legend-item .swatch {
+            width: 20px;
+            height: 4px;
+            border-radius: 2px;
+        }
+
+        /* ═══════════════════════════════════════
+           TIME MATRIX
+        ═══════════════════════════════════════ */
+        .matrix-wrap {
+            overflow-x: auto;
+            margin: 2rem 0;
+        }
+
+        .matrix-wrap table th:first-child {
+            position: sticky;
+            left: 0;
+            background: var(--bg-card);
+            z-index: 2;
+        }
+
+        .matrix-wrap table td:first-child {
+            position: sticky;
+            left: 0;
+            background: var(--bg-card);
+            font-weight: 600;
+            z-index: 1;
+            font-size: 0.78rem;
+        }
+
+        .matrix-cell {
+            text-align: center;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.72rem;
+        }
+
+        .matrix-cell.fast { color: var(--neon-green); }
+        .matrix-cell.medium { color: var(--neon-yellow); }
+        .matrix-cell.slow { color: var(--neon-orange); }
+        .matrix-cell.self { color: var(--text-dim); }
+
+        /* ═══════════════════════════════════════
+           ACCORDION / COLLAPSIBLE
+        ═══════════════════════════════════════ */
+        .accordion {
+            margin: 1rem 0;
+        }
+
+        .accordion details {
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 240, 255, 0.08);
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            overflow: hidden;
+        }
+
+        .accordion details[open] {
+            border-color: rgba(0, 240, 255, 0.2);
+        }
+
+        .accordion summary {
+            padding: 1rem 1.25rem;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.92rem;
+            color: var(--text-bright);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: background 0.2s;
+            list-style: none;
+        }
+
+        .accordion summary::-webkit-details-marker { display: none; }
+
+        .accordion summary::before {
+            content: '▸';
+            font-size: 0.7rem;
+            color: var(--neon-blue);
+            transition: transform 0.2s;
+        }
+
+        .accordion details[open] summary::before {
+            transform: rotate(90deg);
+        }
+
+        .accordion summary:hover {
+            background: rgba(0, 240, 255, 0.03);
+        }
+
+        .accordion .detail-content {
+            padding: 0 1.25rem 1.25rem;
+            font-size: 0.88rem;
+            color: var(--text-main);
+        }
+
+        .accordion .detail-content p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* ═══════════════════════════════════════
+           CROWDING BAR
+        ═══════════════════════════════════════ */
+        .crowd-bar {
+            display: flex;
+            gap: 2px;
+            margin: 0.5rem 0;
+        }
+
+        .crowd-bar span {
+            height: 18px;
+            flex: 1;
+            border-radius: 2px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.55rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bg-dark);
+            font-weight: 700;
+        }
+
+        .crowd-1 { background: var(--neon-green); }
+        .crowd-2 { background: #66dd44; }
+        .crowd-3 { background: var(--neon-yellow); }
+        .crowd-4 { background: var(--neon-orange); }
+        .crowd-5 { background: var(--neon-red); }
+
+        /* ═══════════════════════════════════════
+           FOOTER
+        ═══════════════════════════════════════ */
+        footer {
+            background: var(--bg-card);
+            border-top: 2px solid var(--neon-blue);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--neon-blue);
+        }
+
+        .footer-copy {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            letter-spacing: 0.05em;
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-social a {
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .footer-social a:hover {
+            transform: scale(1.2);
+        }
+
+        /* ═══════════════════════════════════════
+           BACK TO TOP
+        ═══════════════════════════════════════ */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 44px;
+            height: 44px;
+            background: var(--bg-card);
+            border: 1px solid var(--neon-blue);
+            border-radius: 50%;
+            color: var(--neon-blue);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s;
+            z-index: 50;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* ═══════════════════════════════════════
+           MOBILE RESPONSIVE
+        ═══════════════════════════════════════ */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 0.4rem 0.8rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            nav {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 0.5rem;
+                padding-top: 1rem;
+            }
+
+            nav.open {
+                display: flex;
+            }
+
+            .header-content {
+                flex-wrap: wrap;
+            }
+
+            .hero {
+                padding: 3rem 1.5rem 2.5rem;
+            }
+
+            .hero-stats {
+                gap: 1.5rem;
+            }
+
+            .section {
+                padding: 2.5rem 1.25rem;
+            }
+
+            .compare-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .toc-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .toc-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .logo {
+                font-size: 1.4rem;
+            }
+
+            table {
+                font-size: 0.75rem;
+            }
+
+            th, td {
+                padding: 0.5rem 0.6rem;
+            }
+        }
+
+        /* ═══════════════════════════════════════
+           ANIMATIONS
+        ═══════════════════════════════════════ */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-in {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .animate-in.visible {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* Glitch effect for section headers */
+        @keyframes glitch {
+            0%, 100% { text-shadow: none; }
+            20% { text-shadow: -2px 0 var(--neon-pink), 2px 0 var(--neon-blue); }
+            40% { text-shadow: 2px 0 var(--neon-pink), -2px 0 var(--neon-blue); }
+            60% { text-shadow: -1px 0 var(--neon-green), 1px 0 var(--neon-purple); }
+        }
+
+        .section-header h2:hover {
+            animation: glitch 0.3s ease;
+        }
+
+        /* Neon underline util */
+        .neon-underline {
+            text-decoration: none;
+            border-bottom: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            transition: box-shadow 0.3s;
+        }
+
+        .neon-underline:hover {
+            box-shadow: 0 2px 0 var(--neon-blue);
+        }
+
+        /* Progress indicator */
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple), var(--neon-pink));
+            z-index: 1000;
+            transition: width 0.1s;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Reading Progress -->
+<div class="reading-progress" id="readingProgress"></div>
+
+<!-- ═══════════════════════════════════════════════════
+     HEADER
+═══════════════════════════════════════════════════ -->
+<header>
+    <div class="header-content">
+        <a href="index.html" class="logo">Tokyo<span>JetLag</span></a>
+        <button class="mobile-menu-btn" onclick="document.querySelector('nav').classList.toggle('open')" aria-label="Toggle navigation">MENU</button>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="food-guide.html">Food</a>
+            <a href="nightlife.html">Nightlife</a>
+            <a href="transport-guide.html" class="active">Transport</a>
+            <a href="apps.html">Apps</a>
+            <a href="itinerary.html">Itinerary</a>
+            <a href="gallery.html">Gallery</a>
+        </nav>
+    </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════════ -->
+<section class="hero" id="top">
+    <div class="hero-inner">
+        <div class="badge">Complete Transport Guide</div>
+        <h1>Navigate <em>Tokyo</em> Like a Local</h1>
+        <p class="subtitle">
+            Tokyo's transport network moves <strong>13.1 million passengers daily</strong> —
+            the world's busiest. This guide covers every system, route, ticket, and hack
+            you need to ride it all without missing a beat.
+        </p>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <span class="num">286</span>
+                <span class="label">Metro Stations</span>
+            </div>
+            <div class="hero-stat">
+                <span class="num">13</span>
+                <span class="label">Metro Lines</span>
+            </div>
+            <div class="hero-stat">
+                <span class="num">882</span>
+                <span class="label">Bus Routes</span>
+            </div>
+            <div class="hero-stat">
+                <span class="num">¥146</span>
+                <span class="label">Min IC Fare</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     TABLE OF CONTENTS
+═══════════════════════════════════════════════════ -->
+<div class="toc-section animate-in">
+    <div class="toc-grid">
+        <a href="#jr" class="toc-item">
+            <span class="toc-icon">🚄</span>
+            <span class="toc-label">JR East <small>Yamanote, Chuo, Shinkansen</small></span>
+        </a>
+        <a href="#metro" class="toc-item">
+            <span class="toc-icon">🚇</span>
+            <span class="toc-label">Tokyo Metro <small>9 lines, 180 stations</small></span>
+        </a>
+        <a href="#toei" class="toc-item">
+            <span class="toc-icon">🚈</span>
+            <span class="toc-label">Toei Subway <small>4 lines + Arakawa tram</small></span>
+        </a>
+        <a href="#private" class="toc-item">
+            <span class="toc-icon">🚃</span>
+            <span class="toc-label">Private Railways <small>Odakyu, Keio, Tokyu, etc.</small></span>
+        </a>
+        <a href="#monorail" class="toc-item">
+            <span class="toc-icon">🚝</span>
+            <span class="toc-label">Monorail & New Transit <small>Yurikamome, Tokyo Monorail</small></span>
+        </a>
+        <a href="#bus" class="toc-item">
+            <span class="toc-icon">🚌</span>
+            <span class="toc-label">Buses <small>Toei, Tokyu, highway buses</small></span>
+        </a>
+        <a href="#taxi" class="toc-item">
+            <span class="toc-icon">🚕</span>
+            <span class="toc-label">Taxis & Ride-Hailing <small>GO, Uber, fares</small></span>
+        </a>
+        <a href="#rental" class="toc-item">
+            <span class="toc-icon">🚗</span>
+            <span class="toc-label">Rental Cars <small>When (not) to drive in Tokyo</small></span>
+        </a>
+        <a href="#cycling" class="toc-item">
+            <span class="toc-icon">🚲</span>
+            <span class="toc-label">Cycling <small>Docomo, Luup, Charichari</small></span>
+        </a>
+        <a href="#walking" class="toc-item">
+            <span class="toc-icon">🚶</span>
+            <span class="toc-label">Walking <small>The secret best transport</small></span>
+        </a>
+        <a href="#airport" class="toc-item">
+            <span class="toc-icon">✈️</span>
+            <span class="toc-label">Airport Access <small>Narita & Haneda full compare</small></span>
+        </a>
+        <a href="#ic-cards" class="toc-item">
+            <span class="toc-icon">💳</span>
+            <span class="toc-label">Suica & Pasmo <small>Buy, charge, use, Mobile</small></span>
+        </a>
+        <a href="#passes" class="toc-item">
+            <span class="toc-icon">🎫</span>
+            <span class="toc-label">Passes & Tickets <small>JR Pass, day passes, deals</small></span>
+        </a>
+        <a href="#apps-nav" class="toc-item">
+            <span class="toc-icon">📱</span>
+            <span class="toc-label">Navigation Apps <small>Google Maps, Navitime, etc.</small></span>
+        </a>
+        <a href="#last-train" class="toc-item">
+            <span class="toc-icon">🌙</span>
+            <span class="toc-label">Last Train & Survival <small>What to do when stranded</small></span>
+        </a>
+        <a href="#route-map" class="toc-item">
+            <span class="toc-icon">🗺️</span>
+            <span class="toc-label">SVG Route Map <small>Simplified line overview</small></span>
+        </a>
+        <a href="#time-matrix" class="toc-item">
+            <span class="toc-icon">⏱️</span>
+            <span class="toc-label">Travel Time Matrix <small>Area-to-area durations</small></span>
+        </a>
+        <a href="#etiquette" class="toc-item">
+            <span class="toc-icon">🙇</span>
+            <span class="toc-label">Etiquette & Tips <small>Manners, accessibility, luggage</small></span>
+        </a>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION: JR EAST
+═══════════════════════════════════════════════════ -->
+<div class="section-alt">
+<section class="section animate-in" id="jr">
+    <div class="section-header">
+        <span class="tag">// 01 — Rail Network</span>
+        <h2>JR East — <em>The Backbone</em></h2>
+        <p>JR East (East Japan Railway Company) operates the most iconic lines in Tokyo, including the Yamanote Loop, plus all Shinkansen connections. If you only learn one system, learn this one.</p>
+    </div>
+
+    <div class="card">
+        <h3>🟢 Yamanote Line — The Loop</h3>
+        <p>The circular lifeline of Tokyo, connecting all major stations in a 34.5 km loop. Full circuit takes approximately 60 minutes. Trains run every 2–4 minutes during rush hour.</p>
+        <h4>Key Stations</h4>
+        <ul>
+            <li><strong>Tokyo (東京)</strong> — Central hub, Shinkansen terminal, Marunouchi business district</li>
+            <li><strong>Shibuya (渋谷)</strong> — Scramble crossing, shopping, nightlife hub</li>
+            <li><strong>Shinjuku (新宿)</strong> — World's busiest station (3.6M daily), west-side skyscrapers, Kabukicho</li>
+            <li><strong>Ikebukuro (池袋)</strong> — Anime culture, Sunshine City, department stores</li>
+            <li><strong>Ueno (上野)</strong> — Museums, Ameyoko market, zoo, park</li>
+            <li><strong>Akihabara (秋葉原)</strong> — Electronics, anime, maid cafes</li>
+            <li><strong>Shinagawa (品川)</strong> — Shinkansen stop, gateway to Haneda</li>
+            <li><strong>Harajuku (原宿)</strong> — Takeshita Street, Meiji Shrine, youth fashion</li>
+            <li><strong>Ebisu (恵比寿)</strong> — Beer museum, upscale dining, garden place</li>
+        </ul>
+        <h4>Operating Details</h4>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr><th>Detail</th><th>Info</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Color</td><td><span class="line-badge" style="background:#80d41e"></span> Yellow-Green (Uguisu)</td></tr>
+                    <tr><td>Stations</td><td>30 stations</td></tr>
+                    <tr><td>First Train</td><td>~04:26 (Osaki)</td></tr>
+                    <tr><td>Last Train</td><td>~01:04 (varies by station)</td></tr>
+                    <tr><td>Frequency</td><td>2–4 min (rush), 4–6 min (off-peak)</td></tr>
+                    <tr><td>Fare</td><td>¥146–¥216 (IC card) distance-based</td></tr>
+                    <tr><td>Full Loop</td><td>~60 min (inner loop), ~64 min (outer loop)</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="tip-box">
+            <div class="tip-title">Pro Tip</div>
+            <p>Inner loop (内回り/uchimawari) runs counterclockwise; outer loop (外回り/sotomawari) runs clockwise. When in doubt, check which direction gets to your stop faster — some destinations differ by 20+ minutes depending on direction.</p>
+        </div>
+        <h4>Rush Hour Crowding (Weekday)</h4>
+        <div class="crowd-bar">
+            <span class="crowd-1">5am</span>
+            <span class="crowd-2">6am</span>
+            <span class="crowd-5">7am</span>
+            <span class="crowd-5">8am</span>
+            <span class="crowd-4">9am</span>
+            <span class="crowd-2">10am</span>
+            <span class="crowd-1">11am</span>
+            <span class="crowd-1">12pm</span>
+            <span class="crowd-2">1pm</span>
+            <span class="crowd-1">2pm</span>
+            <span class="crowd-1">3pm</span>
+            <span class="crowd-2">4pm</span>
+            <span class="crowd-3">5pm</span>
+            <span class="crowd-4">6pm</span>
+            <span class="crowd-3">7pm</span>
+            <span class="crowd-2">8pm</span>
+            <span class="crowd-1">9pm</span>
+            <span class="crowd-1">10pm</span>
+            <span class="crowd-1">11pm</span>
+        </div>
+        <p style="font-size:0.72rem;color:var(--text-dim);margin-top:0.25rem;">Green = empty, Red = sardine-can. Avoid 7:30–8:45 AM if possible.</p>
+    </div>
+
+    <div class="card">
+        <h3>🟠 Chuo Line (Rapid) — East-West Express</h3>
+        <p>The orange express line slicing east-west across the city from Tokyo Station to the western suburbs. Rapid service skips smaller stations, making it faster than the Chuo-Sobu Local.</p>
+        <h4>Key Stops</h4>
+        <ul>
+            <li><strong>Tokyo → Ochanomizu</strong> — University district, instrument shops</li>
+            <li><strong>Yotsuya</strong> — Sophia University area, upscale residential</li>
+            <li><strong>Shinjuku</strong> — Major transfer hub</li>
+            <li><strong>Nakano</strong> — Broadway (otaku haven), affordable eats</li>
+            <li><strong>Kichijoji</strong> — Inokashira Park, Harmonica Yokocho, consistently voted "most wanted neighborhood"</li>
+            <li><strong>Tachikawa</strong> — Showa Kinen Park, gateway to Mt. Takao</li>
+        </ul>
+        <h4>Operating Details</h4>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Detail</th><th>Info</th></tr></thead>
+                <tbody>
+                    <tr><td>Color</td><td><span class="line-badge" style="background:#ff4500"></span> Orange</td></tr>
+                    <tr><td>First/Last</td><td>~04:38 / ~01:10 (Tokyo Stn)</td></tr>
+                    <tr><td>Frequency</td><td>3–5 min (rush), 5–10 min (off-peak)</td></tr>
+                    <tr><td>Special</td><td>Becomes Chuo-Sobu Local (yellow) late night</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>🟡 Chuo-Sobu Line (Local) — The Slow Ride</h3>
+        <p>The yellow local line stopping at every station between Mitaka and Chiba. Runs on the same tracks as Chuo Rapid in central Tokyo but stops at all stations. Best for stations that Rapid skips: Iidabashi, Suidobashi, Akihabara, Ryogoku.</p>
+    </div>
+
+    <div class="card">
+        <h3>🔵 Keihin-Tohoku & Negishi Line</h3>
+        <p>Blue line running parallel to Yamanote between Tabata and Shinagawa, then continuing south to Yokohama. During daytime, rapid service skips some stations. Useful for Ofuna, Kawasaki, and avoiding the often-packed Yamanote.</p>
+    </div>
+
+    <div class="card">
+        <h3>🚅 Shinkansen (Bullet Trains)</h3>
+        <p>Departing from Tokyo or Shinagawa stations, the Shinkansen connects Tokyo to the rest of Japan at speeds up to 320 km/h. Not covered by regular Tokyo tickets — requires separate fare + reserved/unreserved seat tickets.</p>
+        <h4>Lines from Tokyo</h4>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Line</th><th>Destinations</th><th>Time</th><th>Fare (approx)</th></tr></thead>
+                <tbody>
+                    <tr><td>Tokaido</td><td>Nagoya, Kyoto, Osaka</td><td>2h10m to Kyoto</td><td>¥13,320</td></tr>
+                    <tr><td>Tohoku</td><td>Sendai, Morioka, Shin-Aomori</td><td>1h30m to Sendai</td><td>¥11,410</td></tr>
+                    <tr><td>Joetsu</td><td>Niigata</td><td>1h40m</td><td>¥10,760</td></tr>
+                    <tr><td>Hokuriku</td><td>Nagano, Kanazawa, Tsuruga</td><td>2h30m to Kanazawa</td><td>¥14,380</td></tr>
+                    <tr><td>Akita</td><td>Akita (via Morioka)</td><td>3h50m</td><td>¥17,820</td></tr>
+                    <tr><td>Yamagata</td><td>Yamagata, Shinjo</td><td>2h30m to Yamagata</td><td>¥11,660</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="tip-box warning">
+            <div class="tip-title">Important</div>
+            <p>The Japan Rail Pass covers all Shinkansen lines except the Nozomi and Mizuho services on the Tokaido/Sanyo line. Use Hikari or Kodama instead. Always reserve seats during peak seasons (Golden Week, Obon, New Year).</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Other JR Lines in Tokyo</h3>
+        <div class="accordion">
+            <details>
+                <summary>Saikyo Line / Rinkai Line — Shibuya to Saitama & Odaiba</summary>
+                <div class="detail-content">
+                    <p>Runs from Osaki through Shibuya, Shinjuku, Ikebukuro, and into Saitama. Through-service with the Rinkai Line lets you reach Odaiba (Tokyo Teleport station). Color: dark green. Infamous for extreme rush-hour crowding on the Ikebukuro–Shinjuku section (199% capacity in peak).</p>
+                </div>
+            </details>
+            <details>
+                <summary>Keiyo Line — Tokyo Disney & Makuhari</summary>
+                <div class="detail-content">
+                    <p>Runs from Tokyo Station (underground platform, long walk from main concourse) to Maihama (Tokyo Disney Resort) and Kaihin-Makuhari. Color: wine red. The underground platform is 500m from the main station — allow 10 extra minutes.</p>
+                </div>
+            </details>
+            <details>
+                <summary>Nambu Line — Kawasaki to Tachikawa</summary>
+                <div class="detail-content">
+                    <p>North-south line in the western suburbs connecting Kawasaki to Tachikawa via Musashi-Kosugi and Noborito. Useful for reaching suburbs not on main lines.</p>
+                </div>
+            </details>
+            <details>
+                <summary>Yokosuka Line & Shonan-Shinjuku Line</summary>
+                <div class="detail-content">
+                    <p>Yokosuka Line: Tokyo to Kamakura/Yokosuka, often coupled with Sobu Rapid. Shonan-Shinjuku Line: connects Shinjuku directly to Yokohama, Kamakura, and Odawara without going through Tokyo Station. Very convenient for day trips.</p>
+                </div>
+            </details>
+            <details>
+                <summary>Musashino Line — Suburban Connector</summary>
+                <div class="detail-content">
+                    <p>Arc-shaped line connecting the suburbs, useful for bypassing central Tokyo when traveling between outer areas (Nishi-Funabashi to Fuchu-Honmachi). Also serves Maihama for Disney access from the north.</p>
+                </div>
+            </details>
+        </div>
+    </div>
+</section>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION: TOKYO METRO
+═══════════════════════════════════════════════════ -->
+<section class="section animate-in" id="metro">
+    <div class="section-header">
+        <span class="tag">// 02 — Underground Network</span>
+        <h2>Tokyo Metro — <em>9 Lines, 180 Stations</em></h2>
+        <p>Tokyo Metro operates the majority of Tokyo's subway system. Lines are color-coded, numbered, and well-signed in English. Arguably the most tourist-friendly system in the city.</p>
+    </div>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Line</th>
+                    <th>Code</th>
+                    <th>Color</th>
+                    <th>Route</th>
+                    <th>Stations</th>
+                    <th>Key Stops</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="line-badge" style="background:#ff9500"></span> Ginza</td>
+                    <td>G</td>
+                    <td>Orange</td>
+                    <td>Shibuya ↔ Asakusa</td>
+                    <td>19</td>
+                    <td>Ginza, Ueno, Asakusa, Nihombashi</td>
+                    <td>Tokyo's oldest line (1927). Covers all the classic tourist spots.</td>
+                </tr>
+                <tr>
+                    <td><span class="line-badge" style="background:#f62e36"></span> Marunouchi</td>
+                    <td>M</td>
+                    <td>Red</td>
+                    <td>Ogikubo ↔ Ikebukuro</td>
+                    <td>25 (+3 branch)</td>
+                    <td>Tokyo, Ginza, Shinjuku, Ikebukuro</td>
+                    <td>Connects two of the busiest hubs. Branch line to Honancho.</td>
+                </tr>
+                <tr>
+                    <td><span class="line-badge" style="background:#b5b5ac"></span> Hibiya</td>
+                    <td>H</td>
+                    <td>Silver</td>
+                    <td>Naka-Meguro ↔ Kita-Senju</td>
+                    <td>22</td>
+                    <td>Roppongi, Ginza, Akihabara, Ueno</td>
+                    <td>Through-service with Tokyu Toyoko Line. Good nightlife access.</td>
+                </tr>
+                <tr>
+                    <td><span class="line-badge" style="background:#009bbf"></span> Tozai</td>
+                    <td>T</td>
+                    <td>Light Blue</td>
+                    <td>Nakano ↔ Nishi-Funabashi</td>
+                    <td>23</td>
+                    <td>Nihombashi, Otemachi, Iidabashi</td>
+                    <td>Most crowded line in Tokyo (199% at peak). Avoid during rush.</td>
+                </tr>
+                <tr>
+                    <td><span class="line-badge" style="background:#00bb85"></span> Chiyoda</td>
+                    <td>C</td>
+                    <td>Green</td>
+                    <td>Yoyogi-Uehara ↔ Kita-Ayase</td>
+                    <td>20</td>
+                    <td>Meiji-jingumae, Omotesando, Otemachi</td>
+                    <td>Through-service with Odakyu Line. Access to Meiji Shrine.</td>
+                </tr>
+                <tr>
+                    <td><span class="line-badge" style="background:#c1a470"></span> Yurakucho</td>
+                    <td>Y</td>
+                    <td>Gold</td>
+                    <td>Wakoshi ↔ Shin-Kiba</td>
+                    <td>24</td>
+                    <td>Ikebukuro, Yurakucho, Toyosu, Tsukishima</td>
+                    <td>Access to new Toyosu Fish Market. Through-service with Tobu/Seibu.</td>
+                </tr>
+                <tr>
+                    <td><span class="line-badge" style="background:#8f76d6"></span> Hanzomon</td>
+                    <td>Z</td>
+                    <td>Purple</td>
+                    <td>Shibuya ↔ Oshiage</td>
+                    <td>14</td>
+                    <td>Shibuya, Omotesando, Otemachi, Oshiage</td>
+                    <td>Access to Tokyo Skytree via Oshiage. Through-service with Tokyu/Tobu.</td>
+                </tr>
+                <tr>
+                    <td><span class="line-badge" style="background:#00ac9b"></span> Namboku</td>
+                    <td>N</td>
+                    <td>Teal</td>
+                    <td>Meguro ↔ Akabane-Iwabuchi</td>
+                    <td>19</td>
+                    <td>Roppongi-Itchome, Korakuen, Oji</td>
+                    <td>Full platform doors on every station. Through-service with Tokyu Meguro Line.</td>
+                </tr>
+                <tr>
+                    <td><span class="line-badge" style="background:#9c5e31"></span> Fukutoshin</td>
+                    <td>F</td>
+                    <td>Brown</td>
+                    <td>Wakoshi ↔ Shibuya</td>
+                    <td>16</td>
+                    <td>Ikebukuro, Shinjuku-sanchome, Meiji-jingumae, Shibuya</td>
+                    <td>Newest Metro line (2008). Through-service to Yokohama via Tokyu Toyoko Line.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card">
+        <h4>Metro Fare Structure</h4>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Distance</th><th>Ticket Price</th><th>IC Card Price</th></tr></thead>
+                <tbody>
+                    <tr><td>1–6 km</td><td>¥180</td><td>¥178</td></tr>
+                    <tr><td>7–11 km</td><td>¥210</td><td>¥209</td></tr>
+                    <tr><td>12–19 km</td><td>¥260</td><td>¥262</td></tr>
+                    <tr><td>20–27 km</td><td>¥300</td><td>¥293</td></tr>
+                    <tr><td>28–40 km</td><td>¥340</td><td>¥335</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p style="font-size:0.82rem;color:var(--text-dim);">Children (6–11) pay half fare. Under 6 ride free (up to 2 per adult). IC cards save ¥1–¥7 per trip.</p>
+    </div>
+
+    <div class="card">
+        <h4>Operating Hours</h4>
+        <p>First trains depart around 05:00. Last trains depart between 00:00 and 00:30 depending on the line and direction. There is NO 24-hour service on any metro line.</p>
+        <div class="tip-box warning">
+            <div class="tip-title">Last Train Warning</div>
+            <p>Metro last train times are NOT the same as JR. If your journey requires transferring between operators, always check the last connection time, not just the last departure on each individual line. Missing a single transfer can strand you.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION: TOEI SUBWAY
+═══════════════════════════════════════════════════ -->
+<div class="section-alt">
+<section class="section animate-in" id="toei">
+    <div class="section-header">
+        <span class="tag">// 03 — City-Operated Subway</span>
+        <h2>Toei Subway — <em>4 Lines + Bonus Systems</em></h2>
+        <p>Operated by the Tokyo Metropolitan Bureau of Transportation. Separate fare system from Tokyo Metro (no free transfers between the two without a pass), but IC cards work seamlessly. Generally less crowded than Metro equivalents.</p>
+    </div>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr><th>Line</th><th>Code</th><th>Color</th><th>Route</th><th>Stations</th><th>Key Stops</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Asakusa Line</td>
+                    <td>A</td>
+                    <td style="color:#e85298">Rose</td>
+                    <td>Nishi-Magome ↔ Oshiage</td>
+                    <td>20</td>
+                    <td>Asakusa, Nihombashi, Shinbashi, Gotanda</td>
+                </tr>
+                <tr>
+                    <td>Mita Line</td>
+                    <td>I</td>
+                    <td style="color:#006cb8">Blue</td>
+                    <td>Meguro ↔ Nishi-Takashimadaira</td>
+                    <td>27</td>
+                    <td>Meguro, Mita, Otemachi, Suidobashi</td>
+                </tr>
+                <tr>
+                    <td>Shinjuku Line</td>
+                    <td>S</td>
+                    <td style="color:#6cbb5a">Leaf Green</td>
+                    <td>Shinjuku ↔ Motoyawata</td>
+                    <td>21</td>
+                    <td>Shinjuku, Kudanshita, Jimbocho, Bakurocho</td>
+                </tr>
+                <tr>
+                    <td>Oedo Line</td>
+                    <td>E</td>
+                    <td style="color:#b6007a">Magenta</td>
+                    <td>Hikarigaoka ↔ Tochomae (loop-ish)</td>
+                    <td>38</td>
+                    <td>Roppongi, Tsukiji, Ryogoku, Shinjuku-Nishiguchi</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card">
+        <h3>Oedo Line — The Deep One</h3>
+        <p>The Oedo Line is the deepest subway in Tokyo (up to 48.9m below street level at Roppongi). Its 6-shaped route covers areas other lines miss entirely — particularly useful for reaching Roppongi, Tsukiji Market area, and the Ryogoku sumo district.</p>
+        <div class="tip-box">
+            <div class="tip-title">Pro Tip</div>
+            <p>Oedo Line platforms are very deep. At Roppongi station, budget 5+ minutes just to get from street level to the platform. The elevators and long escalators are not fast.</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Toei Bonus Systems</h3>
+        <h4>Toden Arakawa Line (Tokyo Sakura Tram)</h4>
+        <p>Tokyo's last remaining tram line. Runs 12.2 km from Minowabashi to Waseda along quiet residential streets. A charming, slow ride through old-school Tokyo neighborhoods. Flat fare: ¥170 (IC: ¥168). Great for visiting Sugamo ("Grandma's Harajuku") and the rose gardens along the tracks.</p>
+
+        <h4>Nippori-Toneri Liner</h4>
+        <p>Automated guideway transit in the northern suburbs. Connects Nippori to Minumadai-Shinsuikouen. Elevated views, driverless operation. Useful primarily for locals — tourists rarely need it unless visiting the Toneri area.</p>
+    </div>
+
+    <div class="card">
+        <h4>Toei Fare Structure</h4>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Distance</th><th>Ticket</th><th>IC Card</th></tr></thead>
+                <tbody>
+                    <tr><td>1–4 km</td><td>¥180</td><td>¥178</td></tr>
+                    <tr><td>5–8 km</td><td>¥220</td><td>¥220</td></tr>
+                    <tr><td>9–14 km</td><td>¥270</td><td>¥272</td></tr>
+                    <tr><td>15–22 km</td><td>¥320</td><td>¥314</td></tr>
+                    <tr><td>23+ km</td><td>¥380</td><td>¥377</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="tip-box">
+            <div class="tip-title">Transfer Discount</div>
+            <p>When transferring between Toei and Tokyo Metro with an IC card, you automatically receive a ¥70 discount. This makes the combined fare less painful than it looks on paper.</p>
+        </div>
+    </div>
+</section>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION: PRIVATE RAILWAYS
+═══════════════════════════════════════════════════ -->
+<section class="section animate-in" id="private">
+    <div class="section-header">
+        <span class="tag">// 04 — Private Railways (私鉄)</span>
+        <h2>Private Railways — <em>The Other Half</em></h2>
+        <p>Japan's private railways (shitetsu) carry as many passengers as JR in the Tokyo area. Each company radiates outward from a major terminal station and often integrates with Metro lines via through-service (相互直通運転).</p>
+    </div>
+
+    <div class="compare-grid">
+        <div class="compare-card">
+            <div style="height:3px;background:var(--neon-blue);position:absolute;top:0;left:0;right:0;"></div>
+            <h4>Odakyu Electric Railway</h4>
+            <div class="meta">Terminal: Shinjuku → Odawara / Enoshima</div>
+            <ul>
+                <li>Romancecar express to Hakone (85 min, ¥2,330)</li>
+                <li>Through-service with Chiyoda Line</li>
+                <li>Shimokitazawa — trendy neighborhood access</li>
+                <li>Day trips to Hakone & Enoshima</li>
+            </ul>
+        </div>
+        <div class="compare-card">
+            <div style="height:3px;background:var(--neon-green);position:absolute;top:0;left:0;right:0;"></div>
+            <h4>Keio Corporation</h4>
+            <div class="meta">Terminal: Shinjuku → Hashimoto / Takaosanguchi</div>
+            <ul>
+                <li>Best route to Mt. Takao (direct from Shinjuku)</li>
+                <li>Keio Line + Inokashira Line (to Kichijoji)</li>
+                <li>Budget-friendly alternative to JR for western suburbs</li>
+                <li>Through-service with Toei Shinjuku Line</li>
+            </ul>
+        </div>
+        <div class="compare-card">
+            <div style="height:3px;background:var(--neon-pink);position:absolute;top:0;left:0;right:0;"></div>
+            <h4>Tokyu Corporation</h4>
+            <div class="meta">Terminal: Shibuya / Meguro → Yokohama area</div>
+            <ul>
+                <li>Toyoko Line: Shibuya → Yokohama (25 min, express)</li>
+                <li>Den-en-toshi Line: Shibuya → Chuo-Rinkan</li>
+                <li>Through-service with Fukutoshin/Hanzomon Lines</li>
+                <li>Access to Jiyugaoka, Futakotamagawa</li>
+            </ul>
+        </div>
+        <div class="compare-card">
+            <div style="height:3px;background:var(--neon-yellow);position:absolute;top:0;left:0;right:0;"></div>
+            <h4>Seibu Railway</h4>
+            <div class="meta">Terminal: Ikebukuro / Shinjuku → Saitama</div>
+            <ul>
+                <li>Ikebukuro Line + Shinjuku Line</li>
+                <li>Laview limited express to Chichibu (scenic area)</li>
+                <li>Toshimaen/Nerima/Tokorozawa access</li>
+                <li>Through-service with Yurakucho/Fukutoshin Lines</li>
+            </ul>
+        </div>
+        <div class="compare-card">
+            <div style="height:3px;background:var(--neon-orange);position:absolute;top:0;left:0;right:0;"></div>
+            <h4>Tobu Railway</h4>
+            <div class="meta">Terminal: Asakusa / Ikebukuro → Tochigi / Saitama</div>
+            <ul>
+                <li>Spacia X limited express to Nikko (1h50m)</li>
+                <li>Skytree Line from Asakusa (Skytree access)</li>
+                <li>Tojo Line from Ikebukuro to Kawagoe</li>
+                <li>Through-service with Hanzomon/Hibiya Lines</li>
+            </ul>
+        </div>
+        <div class="compare-card">
+            <div style="height:3px;background:var(--neon-purple);position:absolute;top:0;left:0;right:0;"></div>
+            <h4>Keikyu Corporation</h4>
+            <div class="meta">Terminal: Shinagawa → Yokohama / Haneda Airport</div>
+            <ul>
+                <li>Direct service to Haneda Airport (11 min from Shinagawa)</li>
+                <li>Through-service with Toei Asakusa Line</li>
+                <li>Alternative route to Yokohama</li>
+                <li>Airport Rapid Express — fast and frequent</li>
+            </ul>
+        </div>
+        <div class="compare-card">
+            <div style="height:3px;background:#e85298;position:absolute;top:0;left:0;right:0;"></div>
+            <h4>Keisei Electric Railway</h4>
+            <div class="meta">Terminal: Ueno → Narita Airport</div>
+            <ul>
+                <li>Skyliner: Ueno → Narita in 36 min (¥2,520)</li>
+                <li>Access Express: cheaper, slightly slower</li>
+                <li>Through-service with Toei Asakusa Line</li>
+                <li>Primary Narita Airport rail connection</li>
+            </ul>
+        </div>
+        <div class="compare-card">
+            <div style="height:3px;background:#00bb85;position:absolute;top:0;left:0;right:0;"></div>
+            <h4>Tsukuba Express (TX)</h4>
+            <div class="meta">Terminal: Akihabara → Tsukuba</div>
+            <ul>
+                <li>Akihabara to Tsukuba in 45 min</li>
+                <li>Passes through Asakusa (separate station)</li>
+                <li>Relatively new (2005), modern stations</li>
+                <li>Good for Kashiwa-no-ha, Moriya areas</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="tip-box">
+        <div class="tip-title">Through-Service Explained</div>
+        <p>Many private railways run continuous service onto Metro lines (and vice versa). A train that starts as a Tokyu Toyoko Line train may become a Fukutoshin Line train at Shibuya, then a Seibu Ikebukuro Line train at Kotake-mukaihara — all without you needing to change seats. However, fare is calculated separately for each operator. IC cards handle this automatically; paper tickets do not.</p>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION: MONORAIL & NEW TRANSIT
+═══════════════════════════════════════════════════ -->
+<div class="section-alt">
+<section class="section animate-in" id="monorail">
+    <div class="section-header">
+        <span class="tag">// 05 — Elevated Systems</span>
+        <h2>Monorail & <em>New Transit</em></h2>
+        <p>Automated, elevated guideway systems that fill gaps between traditional rail networks.</p>
+    </div>
+
+    <div class="card">
+        <h3>🚝 Tokyo Monorail</h3>
+        <p>Connects Hamamatsucho (near JR Hamamatsucho/Daimon station) to Haneda Airport in approximately 13–18 minutes. Runs elevated along the Tokyo Bay waterfront with excellent views.</p>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Detail</th><th>Info</th></tr></thead>
+                <tbody>
+                    <tr><td>Route</td><td>Hamamatsucho ↔ Haneda Airport Terminal 2</td></tr>
+                    <tr><td>Time</td><td>13 min (rapid), 18 min (local)</td></tr>
+                    <tr><td>Fare</td><td>¥500 (IC: ¥492)</td></tr>
+                    <tr><td>Frequency</td><td>Every 3–5 min (rush), 4–10 min (off-peak)</td></tr>
+                    <tr><td>First/Last</td><td>~05:10 / ~00:01 (Hamamatsucho → Airport)</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>🚈 Yurikamome</h3>
+        <p>Driverless automated guideway connecting Shimbashi to Toyosu via Odaiba. The front seats offer stunning views of Rainbow Bridge and Tokyo Bay. Popular with tourists for the Odaiba area.</p>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Detail</th><th>Info</th></tr></thead>
+                <tbody>
+                    <tr><td>Route</td><td>Shimbashi ↔ Toyosu (14.7 km, 16 stations)</td></tr>
+                    <tr><td>Time</td><td>~30 min full route</td></tr>
+                    <tr><td>Fare</td><td>¥190–¥390 (distance-based)</td></tr>
+                    <tr><td>Key Stops</td><td>Daiba, Odaiba-Kaihinkoen, Tokyo Big Sight, Toyosu</td></tr>
+                    <tr><td>Special</td><td>Sit in the first car for the "driver's view" — no driver!</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Disney Resort Line</h3>
+        <p>Monorail loop circling Tokyo Disney Resort. Connects JR Maihama Station to Tokyo Disneyland, Tokyo DisneySea, and resort hotels. Single ride: ¥260. One-day pass: ¥660. Mostly for Disney visitors.</p>
+    </div>
+</section>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION: BUS
+═══════════════════════════════════════════════════ -->
+<section class="section animate-in" id="bus">
+    <div class="section-header">
+        <span class="tag">// 06 — Bus Network</span>
+        <h2>Buses — <em>The Overlooked Option</em></h2>
+        <p>Most tourists skip buses, but Tokyo's bus network is extensive and covers areas where rail doesn't reach. Flat-fare system in the 23 wards makes them simple to use.</p>
+    </div>
+
+    <div class="card">
+        <h3>🚌 Toei Bus (都営バス)</h3>
+        <p>The city-operated bus network covering all 23 special wards. All routes within the 23 wards use a flat fare — tap your IC card once when boarding.</p>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Detail</th><th>Info</th></tr></thead>
+                <tbody>
+                    <tr><td>Fare (23 wards)</td><td>¥210 flat (IC: ¥210)</td></tr>
+                    <tr><td>Fare (suburban)</td><td>Distance-based, varies</td></tr>
+                    <tr><td>Payment</td><td>IC card (front door), cash exact change</td></tr>
+                    <tr><td>Hours</td><td>~05:00 – ~23:30 (varies by route)</td></tr>
+                    <tr><td>Boarding</td><td>Front door (23 wards), rear door (suburbs)</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <h4>Useful Bus Routes for Tourists</h4>
+        <ul>
+            <li><strong>Toei Bus #01</strong> — Shinjuku Station West → Tokyo Tower → Shinbashi (covers areas poorly served by metro)</li>
+            <li><strong>Toei Bus Gakuen 07</strong> — Waterfront/Odaiba access from central Tokyo</li>
+            <li><strong>Tokyu Bus / Toei Bus</strong> — Shibuya to Roppongi direct without subway transfer</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h3>Highway Buses (高速バス)</h3>
+        <p>Long-distance buses depart from Shinjuku Expressway Bus Terminal (Busta Shinjuku, 4F of Shinjuku Station South Exit) and Tokyo Station Yaesu Exit. Budget option for intercity travel.</p>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Destination</th><th>Duration</th><th>Fare Range</th><th>Frequency</th></tr></thead>
+                <tbody>
+                    <tr><td>Osaka</td><td>7–9 hours (overnight)</td><td>¥3,000–¥10,000</td><td>20+ daily</td></tr>
+                    <tr><td>Kyoto</td><td>6–8 hours (overnight)</td><td>¥3,000–¥9,000</td><td>15+ daily</td></tr>
+                    <tr><td>Nagoya</td><td>5–6 hours</td><td>¥2,500–¥6,000</td><td>15+ daily</td></tr>
+                    <tr><td>Mt. Fuji 5th Station</td><td>2.5 hours</td><td>¥2,600</td><td>Seasonal</td></tr>
+                    <tr><td>Kawaguchiko</td><td>1h45m</td><td>¥2,200</td><td>Hourly</td></tr>
+                    <tr><td>Kusatsu Onsen</td><td>4 hours</td><td>¥3,500</td><td>4 daily</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="tip-box">
+            <div class="tip-title">Overnight Bus Tip</div>
+            <p>Willer Express and Jamjam Liner offer 3-row independent seat buses with privacy curtains, blankets, and USB charging. Book at least 2 weeks ahead for the best prices. If you're flexible, midweek departures can be as cheap as ¥2,000 to Osaka.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION: TAXI
+═══════════════════════════════════════════════════ -->
+<div class="section-alt">
+<section class="section animate-in" id="taxi">
+    <div class="section-header">
+        <span class="tag">// 07 — Door-to-Door</span>
+        <h2>Taxis & <em>Ride-Hailing</em></h2>
+        <p>Expensive by global standards but sometimes the only option — especially after the last train. Tokyo taxis are legendarily clean, safe, and driven by professionals in white gloves.</p>
+    </div>
+
+    <div class="card">
+        <h3>🚕 Taxi Basics</h3>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Detail</th><th>Standard Taxi</th><th>JPN Taxi (Toyota)</th></tr></thead>
+                <tbody>
+                    <tr><td>Base Fare</td><td>¥500 (1.096 km)</td><td>¥500 (1.096 km)</td></tr>
+                    <tr><td>Meter Rate</td><td>¥100 / 255m</td><td>¥100 / 255m</td></tr>
+                    <tr><td>Late Night Surcharge</td><td>+20% (22:00–05:00)</td><td>+20% (22:00–05:00)</td></tr>
+                    <tr><td>Payment</td><td>Cash, IC card</td><td>Cash, IC, credit card, QR</td></tr>
+                    <tr><td>Capacity</td><td>4 passengers</td><td>4 passengers + wheelchair</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <h4>Sample Fare Estimates</h4>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Route</th><th>Approx. Time</th><th>Daytime</th><th>Late Night</th></tr></thead>
+                <tbody>
+                    <tr><td>Shibuya → Roppongi</td><td>15 min</td><td>~¥1,500</td><td>~¥1,800</td></tr>
+                    <tr><td>Shinjuku → Tokyo Station</td><td>25 min</td><td>~¥2,800</td><td>~¥3,400</td></tr>
+                    <tr><td>Shibuya → Asakusa</td><td>35 min</td><td>~¥4,000</td><td>~¥4,800</td></tr>
+                    <tr><td>Roppongi → Haneda Airport</td><td>30 min</td><td>~¥5,500</td><td>~¥6,600</td></tr>
+                    <tr><td>Tokyo Stn → Narita Airport</td><td>70 min</td><td>~¥20,000+</td><td>~¥24,000+</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="tip-box">
+            <div class="tip-title">Taxi Tips</div>
+            <p>Doors open and close automatically — do NOT touch them. Tipping is not expected and may cause confusion. Show the driver your destination on Google Maps if there's a language barrier. The red light on the dashboard means vacant/available.</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>📱 Ride-Hailing Apps</h3>
+        <div class="compare-grid">
+            <div class="compare-card recommended">
+                <h4>GO (タクシーアプリGO)</h4>
+                <div class="meta">Japan's #1 taxi app</div>
+                <ul>
+                    <li>Largest fleet: 100,000+ taxis nationwide</li>
+                    <li>Set pickup/dropoff on map</li>
+                    <li>Pre-set payment (credit card, PayPay)</li>
+                    <li>AI ETA estimates, fare estimate before booking</li>
+                    <li>English interface available</li>
+                    <li class="con">¥500 dispatch fee during peak times</li>
+                </ul>
+            </div>
+            <div class="compare-card">
+                <h4>S.RIDE</h4>
+                <div class="meta">One-slide hailing</div>
+                <ul>
+                    <li>Simple UI — slide to call a taxi</li>
+                    <li>Good coverage in central Tokyo</li>
+                    <li>Fare estimates available</li>
+                    <li>Credit card payment</li>
+                    <li class="con">Smaller fleet than GO</li>
+                    <li class="con">Less English support</li>
+                </ul>
+            </div>
+            <div class="compare-card">
+                <h4>Uber Japan</h4>
+                <div class="meta">Familiar interface for foreigners</div>
+                <ul>
+                    <li>Uses licensed taxi drivers (not rideshare)</li>
+                    <li>Familiar app if you use Uber abroad</li>
+                    <li>Premium Black option available</li>
+                    <li>English-friendly</li>
+                    <li class="con">Smaller fleet in Tokyo than GO</li>
+                    <li class="con">Often more expensive than hailing</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION: RENTAL CAR
+═══════════════════════════════════════════════════ -->
+<section class="section animate-in" id="rental">
+    <div class="section-header">
+        <span class="tag">// 08 — Self-Drive</span>
+        <h2>Rental Cars — <em>When (Not) to Drive</em></h2>
+        <p>Driving in central Tokyo is generally not recommended. However, a car becomes invaluable for rural day trips, Hokkaido road trips, or accessing remote areas that trains don't serve.</p>
+    </div>
+
+    <div class="card">
+        <h3>🚗 Should You Rent?</h3>
+        <div class="compare-grid">
+            <div class="compare-card" style="border-color: var(--neon-green);">
+                <h4 style="color:var(--neon-green);">YES — Rent When</h4>
+                <ul>
+                    <li>Visiting rural areas (Hokkaido, Shikoku, Kyushu)</li>
+                    <li>Traveling with family/heavy luggage</li>
+                    <li>Day trips to Mt. Fuji area, Izu Peninsula</li>
+                    <li>Exploring the countryside at your own pace</li>
+                    <li>Visiting multiple small towns in one day</li>
+                </ul>
+            </div>
+            <div class="compare-card" style="border-color: var(--neon-red);">
+                <h4 style="color:var(--neon-red);">NO — Don't Rent When</h4>
+                <ul>
+                    <li class="con">Staying within Tokyo 23 wards</li>
+                    <li class="con">Traveling between major cities (use Shinkansen)</li>
+                    <li class="con">You're unfamiliar with left-side driving</li>
+                    <li class="con">You don't have an International Driving Permit (IDP)</li>
+                    <li class="con">Budget is tight (tolls + parking = expensive)</li>
+                </ul>
+            </div>
+        </div>
+
+        <h4>Requirements</h4>
+        <ul>
+            <li>International Driving Permit (IDP) based on the 1949 Geneva Convention — must be obtained BEFORE arriving in Japan</li>
+            <li>Your original home country driver's license (carry both)</li>
+            <li>Minimum age: 18 (some companies require 21 for certain classes)</li>
+            <li>Credit card for deposit</li>
+        </ul>
+
+        <h4>Major Rental Companies</h4>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Company</th><th>English Support</th><th>Approx. Daily Rate</th><th>Notes</th></tr></thead>
+                <tbody>
+                    <tr><td>Toyota Rent-a-Car</td><td>Good</td><td>¥5,500–¥15,000</td><td>Largest fleet, newest cars</td></tr>
+                    <tr><td>Nippon Rent-a-Car</td><td>Good</td><td>¥5,000–¥14,000</td><td>Wide coverage, good English site</td></tr>
+                    <tr><td>Times Car Rental</td><td>Moderate</td><td>¥4,500–¥12,000</td><td>Often cheapest, compact cars</td></tr>
+                    <tr><td>Orix Rent-a-Car</td><td>Good</td><td>¥4,800–¥13,000</td><td>Good value, many locations</td></tr>
+                    <tr><td>Budget Rent-a-Car</td><td>Limited</td><td>¥4,000–¥10,000</td><td>Budget option, smaller fleet</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tip-box warning">
+            <div class="tip-title">Expressway Tolls</div>
+            <p>Tokyo expressway tolls are expensive. A trip from Tokyo to Hakone on the Tomei Expressway costs approximately ¥2,500 one way. Rent an ETC card from the rental company for automated toll payment (¥330/day). Without ETC, you'll queue at manual toll booths.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION: CYCLING
+═══════════════════════════════════════════════════ -->
+<div class="section-alt">
+<section class="section animate-in" id="cycling">
+    <div class="section-header">
+        <span class="tag">// 09 — Two Wheels</span>
+        <h2>Cycling — <em>Tokyo by Bike</em></h2>
+        <p>Flat terrain, excellent infrastructure in some wards, and shared bike stations everywhere make cycling a surprisingly good way to cover short-to-medium distances. Many locals commute this way.</p>
+    </div>
+
+    <div class="card">
+        <h3>🚲 Bike Share Services</h3>
+        <div class="compare-grid">
+            <div class="compare-card recommended">
+                <h4>Docomo Bike Share</h4>
+                <div class="price">¥165 <small>/ 30 min (electric)</small></div>
+                <div class="meta">Largest network, 1,100+ ports in 23 wards</div>
+                <ul>
+                    <li>Electric-assist bikes (red frames)</li>
+                    <li>One-day pass: ¥1,650 (unlimited 30-min rides)</li>
+                    <li>Monthly pass: ¥3,300</li>
+                    <li>Register via app or website (English OK)</li>
+                    <li>Cross-ward returns between partner wards</li>
+                    <li class="con">Bikes can feel heavy without charge</li>
+                </ul>
+            </div>
+            <div class="compare-card">
+                <h4>LUUP</h4>
+                <div class="price">¥50 <small>base + ¥15/min</small></div>
+                <div class="meta">Electric scooters + bikes</div>
+                <ul>
+                    <li>Electric kick-scooters (requires brief license check)</li>
+                    <li>Electric bikes also available</li>
+                    <li>Very convenient for short trips (1–2 km)</li>
+                    <li>Growing port network, mostly central wards</li>
+                    <li class="con">Scooters require helmet (law since 2023)</li>
+                    <li class="con">Per-minute pricing adds up on longer rides</li>
+                </ul>
+            </div>
+            <div class="compare-card">
+                <h4>Hello Cycling</h4>
+                <div class="price">¥70 <small>/ 15 min</small></div>
+                <div class="meta">Available across Japan</div>
+                <ul>
+                    <li>Covers suburban areas Docomo doesn't</li>
+                    <li>Max daily cap: ¥1,000</li>
+                    <li>Electric-assist available at many stations</li>
+                    <li>App-based registration</li>
+                    <li class="con">Fewer central Tokyo ports</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="tip-box warning">
+            <div class="tip-title">Cycling Rules in Japan</div>
+            <p>Ride on the left side of the road (same as cars). Cycling on sidewalks is technically illegal in most areas but widely tolerated when marked. No cycling while holding an umbrella, using a phone, or wearing earbuds (fines up to ¥50,000). Bicycle helmets became a legal "effort obligation" for all riders in April 2023.</p>
+        </div>
+    </div>
+</section>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION: WALKING
+═══════════════════════════════════════════════════ -->
+<section class="section animate-in" id="walking">
+    <div class="section-header">
+        <span class="tag">// 10 — On Foot</span>
+        <h2>Walking — <em>The Secret Best Transport</em></h2>
+        <p>Tokyo is an incredibly walkable city. Many famous areas are closer together than the metro map suggests, and walking reveals hidden temples, backstreet ramen shops, and street-level Tokyo that you'd miss underground.</p>
+    </div>
+
+    <div class="card">
+        <h3>🚶 Walkable Connections Most Tourists Miss</h3>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>From</th><th>To</th><th>Walk Time</th><th>What You'll See</th></tr></thead>
+                <tbody>
+                    <tr><td>Shibuya</td><td>Harajuku</td><td>12 min</td><td>Cat Street boutiques, hidden cafes</td></tr>
+                    <tr><td>Harajuku</td><td>Omotesando</td><td>5 min</td><td>Architect-designed flagship stores</td></tr>
+                    <tr><td>Shinjuku</td><td>Kabukicho</td><td>5 min</td><td>Neon chaos, Robot Restaurant area</td></tr>
+                    <tr><td>Asakusa</td><td>Skytree</td><td>20 min</td><td>Sumida River walk, old-town vibe</td></tr>
+                    <tr><td>Tokyo Station</td><td>Ginza</td><td>10 min</td><td>Imperial Palace moat, luxury shopping</td></tr>
+                    <tr><td>Ueno</td><td>Akihabara</td><td>15 min</td><td>Ameyoko market, under-tracks shops</td></tr>
+                    <tr><td>Ebisu</td><td>Daikanyama</td><td>8 min</td><td>T-Site bookstore, trendy cafes</td></tr>
+                    <tr><td>Roppongi</td><td>Azabu-Juban</td><td>12 min</td><td>Quiet residential streets, local eats</td></tr>
+                    <tr><td>Shimokitazawa</td><td>Sangenjaya</td><td>20 min</td><td>Residential Setagaya, vintage shops</td></tr>
+                    <tr><td>Tsukiji</td><td>Ginza</td><td>8 min</td><td>Outer market seafood, department stores</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tip-box">
+            <div class="tip-title">Walking Tip</div>
+            <p>Google Maps walking estimates in Tokyo are quite accurate. The city is flat (except for a few hills in Shibuya/Roppongi) and pedestrian infrastructure is excellent. Underground passages at major stations can shave minutes off walks and keep you dry in rain.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION: AIRPORT ACCESS
+═══════════════════════════════════════════════════ -->
+<div class="section-alt">
+<section class="section animate-in" id="airport">
+    <div class="section-header">
+        <span class="tag">// 11 — Airport Access</span>
+        <h2>Narita & Haneda — <em>Complete Access Comparison</em></h2>
+        <p>Two airports serve Tokyo. Haneda (HND) is closer and more convenient for most travelers. Narita (NRT) handles most international long-haul flights but is 60+ km from central Tokyo.</p>
+    </div>
+
+    <div class="section-header"><h3>Narita Airport (NRT) → Central Tokyo</h3></div>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Transport</th>
+                    <th>Route</th>
+                    <th>Time</th>
+                    <th>Fare</th>
+                    <th>Frequency</th>
+                    <th>Best For</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="background:rgba(0,255,136,0.05);">
+                    <td><strong>Keisei Skyliner</strong></td>
+                    <td>Narita → Ueno / Nippori</td>
+                    <td>36 min to Nippori</td>
+                    <td>¥2,520</td>
+                    <td>Every 20–40 min</td>
+                    <td>Speed + east Tokyo destinations</td>
+                </tr>
+                <tr>
+                    <td><strong>Keisei Access Express</strong></td>
+                    <td>Narita → Aoto → Asakusa / Shinbashi / Haneda</td>
+                    <td>59 min to Shinbashi</td>
+                    <td>¥1,270</td>
+                    <td>Every 20–40 min</td>
+                    <td>Budget rail, multiple stops</td>
+                </tr>
+                <tr>
+                    <td><strong>JR Narita Express (N'EX)</strong></td>
+                    <td>Narita → Tokyo / Shinagawa / Shibuya / Shinjuku</td>
+                    <td>53 min to Tokyo Stn</td>
+                    <td>¥3,250</td>
+                    <td>Every 30–60 min</td>
+                    <td>West Tokyo destinations, JR Pass holders</td>
+                </tr>
+                <tr>
+                    <td><strong>Limousine Bus</strong></td>
+                    <td>Narita → Major hotels & stations</td>
+                    <td>85–120 min</td>
+                    <td>¥3,200</td>
+                    <td>Every 20–30 min</td>
+                    <td>Direct to hotel door, heavy luggage</td>
+                </tr>
+                <tr>
+                    <td><strong>Access Narita / TYO-NRT Bus</strong></td>
+                    <td>Narita → Tokyo Stn / Ginza / Shinjuku</td>
+                    <td>60–90 min</td>
+                    <td>¥1,300–¥1,900</td>
+                    <td>Every 15–30 min</td>
+                    <td>Budget conscious, big luggage</td>
+                </tr>
+                <tr>
+                    <td><strong>Shared Shuttle</strong></td>
+                    <td>Narita → Your hotel door</td>
+                    <td>90–150 min</td>
+                    <td>¥3,000–¥4,500</td>
+                    <td>Book ahead</td>
+                    <td>Multiple bags, night arrival</td>
+                </tr>
+                <tr>
+                    <td><strong>Taxi / Private Car</strong></td>
+                    <td>Narita → Anywhere</td>
+                    <td>60–90 min</td>
+                    <td>¥20,000–¥30,000+</td>
+                    <td>On demand</td>
+                    <td>Groups of 3–4 splitting cost</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section-header"><h3>Haneda Airport (HND) → Central Tokyo</h3></div>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Transport</th>
+                    <th>Route</th>
+                    <th>Time</th>
+                    <th>Fare</th>
+                    <th>Frequency</th>
+                    <th>Best For</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="background:rgba(0,255,136,0.05);">
+                    <td><strong>Keikyu Line</strong></td>
+                    <td>Haneda → Shinagawa (→ Toei Asakusa Line)</td>
+                    <td>11 min to Shinagawa</td>
+                    <td>¥300</td>
+                    <td>Every 3–10 min</td>
+                    <td>Speed + budget, through-service to Asakusa</td>
+                </tr>
+                <tr>
+                    <td><strong>Tokyo Monorail</strong></td>
+                    <td>Haneda → Hamamatsucho (→ JR Yamanote)</td>
+                    <td>13 min (rapid)</td>
+                    <td>¥500</td>
+                    <td>Every 3–5 min</td>
+                    <td>Bay views, JR connections</td>
+                </tr>
+                <tr>
+                    <td><strong>Limousine Bus</strong></td>
+                    <td>Haneda → Shinjuku / Shibuya / Ikebukuro / Hotels</td>
+                    <td>30–75 min</td>
+                    <td>¥1,000–¥1,300</td>
+                    <td>Every 15–30 min</td>
+                    <td>Direct to west side, heavy luggage</td>
+                </tr>
+                <tr>
+                    <td><strong>Taxi</strong></td>
+                    <td>Haneda → Central Tokyo</td>
+                    <td>20–40 min</td>
+                    <td>¥5,000–¥8,000</td>
+                    <td>On demand</td>
+                    <td>Late night, groups splitting</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="tip-box">
+        <div class="tip-title">Airport Decision Tree</div>
+        <p>Going to east Tokyo (Ueno, Asakusa, Akihabara) from Narita? → Skyliner. Going to west Tokyo (Shinjuku, Shibuya) from Narita? → N'EX. Budget from Narita? → Access Express or TYO-NRT Bus. From Haneda? → Keikyu wins almost every time on price and speed.</p>
+    </div>
+</section>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION: IC CARDS
+═══════════════════════════════════════════════════ -->
+<section class="section animate-in" id="ic-cards">
+    <div class="section-header">
+        <span class="tag">// 12 — Tap & Ride</span>
+        <h2>Suica & Pasmo — <em>Your Essential Cards</em></h2>
+        <p>Rechargeable IC (integrated circuit) cards that work on virtually all trains, buses, monorails, and even convenience stores and vending machines across Japan. Get one immediately upon arrival — it's the single most useful thing you can do.</p>
+    </div>
+
+    <div class="card">
+        <h3>💳 Suica vs Pasmo — What's the Difference?</h3>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Feature</th><th>Suica</th><th>Pasmo</th></tr></thead>
+                <tbody>
+                    <tr><td>Issuer</td><td>JR East</td><td>Private railways & Metro</td></tr>
+                    <tr><td>Where to Buy</td><td>JR stations, Airport</td><td>Metro/private rail stations</td></tr>
+                    <tr><td>Deposit</td><td>¥500 (refundable)</td><td>¥500 (refundable)</td></tr>
+                    <tr><td>Compatibility</td><td>Works everywhere Pasmo works</td><td>Works everywhere Suica works</td></tr>
+                    <tr><td>Nationwide Use</td><td>Yes (all 10 IC regions)</td><td>Yes (all 10 IC regions)</td></tr>
+                    <tr><td>Mobile Version</td><td>Apple Pay / Google Pay</td><td>Apple Pay / Google Pay</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p>In practice, Suica and Pasmo are completely interchangeable. Pick whichever you encounter first.</p>
+    </div>
+
+    <div class="card">
+        <h3>How to Get an IC Card</h3>
+        <h4>Option 1: Physical Card (Limited Availability)</h4>
+        <p>Due to a global semiconductor shortage, physical Suica/Pasmo cards have been limited since 2023. As of 2025, availability has improved but is still inconsistent. Welcome Suica cards (28-day expiry, no deposit) are sold at Narita/Haneda airports.</p>
+        <ul>
+            <li>JR ticket machines (green machines) — look for English option</li>
+            <li>Airport JR East Travel Service Centers</li>
+            <li>Some convenience stores near major stations</li>
+        </ul>
+
+        <h4>Option 2: Mobile Suica / Pasmo (Recommended)</h4>
+        <p>The best option for tourists. Available on iPhone (Wallet app) and Android (Google Pay). No physical card needed, no semiconductor shortage issues.</p>
+        <ul>
+            <li><strong>iPhone:</strong> Settings → Wallet → Add Card → Transit Card → Suica or Pasmo</li>
+            <li><strong>Android:</strong> Google Pay → Transit → Add Suica</li>
+            <li>Charge with any international credit/debit card</li>
+            <li>Express Transit mode: no Face ID/fingerprint needed — just tap the reader</li>
+        </ul>
+
+        <div class="tip-box">
+            <div class="tip-title">Mobile Suica Setup Tip</div>
+            <p>Set up Mobile Suica BEFORE you land in Japan. You can add it to your phone from anywhere in the world and charge it with your home credit card. When you arrive, you're ready to tap through gates immediately. Initial charge minimum: ¥1,000.</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Charging Your Card</h3>
+        <ul>
+            <li><strong>Ticket Machines:</strong> Insert your card, select "charge," insert cash. Accepts ¥1,000, ¥2,000, ¥5,000, ¥10,000 notes</li>
+            <li><strong>Convenience Stores:</strong> Tell the clerk "charge onegaishimasu" and hand them your card + cash</li>
+            <li><strong>Mobile:</strong> Charge via credit card in the app (no cash needed)</li>
+            <li><strong>Maximum Balance:</strong> ¥20,000</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h3>What You Can Pay For</h3>
+        <div class="compare-grid">
+            <div class="compare-card">
+                <h4 style="color:var(--neon-green);">Transport</h4>
+                <ul>
+                    <li>All JR lines (including Yamanote, Chuo)</li>
+                    <li>All Tokyo Metro lines</li>
+                    <li>All Toei Subway & bus lines</li>
+                    <li>All private railways (Odakyu, Keio, Tokyu, etc.)</li>
+                    <li>Tokyo Monorail, Yurikamome</li>
+                    <li>Most highway & local buses</li>
+                    <li>Limousine Bus to/from airports</li>
+                </ul>
+            </div>
+            <div class="compare-card">
+                <h4 style="color:var(--neon-blue);">Shopping & More</h4>
+                <ul>
+                    <li>Convenience stores (7-Eleven, Lawson, FamilyMart)</li>
+                    <li>Vending machines</li>
+                    <li>Station kiosks (NewDays, Kiosk)</li>
+                    <li>Many restaurants and fast-food chains</li>
+                    <li>Coin lockers at stations</li>
+                    <li>Some drug stores and supermarkets</li>
+                    <li>Taxis (most accept IC payment)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION: PASSES & TICKETS
+═══════════════════════════════════════════════════ -->
+<div class="section-alt">
+<section class="section animate-in" id="passes">
+    <div class="section-header">
+        <span class="tag">// 13 — Passes & Discount Tickets</span>
+        <h2>Travel Passes — <em>Save Smart</em></h2>
+        <p>Multiple day passes exist for different networks. Whether they save you money depends entirely on your itinerary — do the math before buying.</p>
+    </div>
+
+    <div class="compare-grid">
+        <div class="compare-card">
+            <h4>Tokyo Subway Ticket</h4>
+            <div class="price">¥800 <small>/ 24 hours</small></div>
+            <div class="meta">Tokyo Metro + Toei — all 13 subway lines</div>
+            <ul>
+                <li>24h: ¥800 / 48h: ¥1,200 / 72h: ¥1,500</li>
+                <li>Available to foreign passport holders only</li>
+                <li>Buy at airports, Bic Camera, HIS counters</li>
+                <li>Covers ALL subway lines (Metro + Toei)</li>
+                <li class="con">Does NOT cover JR, private railways, or buses</li>
+            </ul>
+        </div>
+        <div class="compare-card recommended">
+            <h4>Tokyo Metro 24-Hour Ticket</h4>
+            <div class="price">¥600 <small>/ 24 hours</small></div>
+            <div class="meta">Tokyo Metro only — 9 lines</div>
+            <ul>
+                <li>Best value if staying mostly on Metro lines</li>
+                <li>Available to anyone at Metro ticket machines</li>
+                <li>Pays for itself with just 4 Metro rides</li>
+                <li class="con">Does NOT cover Toei, JR, or private lines</li>
+            </ul>
+        </div>
+        <div class="compare-card">
+            <h4>Toei One-Day Pass</h4>
+            <div class="price">¥700 <small>/ 1 day</small></div>
+            <div class="meta">All Toei systems</div>
+            <ul>
+                <li>Covers Toei Subway + Toei Bus + Toden Tram + Nippori-Toneri Liner</li>
+                <li>Calendar-day based (not 24-hour)</li>
+                <li>Good if hitting multiple Oedo Line stops</li>
+                <li class="con">Calendar day means less flexible than 24h passes</li>
+            </ul>
+        </div>
+        <div class="compare-card">
+            <h4>Tokyo 1-Day Ticket (Tokunai Pass)</h4>
+            <div class="price">¥760 <small>/ 1 day</small></div>
+            <div class="meta">JR lines within Tokyo 23 wards</div>
+            <ul>
+                <li>Unlimited JR rides within the Tokyo zone</li>
+                <li>Great for Yamanote Line hopping</li>
+                <li>Buy at JR ticket machines</li>
+                <li class="con">Calendar-day only, JR only</li>
+            </ul>
+        </div>
+        <div class="compare-card">
+            <h4>Greater Tokyo Pass</h4>
+            <div class="price">¥7,200 <small>/ 3 days</small></div>
+            <div class="meta">Nearly everything except JR</div>
+            <ul>
+                <li>All private railways + Metro + Toei + most buses</li>
+                <li>Foreign passport holders only</li>
+                <li>Incredible value for heavy suburban exploration</li>
+                <li class="con">Does NOT cover JR lines or Shinkansen</li>
+            </ul>
+        </div>
+        <div class="compare-card">
+            <h4>Japan Rail Pass</h4>
+            <div class="price">¥50,000 <small>/ 7 days</small></div>
+            <div class="meta">All JR lines nationwide (including most Shinkansen)</div>
+            <ul>
+                <li>7 / 14 / 21 day options</li>
+                <li>Covers JR local, express, and most Shinkansen</li>
+                <li>Only for foreign tourists (temporary visitor status)</li>
+                <li>Must be activated at JR office with passport</li>
+                <li class="con">NOT valid on Nozomi/Mizuho Shinkansen</li>
+                <li class="con">NOT valid on Tokyo Metro, Toei, or private railways</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="tip-box">
+        <div class="tip-title">Pass Strategy</div>
+        <p>For a typical 3-day Tokyo-only stay: 72-hour Tokyo Subway Ticket (¥1,500) + Suica for JR/buses is the sweet spot. If making day trips by JR, consider whether a JR Pass pays off — it usually only does if you're taking 2+ Shinkansen rides within the pass period.</p>
+    </div>
+</section>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION: NAVIGATION APPS
+═══════════════════════════════════════════════════ -->
+<section class="section animate-in" id="apps-nav">
+    <div class="section-header">
+        <span class="tag">// 14 — Navigation Apps</span>
+        <h2>Apps That <em>Actually Work</em></h2>
+        <p>The right app turns Tokyo's labyrinthine system from terrifying to trivial. Here are the apps that will save you daily.</p>
+    </div>
+
+    <div class="compare-grid">
+        <div class="compare-card recommended">
+            <h4>Google Maps</h4>
+            <div class="meta">The universal choice</div>
+            <ul>
+                <li>Real-time train/bus data, accurate for Japan</li>
+                <li>Walking directions work well in Tokyo</li>
+                <li>Shows platform numbers and exit numbers</li>
+                <li>Multi-language support excellent</li>
+                <li>Shows fare for each route option</li>
+                <li>Offline maps available (download Tokyo beforehand)</li>
+                <li class="con">Occasional quirks with through-service routes</li>
+            </ul>
+        </div>
+        <div class="compare-card">
+            <h4>Navitime / Japan Travel by NAVITIME</h4>
+            <div class="meta">Japanese transit specialist</div>
+            <ul>
+                <li>Most accurate for complex transfers</li>
+                <li>"Japan Travel" version is free for tourists</li>
+                <li>Shows car number to board for optimal transfer</li>
+                <li>Platform-specific guidance</li>
+                <li>Offline timetables available</li>
+                <li class="con">Interface less intuitive than Google Maps</li>
+            </ul>
+        </div>
+        <div class="compare-card">
+            <h4>Yahoo! Transit (Japan)</h4>
+            <div class="meta">Local favorite</div>
+            <ul>
+                <li>Extremely accurate for train transfers</li>
+                <li>Shows crowding level predictions per train car</li>
+                <li>Real-time delay information</li>
+                <li>Used by most Japanese commuters</li>
+                <li class="con">Japanese interface (limited English)</li>
+            </ul>
+        </div>
+        <div class="compare-card">
+            <h4>Apple Maps</h4>
+            <div class="meta">Good for iPhone users</div>
+            <ul>
+                <li>Transit directions improved significantly</li>
+                <li>Indoor maps for major stations</li>
+                <li>Integrates with Suica balance on iPhone</li>
+                <li>Clean interface, easy to use</li>
+                <li class="con">Less route variety than Google Maps</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="tip-box">
+        <div class="tip-title">App Combo</div>
+        <p>Use Google Maps for general navigation and walking directions. Use Navitime for complex multi-transfer routes where you need to know which car to board. Both are free and complement each other well.</p>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION: LAST TRAIN & SURVIVAL
+═══════════════════════════════════════════════════ -->
+<div class="section-alt">
+<section class="section animate-in" id="last-train">
+    <div class="section-header">
+        <span class="tag">// 15 — After Midnight</span>
+        <h2>Last Train & <em>Survival Guide</em></h2>
+        <p>Missed the last train? You're not alone — it happens to millions of people. Tokyo has a well-established ecosystem for exactly this situation. Don't panic.</p>
+    </div>
+
+    <div class="card">
+        <h3>🌙 Last Train Times (General)</h3>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>System</th><th>Last Departure (approx.)</th><th>Notes</th></tr></thead>
+                <tbody>
+                    <tr><td>JR Yamanote Line</td><td>00:30–01:04</td><td>Varies by station & direction</td></tr>
+                    <tr><td>Tokyo Metro</td><td>00:00–00:30</td><td>Check specific line & direction</td></tr>
+                    <tr><td>Toei Subway</td><td>00:00–00:25</td><td>Oedo Line tends to run latest</td></tr>
+                    <tr><td>Private Railways</td><td>23:30–00:30</td><td>Check operator's timetable</td></tr>
+                    <tr><td>Tokyo Monorail</td><td>~00:01</td><td>From Hamamatsucho to Haneda</td></tr>
+                    <tr><td>Buses</td><td>~23:00–23:30</td><td>Most routes end much earlier</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="tip-box danger">
+            <div class="tip-title">Critical Warning</div>
+            <p>The "last train" shown on timetables is the last departure from the ORIGIN station. Your station may be mid-line, meaning the last train passing through could be 10–30 minutes later. Always search your SPECIFIC station, not just the line. Use Google Maps' "Depart At" feature set to midnight to check.</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Missed the Last Train? Your Options:</h3>
+
+        <h4>1. Taxi (Most Common)</h4>
+        <p>Flag one down or use the GO app. Expect 20% late-night surcharge (22:00–05:00). A ride from Shinjuku to Shibuya is only ~¥1,500 even late at night. Split with friends to make it affordable. Taxi queues at major stations can be 30+ minutes after midnight on weekends.</p>
+
+        <h4>2. Manga Cafe / Internet Cafe (漫画喫茶)</h4>
+        <p>The classic last-train-miss solution. Private booths with reclining seats, free drinks, showers, and manga/internet access. Chains include Manboo!, Popeye, and Gran Cyber Cafe. Night packs (6–8 hours) typically run ¥1,500–¥2,500.</p>
+
+        <h4>3. Capsule Hotel</h4>
+        <p>Small sleeping pods clustered near major stations. Clean, quiet, and surprisingly comfortable. Expect ¥3,000–¥5,000 for a night. Book via apps like Booking.com or just walk in — most have availability on weeknights. Nine Hours, First Cabin, and Anshin Oyado are popular chains.</p>
+
+        <h4>4. Karaoke All-Night</h4>
+        <p>Karaoke chains offer all-night packages (フリータイム) starting around ¥1,500–¥2,500 with unlimited drinks. Not the best sleep, but fun with friends. Big Echo, Karaoke Kan, and Joysound are everywhere.</p>
+
+        <h4>5. 24-Hour Restaurants</h4>
+        <p>Denny's, Jonathan's, Gusto, Saizeriya — Japan's family restaurants are open 24/7 in many locations. A ¥500 order buys you a warm seat until the first train at 5 AM. Technically not for sleeping, but nobody will bother you if you're nursing a coffee.</p>
+
+        <h4>6. Sento / Onsen</h4>
+        <p>Some bathhouses offer late-night / overnight stays. Thermae-Yu in Shinjuku (open until 9 AM) is a popular option with full bathing facilities and rest areas. Entry around ¥2,600.</p>
+
+        <h4>7. Walk It</h4>
+        <p>Tokyo is extremely safe at all hours. If your hotel is within 5 km, a 45-60 minute walk through quiet nighttime streets can be a memorable experience. Use Google Maps walking mode.</p>
+    </div>
+
+    <div class="card">
+        <h3>First Train Schedule</h3>
+        <p>First trains start rolling around 04:30–05:00. If you've survived the night, the wait is shorter than you think.</p>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>System</th><th>First Departure</th></tr></thead>
+                <tbody>
+                    <tr><td>JR Yamanote Line</td><td>~04:26 (Osaki)</td></tr>
+                    <tr><td>Tokyo Metro</td><td>~05:00</td></tr>
+                    <tr><td>Toei Subway</td><td>~05:00–05:20</td></tr>
+                    <tr><td>Private Railways</td><td>~04:40–05:10</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION: SVG ROUTE MAP
+═══════════════════════════════════════════════════ -->
+<section class="section animate-in" id="route-map">
+    <div class="section-header">
+        <span class="tag">// 16 — Visual Guide</span>
+        <h2>Simplified <em>Route Map</em></h2>
+        <p>A stylized overview of Tokyo's core rail network. Not geographically accurate — designed for quick route planning.</p>
+    </div>
+
+    <div class="map-container">
+        <svg viewBox="0 0 900 650" xmlns="http://www.w3.org/2000/svg" style="font-family:'Space Mono',monospace;">
+            <!-- Background grid -->
+            <defs>
+                <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+                    <path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(0,240,255,0.04)" stroke-width="0.5"/>
+                </pattern>
+            </defs>
+            <rect width="900" height="650" fill="#0a0a1e"/>
+            <rect width="900" height="650" fill="url(#grid)"/>
+
+            <!-- Title -->
+            <text x="450" y="35" fill="#00f0ff" font-size="16" text-anchor="middle" letter-spacing="0.2em" font-weight="700">TOKYO RAIL — SIMPLIFIED MAP</text>
+
+            <!-- ====== YAMANOTE LINE (Green Loop) ====== -->
+            <ellipse cx="430" cy="340" rx="180" ry="200" fill="none" stroke="#80d41e" stroke-width="4" opacity="0.8"/>
+
+            <!-- Yamanote Stations -->
+            <!-- Top: Ikebukuro -->
+            <circle cx="430" cy="140" r="7" fill="#80d41e" stroke="#0a0a1e" stroke-width="2"/>
+            <text x="430" y="125" fill="#e8e8f0" font-size="9" text-anchor="middle">IKEBUKURO</text>
+
+            <!-- Top-Right: Ueno -->
+            <circle cx="570" cy="200" r="7" fill="#80d41e" stroke="#0a0a1e" stroke-width="2"/>
+            <text x="585" y="195" fill="#e8e8f0" font-size="9" text-anchor="start">UENO</text>
+
+            <!-- Right: Akihabara -->
+            <circle cx="600" cy="280" r="6" fill="#80d41e" stroke="#0a0a1e" stroke-width="2"/>
+            <text x="615" y="284" fill="#e8e8f0" font-size="8" text-anchor="start">AKIHABARA</text>
+
+            <!-- Right: Tokyo -->
+            <circle cx="610" cy="340" r="9" fill="#ff4500" stroke="#e8e8f0" stroke-width="2"/>
+            <text x="628" y="344" fill="#ffffff" font-size="10" text-anchor="start" font-weight="700">TOKYO</text>
+
+            <!-- Bottom-Right: Shinagawa -->
+            <circle cx="540" cy="490" r="7" fill="#80d41e" stroke="#0a0a1e" stroke-width="2"/>
+            <text x="556" y="494" fill="#e8e8f0" font-size="9" text-anchor="start">SHINAGAWA</text>
+
+            <!-- Bottom: Osaki -->
+            <circle cx="380" cy="530" r="5" fill="#80d41e" stroke="#0a0a1e" stroke-width="2"/>
+            <text x="380" y="550" fill="#7070a0" font-size="7" text-anchor="middle">OSAKI</text>
+
+            <!-- Left-Bottom: Ebisu -->
+            <circle cx="290" cy="480" r="5" fill="#80d41e" stroke="#0a0a1e" stroke-width="2"/>
+            <text x="275" y="484" fill="#7070a0" font-size="7" text-anchor="end">EBISU</text>
+
+            <!-- Left: Shibuya -->
+            <circle cx="260" cy="420" r="8" fill="#ff0080" stroke="#e8e8f0" stroke-width="2"/>
+            <text x="240" y="424" fill="#ffffff" font-size="10" text-anchor="end" font-weight="700">SHIBUYA</text>
+
+            <!-- Left: Harajuku -->
+            <circle cx="255" cy="355" r="5" fill="#80d41e" stroke="#0a0a1e" stroke-width="2"/>
+            <text x="238" y="359" fill="#7070a0" font-size="7" text-anchor="end">HARAJUKU</text>
+
+            <!-- Left-Top: Shinjuku -->
+            <circle cx="265" cy="270" r="8" fill="#bf00ff" stroke="#e8e8f0" stroke-width="2"/>
+            <text x="245" y="274" fill="#ffffff" font-size="10" text-anchor="end" font-weight="700">SHINJUKU</text>
+
+            <!-- Top-Left: Takadanobaba -->
+            <circle cx="320" cy="170" r="5" fill="#80d41e" stroke="#0a0a1e" stroke-width="2"/>
+            <text x="305" y="164" fill="#7070a0" font-size="7" text-anchor="end">TAKADANOBABA</text>
+
+            <!-- Right-middle: Yurakucho -->
+            <circle cx="605" cy="370" r="4" fill="#80d41e" stroke="#0a0a1e" stroke-width="2"/>
+            <text x="618" y="374" fill="#7070a0" font-size="7" text-anchor="start">YURAKUCHO</text>
+
+            <!-- Shinbashi -->
+            <circle cx="590" cy="410" r="5" fill="#80d41e" stroke="#0a0a1e" stroke-width="2"/>
+            <text x="605" y="414" fill="#7070a0" font-size="8" text-anchor="start">SHINBASHI</text>
+
+            <!-- Hamamatsucho -->
+            <circle cx="570" cy="450" r="5" fill="#80d41e" stroke="#0a0a1e" stroke-width="2"/>
+            <text x="585" y="454" fill="#7070a0" font-size="7" text-anchor="start">HAMAMATSUCHO</text>
+
+            <!-- ====== CHUO LINE (Orange, horizontal) ====== -->
+            <line x1="100" y1="270" x2="610" y2="340" stroke="#ff4500" stroke-width="3" opacity="0.7"/>
+            <!-- Kichijoji -->
+            <circle cx="120" cy="274" r="5" fill="#ff4500" stroke="#0a0a1e" stroke-width="2"/>
+            <text x="120" y="264" fill="#e8e8f0" font-size="8" text-anchor="middle">KICHIJOJI</text>
+            <!-- Nakano -->
+            <circle cx="190" cy="278" r="4" fill="#ff4500" stroke="#0a0a1e" stroke-width="2"/>
+            <text x="190" y="268" fill="#7070a0" font-size="7" text-anchor="middle">NAKANO</text>
+
+            <!-- ====== GINZA LINE (Orange/yellow) ====== -->
+            <line x1="260" y1="420" x2="690" y2="220" stroke="#ff9500" stroke-width="2.5" stroke-dasharray="8,3" opacity="0.7"/>
+            <!-- Asakusa -->
+            <circle cx="690" cy="220" r="7" fill="#ff9500" stroke="#0a0a1e" stroke-width="2"/>
+            <text x="705" y="224" fill="#e8e8f0" font-size="9" text-anchor="start">ASAKUSA</text>
+
+            <!-- ====== HIBIYA LINE (Silver) ====== -->
+            <line x1="260" y1="480" x2="640" y2="170" stroke="#b5b5ac" stroke-width="2" opacity="0.6"/>
+            <!-- Roppongi -->
+            <circle cx="380" cy="400" r="6" fill="#b5b5ac" stroke="#0a0a1e" stroke-width="2"/>
+            <text x="380" y="416" fill="#e8e8f0" font-size="8" text-anchor="middle">ROPPONGI</text>
+
+            <!-- ====== MARUNOUCHI LINE (Red) ====== -->
+            <path d="M 430 140 Q 500 240 610 340" fill="none" stroke="#f62e36" stroke-width="2.5" opacity="0.7"/>
+            <!-- Extend to Shinjuku -->
+            <path d="M 430 140 Q 350 200 265 270" fill="none" stroke="#f62e36" stroke-width="2.5" opacity="0.7"/>
+
+            <!-- ====== KEIKYU to HANEDA ====== -->
+            <line x1="540" y1="490" x2="660" y2="580" stroke="#e85298" stroke-width="2" opacity="0.7"/>
+            <circle cx="660" cy="580" r="7" fill="#e85298" stroke="#e8e8f0" stroke-width="2"/>
+            <text x="660" y="600" fill="#e8e8f0" font-size="9" text-anchor="middle" font-weight="700">HANEDA ✈</text>
+
+            <!-- ====== MONORAIL to HANEDA ====== -->
+            <line x1="570" y1="450" x2="660" y2="575" stroke="#00ac9b" stroke-width="2" stroke-dasharray="4,3" opacity="0.6"/>
+
+            <!-- ====== KEISEI to NARITA ====== -->
+            <line x1="570" y1="200" x2="820" y2="100" stroke="#006cb8" stroke-width="2" opacity="0.7"/>
+            <circle cx="820" cy="100" r="7" fill="#006cb8" stroke="#e8e8f0" stroke-width="2"/>
+            <text x="820" y="85" fill="#e8e8f0" font-size="9" text-anchor="middle" font-weight="700">NARITA ✈</text>
+
+            <!-- ====== YURIKAMOME ====== -->
+            <path d="M 590 410 Q 650 430 700 470 Q 720 490 700 520" fill="none" stroke="#00f0ff" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.6"/>
+            <circle cx="700" cy="520" r="5" fill="#00f0ff" stroke="#0a0a1e" stroke-width="2"/>
+            <text x="715" y="524" fill="#00f0ff" font-size="7" text-anchor="start">ODAIBA</text>
+
+            <!-- ====== SKYTREE marker ====== -->
+            <circle cx="720" cy="190" r="5" fill="#bf00ff" stroke="#0a0a1e" stroke-width="2"/>
+            <text x="735" y="194" fill="#bf00ff" font-size="7" text-anchor="start">SKYTREE</text>
+            <line x1="690" y1="220" x2="720" y2="190" stroke="#bf00ff" stroke-width="1" opacity="0.5"/>
+
+            <!-- Shinkansen indicator -->
+            <line x1="610" y1="340" x2="800" y2="340" stroke="#ffffff" stroke-width="2" stroke-dasharray="12,4" opacity="0.4"/>
+            <text x="810" y="344" fill="#7070a0" font-size="7" text-anchor="start">→ SHINKANSEN</text>
+            <text x="810" y="356" fill="#7070a0" font-size="6" text-anchor="start">(Kyoto, Osaka, etc.)</text>
+        </svg>
+
+        <div class="map-legend">
+            <div class="map-legend-item"><div class="swatch" style="background:#80d41e"></div> JR Yamanote Line</div>
+            <div class="map-legend-item"><div class="swatch" style="background:#ff4500"></div> JR Chuo Line</div>
+            <div class="map-legend-item"><div class="swatch" style="background:#ff9500"></div> Metro Ginza Line</div>
+            <div class="map-legend-item"><div class="swatch" style="background:#f62e36"></div> Metro Marunouchi Line</div>
+            <div class="map-legend-item"><div class="swatch" style="background:#b5b5ac"></div> Metro Hibiya Line</div>
+            <div class="map-legend-item"><div class="swatch" style="background:#e85298"></div> Keikyu (Haneda)</div>
+            <div class="map-legend-item"><div class="swatch" style="background:#006cb8"></div> Keisei (Narita)</div>
+            <div class="map-legend-item"><div class="swatch" style="background:#00f0ff"></div> Yurikamome</div>
+            <div class="map-legend-item"><div class="swatch" style="background:#00ac9b"></div> Tokyo Monorail</div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION: TRAVEL TIME MATRIX
+═══════════════════════════════════════════════════ -->
+<div class="section-alt">
+<section class="section animate-in" id="time-matrix">
+    <div class="section-header">
+        <span class="tag">// 17 — Travel Times</span>
+        <h2>Area-to-Area <em>Time Matrix</em></h2>
+        <p>Approximate travel times between major areas by the fastest common route. Times include typical wait and one transfer where needed. All times in minutes.</p>
+    </div>
+
+    <div class="matrix-wrap">
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Shinjuku</th>
+                        <th>Shibuya</th>
+                        <th>Tokyo</th>
+                        <th>Ueno</th>
+                        <th>Asakusa</th>
+                        <th>Roppongi</th>
+                        <th>Ikebukuro</th>
+                        <th>Akihabara</th>
+                        <th>Odaiba</th>
+                        <th>Ginza</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Shinjuku</td>
+                        <td class="matrix-cell self">—</td>
+                        <td class="matrix-cell fast">7</td>
+                        <td class="matrix-cell medium">15</td>
+                        <td class="matrix-cell medium">24</td>
+                        <td class="matrix-cell medium">30</td>
+                        <td class="matrix-cell medium">18</td>
+                        <td class="matrix-cell fast">8</td>
+                        <td class="matrix-cell medium">20</td>
+                        <td class="matrix-cell slow">40</td>
+                        <td class="matrix-cell medium">20</td>
+                    </tr>
+                    <tr>
+                        <td>Shibuya</td>
+                        <td class="matrix-cell fast">7</td>
+                        <td class="matrix-cell self">—</td>
+                        <td class="matrix-cell medium">20</td>
+                        <td class="matrix-cell medium">28</td>
+                        <td class="matrix-cell slow">35</td>
+                        <td class="matrix-cell fast">10</td>
+                        <td class="matrix-cell medium">18</td>
+                        <td class="matrix-cell medium">25</td>
+                        <td class="matrix-cell slow">35</td>
+                        <td class="matrix-cell medium">15</td>
+                    </tr>
+                    <tr>
+                        <td>Tokyo</td>
+                        <td class="matrix-cell medium">15</td>
+                        <td class="matrix-cell medium">20</td>
+                        <td class="matrix-cell self">—</td>
+                        <td class="matrix-cell fast">7</td>
+                        <td class="matrix-cell medium">15</td>
+                        <td class="matrix-cell medium">18</td>
+                        <td class="matrix-cell medium">20</td>
+                        <td class="matrix-cell fast">5</td>
+                        <td class="matrix-cell medium">25</td>
+                        <td class="matrix-cell fast">3</td>
+                    </tr>
+                    <tr>
+                        <td>Ueno</td>
+                        <td class="matrix-cell medium">24</td>
+                        <td class="matrix-cell medium">28</td>
+                        <td class="matrix-cell fast">7</td>
+                        <td class="matrix-cell self">—</td>
+                        <td class="matrix-cell fast">6</td>
+                        <td class="matrix-cell medium">25</td>
+                        <td class="matrix-cell medium">18</td>
+                        <td class="matrix-cell fast">4</td>
+                        <td class="matrix-cell slow">35</td>
+                        <td class="matrix-cell medium">12</td>
+                    </tr>
+                    <tr>
+                        <td>Asakusa</td>
+                        <td class="matrix-cell medium">30</td>
+                        <td class="matrix-cell slow">35</td>
+                        <td class="matrix-cell medium">15</td>
+                        <td class="matrix-cell fast">6</td>
+                        <td class="matrix-cell self">—</td>
+                        <td class="matrix-cell medium">28</td>
+                        <td class="matrix-cell medium">25</td>
+                        <td class="matrix-cell fast">8</td>
+                        <td class="matrix-cell slow">40</td>
+                        <td class="matrix-cell medium">15</td>
+                    </tr>
+                    <tr>
+                        <td>Roppongi</td>
+                        <td class="matrix-cell medium">18</td>
+                        <td class="matrix-cell fast">10</td>
+                        <td class="matrix-cell medium">18</td>
+                        <td class="matrix-cell medium">25</td>
+                        <td class="matrix-cell medium">28</td>
+                        <td class="matrix-cell self">—</td>
+                        <td class="matrix-cell medium">25</td>
+                        <td class="matrix-cell medium">22</td>
+                        <td class="matrix-cell medium">30</td>
+                        <td class="matrix-cell medium">12</td>
+                    </tr>
+                    <tr>
+                        <td>Ikebukuro</td>
+                        <td class="matrix-cell fast">8</td>
+                        <td class="matrix-cell medium">18</td>
+                        <td class="matrix-cell medium">20</td>
+                        <td class="matrix-cell medium">18</td>
+                        <td class="matrix-cell medium">25</td>
+                        <td class="matrix-cell medium">25</td>
+                        <td class="matrix-cell self">—</td>
+                        <td class="matrix-cell medium">20</td>
+                        <td class="matrix-cell slow">45</td>
+                        <td class="matrix-cell medium">22</td>
+                    </tr>
+                    <tr>
+                        <td>Akihabara</td>
+                        <td class="matrix-cell medium">20</td>
+                        <td class="matrix-cell medium">25</td>
+                        <td class="matrix-cell fast">5</td>
+                        <td class="matrix-cell fast">4</td>
+                        <td class="matrix-cell fast">8</td>
+                        <td class="matrix-cell medium">22</td>
+                        <td class="matrix-cell medium">20</td>
+                        <td class="matrix-cell self">—</td>
+                        <td class="matrix-cell slow">35</td>
+                        <td class="matrix-cell fast">8</td>
+                    </tr>
+                    <tr>
+                        <td>Odaiba</td>
+                        <td class="matrix-cell slow">40</td>
+                        <td class="matrix-cell slow">35</td>
+                        <td class="matrix-cell medium">25</td>
+                        <td class="matrix-cell slow">35</td>
+                        <td class="matrix-cell slow">40</td>
+                        <td class="matrix-cell medium">30</td>
+                        <td class="matrix-cell slow">45</td>
+                        <td class="matrix-cell slow">35</td>
+                        <td class="matrix-cell self">—</td>
+                        <td class="matrix-cell medium">20</td>
+                    </tr>
+                    <tr>
+                        <td>Ginza</td>
+                        <td class="matrix-cell medium">20</td>
+                        <td class="matrix-cell medium">15</td>
+                        <td class="matrix-cell fast">3</td>
+                        <td class="matrix-cell medium">12</td>
+                        <td class="matrix-cell medium">15</td>
+                        <td class="matrix-cell medium">12</td>
+                        <td class="matrix-cell medium">22</td>
+                        <td class="matrix-cell fast">8</td>
+                        <td class="matrix-cell medium">20</td>
+                        <td class="matrix-cell self">—</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="tip-box">
+        <div class="tip-title">Reading the Matrix</div>
+        <p>Green = under 10 min (practically next door). Yellow = 10–25 min (one ride). Orange = 25+ min (plan ahead). Actual times may vary ±5 min based on time of day, transfers, and walking distance within stations. Rush hour adds 5–15 min to most journeys due to crowds at transfer points.</p>
+    </div>
+</section>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION: ETIQUETTE
+═══════════════════════════════════════════════════ -->
+<section class="section animate-in" id="etiquette">
+    <div class="section-header">
+        <span class="tag">// 18 — Know the Rules</span>
+        <h2>Etiquette, Accessibility & <em>Pro Tips</em></h2>
+        <p>Knowing the unwritten rules will make your experience smoother and earn you respect from locals.</p>
+    </div>
+
+    <div class="card">
+        <h3>🙇 Train Etiquette</h3>
+        <ul>
+            <li><strong>Queue up:</strong> Lines form on platform markings. Wait for passengers to exit before boarding.</li>
+            <li><strong>No phone calls:</strong> Set your phone to manner mode (マナーモード). Texting is fine; talking is not.</li>
+            <li><strong>No eating/drinking:</strong> On commuter trains, eating and drinking is frowned upon. Long-distance trains (Shinkansen, limited express) are fine.</li>
+            <li><strong>Backpacks:</strong> Hold your backpack in front of you or place it on the overhead rack. Never leave it on your back in a crowded train.</li>
+            <li><strong>Priority seats:</strong> 優先席 (yūsenseki) are for elderly, pregnant, disabled, and injured passengers. Offer your seat even from regular seats if someone needs it.</li>
+            <li><strong>Women-only cars:</strong> 女性専用車両 are usually the first or last car during morning rush. Men should avoid them during posted hours.</li>
+            <li><strong>Keep left:</strong> On escalators, stand on the left in Tokyo (opposite to Osaka's right-side standing). Walking on the right side is being phased out, but old habits persist.</li>
+            <li><strong>Volume:</strong> Speak quietly. Trains in Tokyo are remarkably silent during commute hours.</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h3>♿ Accessibility</h3>
+        <p>Tokyo's rail system has made significant accessibility improvements:</p>
+        <ul>
+            <li>Most stations have at least one barrier-free route (elevator + flat path to platform)</li>
+            <li>Tactile paving (yellow bumps) guides visually impaired passengers on all platforms</li>
+            <li>Station staff will deploy ramps for wheelchair users — press the intercom at the gate</li>
+            <li>Priority elevators are available but often crowded — budget extra time</li>
+            <li>Newer trains (Yamanote E235, etc.) have dedicated wheelchair spaces</li>
+            <li>The Namboku Line has platform screen doors at every station for safety</li>
+            <li>Audio announcements in Japanese and English on most lines</li>
+        </ul>
+        <div class="tip-box">
+            <div class="tip-title">Wheelchair Users</div>
+            <p>Contact your departing station in advance (or use the intercom at the gate). Staff will coordinate with the arrival station to have someone waiting with a ramp. This service is free and well-practiced. Japan Accessible Tourism Center (accessible-japan.com) has detailed station-by-station accessibility information.</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>🧳 Luggage Tips</h3>
+        <ul>
+            <li><strong>Coin lockers:</strong> Available at all major stations (¥400–¥800 per day). Large sizes fill up by mid-morning at popular stations — arrive early or use Ecbo Cloak luggage storage service.</li>
+            <li><strong>Luggage forwarding (Takkyubin):</strong> Ship your suitcase ahead via Yamato Transport or Sagawa Express from your hotel to the airport or next hotel. ¥2,000–¥3,000 per bag, next-day delivery. Absolute game-changer for travel days.</li>
+            <li><strong>On trains:</strong> Large suitcases are awkward on commuter trains during rush hour. Shinkansen have overhead racks and behind-seat storage (reserve "extra-large luggage" seats if your bag exceeds 160cm total dimensions).</li>
+            <li><strong>Avoid rush hour with luggage:</strong> If carrying bags, travel before 7 AM or after 10 AM. You'll be miserable — and making others miserable — on a packed rush-hour train with a suitcase.</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h3>💡 Power User Tips</h3>
+        <ul>
+            <li><strong>Station numbering:</strong> Every station has a letter-number code (e.g., G-01 for Shibuya on Ginza Line). Use these when asking for directions — clearer than pronunciation.</li>
+            <li><strong>Exit numbers matter:</strong> Large stations have 20+ exits. Google Maps shows the specific exit number closest to your destination. Using the right exit saves 5–10 min.</li>
+            <li><strong>Transfer walks:</strong> "Transfer" doesn't mean stepping off one train onto another. At major stations (Shinjuku, Tokyo, Otemachi), transfers can involve 5–15 minute walks through underground passages. Budget accordingly.</li>
+            <li><strong>Ekiben:</strong> Station bento boxes (駅弁) are sold at major stations, especially for Shinkansen travel. Each station has unique regional specialties.</li>
+            <li><strong>Rush hour hack:</strong> Trains are less crowded toward the ends of the platform. If you must ride during rush hour, walk to the first or last car.</li>
+            <li><strong>Free Wi-Fi:</strong> Tokyo Metro and Toei offer free Wi-Fi at stations. JR East has JR-EAST FREE Wi-Fi. Quality is spotty — don't rely on it.</li>
+            <li><strong>Lost property:</strong> If you leave something on a train, go to the station's lost-and-found (落とし物センター) or call the operator. Japanese people routinely turn in lost items — your chances of recovery are extremely high.</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════ -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-social">
+            <a href="#">📷</a>
+            <a href="#">𝕏</a>
+            <a href="#">🎵</a>
+            <a href="#">▶</a>
+        </div>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="food-guide.html">Food Guide</a>
+            <a href="nightlife.html">Nightlife</a>
+            <a href="transport-guide.html">Transport</a>
+            <a href="apps.html">Apps</a>
+            <a href="itinerary.html">Itinerary</a>
+            <a href="gallery.html">Gallery</a>
+        </div>
+        <div class="footer-copy">
+            &copy; 2026 Tokyo Jet Lag &mdash; Your cyberpunk guide to Tokyo
+        </div>
+    </div>
+</footer>
+
+<!-- Back to Top -->
+<a href="#top" class="back-to-top" id="backToTop" aria-label="Back to top">↑</a>
+
+<!-- ═══════════════════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════════════════ -->
+<script>
+// Reading progress bar
+window.addEventListener('scroll', () => {
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrolled = window.scrollY;
+    const progress = (scrolled / docHeight) * 100;
+    document.getElementById('readingProgress').style.width = progress + '%';
+});
+
+// Back to top button
+const backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 600) {
+        backToTop.classList.add('visible');
+    } else {
+        backToTop.classList.remove('visible');
+    }
+});
+
+// Intersection Observer for animations
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.animate-in').forEach(el => {
+    observer.observe(el);
+});
+
+// Mobile menu close on link click
+document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.querySelector('nav').classList.remove('open');
+    });
+});
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            const headerHeight = document.querySelector('header').offsetHeight;
+            const targetPosition = target.getBoundingClientRect().top + window.scrollY - headerHeight - 20;
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+</script>
+
+</body>
+</html>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Photo Gallery — Tokyo Jet Lag</title>
   <meta name="description" content="Stunning photography of Tokyo's neighborhoods — from neon-lit Shinjuku to tranquil Asakusa." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -26,7 +26,7 @@
       --glow-purple: 0 0 6px #bf00ff88, 0 0 12px #bf00ff22;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * { -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
 
     body {
@@ -35,7 +35,10 @@
       font-family: 'Inter', 'Space Mono', sans-serif;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
       min-height: 100vh;
+      min-height: 100dvh;
+      min-height: 100dvh;
     }
 
     body::before {
@@ -59,8 +62,8 @@
       align-items: center;
       border-bottom: 1px solid rgba(0, 240, 255, 0.08);
       background: rgba(4, 4, 15, 0.95);
-      backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
     }
 
     .logo {
@@ -246,8 +249,8 @@
       inset: 0;
       z-index: 200;
       background: rgba(4,4,15,0.95);
-      backdrop-filter: blur(30px);
       -webkit-backdrop-filter: blur(30px);
+      backdrop-filter: blur(30px);
       display: none;
       align-items: center;
       justify-content: center;
@@ -633,5 +636,6 @@ function updateLightbox() {
   document.getElementById('lbCounter').textContent = `${lightboxIndex + 1} / ${filteredPhotos.length}`;
 }
 </script>
+<script data-analytics="micro-tracker">(function(){var K='_ma_',L=localStorage,J=JSON,N=Date.now(),P=location.pathname,U=navigator.userAgent;function g(k){try{return J.parse(L.getItem(K+k))||{}}catch(e){return{}}}function s(k,v){try{L.setItem(K+k,J.stringify(v))}catch(e){}}var i=sessionStorage.getItem(K+'s');if(!i){i=N.toString(36);sessionStorage.setItem(K+'s',i);var x=g('ss');x[i]={s:N,p:[]};s('ss',x)}var p=g('pv');p[P]=(p[P]||0)+1;s('pv',p);var x=g('ss');if(x[i]){x[i].p.push({u:P,t:N});s('ss',x)}var d=g('dv'),b='Other',m=/Mobile|Android|iPhone/i.test(U)?'Mobile':'Desktop';if(/Chrome/i.test(U)&&!/Edg/i.test(U))b='Chrome';else if(/Safari/i.test(U)&&!/Chrome/i.test(U))b='Safari';else if(/Firefox/i.test(U))b='Firefox';else if(/Edg/i.test(U))b='Edge';d[b]=(d[b]||0)+1;s('dv',d);var t=g('dt');t[m]=(t[m]||0)+1;s('dt',t);document.addEventListener('click',function(e){var h=g('cl'),k=P+'|'+((e.clientX/10|0)*10)+'|'+((e.clientY/10|0)*10);h[k]=(h[k]||0)+1;s('cl',h)});addEventListener('beforeunload',function(){var x=g('ss');if(x[i]){x[i].e=Date.now();s('ss',x)}});var y=new Date().toISOString().slice(0,10),z=g('dy');z[y]=(z[y]||0)+1;s('dy',z)})()</script>
 </body>
 </html>

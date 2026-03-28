@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Essential Apps — Tokyo Jet Lag</title>
+  <meta name="description" content="Every app a Tokyo traveler needs: navigation, food, translation, payment, and booking. Complete guide with setup checklist." />
+  <meta name="theme-color" content="#04040f" />
+  <link rel="canonical" href="https://tokyojetlag.com/apps.html" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%23ff0080'/%3E%3Cstop offset='100%25' stop-color='%23ff4400'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M32 2 L26 38 L22 62 L28 62 L29 46 L35 46 L36 62 L42 62 L38 38 Z' fill='url(%23g)'/%3E%3Crect x='24' y='20' width='16' height='3' rx='1' fill='%23fff' opacity='0.9'/%3E%3Crect x='25' y='28' width='14' height='3' rx='1' fill='%23fff' opacity='0.7'/%3E%3Crect x='26' y='36' width='12' height='2' rx='1' fill='%23fff' opacity='0.5'/%3E%3Ccircle cx='32' cy='10' r='2.5' fill='%2300f0ff'/%3E%3Cline x1='32' y1='2' x2='32' y2='7' stroke='%2300f0ff' stroke-width='1.5'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Noto+Sans+JP:wght@300;400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --neon-blue: #00f0ff;
+      --neon-purple: #bf00ff;
+      --neon-pink: #ff0080;
+      --neon-yellow: #ffe000;
+      --neon-green: #00ff88;
+      --bg-dark: #04040f;
+      --bg-card: #0a0a1e;
+      --bg-card-hover: #0f0f2a;
+      --text-main: #e8e8f0;
+      --text-dim: #7070a0;
+      --text-bright: #ffffff;
+      --glow-blue: 0 0 6px #00f0ff88, 0 0 12px #00f0ff22;
+      --glow-purple: 0 0 6px #bf00ff88, 0 0 12px #bf00ff22;
+      --glow-pink: 0 0 6px #ff008088, 0 0 12px #ff008022;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Inter', 'Space Mono', sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      background: var(--bg-dark);
+      border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 2.5rem;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      color: var(--text-bright);
+      transition: color 0.3s;
+    }
+
+    .logo span {
+      color: var(--neon-blue);
+      text-shadow: 0 0 10px var(--neon-blue);
+    }
+
+    .logo:hover span {
+      color: var(--neon-pink);
+      text-shadow: 0 0 12px var(--neon-pink);
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text-main);
+      font-size: 0.8rem;
+      font-family: 'Space Mono', monospace;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: all 0.3s;
+      position: relative;
+      padding-bottom: 0.3rem;
+    }
+
+    nav a:hover {
+      color: var(--neon-blue);
+    }
+
+    nav a.active {
+      color: var(--neon-blue);
+      text-shadow: 0 0 8px var(--neon-blue);
+    }
+
+    @media (max-width: 900px) {
+      header {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      nav {
+        justify-content: center;
+        gap: 1rem;
+      }
+      nav a {
+        font-size: 0.7rem;
+      }
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.05) 0%, rgba(191, 0, 255, 0.05) 100%);
+      border-bottom: 1px solid rgba(0, 240, 255, 0.15);
+      padding: 5rem 2.5rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem;
+      letter-spacing: 0.06em;
+      color: var(--text-bright);
+      margin-bottom: 0.5rem;
+      text-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+    }
+
+    .hero h1 span {
+      color: var(--neon-blue);
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--text-dim);
+      margin-bottom: 2rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @media (max-width: 900px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      .hero p {
+        font-size: 0.95rem;
+      }
+    }
+
+    /* ─── SETUP CHECKLIST ─── */
+    .checklist-section {
+      background: var(--bg-dark);
+      padding: 4rem 2.5rem;
+      border-bottom: 1px solid rgba(0, 240, 255, 0.06);
+    }
+
+    .checklist-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      letter-spacing: 0.06em;
+      color: var(--text-bright);
+      margin-bottom: 2rem;
+    }
+
+    .section-title span {
+      color: var(--neon-blue);
+    }
+
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .checklist-item {
+      background: var(--bg-card);
+      border: 1px solid rgba(0, 240, 255, 0.1);
+      border-radius: 6px;
+      padding: 1.5rem;
+      transition: all 0.3s;
+    }
+
+    .checklist-item:hover {
+      border-color: rgba(0, 240, 255, 0.3);
+      background: var(--bg-card-hover);
+      transform: translateY(-2px);
+    }
+
+    .checklist-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .checkbox-input {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      accent-color: var(--neon-blue);
+    }
+
+    .checklist-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+      color: var(--text-main);
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .checklist-desc {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-left: 2rem;
+      line-height: 1.6;
+    }
+
+    /* ─── FILTER BUTTONS ─── */
+    .filter-section {
+      background: var(--bg-dark);
+      padding: 3rem 2.5rem;
+      border-bottom: 1px solid rgba(0, 240, 255, 0.06);
+    }
+
+    .filter-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .filter-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .filter-btn {
+      background: var(--bg-card);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      color: var(--text-main);
+      padding: 0.7rem 1.5rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-family: 'Space Mono', monospace;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: all 0.3s;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--neon-blue);
+      color: var(--neon-blue);
+    }
+
+    .filter-btn.active {
+      background: linear-gradient(135deg, var(--neon-blue), #0088ff);
+      border-color: var(--neon-blue);
+      color: var(--bg-dark);
+      font-weight: 600;
+    }
+
+    /* ─── APPS GRID ─── */
+    .apps-section {
+      background: var(--bg-dark);
+      padding: 4rem 2.5rem;
+      border-bottom: 1px solid rgba(0, 240, 255, 0.06);
+    }
+
+    .apps-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .app-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(0, 240, 255, 0.1);
+      border-radius: 8px;
+      padding: 2rem;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .app-card::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--neon-blue), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .app-card:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(0, 240, 255, 0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+    }
+
+    .app-card:hover::before {
+      opacity: 1;
+    }
+
+    .app-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .app-title {
+      flex: 1;
+    }
+
+    .app-name-en {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.04em;
+      color: var(--text-bright);
+      margin-bottom: 0.2rem;
+    }
+
+    .app-name-jp {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.85rem;
+      color: var(--neon-blue);
+    }
+
+    .app-rating {
+      display: flex;
+      gap: 0.2rem;
+      font-size: 1.1rem;
+    }
+
+    .star {
+      color: var(--neon-yellow);
+      text-shadow: 0 0 4px rgba(255, 224, 0, 0.5);
+    }
+
+    .badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--neon-pink), #ff4d7d);
+      color: var(--bg-dark);
+      font-size: 0.65rem;
+      padding: 0.35rem 0.8rem;
+      border-radius: 3px;
+      font-family: 'Space Mono', monospace;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      width: fit-content;
+    }
+
+    .app-category {
+      display: inline-block;
+      font-size: 0.65rem;
+      padding: 0.35rem 0.8rem;
+      border-radius: 3px;
+      font-family: 'Space Mono', monospace;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      border: 1px solid;
+    }
+
+    .cat-nav {
+      border-color: var(--neon-blue);
+      color: var(--neon-blue);
+      background: rgba(0, 240, 255, 0.08);
+    }
+
+    .cat-food {
+      border-color: var(--neon-green);
+      color: var(--neon-green);
+      background: rgba(0, 255, 136, 0.08);
+    }
+
+    .cat-comm {
+      border-color: var(--neon-pink);
+      color: var(--neon-pink);
+      background: rgba(255, 0, 128, 0.08);
+    }
+
+    .cat-money {
+      border-color: var(--neon-yellow);
+      color: var(--neon-yellow);
+      background: rgba(255, 224, 0, 0.08);
+    }
+
+    .cat-travel {
+      border-color: var(--neon-purple);
+      color: var(--neon-purple);
+      background: rgba(191, 0, 255, 0.08);
+    }
+
+    .cat-lifestyle {
+      border-color: #ff6b9d;
+      color: #ff6b9d;
+      background: rgba(255, 107, 157, 0.08);
+    }
+
+    .app-desc {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+      flex: 1;
+    }
+
+    .app-protip {
+      background: rgba(0, 240, 255, 0.05);
+      border: 1px solid rgba(0, 240, 255, 0.1);
+      border-radius: 4px;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .app-protip-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--neon-blue);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+      font-weight: 600;
+    }
+
+    .app-protip-text {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    .app-hidden {
+      display: none;
+    }
+
+    /* ─── TIPS SECTION ─── */
+    .tips-section {
+      background: linear-gradient(135deg, rgba(191, 0, 255, 0.03) 0%, rgba(255, 0, 128, 0.03) 100%);
+      padding: 4rem 2.5rem;
+      border-bottom: 1px solid rgba(0, 240, 255, 0.06);
+    }
+
+    .tips-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .tip-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(191, 0, 255, 0.15);
+      border-left: 3px solid var(--neon-purple);
+      border-radius: 6px;
+      padding: 1.8rem;
+      transition: all 0.3s;
+    }
+
+    .tip-card:hover {
+      border-left-color: var(--neon-pink);
+      border-color: rgba(191, 0, 255, 0.3);
+      transform: translateX(4px);
+    }
+
+    .tip-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.04em;
+      color: var(--text-bright);
+      margin-bottom: 0.8rem;
+    }
+
+    .tip-body {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      line-height: 1.8;
+    }
+
+    .tip-body strong {
+      color: var(--neon-purple);
+    }
+
+    .tip-body em {
+      color: var(--neon-blue);
+      font-style: italic;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #050510;
+      border-top: 1px solid rgba(0, 240, 255, 0.08);
+      padding: 3rem 2.5rem;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.08em;
+      color: var(--text-bright);
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-sub {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .footer-about {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: rgba(0, 240, 255, 0.02);
+      border: 1px solid rgba(0, 240, 255, 0.06);
+      border-radius: 6px;
+    }
+
+    .footer-about-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.05em;
+      color: var(--neon-blue);
+      margin-bottom: 1rem;
+    }
+
+    .footer-about-text {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      line-height: 1.8;
+    }
+
+    .footer-social {
+      margin: 2rem 0;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .footer-social a {
+      font-size: 1.5rem;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .footer-social a:hover {
+      transform: scale(1.2);
+      filter: drop-shadow(0 0 4px var(--neon-blue));
+    }
+
+    .footer-contact {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      margin: 1rem 0;
+    }
+
+    .footer-contact a {
+      color: var(--neon-blue);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-contact a:hover {
+      color: var(--neon-pink);
+    }
+
+    .footer-disclaimer {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      margin-top: 1.5rem;
+      line-height: 1.6;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .section-title {
+        font-size: 1.8rem;
+      }
+
+      .apps-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tips-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .checklist {
+        grid-template-columns: 1fr;
+      }
+
+      nav {
+        gap: 0.8rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      header {
+        padding: 1rem;
+      }
+
+      .checklist-section,
+      .apps-section,
+      .tips-section,
+      .filter-section {
+        padding: 2.5rem 1.5rem;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
+  <!-- HEADER -->
+  <header role="banner">
+    <a href="index.html" class="logo">Tokyo<span>JetLag</span></a>
+    <nav aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="index.html#venues">Venues</a>
+      <a href="index.html#seasonal">Seasonal</a>
+      <a href="food-guide.html">Food Guide</a>
+      <a href="nightlife.html">Nightlife</a>
+      <a href="index.html#day-trips">Day Trips</a>
+      <a href="apps.html" class="active">Apps</a>
+      <a href="itinerary.html">Itinerary</a>
+      <a href="index.html#faq">FAQ</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Essential <span>Apps</span></h1>
+    <p>Every app you need before boarding that plane. Pre-download, pre-configure, and arrive ready to conquer Tokyo's night.</p>
+  </section>
+
+  <!-- SETUP CHECKLIST -->
+  <section class="checklist-section">
+    <div class="checklist-inner">
+      <h2 class="section-title">Setup <span>Before You Fly</span></h2>
+      <p style="color: var(--text-dim); margin-bottom: 2rem; max-width: 800px;">Download these apps before departure. Weak hotel Wi-Fi at midnight is not the time to discover you're missing an essential tool. Get offline maps, register accounts, and enable camera translation now.</p>
+
+      <div class="checklist">
+        <div class="checklist-item">
+          <div class="checklist-checkbox">
+            <input type="checkbox" id="check1" class="checkbox-input" />
+            <label for="check1" class="checklist-label">Google Maps</label>
+          </div>
+          <div class="checklist-desc">Download offline maps for Tokyo, Shibuya, Shinjuku. Enable location history.</div>
+        </div>
+
+        <div class="checklist-item">
+          <div class="checklist-checkbox">
+            <input type="checkbox" id="check2" class="checkbox-input" />
+            <label for="check2" class="checklist-label">Suica / PASMO Card</label>
+          </div>
+          <div class="checklist-desc">Add to Apple Wallet or Google Pay now. Most convenient payment in Japan.</div>
+        </div>
+
+        <div class="checklist-item">
+          <div class="checklist-checkbox">
+            <input type="checkbox" id="check3" class="checkbox-input" />
+            <label for="check3" class="checklist-label">Tabelog (食べログ)</label>
+          </div>
+          <div class="checklist-desc">Create account, set language to English, save favorite restaurant areas.</div>
+        </div>
+
+        <div class="checklist-item">
+          <div class="checklist-checkbox">
+            <input type="checkbox" id="check4" class="checkbox-input" />
+            <label for="check4" class="checklist-label">Google Translate</label>
+          </div>
+          <div class="checklist-desc">Enable camera translation, download Japanese offline language pack.</div>
+        </div>
+
+        <div class="checklist-item">
+          <div class="checklist-checkbox">
+            <input type="checkbox" id="check5" class="checkbox-input" />
+            <label for="check5" class="checklist-label">LINE</label>
+          </div>
+          <div class="checklist-desc">Create account, connect with friends in Japan before arrival.</div>
+        </div>
+
+        <div class="checklist-item">
+          <div class="checklist-checkbox">
+            <input type="checkbox" id="check6" class="checkbox-input" />
+            <label for="check6" class="checklist-label">Offline Maps (GMaps)</label>
+          </div>
+          <div class="checklist-desc">Precious at 3AM when hotel Wi-Fi dies. Download city center maps now.</div>
+        </div>
+
+        <div class="checklist-item">
+          <div class="checklist-checkbox">
+            <input type="checkbox" id="check7" class="checkbox-input" />
+            <label for="check7" class="checklist-label">Navitime or Yahoo! Transit</label>
+          </div>
+          <div class="checklist-desc">Essential for train schedules. Test a sample route before departure.</div>
+        </div>
+
+        <div class="checklist-item">
+          <div class="checklist-checkbox">
+            <input type="checkbox" id="check8" class="checkbox-input" />
+            <label for="check8" class="checklist-label">PayPay Account</label>
+          </div>
+          <div class="checklist-desc">Register with credit card at home. Japanese payment ubiquitous by 2026.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FILTER BUTTONS -->
+  <section class="filter-section">
+    <div class="filter-inner">
+      <h2 class="section-title">Filter by <span>Category</span></h2>
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="all">All Apps</button>
+        <button class="filter-btn" data-filter="navigation">Navigation & Transport</button>
+        <button class="filter-btn" data-filter="food">Food & Dining</button>
+        <button class="filter-btn" data-filter="communication">Communication</button>
+        <button class="filter-btn" data-filter="money">Money & Shopping</button>
+        <button class="filter-btn" data-filter="travel">Travel & Booking</button>
+        <button class="filter-btn" data-filter="lifestyle">Convenience & Lifestyle</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPS GRID -->
+  <section class="apps-section" id="main-content">
+    <div class="apps-inner">
+      <h2 class="section-title">The Complete <span>App Stack</span></h2>
+
+      <div class="apps-grid" id="appsGrid">
+        <!-- NAVIGATION & TRANSPORT -->
+        <article class="app-card" data-category="navigation">
+          <div class="app-header">
+            <div class="app-title">
+              <div class="app-name-en">Google Maps</div>
+              <div class="app-name-jp">グーグルマップ</div>
+            </div>
+            <div class="app-rating">
+              <span class="star">★★★★★</span>
+            </div>
+          </div>
+          <span class="badge">Must Have</span>
+          <span class="app-category cat-nav">Navigation</span>
+          <p class="app-desc">
+            Best overall navigation for English speakers. Real-time transit info, English names for stations and restaurants. Download offline maps of central Tokyo before landing.
+          </p>
+          <div class="app-protip">
+            <div class="app-protip-label">Pro Tip for Jet Lag</div>
+            <div class="app-protip-text">Use offline maps at 3AM when your hotel's Wi-Fi dies. Saved offline regions are a lifesaver—always keep central Tokyo downloaded.</div>
+          </div>
+        </article>
+
+        <article class="app-card" data-category="navigation">
+          <div class="app-header">
+            <div class="app-title">
+              <div class="app-name-en">Apple Maps</div>
+              <div class="app-name-jp">アップルマップス</div>
+            </div>
+            <div class="app-rating">
+              <span class="star">★★★★</span>
+            </div>
+          </div>
+          <span class="app-category cat-nav">Navigation</span>
+          <p class="app-desc">
+            Improved significantly for Japan coverage as of 2025. Good transit integration with English support. Native on iOS, seamless with Apple ecosystem.
+          </p>
+          <div class="app-protip">
+            <div class="app-protip-label">Pro Tip for Jet Lag</div>
+            <div class="app-protip-text">iOS users: Use Siri for quick navigation at 2AM when you're too tired to type. Works perfectly with offline maps.</div>
+          </div>
+        </article>
+
+        <article class="app-card" data-category="navigation">
+          <div class="app-header">
+            <div class="app-title">
+              <div class="app-name-en">Navitime</div>
+              <div class="app-name-jp">ナビタイム</div>
+            </div>
+            <div class="app-rating">
+              <span class="star">★★★★★</span>
+            </div>
+          </div>
+          <span class="badge">Must Have</span>
+          <span class="app-category cat-nav">Navigation</span>
+          <p class="app-desc">
+            Japan's #1 transit app. Hyperdetailed rail info, minute-by-minute schedules, platform numbers. Covers every train line including midnight express trains.
+          </p>
+          <div class="app-protip">
+            <div class="app-protip-label">Pro Tip for Jet Lag</div>
+            <div class="app-protip-text">Shows first/last train times precisely. Critical when wondering if you can catch the 5:30 AM return train or need to crash at a capsule hotel.</div>
+          </div>
+        </article>
+
+        <article class="app-card" data-category="navigation">
+          <div class="app-header">
+            <div class="app-title">
+              <div class="app-name-en">Yahoo! Transit</div>
+              <div class="app-name-jp">Yahoo!乗換案内</div>
+            </div>
+            <div class="app-rating">
+              <span class="star">★★★★★</span>
+            </div>
+          </div>
+          <span class="app-category cat-nav">Navigation</span>
+          <p class="app-desc">
+            Locals' favorite for train timing. Faster, more intuitive than Navitime for most users. Excellent for finding the fastest route between neighborhoods at odd hours.
+          </p>
+          <div class="app-protip">
+            <div class="app-protip-label">Pro Tip for Jet Lag</div>
+            <div class="app-protip-text">Set your home station on this app for fastest commute calculations. Works offline for recent searches.</div>
+          </div>
+        </article>
+
+        <article class="app-card" data-category="navigation">
+          <div class="app-header">
+            <div class="app-title">
+              <div class="app-name-en">Suica / PASMO</div>
+              <div class="app-name-jp">Suica・PASMO</div>
+            </div>
+            <div class="app-rating">
+              <span class="star">★★★★★</span>
+            </div>
+          </div>
+          <span class="badge">Must Have</span>
+          <span class="app-category cat-nav">Payment</span>
+          <p class="app-desc">
+            Contactless IC card in Apple Wallet or Google Pay. Works on all trains, buses, and konbini vending machines. Single tap: instant transit payment.
+          </p>
+          <div class="app-protip">
+            <div class="app-protip-label">Pro Tip for Jet Lag</div>
+            <div class="app-protip-text">Add ¥10,000 on day 1. Never fumble for cash on a late-night train. Works everywhere—subway, convenience stores, vending machines, taxis.</div>
+          </div>
+        </article>
+
+        <!-- FOOD & DINING -->
+        <article class="app-card" data-category="food">
+          <div class="app-header">
+            <div class="app-title">
+              <div class="app-name-en">Tabelog</div>
+              <div class="app-name-jp">食べログ</div>
+            </div>
+            <div class="app-rating">
+              <span class="star">★★★★★</span>
+            </div>
+          </div>
+          <span class="badge">Must Have</span>
+          <span class="app-category cat-food">Food & Dining</span>
+          <p class="app-desc">
+            Japan's #1 restaurant review site. Ratings are trustworthy (3.5+ is excellent). Photos from real customers show actual portions and ambiance at any hour.
+          </p>
+          <div class="app-protip">
+            <div class="app-protip-label">Pro Tip for Jet Lag</div>
+            <div class="app-protip-text">Search "24時間営業" (24 hours) + ramen/tonkatsu. Real customer reviews at 3AM are surprisingly honest. Check posted hours for late-night validation.</div>
+          </div>
+        </article>
+
+        <article class="app-card" data-category="food">
+          <div class="app-header">
+            <div class="app-title">
+              <div class="app-name-en">Google Maps Reviews</div>
+              <div class="app-name-jp">グーグルマップ・レビュー</div>
+            </div>
+            <div class="app-rating">
+              <span class="star">★★★★</span>
+            </div>
+          </div>
+          <span class="app-category cat-food">Food & Dining</span>
+          <p class="app-desc">
+            English reviews prevalent. See recent visit timestamps. Integration with Maps means you can navigate directly to kitchen. Filtering by rating works well.
+          </p>
+          <div class="app-protip">
+            <div class="app-protip-label">Pro Tip for Jet Lag</div>
+            <div class="app-protip-text">Check review dates for recent feedback. "Visited 2 hours ago" is gold—tells you the place is actually open at midnight when Tabelog hours say it should be.</div>
+          </div>
+        </article>
+
+        <article class="app-card" data-category="food">
+          <div class="app-header">
+            <div class="app-title">
+              <div class="app-name-en">Gurunavi</div>
+              <div class="app-name-jp">ぐるなび</div>
+            </div>
+            <div class="app-rating">
+              <span class="star">★★★★</span>
+            </div>
+          </div>
+          <span class="app-category cat-food">Food & Dining</span>
+          <p class="app-desc">
+            Good for reservations. English version decent. Coupons and deals baked in. Best for izakaya and nicer restaurants where advance booking helps.
+          </p>
+          <div class="app-protip">
+            <div class="app-protip-label">Pro Tip for Jet Lag</div>
+            <div class="app-protip-text">Book izakaya reservations 1 day ahead. Popular spots fill up. Many offer table turnover discounts—book off-peak (5-7pm) for better atmosphere and quieter experience.</div>
+          </div>
+        </article>
+
+        <article class="app-card" data-category="food">
+          <div class="app-header">
+            <div class="app-title">
+              <div class="app-name-en">Hot Pepper Gourmet</div>
+              <div class="app-name-jp">ホットペッパー</div>
+            </div>
+            <div class="app-rating">
+              <span class="star">★★★★</span>
+            </div>
+          </div>
+          <span class="app-category cat-food">Food & Dining</span>
+          <p class="app-desc">
+            Aggressive coupon deals. "¥500 off if you book via app" is common. Huge restaurant database. Good for yakiniku and izakaya specifically.
+          </p>
+          <div class="app-protip">
+            <div class="app-protip-label">Pro Tip for Jet Lag</div>
+            <div class="app-protip-text">Check coupons section first. A ¥2,500 meal becomes ¥1,500 with a quick coupon tap. Discounts are better on weekday late hours.</div>
+          </div>
+        </article>
+
+        <article class="app-card" data-category="food">
+          <div class="app-header">
+            <div class="app-title">
+              <div class="app-name-en">TableCheck</div>
+              <div class="app-name-jp">テーブルチェック</div>
+            </div>
+            <div class="app-rating">
+              <span class="star">★★★★</span>
+            </div>
+          </div>
+          <span class="app-category cat-food">Food & Dining</span>
+          <p class="app-desc">
+            Restaurant reservations in English. Works for nicer establishments. Fewer venues than Gurunavi but excellent for English-speaking reservations.
+          </p>
+          <div class="app-protip">
+            <div class="app-protip-label">Pro Tip for Jet Lag</div>
+            <div class="app-protip-text">Best for fine dining reservations. Michelin-listed restaurants often accept TableCheck. Book 2-3 days ahead for weekend spots in Ginza/Roppongi.</div>
+          </div>
+        </article>
+
+        <!-- COMMUNICATION -->
+        <article class="app-card" data-category="communication">
+          <div class="app-header">
+            <div class="app-title">
+              <div class="app-name-en">LINE</div>
+              <div class="app-name-jp">LINE</div>
+            </div>
+            <div class="app-rating">
+              <span class="star">★★★★★</span>
+            </div>
+          </div>
+          <span class="badge">Must Have</span>
+          <span class="app-category cat-comm">Communication</span>
+          <p class="app-desc">
+            Japan's WhatsApp. Everyone uses it. Texting, calling, video, groups. Most efficient way to coordinate with travelers and local friends. Stickers culture is real.
+          </p>
+          <div class="app-protip">
+            <div class="app-protip-label">Pro Tip for Jet Lag</div>
+            <div class="app-protip-text">Many Japanese people communicate solely via LINE. No SMS/texts needed. Create group chats with hostel mates or day-trip buddies—essential for 2AM coordination.</div>
+          </div>
+        </article>
+
+        <article class="app-card" data-category="communication">
+          <div class="app-header">
+            <div class="app-title">
+              <div class="app-name-en">Google Translate</div>
+              <div class="app-name-jp">グーグル翻訳</div>
+            </div>
+            <div class="app-rating">
+              <span class="star">★★★★★</span>
+            </div>
+          </div>
+          <span class="badge">Must Have</span>
+          <span class="app-category cat-comm">Communication</span>
+          <p class="app-desc">
+            Camera mode translates real-time. Point at menu, sign, or poster—instant English. Offline Japanese language pack mandatory. Voice translation works too.
+          </p>
+          <div class="app-protip">
+            <div class="app-protip-label">Pro Tip for Jet Lag</div>
+            <div class="app-protip-text">Download Japanese language pack in airplane mode at home. Camera mode at 3AM on a menu is magic. Takes 3 seconds vs 5 minutes of squinting.</div>
+          </div>
+        </article>
+
+        <article class="app-card" data-category="communication">
+          <div class="app-header">
+            <div class="app-title">
+              <div class="app-name-en">DeepL</div>
+              <div class="app-name-jp">ディープエル</div>
+            </div>
+            <div class="app-rating">
+              <span class="star">★★★★★</span>
+            </div>
+          </div>
+          <span class="app-category cat-comm">Communication</span>
+          <p class="app-desc">
+            Superior translation quality for longer text. Better nuance than Google for Japanese→English. No camera mode but text input is natural and contextual.
+          </p>
+          <div class="app-protip">
+            <div class="app-protip-label">Pro Tip for Jet Lag</div>
+            <div class="app-protip-text">Use for menus and longer text passages. Especially good for understanding Japanese descriptions. Pair with Google Translate's camera mode for complete coverage.</div>
+          </div>
+        </article>
+
+        <article class="app-card" data-category="communication">
+          <div class="app-header">
+            <div class="app-title">
+              <div class="app-name-en">Papago</div>
+              <div class="app-name-jp">パパゴ</div>
+            </div>
+            <div class="app-rating">
+              <span class="star">★★★★</span>
+            </div>
+          </div>
+          <span class="app-category cat-comm">Communication</span>
+          <p class="app-desc">
+            Naver's translation app. Good for casual conversation translation. Less formal than DeepL. Voice mode functional. Growing in Tokyo usage.
+          </p>
+          <div class="app-protip">
+            <div class="app-protip-label">Pro Tip for Jet Lag</div>
+            <div class="app-protip-text">Good for casual exchanges with locals. Less formal, more conversational translations. Voice translation helps when keyboard typing is awkward.</div>
+          </div>
+        </article>
+
+        <!-- MONEY & SHOPPING -->
+        <article class="app-card" data-category="money">
+          <div class="app-header">
+            <div class="app-title">
+              <div class="app-name-en">PayPay</div>
+              <div class="app-name-jp">ペイペイ</div>
+            </div>
+            <div class="app-rating">
+              <span class="star">★★★★</span>
+            </div>
+          </div>
+          <span class="app-category cat-money">Money & Shopping</span>
+          <p class="app-desc">
+            Japan's most popular mobile payment. QR code scanning everywhere—restaurants, konbini, vending. Register with credit card at home. Ubiquitous by 2026.
+          </p>
+          <div class="app-protip">
+            <div class="app-protip-label">Pro Tip for Jet Lag</div>
+            <div class="app-protip-text">Register with your credit card before departure. Most 7-Elevens, ramen shops, and convenience stores accept PayPay. Tap and go—never need ATM.</div>
+          </div>
+        </article>
+
+        <article class="app-card" data-category="money">
+          <div class="app-header">
+            <div class="app-title">
+              <div class="app-name-en">Wise</div>
+              <div class="app-name-jp">ワイズ</div>
+            </div>
+            <div class="app-rating">
+              <span class="star">★★★★★</span>
+            </div>
+          </div>
+          <span class="app-category cat-money">Money & Shopping</span>
+          <p class="app-desc">
+            Best exchange rates for currency conversion. Multi-currency account. Debit card works in ATMs. Way better than airport exchange or bank fees.
+          </p>
+          <div class="app-protip">
+            <div class="app-protip-label">Pro Tip for Jet Lag</div>
+            <div class="app-protip-text">Open Wise account 1 week before travel. Load JPY at true exchange rates. Use Wise debit card at convenience store ATMs for better rates than PayPay conversion.</div>
+          </div>
+        </article>
+
+        <article class="app-card" data-category="money">
+          <div class="app-header">
+            <div class="app-title">
+              <div class="app-name-en">Amazon Japan</div>
+              <div class="app-name-jp">アマゾン日本</div>
+            </div>
+            <div class="app-rating">
+              <span class="star">★★★★</span>
+            </div>
+          </div>
+          <span class="app-category cat-money">Money & Shopping</span>
+          <p class="app-desc">
+            Delivery to hotel even same-day in central Tokyo. Register with hotel address. Buy chargers, adapters, forgotten items without leaving your room.
+          </p>
+          <div class="app-protip">
+            <div class="app-protip-label">Pro Tip for Jet Lag</div>
+            <div class="app-protip-text">Forgot phone charger? Amazon same-day to hotel beats 7-Eleven markup pricing. Set hotel address as default delivery. Prime membership often worth it for travelers.</div>
+          </div>
+        </article>
+
+        <article class="app-card" data-category="money">
+          <div class="app-header">
+            <div class="app-title">
+              <div class="app-name-en">Mercari</div>
+              <div class="app-name-jp">メルカリ</div>
+            </div>
+            <div class="app-rating">
+              <span class="star">★★★★</span>
+            </div>
+          </div>
+          <span class="app-category cat-money">Money & Shopping</span>
+          <p class="app-desc">
+            Japan's flea market app. Vintage finds, collectibles, used goods. Locals sell constantly. Tangential to travel but great for authentic shopping experience.
+          </p>
+          <div class="app-protip">
+            <div class="app-protip-label">Pro Tip for Jet Lag</div>
+            <div class="app-protip-text">Browse for vintage Tokyo souvenirs or local collectibles. Shipping to hotels is possible. Pure Japanese experience—prices are negotiable through app messaging.</div>
+          </div>
+        </article>
+
+        <!-- TRAVEL & BOOKING -->
+        <article class="app-card" data-category="travel">
+          <div class="app-header">
+            <div class="app-title">
+              <div class="app-name-en">Booking.com</div>
+              <div class="app-name-jp">ブッキング・ドットコム</div>
+            </div>
+            <div class="app-rating">
+              <span class="star">★★★★★</span>
+            </div>
+          </div>
+          <span class="app-category cat-travel">Travel & Booking</span>
+          <p class="app-desc">
+            Best hotel selection for Tokyo. Free cancellation common. Compare prices across platforms. English interface seamless. Book well in advance for peak season.
+          </p>
+          <div class="app-protip">
+            <div class="app-protip-label">Pro Tip for Jet Lag</div>
+            <div class="app-protip-text">Book hotels with late check-in. Choose Shinjuku/Shibuya central locations. Free breakfast helps with jet lag recovery—starts your body clock reset immediately.</div>
+          </div>
+        </article>
+
+        <article class="app-card" data-category="travel">
+          <div class="app-header">
+            <div class="app-title">
+              <div class="app-name-en">Jalan</div>
+              <div class="app-name-jp">じゃらん</div>
+            </div>
+            <div class="app-rating">
+              <span class="star">★★★★</span>
+            </div>
+          </div>
+          <span class="app-category cat-travel">Travel & Booking</span>
+          <p class="app-desc">
+            Japanese booking with ryokan specialty. Great for onsen hotels outside Tokyo. English version works. Often cheaper than Booking for Japanese-specific properties.
+          </p>
+          <div class="app-protip">
+            <div class="app-protip-label">Pro Tip for Jet Lag</div>
+            <div class="app-protip-text">Book a Hakone or Kamakura ryokan for day-trip onsen recovery. Late-night baths (often available 24h) help reset circadian rhythm after 3 days of jet lag intensity.</div>
+          </div>
+        </article>
+
+        <article class="app-card" data-category="travel">
+          <div class="app-header">
+            <div class="app-title">
+              <div class="app-name-en">Klook</div>
+              <div class="app-name-jp">クルック</div>
+            </div>
+            <div class="app-rating">
+              <span class="star">★★★★</span>
+            </div>
+          </div>
+          <span class="app-category cat-travel">Travel & Booking</span>
+          <p class="app-desc">
+            Activities, tours, attraction tickets. teamLab, Robot Restaurant, karaoke packages. Skip-the-line tickets for museums. Works seamlessly in English.
+          </p>
+          <div class="app-protip">
+            <div class="app-protip-label">Pro Tip for Jet Lag</div>
+            <div class="app-protip-text">Book teamLab Borderless timed entries in advance. Popular slots fill up. Late afternoon entries (5-8pm) mean you can sleep until noon, then enjoy 6 hours immersed.</div>
+          </div>
+        </article>
+
+        <article class="app-card" data-category="travel">
+          <div class="app-header">
+            <div class="app-title">
+              <div class="app-name-en">Japan Official Travel</div>
+              <div class="app-name-jp">日本公式観光</div>
+            </div>
+            <div class="app-rating">
+              <span class="star">★★★★</span>
+            </div>
+          </div>
+          <span class="app-category cat-travel">Travel & Booking</span>
+          <p class="app-desc">
+            Official government tourist information. Reliable hours, official venue info. Maps of shrines, temples, museums. Less user-friendly but information is canonical.
+          </p>
+          <div class="app-protip">
+            <div class="app-protip-label">Pro Tip for Jet Lag</div>
+            <div class="app-protip-text">Verify actual hours here when other apps seem inconsistent. Government data is most reliable. Use for shrine/temple visit planning—many open early for sunrise meditation.</div>
+          </div>
+        </article>
+
+        <!-- CONVENIENCE & LIFESTYLE -->
+        <article class="app-card" data-category="lifestyle">
+          <div class="app-header">
+            <div class="app-title">
+              <div class="app-name-en">7-Eleven App</div>
+              <div class="app-name-jp">セブン-イレブン</div>
+            </div>
+            <div class="app-rating">
+              <span class="star">★★★</span>
+            </div>
+          </div>
+          <span class="app-category cat-lifestyle">Lifestyle</span>
+          <p class="app-desc">
+            Points and promotions. Find nearest store. Pre-order food or concert tickets. Loyalty rewards. Major chain presence makes this worth the download.
+          </p>
+          <div class="app-protip">
+            <div class="app-protip-label">Pro Tip for Jet Lag</div>
+            <div class="app-protip-text">7-Elevens open 24h everywhere. App shows nearest location at 4AM when convenience hunting. Coupons stack—get daily bonuses and discounts on iced coffee.</div>
+          </div>
+        </article>
+
+        <article class="app-card" data-category="lifestyle">
+          <div class="app-header">
+            <div class="app-title">
+              <div class="app-name-en">Suica App (iOS)</div>
+              <div class="app-name-jp">Suicaアプリ</div>
+            </div>
+            <div class="app-rating">
+              <span class="star">★★★★★</span>
+            </div>
+          </div>
+          <span class="badge">Must Have</span>
+          <span class="app-category cat-lifestyle">Lifestyle</span>
+          <p class="app-desc">
+            Manage your Suica card. Check balance, recharge, view history. Seamless wallet integration. Essential for tracking spending and ensuring you don't run out mid-trip.
+          </p>
+          <div class="app-protip">
+            <div class="app-protip-label">Pro Tip for Jet Lag</div>
+            <div class="app-protip-text">Set auto-recharge to ¥10,000 when balance drops below ¥2,000. At 2AM on a midnight train, you'll be glad you did. Monitor spending to see where money goes.</div>
+          </div>
+        </article>
+
+        <article class="app-card" data-category="lifestyle">
+          <div class="app-header">
+            <div class="app-title">
+              <div class="app-name-en">Japan Wi-Fi Auto</div>
+              <div class="app-name-jp">ジャパンWi-Fi</div>
+            </div>
+            <div class="app-rating">
+              <span class="star">★★★</span>
+            </div>
+          </div>
+          <span class="app-category cat-lifestyle">Lifestyle</span>
+          <p class="app-desc">
+            Auto-connects to free public Wi-Fi networks. Covers convenience stores, stations, cafes. Useful backup when hotel Wi-Fi is spotty. One-time registration.
+          </p>
+          <div class="app-protip">
+            <div class="app-protip-label">Pro Tip for Jet Lag</div>
+            <div class="app-protip-text">Set up before hotel check-in. Free Wi-Fi throughout Tokyo can save data overage fees. 7-Eleven, McDonald's, and Starbucks networks auto-connect.</div>
+          </div>
+        </article>
+
+        <article class="app-card" data-category="lifestyle">
+          <div class="app-header">
+            <div class="app-title">
+              <div class="app-name-en">Disaster Preparedness</div>
+              <div class="app-name-jp">Safety Tips</div>
+            </div>
+            <div class="app-rating">
+              <span class="star">★★★★★</span>
+            </div>
+          </div>
+          <span class="badge">Must Have</span>
+          <span class="app-category cat-lifestyle">Lifestyle</span>
+          <p class="app-desc">
+            Government emergency alerts. Earthquake notifications, tsunami warnings, weather alerts. Push notifications in English. No travel to Japan is complete without this.
+          </p>
+          <div class="app-protip">
+            <div class="app-protip-label">Pro Tip for Jet Lag</div>
+            <div class="app-protip-text">Japan sits on Ring of Fire—earthquakes are normal but never severe in built areas. This app warns you. Enable push notifications immediately. You'll sleep better knowing you're covered.</div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRO TIPS SECTION -->
+  <section class="tips-section">
+    <div class="tips-inner">
+      <h2 class="section-title">Pro <span>Tips</span></h2>
+
+      <div class="tips-grid">
+        <div class="tip-card">
+          <h3 class="tip-title">Offline Maps Save Lives</h3>
+          <p class="tip-body">
+            Download Google Maps offline regions for central Tokyo, Shibuya, and Shinjuku before landing. Weak hotel Wi-Fi and weak phone signals at 3AM mean you'll absolutely need offline data. Every major area stays in your phone permanently.
+          </p>
+        </div>
+
+        <div class="tip-card">
+          <h3 class="tip-title">Camera Translation is Magic</h3>
+          <p class="tip-body">
+            Google Translate's camera mode translates signs, menus, and text in real-time. Download the Japanese language pack at home. Point your phone at kanji menu items—3 seconds later you know what you're eating. Changes the entire experience.
+          </p>
+        </div>
+
+        <div class="tip-card">
+          <h3 class="tip-title">Tabelog 3.5+ Rule</h3>
+          <p class="tip-body">
+            On Tabelog, <em>3.5 stars or higher is legitimately excellent</em>. Japanese reviews are honest—they don't inflate ratings. 3.0 means okay, 3.5+ means exceptional. This scale is different from Western review sites.
+          </p>
+        </div>
+
+        <div class="tip-card">
+          <h3 class="tip-title">Register Accounts at Home</h3>
+          <p class="tip-body">
+            Create Tabelog, LINE, PayPay, Booking.com, Wise accounts before departure. Most require email verification. Registering at the airport on sketchy Wi-Fi wastes precious travel time. Done correctly at home, every app is instant on arrival.
+          </p>
+        </div>
+
+        <div class="tip-card">
+          <h3 class="tip-title">Navigation Apps Don't Compete</h3>
+          <p class="tip-body">
+            Use Google Maps + Navitime. Google is for walking/general. Navitime is for precise train connections and timing. They complement each other. Install both. At 2AM trying to catch the last train, Navitime's precision will save you from being stranded.
+          </p>
+        </div>
+
+        <div class="tip-card">
+          <h3 class="tip-title">Suica / PASMO Everywhere</h3>
+          <p class="tip-body">
+            Add your Suica to Apple Wallet on day 1. Load ¥10,000. This single card works on <strong>every train, every bus, every konbini vending machine, many taxis.</strong> Tap and go. Never fumble for coins at 3AM.
+          </p>
+        </div>
+
+        <div class="tip-card">
+          <h3 class="tip-title">24h Verification is Real</h3>
+          <p class="tip-body">
+            Always verify late-night hours before going somewhere. Google Maps hours can be outdated. Check Tabelog and Navitime for "24 hours" verification. Nothing worse than arriving at a ramen shop at 4AM only to find they close at 3:30.
+          </p>
+        </div>
+
+        <div class="tip-card">
+          <h3 class="tip-title">LINE is Not Optional</h3>
+          <p class="tip-body">
+            Most Japanese people communicate <em>only through LINE</em>. No SMS, no calls. Create account, exchange with locals and travelers. Group chats for coordinating meetups, sharing intel, midnight adventures become exponentially easier.
+          </p>
+        </div>
+
+        <div class="tip-card">
+          <h3 class="tip-title">Cash ATMs: 7-Eleven Always</h3>
+          <p class="tip-body">
+            7-Elevens have 24h ATMs that accept foreign cards. No fees like airport exchange. Get cash at convenience stores instead of exchanging at Narita. Suica + PayPay covers 90% of purchases, but small vendor stalls still need cash.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer role="contentinfo">
+    <div class="footer-logo">TokyoJetLag.com</div>
+    <div class="footer-sub">
+      For the wide-awake, the displaced, and the thoroughly confused.<br>
+      Tokyo · 東京 · All hours · All nights
+    </div>
+
+    <div class="footer-about">
+      <div class="footer-about-title">About Tokyo Jet Lag</div>
+      <div class="footer-about-text">
+        Tokyo Jet Lag was born at 3AM in a Shinjuku convenience store, staring at an onigiri selection and wondering why nobody had made a guide for people like us — the wide-awake, time-displaced visitors who find themselves wandering Tokyo's streets when the rest of the world is asleep. Every app is hand-tested. Every tip verified in the field. This is not a travel blog. This is a survival guide for your circadian system's worst nightmare and Tokyo's best-kept secret: the city after dark.
+      </div>
+    </div>
+
+    <div class="footer-social" aria-label="Social media links">
+      <a href="#" aria-label="Instagram" title="Instagram">📷</a>
+      <a href="#" aria-label="Twitter / X" title="Twitter / X">𝕏</a>
+      <a href="#" aria-label="TikTok" title="TikTok">🎵</a>
+      <a href="#" aria-label="YouTube" title="YouTube">▶</a>
+    </div>
+
+    <div class="footer-contact">
+      <a href="mailto:hello@tokyojetlag.com">hello@tokyojetlag.com</a> · Tokyo, Japan
+    </div>
+
+    <div style="margin-top:1rem;"></div>
+    <div class="footer-disclaimer">
+      App versions and availability change constantly. Information current as of March 2026. Always verify app store availability in your region. We are not responsible for app changes or platform discontinuations. Use common sense when installing apps from unfamiliar sources.
+    </div>
+  </footer>
+
+  <!-- FILTERING SCRIPT -->
+  <script>
+    (function() {
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const appCards = document.querySelectorAll('.app-card');
+
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          // Update active button
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+
+          // Get filter value
+          const filterValue = button.getAttribute('data-filter');
+
+          // Show/hide cards
+          appCards.forEach(card => {
+            if (filterValue === 'all') {
+              card.classList.remove('app-hidden');
+            } else {
+              if (card.getAttribute('data-category') === filterValue) {
+                card.classList.remove('app-hidden');
+              } else {
+                card.classList.add('app-hidden');
+              }
+            }
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

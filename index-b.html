@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Tokyo Jet Lag — Wired at 2AM</title>
+  <meta name="description" content="Jet lag wrecked your sleep. Now you're amped at 2AM in Tokyo. We've got the 24-hour moves, the late-night venues, the survival playbook. This is your guide to Tokyo after dark." />
+
+  <!-- SEO & Social -->
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Tokyo Jet Lag" />
+  <meta name="theme-color" content="#04040f" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icon-192.svg" />
+
+  <link rel="canonical" href="https://tokyojetlag.com/" />
+  <link rel="alternate" hreflang="en" href="https://tokyojetlag.com/" />
+  <link rel="alternate" hreflang="ja" href="https://tokyojetlag.com/ja/" />
+  <meta name="keywords" content="Tokyo jet lag, late night Tokyo, 24 hour restaurants Tokyo, Tokyo nightlife, things to do Tokyo at night" />
+  <meta name="geo.region" content="JP-13" />
+  <meta name="geo.placename" content="Tokyo" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Tokyo Jet Lag — Wired at 2AM" />
+  <meta property="og:description" content="Jet lag wrecked your sleep. Now you're amped at 2AM in Tokyo. We've got the 24-hour moves, the late-night venues, the survival playbook. This is your guide to Tokyo after dark." />
+  <meta property="og:url" content="https://tokyojetlag.com/" />
+  <meta property="og:image" content="https://tokyojetlag.com/ogp-image.svg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Tokyo Jet Lag" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Tokyo Jet Lag — Wired at 2AM" />
+  <meta name="twitter:description" content="Jet lag. Tokyo. 2AM. We've mapped the moves. Late-night venues, all-night strategies, where to be when sleep won't come." />
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Tokyo Jet Lag",
+    "url": "https://tokyojetlag.com/",
+    "description": "Your 2AM Tokyo survival guide. 24-hour ramen, all-night venues, jet lag hacks, and late-night culture. Raw. Real. After dark."
+  }
+  </script>
+
+  <!-- Resource Hints for Performance -->
+  <link rel="dns-prefetch" href="https://images.unsplash.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Preload Critical Resources -->
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=1200&q=60" fetchpriority="high" />
+  
+  <!-- Fonts with font-display: swap -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Noto+Sans+JP:wght@300;400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --neon-blue: #00f0ff;
+      --neon-purple: #bf00ff;
+      --neon-pink: #ff0080;
+      --neon-yellow: #ffe000;
+      --neon-green: #00ff88;
+      --bg-dark: #04040f;
+      --bg-card: #0a0a1e;
+      --bg-card-hover: #0f0f2a;
+      --text-main: #e8e8f0;
+      --text-dim: #7070a0;
+      --text-bright: #ffffff;
+    }
+
+    * { -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    .skip-to-content {
+      position: absolute;
+      top: -100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--neon-blue);
+      color: var(--bg-dark);
+      padding: 0.8rem 1.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      z-index: 200;
+      border-radius: 0 0 6px 6px;
+      text-decoration: none;
+    }
+    .skip-to-content:focus {
+      top: 0;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--neon-blue);
+      outline-offset: 2px;
+    }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Inter', 'Space Mono', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      padding: 1rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(4, 4, 15, 0.9);
+      backdrop-filter: blur(20px);
+    }
+
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.1em;
+      color: var(--neon-blue);
+      text-decoration: none;
+    }
+
+    nav { display: flex; gap: 0.5rem; }
+    nav a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      font-family: 'Space Mono', monospace;
+    }
+    nav a:hover {
+      color: var(--neon-blue);
+      background: rgba(0,240,255,0.06);
+    }
+
+    .hero {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 2.5rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+    }
+
+    h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 12vw, 10rem);
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .h1-line1 { color: var(--text-main); display: block; }
+    .h1-line2 {
+      color: var(--neon-blue);
+      display: block;
+    }
+    .h1-line3 {
+      color: var(--neon-pink);
+      display: block;
+      font-size: clamp(2rem, 6vw, 5rem);
+    }
+
+    .hero-sub {
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      line-height: 1.8;
+      color: var(--text-dim);
+      max-width: 500px;
+    }
+
+    .world-clock {
+      margin-top: 3rem;
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .clock-city { display: flex; flex-direction: column; gap: 0.2rem; }
+    .clock-city-name {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      font-family: 'Space Mono', monospace;
+    }
+    .clock-city-time {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.05em;
+      line-height: 1;
+      color: var(--neon-blue);
+    }
+
+    section {
+      padding: 6rem 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      line-height: 1;
+      margin-bottom: 1.5rem;
+      color: var(--text-main);
+    }
+    .section-title span { color: var(--neon-blue); }
+
+    .section-desc {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      line-height: 1.8;
+      max-width: 600px;
+      margin-bottom: 3rem;
+    }
+
+    .venues-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    @media (max-width: 900px) { .venues-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .venues-grid { grid-template-columns: 1fr; } }
+
+    .venue-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(0,240,255,0.06);
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+    }
+    .venue-card:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(0,240,255,0.15);
+      transform: translateY(-2px);
+    }
+
+    .venue-img-wrap {
+      position: relative;
+      width: 100%;
+      height: 180px;
+      overflow: hidden;
+    }
+    .venue-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: 0.85;
+      decoding: async;
+    }
+    .venue-card:hover .venue-img {
+      transform: scale(1.05);
+      opacity: 1;
+    }
+
+    .venue-content { padding: 1.2rem 1.5rem 1.5rem; }
+
+    .venue-tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      margin-bottom: 0.8rem;
+      border-radius: 2px;
+      font-family: 'Space Mono', monospace;
+      background: rgba(0,240,255,0.08);
+      color: var(--neon-blue);
+    }
+
+    .venue-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.04em;
+      color: var(--text-bright);
+      margin-bottom: 0.2rem;
+      line-height: 1.1;
+    }
+    .venue-name-jp {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      margin-bottom: 0.8rem;
+    }
+
+    .venue-hours {
+      font-size: 0.65rem;
+      color: var(--neon-blue);
+      margin-bottom: 0.6rem;
+      font-family: 'Space Mono', monospace;
+    }
+
+    .venue-desc {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+      margin-bottom: 0.8rem;
+    }
+
+    .venue-map-link {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 0.6rem;
+      font-size: 0.68rem;
+      color: var(--neon-blue);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-family: 'Space Mono', monospace;
+      min-height: 44px;
+    }
+    .venue-map-link:hover {
+      color: var(--neon-pink);
+    }
+
+    .area-section {
+      margin-bottom: 4rem;
+      scroll-margin-top: 120px;
+    }
+    .area-header {
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(0,240,255,0.08);
+    }
+    .area-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem;
+      color: var(--text-main);
+      letter-spacing: 0.03em;
+    }
+    .area-name-jp {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 1rem;
+      color: var(--text-dim);
+      font-weight: 300;
+    }
+    .area-desc {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+      max-width: 700px;
+      margin-bottom: 2rem;
+    }
+
+    @media (max-width: 640px) {
+      header { padding: 0.8rem 1rem; }
+      nav { display: none; }
+      .hero { padding: 6rem 1.2rem 3rem; }
+      section { padding: 3rem 1.2rem; }
+      h1 { font-size: clamp(3rem, 10vw, 10rem); }
+    }
+
+    @media (max-width: 400px) {
+      .world-clock { flex-direction: column; gap: 1rem; }
+    }
+
+    @media (pointer: coarse) {
+      nav a { min-height: 44px; display: inline-flex; align-items: center; }
+      .venue-map-link { min-height: 44px; }
+    }
+
+    [id] { scroll-margin-top: 80px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
+    }
+
+    footer {
+      padding: 4rem 2.5rem;
+      border-top: 1px solid rgba(0,240,255,0.06);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <a href="#venues" class="skip-to-content">Skip to venues</a>
+
+  <header role="banner">
+    <a href="/" class="logo" aria-label="Tokyo Jet Lag — Home">Tokyo<span>JetLag</span></a>
+    <nav aria-label="Main navigation">
+      <a href="#why">Why Awake</a>
+      <a href="#venues">Venues</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </header>
+
+  <main>
+  <div class="hero" role="region" aria-label="Hero section">
+    <div class="hero-content">
+      <h1>
+        <span class="h1-line1">WIRED</span>
+        <span class="h1-line2">AT 2AM</span>
+        <span class="h1-line3">in tokyo.</span>
+      </h1>
+
+      <p class="hero-sub">
+        Your body's clock is shattered. The city hasn't slept. Welcome to Tokyo after dark—where the real night begins.
+        We've mapped every late-night move, every 24-hour spot, every bar that knows your name at 4AM.
+      </p>
+
+      <div class="world-clock" id="worldClock" role="region" aria-label="World clock showing current times" aria-live="polite">
+        <div class="clock-city">
+          <div class="clock-city-name">🗼 Tokyo</div>
+          <div class="clock-city-time" id="time-tokyo">--:--</div>
+        </div>
+        <div class="clock-city">
+          <div class="clock-city-name">🌁 Los Angeles</div>
+          <div class="clock-city-time" id="time-la">--:--</div>
+        </div>
+        <div class="clock-city">
+          <div class="clock-city-name">🗽 New York</div>
+          <div class="clock-city-time" id="time-nyc">--:--</div>
+        </div>
+        <div class="clock-city">
+          <div class="clock-city-name">🎡 London</div>
+          <div class="clock-city-time" id="time-london">--:--</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="venues">
+    <h2 class="section-title">Places That<br><span>Never Close</span></h2>
+    <p class="section-desc">
+      Every venue below is verified open late or 24/7. Organized by neighborhood. Hit them before midnight when possible—late-night Tokyo moves fast.
+    </p>
+
+    <div class="area-section" id="area-shinjuku" role="region" aria-labelledby="heading-shinjuku">
+      <div class="area-header">
+        <div class="area-name" id="heading-shinjuku">Shinjuku</div>
+        <div class="area-name-jp">新宿</div>
+      </div>
+      <div class="area-desc">Shinjuku bleeds neon. 24-hour ramen steam, 200+ micro-bars wedged in narrow alleys, Kabukicho's chaos. This is the nerve center. At 2AM it's fully alive.</div>
+      <div class="venues-grid">
+
+        <div class="venue-card">
+          <div class="venue-img-wrap">
+            <img class="venue-img" width="600" height="360" src="https://images.unsplash.com/photo-1557872943-16a5ac26437e?w=600&h=360&fit=crop" alt="Late night ramen bowl with tonkotsu broth in Tokyo" loading="lazy" decoding="async" fetchpriority="high">
+          </div>
+          <div class="venue-content">
+            <span class="venue-tag">Ramen · 24H</span>
+            <div class="venue-name">Ichiran Shinjuku</div>
+            <div class="venue-name-jp">一蘭 新宿中央東口店</div>
+            <div class="venue-hours">Open 24 hours</div>
+            <div class="venue-desc">Solo booths. No eye contact. Just you, noodles, and your jet lag. Tonkotsu creamy and brutal at 3AM. This hits different.</div>
+            <a class="venue-map-link" href="https://maps.google.com/?q=一蘭+新宿中央東口店" target="_blank" rel="noopener noreferrer">→ Google Maps</a>
+          </div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-img-wrap">
+            <img class="venue-img" width="600" height="360" src="https://images.unsplash.com/photo-1614563637806-1d0e645e0940?w=600&h=360&fit=crop" alt="Niboshi ramen bowl with dried sardine broth" loading="lazy" decoding="async">
+          </div>
+          <div class="venue-content">
+            <span class="venue-tag">Ramen · 24H</span>
+            <div class="venue-name">Nagi Golden Gai</div>
+            <div class="venue-name-jp">すごい煮干ラーメン凪</div>
+            <div class="venue-hours">Open 24 hours</div>
+            <div class="venue-desc">Fierce niboshi ramen—dried sardine umami. The 4AM bowl after Golden Gai is a Tokyo rite of passage. Worth it.</div>
+            <a class="venue-map-link" href="https://maps.google.com/?q=すごい煮干ラーメン凪+新宿" target="_blank" rel="noopener noreferrer">→ Google Maps</a>
+          </div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-img-wrap">
+            <img class="venue-img" width="600" height="360" src="https://images.unsplash.com/photo-1577593980286-2fc63b35d575?w=600&h=360&fit=crop" alt="Golden Gai alley in Shinjuku with tiny bars" loading="lazy" decoding="async">
+          </div>
+          <div class="venue-content">
+            <span class="venue-tag">Bar</span>
+            <div class="venue-name">Golden Gai</div>
+            <div class="venue-name-jp">新宿ゴールデン街</div>
+            <div class="venue-hours">8PM–5AM</div>
+            <div class="venue-desc">200+ micro-bars jammed into six tight alleys. Neon, sawdust, whiskey. Some fit 5 people. Cash only. Pure Tokyo magic.</div>
+            <a class="venue-map-link" href="https://maps.google.com/?q=Golden+Gai+Shinjuku+Tokyo" target="_blank" rel="noopener noreferrer">→ Google Maps</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="area-section" id="area-shibuya" role="region" aria-labelledby="heading-shibuya">
+      <div class="area-header">
+        <div class="area-name" id="heading-shibuya">Shibuya</div>
+        <div class="area-name-jp">渋谷</div>
+      </div>
+      <div class="area-desc">The world's most famous crossing still buzzes at 2AM. Clubs run until sunrise. WOMB. Vision. Raw energy.</div>
+      <div class="venues-grid">
+
+        <div class="venue-card">
+          <div class="venue-img-wrap">
+            <img class="venue-img" width="600" height="360" src="https://images.unsplash.com/photo-1532236204992-f5e85c024202?w=600&h=360&fit=crop" alt="Shibuya crossing at night with pedestrians" loading="lazy" decoding="async">
+          </div>
+          <div class="venue-content">
+            <span class="venue-tag">Walk</span>
+            <div class="venue-name">Shibuya Crossing</div>
+            <div class="venue-name-jp">渋谷スクランブル交差点</div>
+            <div class="venue-hours">Always open</div>
+            <div class="venue-desc">Weekends: packed at 2AM. Weeknights: eerily empty and hypnotic. Either way, sacred Tokyo moment.</div>
+            <a class="venue-map-link" href="https://maps.google.com/?q=Shibuya+Scramble+Crossing+Tokyo" target="_blank" rel="noopener noreferrer">→ Google Maps</a>
+          </div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-img-wrap">
+            <img class="venue-img" width="600" height="360" src="https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=600&h=360&fit=crop" alt="Tokyo nightclub dance floor with lights" loading="lazy" decoding="async">
+          </div>
+          <div class="venue-content">
+            <span class="venue-tag">Club</span>
+            <div class="venue-name">WOMB</div>
+            <div class="venue-name-jp">ウーム</div>
+            <div class="venue-hours">Fri–Sat 11PM–5AM</div>
+            <div class="venue-desc">Asia's underground cathedral. Four floors. Sound that shakes your soul. Where Tokyo's night tribe gathers until dawn.</div>
+            <a class="venue-map-link" href="https://maps.google.com/?q=WOMB+Shibuya+Tokyo" target="_blank" rel="noopener noreferrer">→ Google Maps</a>
+          </div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-img-wrap">
+            <img class="venue-img" width="600" height="360" src="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=600&h=360&fit=crop" alt="Ramen shop interior with counter seating" loading="lazy" decoding="async">
+          </div>
+          <div class="venue-content">
+            <span class="venue-tag">Ramen · 24H</span>
+            <div class="venue-name">Ichiran Shibuya</div>
+            <div class="venue-name-jp">一蘭 渋谷店</div>
+            <div class="venue-hours">Open 24 hours</div>
+            <div class="venue-desc">Post-club ramen sanctuary. Same solo booth, same creamy tonkotsu. You need this after WOMB.</div>
+            <a class="venue-map-link" href="https://maps.google.com/?q=一蘭+渋谷店" target="_blank" rel="noopener noreferrer">→ Google Maps</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="area-section" id="area-roppongi" role="region" aria-labelledby="heading-roppongi">
+      <div class="area-header">
+        <div class="area-name" id="heading-roppongi">Roppongi</div>
+        <div class="area-name-jp">六本木</div>
+      </div>
+      <div class="area-desc">Where Tokyo's international underground thrives. Cocktails, clubs, chaos. English-friendly. Polished but real.</div>
+      <div class="venues-grid">
+
+        <div class="venue-card">
+          <div class="venue-img-wrap">
+            <img class="venue-img" width="600" height="360" src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&h=360&fit=crop" alt="Tokyo Tower illuminated at night" loading="lazy" decoding="async">
+          </div>
+          <div class="venue-content">
+            <span class="venue-tag">Walk</span>
+            <div class="venue-name">Tokyo Tower</div>
+            <div class="venue-name-jp">東京タワー</div>
+            <div class="venue-hours">Main deck until 11PM</div>
+            <div class="venue-desc">Neon needle piercing Tokyo's night. Climb it. Stare down at 2 million lights. Reality check from 360 meters up.</div>
+            <a class="venue-map-link" href="https://maps.google.com/?q=Tokyo+Tower" target="_blank" rel="noopener noreferrer">→ Google Maps</a>
+          </div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-img-wrap">
+            <img class="venue-img" width="600" height="360" src="https://images.unsplash.com/photo-1525268323446-0505b6fe7778?w=600&h=360&fit=crop" alt="Whisky bar with bottles and glasses" loading="lazy" decoding="async">
+          </div>
+          <div class="venue-content">
+            <span class="venue-tag">Bar</span>
+            <div class="venue-name">Gonpachi</div>
+            <div class="venue-name-jp">権八 六本木</div>
+            <div class="venue-hours">11:30AM–3:30AM daily</div>
+            <div class="venue-desc">Grilled yakitori and brutal cocktails until 3:30AM. Traditional floors, modern chaos. Tokyo nightlife blueprint.</div>
+            <a class="venue-map-link" href="https://maps.google.com/?q=権八+六本木" target="_blank" rel="noopener noreferrer">→ Google Maps</a>
+          </div>
+        </div>
+
+        <div class="venue-card">
+          <div class="venue-img-wrap">
+            <img class="venue-img" width="600" height="360" src="https://images.unsplash.com/photo-1598514983318-2f64f8f4796c?w=600&h=360&fit=crop" alt="Japanese izakaya with traditional dishes" loading="lazy" decoding="async">
+          </div>
+          <div class="venue-content">
+            <span class="venue-tag">Ramen</span>
+            <div class="venue-name">Afuri</div>
+            <div class="venue-name-jp">AFURI 六本木店</div>
+            <div class="venue-hours">11AM–5AM</div>
+            <div class="venue-desc">Yuzu shio ramen—citrus-forward, clean, sharp. When your stomach needs light but intense. 3AM perfection.</div>
+            <a class="venue-map-link" href="https://maps.google.com/?q=AFURI+六本木" target="_blank" rel="noopener noreferrer">→ Google Maps</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <footer role="contentinfo">
+    <p>&copy; 2026 Tokyo Jet Lag. For the wired. For the displaced. For everyone wide awake at 2AM in the world's most beautiful city.</p>
+  </footer>
+
+  <script defer>
+    document.addEventListener('DOMContentLoaded', function() {
+      function updateClocks() {
+        var now = new Date();
+        var tokyo = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
+        var la = new Date(now.toLocaleString('en-US', { timeZone: 'America/Los_Angeles' }));
+        var nyc = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }));
+        var london = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/London' }));
+
+        function pad(n) { return String(n).padStart(2, '0'); }
+        function fmt(d) { return pad(d.getHours()) + ':' + pad(d.getMinutes()); }
+
+        document.getElementById('time-tokyo').textContent = fmt(tokyo);
+        document.getElementById('time-la').textContent = fmt(la);
+        document.getElementById('time-nyc').textContent = fmt(nyc);
+        document.getElementById('time-london').textContent = fmt(london);
+      }
+      updateClocks();
+      setInterval(updateClocks, 60000);
+    });
+  </script>
+</body>
+</html>

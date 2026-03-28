@@ -1,0 +1,2968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café & Workspace Guide — Tokyo Jet Lag</title>
+    <meta name="description" content="50 WiFi cafés + 20 coworking spaces in Tokyo. WiFi speeds, power outlets, noise levels, hours — everything a digital nomad needs.">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --neon-blue: #00f0ff;
+            --neon-purple: #bf00ff;
+            --neon-pink: #ff0080;
+            --neon-yellow: #ffe000;
+            --neon-green: #00ff88;
+            --neon-orange: #ff6600;
+            --bg-dark: #04040f;
+            --bg-card: #0a0a1e;
+            --bg-card-hover: #0f0f2a;
+            --text-main: #e8e8f0;
+            --text-dim: #7070a0;
+            --text-bright: #ffffff;
+            --border-glow: rgba(0, 240, 255, 0.15);
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            background-image: linear-gradient(0deg, transparent 24%, rgba(255,0,0,0.02) 25%, rgba(255,0,0,0.02) 26%, transparent 27%, transparent 74%, rgba(255,0,0,0.02) 75%, rgba(255,0,0,0.02) 76%, transparent 77%, transparent);
+            background-size: 100% 4px;
+            z-index: 9999;
+        }
+
+        /* ── Header ── */
+        header {
+            background: rgba(4,4,15,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--neon-blue);
+            padding: 1rem 2rem;
+            position: sticky; top: 0; z-index: 100;
+            box-shadow: 0 0 20px rgba(0,240,255,0.3);
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+        }
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        nav { display: flex; gap: 1rem; flex-wrap: wrap; }
+        nav a {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.4rem 0.6rem;
+            border: 1px solid transparent;
+            transition: all 0.3s;
+        }
+        nav a:hover, nav a.active {
+            color: var(--neon-blue);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 8px rgba(0,240,255,0.3);
+        }
+
+        /* ── Hero ── */
+        .hero {
+            position: relative;
+            min-height: 70vh;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center;
+            padding: 4rem 2rem;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(ellipse at center, rgba(0,240,255,0.05) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 80%, rgba(191,0,255,0.05) 0%, transparent 50%);
+            animation: heroPulse 8s ease-in-out infinite;
+        }
+        @keyframes heroPulse {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+        .hero-grid {
+            position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(0,240,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,240,255,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gridScroll 20s linear infinite;
+        }
+        @keyframes gridScroll { to { background-position: 60px 60px; } }
+        .hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative; z-index: 1;
+            line-height: 1.1;
+        }
+        .hero h1 .jp {
+            display: block;
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 0.35em;
+            letter-spacing: 0.2em;
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-yellow));
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+        .hero .subtitle {
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(0.85rem, 2vw, 1.1rem);
+            color: var(--neon-green);
+            margin-top: 1.5rem;
+            position: relative; z-index: 1;
+        }
+        .hero .stats-bar {
+            display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center;
+            margin-top: 2rem; position: relative; z-index: 1;
+        }
+        .hero .stat {
+            text-align: center;
+        }
+        .hero .stat-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            color: var(--neon-blue);
+        }
+        .hero .stat-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+        }
+
+        /* ── Filter Bar ── */
+        .filter-bar {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: 8px;
+            padding: 1.5rem 2rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+            display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;
+        }
+        .filter-bar label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .filter-bar select, .filter-bar input[type="text"] {
+            background: var(--bg-dark);
+            color: var(--text-main);
+            border: 1px solid var(--border-glow);
+            border-radius: 4px;
+            padding: 0.5rem 0.8rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .filter-bar select:focus, .filter-bar input:focus {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 8px rgba(0,240,255,0.2);
+        }
+        .filter-group { display: flex; flex-direction: column; gap: 0.3rem; }
+        .filter-btn {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            padding: 0.5rem 1rem;
+            background: transparent;
+            color: var(--text-dim);
+            border: 1px solid var(--border-glow);
+            border-radius: 4px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            color: var(--neon-blue);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 10px rgba(0,240,255,0.2);
+        }
+        .filter-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+        /* ── Section Headings ── */
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-align: center;
+            margin: 3rem 0 1rem;
+            position: relative;
+        }
+        .section-title .en {
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .section-title .jp-sub {
+            display: block;
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 0.35em;
+            color: var(--text-dim);
+            letter-spacing: 0.15em;
+        }
+        .section-desc {
+            text-align: center;
+            color: var(--text-dim);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-size: 0.95rem;
+        }
+
+        /* ── Area Tabs ── */
+        .area-tabs {
+            display: flex; flex-wrap: wrap; justify-content: center;
+            gap: 0.5rem;
+            margin: 1.5rem auto;
+            max-width: 1200px;
+            padding: 0 1rem;
+        }
+        .area-tab {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg-card);
+            color: var(--text-dim);
+            border: 1px solid var(--border-glow);
+            border-radius: 20px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+        .area-tab:hover, .area-tab.active {
+            color: var(--neon-pink);
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 12px rgba(255,0,128,0.2);
+            background: rgba(255,0,128,0.08);
+        }
+
+        /* ── Cards Grid ── */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem 3rem;
+        }
+        .spot-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.4s;
+            position: relative;
+        }
+        .spot-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple), var(--neon-pink));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .spot-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--neon-blue);
+            box-shadow: 0 8px 30px rgba(0,240,255,0.1);
+        }
+        .spot-card:hover::before { opacity: 1; }
+        .card-header {
+            padding: 1.2rem 1.2rem 0.6rem;
+            display: flex; justify-content: space-between; align-items: flex-start;
+        }
+        .card-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.4rem;
+            letter-spacing: 0.05em;
+            color: var(--text-bright);
+        }
+        .card-name-jp {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            margin-top: 0.1rem;
+        }
+        .card-area-badge {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+        .badge-shibuya { background: rgba(255,0,128,0.15); color: var(--neon-pink); border: 1px solid rgba(255,0,128,0.3); }
+        .badge-shinjuku { background: rgba(191,0,255,0.15); color: var(--neon-purple); border: 1px solid rgba(191,0,255,0.3); }
+        .badge-shimokita { background: rgba(0,255,136,0.15); color: var(--neon-green); border: 1px solid rgba(0,255,136,0.3); }
+        .badge-roppongi { background: rgba(255,224,0,0.15); color: var(--neon-yellow); border: 1px solid rgba(255,224,0,0.3); }
+        .badge-akihabara { background: rgba(255,102,0,0.15); color: var(--neon-orange); border: 1px solid rgba(255,102,0,0.3); }
+        .badge-ginza { background: rgba(0,240,255,0.15); color: var(--neon-blue); border: 1px solid rgba(0,240,255,0.3); }
+        .badge-ikebukuro { background: rgba(200,100,255,0.15); color: #c864ff; border: 1px solid rgba(200,100,255,0.3); }
+        .badge-nakameguro { background: rgba(255,150,200,0.15); color: #ff96c8; border: 1px solid rgba(255,150,200,0.3); }
+        .badge-koenji { background: rgba(100,255,200,0.15); color: #64ffc8; border: 1px solid rgba(100,255,200,0.3); }
+        .badge-daikanyama { background: rgba(255,200,100,0.15); color: #ffc864; border: 1px solid rgba(255,200,100,0.3); }
+        .badge-aoyama { background: rgba(100,200,255,0.15); color: #64c8ff; border: 1px solid rgba(100,200,255,0.3); }
+        .badge-asakusa { background: rgba(255,100,100,0.15); color: #ff6464; border: 1px solid rgba(255,100,100,0.3); }
+        .badge-nihonbashi { background: rgba(180,180,255,0.15); color: #b4b4ff; border: 1px solid rgba(180,180,255,0.3); }
+
+        .card-specs {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            padding: 0 1.2rem;
+            margin: 0.5rem 0;
+        }
+        .spec {
+            text-align: center;
+            padding: 0.5rem 0.2rem;
+            border-right: 1px solid var(--border-glow);
+        }
+        .spec:last-child { border-right: none; }
+        .spec-icon { font-size: 1rem; margin-bottom: 0.2rem; }
+        .spec-val {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--neon-blue);
+            font-weight: 700;
+        }
+        .spec-label {
+            font-size: 0.6rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+        }
+
+        .card-details {
+            padding: 0.8rem 1.2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.4rem;
+            border-top: 1px solid var(--border-glow);
+        }
+        .detail-item {
+            display: flex; align-items: center; gap: 0.4rem;
+            font-size: 0.78rem;
+        }
+        .detail-label { color: var(--text-dim); }
+        .detail-val { color: var(--text-main); font-family: 'Space Mono', monospace; font-size: 0.72rem; }
+
+        .card-tags {
+            padding: 0.5rem 1.2rem 1rem;
+            display: flex; gap: 0.4rem; flex-wrap: wrap;
+        }
+        .tag {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.6rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            background: rgba(0,240,255,0.08);
+            color: var(--neon-blue);
+            border: 1px solid rgba(0,240,255,0.15);
+        }
+
+        /* Noise meter */
+        .noise-meter {
+            display: flex; gap: 2px; align-items: center;
+        }
+        .noise-bar {
+            width: 4px; border-radius: 2px;
+            background: var(--border-glow);
+        }
+        .noise-bar.active { background: var(--neon-green); }
+        .noise-bar:nth-child(1) { height: 6px; }
+        .noise-bar:nth-child(2) { height: 9px; }
+        .noise-bar:nth-child(3) { height: 12px; }
+        .noise-bar:nth-child(4) { height: 15px; }
+        .noise-bar:nth-child(5) { height: 18px; }
+
+        /* WiFi signal */
+        .wifi-signal { display: flex; align-items: flex-end; gap: 1px; }
+        .wifi-bar { width: 3px; border-radius: 1px; background: var(--border-glow); }
+        .wifi-bar.active { background: var(--neon-green); }
+        .wifi-bar:nth-child(1) { height: 4px; }
+        .wifi-bar:nth-child(2) { height: 7px; }
+        .wifi-bar:nth-child(3) { height: 10px; }
+        .wifi-bar:nth-child(4) { height: 13px; }
+
+        /* ── Coworking Section ── */
+        .cw-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(191,0,255,0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.4s;
+            position: relative;
+        }
+        .cw-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-purple), var(--neon-pink));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .cw-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--neon-purple);
+            box-shadow: 0 8px 30px rgba(191,0,255,0.15);
+        }
+        .cw-card:hover::before { opacity: 1; }
+        .cw-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            color: var(--text-bright);
+            letter-spacing: 0.04em;
+        }
+        .cw-name-jp {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 0.72rem;
+            color: var(--text-dim);
+        }
+        .cw-specs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.8rem;
+            margin: 1rem 0;
+        }
+        .cw-spec {
+            text-align: center;
+            padding: 0.6rem;
+            background: rgba(191,0,255,0.05);
+            border-radius: 6px;
+            border: 1px solid rgba(191,0,255,0.1);
+        }
+        .cw-spec-val {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--neon-purple);
+            font-weight: 700;
+        }
+        .cw-spec-label {
+            font-size: 0.6rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+        }
+        .cw-pricing {
+            display: flex; gap: 0.5rem; flex-wrap: wrap;
+            margin: 0.8rem 0;
+        }
+        .price-tag {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
+            background: rgba(0,240,255,0.08);
+            border: 1px solid rgba(0,240,255,0.15);
+        }
+        .price-tag .amount { color: var(--neon-blue); }
+        .price-tag .period { color: var(--text-dim); }
+
+        /* ── Nomad Tips ── */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem 3rem;
+        }
+        .tip-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(0,255,136,0.15);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+        .tip-card:hover {
+            border-color: var(--neon-green);
+            box-shadow: 0 4px 20px rgba(0,255,136,0.1);
+        }
+        .tip-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+        .tip-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            color: var(--neon-green);
+            letter-spacing: 0.04em;
+            margin-bottom: 0.5rem;
+        }
+        .tip-text { font-size: 0.88rem; color: var(--text-dim); line-height: 1.7; }
+
+        /* ── Area Map ── */
+        .area-map-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem 3rem;
+        }
+        .area-map-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.2rem;
+        }
+        .area-map-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .area-map-card:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 4px 20px rgba(0,240,255,0.1);
+        }
+        .area-map-icon { font-size: 2.5rem; margin-bottom: 0.8rem; }
+        .area-map-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            color: var(--text-bright);
+        }
+        .area-map-name-jp {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 0.72rem;
+            color: var(--text-dim);
+        }
+        .area-map-count {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--neon-blue);
+            margin-top: 0.5rem;
+        }
+        .area-map-vibe {
+            font-size: 0.78rem;
+            color: var(--text-dim);
+            margin-top: 0.3rem;
+            line-height: 1.5;
+        }
+
+        /* ── Footer ── */
+        footer {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-glow);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        footer .logo-foot {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        footer p {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            margin-top: 0.5rem;
+        }
+        footer nav { justify-content: center; margin-top: 1rem; }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            header { padding: 0.8rem 1rem; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .card-specs { grid-template-columns: repeat(2, 1fr); }
+            .cw-specs { grid-template-columns: repeat(2, 1fr); }
+            .filter-bar { flex-direction: column; align-items: stretch; }
+        }
+
+        /* ── Count badge ── */
+        .results-count {
+            text-align: center;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            margin: 1rem 0;
+        }
+        .results-count span { color: var(--neon-blue); }
+
+        /* ── Back to top ── */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem; right: 2rem;
+            width: 44px; height: 44px;
+            background: var(--bg-card);
+            border: 1px solid var(--neon-blue);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--neon-blue);
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 90;
+        }
+        .back-to-top.visible { opacity: 1; }
+        .back-to-top:hover { background: rgba(0,240,255,0.1); box-shadow: 0 0 12px rgba(0,240,255,0.3); }
+
+        /* ── Hidden ── */
+        .hidden { display: none !important; }
+
+        /* ── Glow divider ── */
+        .glow-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), var(--neon-purple), var(--neon-pink), transparent);
+            max-width: 800px;
+            margin: 3rem auto;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     HEADER
+     ══════════════════════════════════════════════════════════════════ -->
+<header>
+    <a href="index.html" class="logo">TOKYO JET LAG</a>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="food-guide.html">Food</a>
+        <a href="nightlife.html">Nightlife</a>
+        <a href="#" class="active">Café & Work</a>
+        <a href="transport-guide.html">Transport</a>
+        <a href="hidden-gems.html">Hidden Gems</a>
+    </nav>
+</header>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     HERO
+     ══════════════════════════════════════════════════════════════════ -->
+<section class="hero">
+    <div class="hero-grid"></div>
+    <h1>
+        Café & Workspace
+        <span class="jp">カフェ＆ワークスペース完全ガイド</span>
+    </h1>
+    <p class="subtitle">// WiFi. Power. Coffee. Focus. — Tokyo's best spots for digital nomads</p>
+    <div class="stats-bar">
+        <div class="stat">
+            <div class="stat-num">50</div>
+            <div class="stat-label">Cafés</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">20</div>
+            <div class="stat-label">Coworking</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">13</div>
+            <div class="stat-label">Areas</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">24/7</div>
+            <div class="stat-label">Coverage</div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     AREA MAP
+     ══════════════════════════════════════════════════════════════════ -->
+<div class="glow-divider"></div>
+<h2 class="section-title">
+    <span class="en">Area Map</span>
+    <span class="jp-sub">エリアマップ</span>
+</h2>
+<p class="section-desc">Click an area to filter spots. Each neighborhood has its own energy — find your frequency.</p>
+
+<div class="area-map-section">
+    <div class="area-map-grid">
+        <div class="area-map-card" onclick="filterByArea('shibuya')">
+            <div class="area-map-icon">🌀</div>
+            <div class="area-map-name">Shibuya</div>
+            <div class="area-map-name-jp">渋谷</div>
+            <div class="area-map-count">8 cafés / 3 coworking</div>
+            <div class="area-map-vibe">High energy, youth culture, scramble crossing chaos. Dense café scene.</div>
+        </div>
+        <div class="area-map-card" onclick="filterByArea('shinjuku')">
+            <div class="area-map-icon">🏙️</div>
+            <div class="area-map-name">Shinjuku</div>
+            <div class="area-map-name-jp">新宿</div>
+            <div class="area-map-count">7 cafés / 3 coworking</div>
+            <div class="area-map-vibe">Business + nightlife mix. Late-night options near Kabukicho.</div>
+        </div>
+        <div class="area-map-card" onclick="filterByArea('shimokita')">
+            <div class="area-map-icon">🎸</div>
+            <div class="area-map-name">Shimokitazawa</div>
+            <div class="area-map-name-jp">下北沢</div>
+            <div class="area-map-count">5 cafés / 1 coworking</div>
+            <div class="area-map-vibe">Indie vibes, vintage shops, creative crowd. Cozy cafés.</div>
+        </div>
+        <div class="area-map-card" onclick="filterByArea('roppongi')">
+            <div class="area-map-icon">🌃</div>
+            <div class="area-map-name">Roppongi</div>
+            <div class="area-map-name-jp">六本木</div>
+            <div class="area-map-count">4 cafés / 2 coworking</div>
+            <div class="area-map-vibe">International crowd, late-night energy, upscale spaces.</div>
+        </div>
+        <div class="area-map-card" onclick="filterByArea('akihabara')">
+            <div class="area-map-icon">🎮</div>
+            <div class="area-map-name">Akihabara</div>
+            <div class="area-map-name-jp">秋葉原</div>
+            <div class="area-map-count">4 cafés / 2 coworking</div>
+            <div class="area-map-vibe">Electric Town. Manga cafés double as workspaces. Nerd paradise.</div>
+        </div>
+        <div class="area-map-card" onclick="filterByArea('ginza')">
+            <div class="area-map-icon">💎</div>
+            <div class="area-map-name">Ginza</div>
+            <div class="area-map-name-jp">銀座</div>
+            <div class="area-map-count">4 cafés / 2 coworking</div>
+            <div class="area-map-vibe">Premium, quiet, business-class. High-end coffee and polished spaces.</div>
+        </div>
+        <div class="area-map-card" onclick="filterByArea('ikebukuro')">
+            <div class="area-map-icon">🚂</div>
+            <div class="area-map-name">Ikebukuro</div>
+            <div class="area-map-name-jp">池袋</div>
+            <div class="area-map-count">4 cafés / 2 coworking</div>
+            <div class="area-map-vibe">Major hub, affordable, manga-café culture. Budget-friendly.</div>
+        </div>
+        <div class="area-map-card" onclick="filterByArea('nakameguro')">
+            <div class="area-map-icon">🌸</div>
+            <div class="area-map-name">Nakameguro</div>
+            <div class="area-map-name-jp">中目黒</div>
+            <div class="area-map-count">3 cafés / 1 coworking</div>
+            <div class="area-map-vibe">Canal-side calm, cherry blossoms, artisan roasters.</div>
+        </div>
+        <div class="area-map-card" onclick="filterByArea('koenji')">
+            <div class="area-map-icon">🎪</div>
+            <div class="area-map-name">Koenji</div>
+            <div class="area-map-name-jp">高円寺</div>
+            <div class="area-map-count">3 cafés / 1 coworking</div>
+            <div class="area-map-vibe">Punk-rock soul, cheap eats, community cafés.</div>
+        </div>
+        <div class="area-map-card" onclick="filterByArea('daikanyama')">
+            <div class="area-map-icon">📚</div>
+            <div class="area-map-name">Daikanyama</div>
+            <div class="area-map-name-jp">代官山</div>
+            <div class="area-map-count">3 cafés / 1 coworking</div>
+            <div class="area-map-vibe">T-Site bookstore vibes, quiet, design-forward.</div>
+        </div>
+        <div class="area-map-card" onclick="filterByArea('aoyama')">
+            <div class="area-map-icon">🖼️</div>
+            <div class="area-map-name">Aoyama / Omotesando</div>
+            <div class="area-map-name-jp">青山・表参道</div>
+            <div class="area-map-count">2 cafés / 1 coworking</div>
+            <div class="area-map-vibe">Architecture, galleries, fashion-forward coffee scene.</div>
+        </div>
+        <div class="area-map-card" onclick="filterByArea('asakusa')">
+            <div class="area-map-icon">⛩️</div>
+            <div class="area-map-name">Asakusa / Kuramae</div>
+            <div class="area-map-name-jp">浅草・蔵前</div>
+            <div class="area-map-count">2 cafés / 1 coworking</div>
+            <div class="area-map-vibe">Old Tokyo meets new craft scene. Artisan everything.</div>
+        </div>
+        <div class="area-map-card" onclick="filterByArea('nihonbashi')">
+            <div class="area-map-icon">🏛️</div>
+            <div class="area-map-name">Nihonbashi / Tokyo Sta.</div>
+            <div class="area-map-name-jp">日本橋・東京駅</div>
+            <div class="area-map-count">1 café / 0 coworking</div>
+            <div class="area-map-vibe">Business district. Quick stops near bullet train access.</div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     FILTER BAR
+     ══════════════════════════════════════════════════════════════════ -->
+<div class="glow-divider"></div>
+<h2 class="section-title">
+    <span class="en">WiFi Cafés — Top 50</span>
+    <span class="jp-sub">WiFiカフェ 厳選50</span>
+</h2>
+<p class="section-desc">Every spot verified for WiFi, power outlets, and nomad-friendliness. Filter to find your perfect base.</p>
+
+<div class="filter-bar" id="cafeFilterBar">
+    <div class="filter-group">
+        <label>Area エリア</label>
+        <select id="filterArea" onchange="applyFilters()">
+            <option value="all">All Areas</option>
+            <option value="shibuya">Shibuya 渋谷</option>
+            <option value="shinjuku">Shinjuku 新宿</option>
+            <option value="shimokita">Shimokitazawa 下北沢</option>
+            <option value="roppongi">Roppongi 六本木</option>
+            <option value="akihabara">Akihabara 秋葉原</option>
+            <option value="ginza">Ginza 銀座</option>
+            <option value="ikebukuro">Ikebukuro 池袋</option>
+            <option value="nakameguro">Nakameguro 中目黒</option>
+            <option value="koenji">Koenji 高円寺</option>
+            <option value="daikanyama">Daikanyama 代官山</option>
+            <option value="aoyama">Aoyama 青山</option>
+            <option value="asakusa">Asakusa 浅草</option>
+            <option value="nihonbashi">Nihonbashi 日本橋</option>
+        </select>
+    </div>
+    <div class="filter-group">
+        <label>WiFi Speed</label>
+        <select id="filterWifi" onchange="applyFilters()">
+            <option value="all">Any Speed</option>
+            <option value="fast">50+ Mbps</option>
+            <option value="blazing">100+ Mbps</option>
+        </select>
+    </div>
+    <div class="filter-group">
+        <label>Noise Level</label>
+        <select id="filterNoise" onchange="applyFilters()">
+            <option value="all">Any Level</option>
+            <option value="quiet">Quiet (1-2)</option>
+            <option value="moderate">Moderate (3)</option>
+            <option value="lively">Lively (4-5)</option>
+        </select>
+    </div>
+    <div class="filter-group">
+        <label>Open Late</label>
+        <select id="filterLate" onchange="applyFilters()">
+            <option value="all">Any Hours</option>
+            <option value="late">Until 23:00+</option>
+            <option value="24h">24 Hours</option>
+        </select>
+    </div>
+    <div class="filter-group">
+        <label>Search</label>
+        <input type="text" id="filterSearch" placeholder="Name or tag..." oninput="applyFilters()">
+    </div>
+</div>
+<div class="results-count" id="cafeCount">Showing <span>50</span> of 50 cafés</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     CAFÉS GRID
+     ══════════════════════════════════════════════════════════════════ -->
+<div class="cards-grid" id="cafeGrid">
+
+    <!-- ── CAFE 1 ── -->
+    <div class="spot-card" data-area="shibuya" data-wifi="120" data-noise="3" data-late="23" data-tags="specialty,pour-over,quiet-corner">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Fuglen Tokyo</div>
+                <div class="card-name-jp">フグレン東京</div>
+            </div>
+            <span class="card-area-badge badge-shibuya">Shibuya</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">120 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">12</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">35</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">3/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">8:00–22:00 (bar til 1AM)</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥500–¥900</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Weekday AM</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">specialty coffee</span><span class="tag">Norwegian roast</span><span class="tag">bar at night</span><span class="tag">Tomigaya</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 2 ── -->
+    <div class="spot-card" data-area="shibuya" data-wifi="85" data-noise="2" data-late="21" data-tags="books,quiet,study">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Shibuya Publishing & Booksellers</div>
+                <div class="card-name-jp">渋谷パブリッシング＆ブックセラーズ</div>
+            </div>
+            <span class="card-area-badge badge-shibuya">Shibuya</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">85 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">8</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">20</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">2/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">11:00–21:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥400–¥700</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Afternoon</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">bookstore café</span><span class="tag">quiet</span><span class="tag">curated space</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 3 ── -->
+    <div class="spot-card" data-area="shibuya" data-wifi="200" data-noise="2" data-late="23" data-tags="roastery,premium,quiet">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Starbucks Reserve Roastery</div>
+                <div class="card-name-jp">スターバックス リザーブ ロースタリー 東京</div>
+            </div>
+            <span class="card-area-badge badge-shibuya">Shibuya</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">200 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">20</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">200</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">2/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">7:00–23:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥700–¥2,000</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Weekday 7–9AM</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">4 floors</span><span class="tag">Nakameguro border</span><span class="tag">premium</span><span class="tag">architecture</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 4 ── -->
+    <div class="spot-card" data-area="shibuya" data-wifi="95" data-noise="3" data-late="22" data-tags="specialty,latte-art,hip">
+        <div class="card-header">
+            <div>
+                <div class="card-name">About Life Coffee Brewers</div>
+                <div class="card-name-jp">アバウトライフコーヒーブリューワーズ</div>
+            </div>
+            <span class="card-area-badge badge-shibuya">Shibuya</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">95 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">6</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">15</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">3/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">9:00–22:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥450–¥750</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Morning</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">2 hours peak</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">standing bar</span><span class="tag">rotating roasters</span><span class="tag">compact</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 5 ── -->
+    <div class="spot-card" data-area="shibuya" data-wifi="150" data-noise="2" data-late="23" data-tags="quiet,design,workspace">
+        <div class="card-header">
+            <div>
+                <div class="card-name">FabCafe Tokyo</div>
+                <div class="card-name-jp">ファブカフェ東京</div>
+            </div>
+            <span class="card-area-badge badge-shibuya">Shibuya</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">150 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">18</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">40</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">2/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">10:00–22:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥500–¥800</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">All day</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">3D printer</span><span class="tag">laser cutter</span><span class="tag">maker space</span><span class="tag">Dogenzaka</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 6 ── -->
+    <div class="spot-card" data-area="shibuya" data-wifi="80" data-noise="4" data-late="23" data-tags="rooftop,trendy,instagram">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Miyashita Park Café</div>
+                <div class="card-name-jp">ミヤシタパークカフェ</div>
+            </div>
+            <span class="card-area-badge badge-shibuya">Shibuya</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">80 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">10</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">50</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">4/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">8:00–23:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥550–¥1,000</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Weekday 8–10AM</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">rooftop park</span><span class="tag">city view</span><span class="tag">Miyashita</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 7 ── -->
+    <div class="spot-card" data-area="shibuya" data-wifi="180" data-noise="1" data-late="24" data-tags="manga-cafe,24h,booths">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Gran Cyber Café Bagus Shibuya</div>
+                <div class="card-name-jp">グランサイバーカフェ バグース渋谷</div>
+            </div>
+            <span class="card-area-badge badge-shibuya">Shibuya</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">180 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">80+</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">120</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">1/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">24 Hours</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥0 (free drinks)</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Late night</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">Pay per hour</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">24h</span><span class="tag">private booth</span><span class="tag">shower</span><span class="tag">manga</span><span class="tag">¥300/hr</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 8 ── -->
+    <div class="spot-card" data-area="shibuya" data-wifi="110" data-noise="3" data-late="21" data-tags="brunch,australian,flat-white">
+        <div class="card-header">
+            <div>
+                <div class="card-name">The Local Coffee Stand</div>
+                <div class="card-name-jp">ザ・ローカル コーヒースタンド</div>
+            </div>
+            <span class="card-area-badge badge-shibuya">Shibuya</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">110 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">8</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">25</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">3/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">8:00–21:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥450–¥750</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Morning</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">2 hours</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">flat whites</span><span class="tag">brunch</span><span class="tag">Aussie style</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 9 ── -->
+    <div class="spot-card" data-area="shinjuku" data-wifi="90" data-noise="2" data-late="22" data-tags="specialty,single-origin,cupping">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Bear Pond Espresso</div>
+                <div class="card-name-jp">ベアポンド エスプレッソ</div>
+            </div>
+            <span class="card-area-badge badge-shinjuku">Shinjuku</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">90 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">6</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">18</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">2/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">11:00–22:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥500–¥900</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Early afternoon</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">angel stain espresso</span><span class="tag">legendary</span><span class="tag">craft</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 10 ── -->
+    <div class="spot-card" data-area="shinjuku" data-wifi="200" data-noise="1" data-late="24" data-tags="manga-cafe,24h,private">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Hailey'5 Café Shinjuku</div>
+                <div class="card-name-jp">ハイリーファイブカフェ 新宿</div>
+            </div>
+            <span class="card-area-badge badge-shinjuku">Shinjuku</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">200 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">100+</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">150</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">1/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">24 Hours</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥0 (included)</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Late night / AM</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">¥200/30min</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">24h</span><span class="tag">private booth</span><span class="tag">shower</span><span class="tag">hip manga café</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 11 ── -->
+    <div class="spot-card" data-area="shinjuku" data-wifi="75" data-noise="4" data-late="23" data-tags="chain,reliable,everywhere">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Doutor Shinjuku South Exit</div>
+                <div class="card-name-jp">ドトール 新宿南口店</div>
+            </div>
+            <span class="card-area-badge badge-shinjuku">Shinjuku</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">75 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">15</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">60</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">4/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">6:30–23:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥250–¥500</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Early morning</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">budget</span><span class="tag">chain</span><span class="tag">smoking section</span><span class="tag">reliable</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 12 ── -->
+    <div class="spot-card" data-area="shinjuku" data-wifi="130" data-noise="2" data-late="22" data-tags="specialty,third-wave,design">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Verve Coffee Shinjuku</div>
+                <div class="card-name-jp">ヴァーヴコーヒー 新宿</div>
+            </div>
+            <span class="card-area-badge badge-shinjuku">Shinjuku</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">130 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">14</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">45</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">2/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">8:00–22:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥500–¥850</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Weekday AM</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">California origin</span><span class="tag">pour-over</span><span class="tag">minimal design</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 13 ── -->
+    <div class="spot-card" data-area="shinjuku" data-wifi="65" data-noise="3" data-late="23" data-tags="jazz,retro,kissaten">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Café Aaliya</div>
+                <div class="card-name-jp">カフェ アリヤ</div>
+            </div>
+            <span class="card-area-badge badge-shinjuku">Shinjuku</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">65 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">4</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">30</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">3/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">9:00–23:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥400–¥650</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Afternoon</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">kissaten</span><span class="tag">french toast</span><span class="tag">retro</span><span class="tag">Showa era</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 14 ── -->
+    <div class="spot-card" data-area="shinjuku" data-wifi="100" data-noise="2" data-late="20" data-tags="specialty,quiet,beans">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Café de L'ambre</div>
+                <div class="card-name-jp">カフェ・ド・ランブル</div>
+            </div>
+            <span class="card-area-badge badge-shinjuku">Shinjuku</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">100 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">4</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">12</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">2/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">12:00–20:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥600–¥1,200</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Early afternoon</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">aged beans</span><span class="tag">since 1948</span><span class="tag">master barista</span><span class="tag">Ginza border</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 15 ── -->
+    <div class="spot-card" data-area="shinjuku" data-wifi="160" data-noise="3" data-late="23" data-tags="chain,spacious,reliable">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Tully's NEWoMan Shinjuku</div>
+                <div class="card-name-jp">タリーズ ニュウマン新宿</div>
+            </div>
+            <span class="card-area-badge badge-shinjuku">Shinjuku</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">160 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">20</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">70</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">3/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">7:00–23:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥350–¥650</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">After 14:00</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">station direct</span><span class="tag">spacious</span><span class="tag">good chain</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 16 ── -->
+    <div class="spot-card" data-area="shimokita" data-wifi="70" data-noise="2" data-late="22" data-tags="vinyl,music,chill">
+        <div class="card-header">
+            <div>
+                <div class="card-name">City Country City</div>
+                <div class="card-name-jp">シティ カントリー シティ</div>
+            </div>
+            <span class="card-area-badge badge-shimokita">Shimokita</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">70 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">6</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">20</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">2/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">12:00–22:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥500–¥800</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Afternoon</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">vinyl records</span><span class="tag">indie</span><span class="tag">2F hideaway</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 17 ── -->
+    <div class="spot-card" data-area="shimokita" data-wifi="110" data-noise="3" data-late="23" data-tags="specialty,single-origin,hip">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Bear Pond Espresso Shimokita</div>
+                <div class="card-name-jp">ベアポンド エスプレッソ 下北沢</div>
+            </div>
+            <span class="card-area-badge badge-shimokita">Shimokita</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">110 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">8</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">15</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">3/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">11:00–23:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥450–¥800</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Late morning</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">angel stain</span><span class="tag">cult following</span><span class="tag">tiny</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 18 ── -->
+    <div class="spot-card" data-area="shimokita" data-wifi="90" data-noise="2" data-late="21" data-tags="bookstore,quiet,reading">
+        <div class="card-header">
+            <div>
+                <div class="card-name">B&B (Books & Beer)</div>
+                <div class="card-name-jp">B&B ブックス＆ビア</div>
+            </div>
+            <span class="card-area-badge badge-shimokita">Shimokita</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">90 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">10</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">25</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">2/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">12:00–21:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥500–¥900</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Weekday PM</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">indie bookstore</span><span class="tag">craft beer</span><span class="tag">events</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 19 ── -->
+    <div class="spot-card" data-area="shimokita" data-wifi="85" data-noise="3" data-late="22" data-tags="organic,vegan,healthy">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Mois Café</div>
+                <div class="card-name-jp">モワカフェ</div>
+            </div>
+            <span class="card-area-badge badge-shimokita">Shimokita</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">85 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">10</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">30</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">3/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">11:00–22:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥500–¥800</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Lunch hours</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">organic</span><span class="tag">vegan options</span><span class="tag">Reload complex</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 20 ── -->
+    <div class="spot-card" data-area="shimokita" data-wifi="120" data-noise="2" data-late="23" data-tags="modern,spacious,design">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Bonus Track Coffee</div>
+                <div class="card-name-jp">ボーナストラック コーヒー</div>
+            </div>
+            <span class="card-area-badge badge-shimokita">Shimokita</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">120 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">14</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">40</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">2/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">9:00–23:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥450–¥750</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">All day</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">new development</span><span class="tag">terrace</span><span class="tag">nomad-friendly</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 21 ── -->
+    <div class="spot-card" data-area="roppongi" data-wifi="250" data-noise="2" data-late="23" data-tags="premium,quiet,business">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Tsutaya Tokyo Roppongi</div>
+                <div class="card-name-jp">蔦屋書店 六本木</div>
+            </div>
+            <span class="card-area-badge badge-roppongi">Roppongi</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">250 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">30</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">80</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">2/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">7:00–23:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥500–¥900</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Weekday morning</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">Starbucks inside</span><span class="tag">books</span><span class="tag">art</span><span class="tag">Roppongi Hills</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 22 ── -->
+    <div class="spot-card" data-area="roppongi" data-wifi="140" data-noise="3" data-late="24" data-tags="cozy,international,late-night">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Hobgoblin Roppongi</div>
+                <div class="card-name-jp">ホブゴブリン六本木</div>
+            </div>
+            <span class="card-area-badge badge-roppongi">Roppongi</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">140 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">8</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">45</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">3/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">14:00–2:00 (Fri/Sat 5AM)</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥700–¥1,200</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Afternoon (quiet)</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">British pub</span><span class="tag">craft beer</span><span class="tag">late night WiFi</span><span class="tag">expat hub</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 23 ── -->
+    <div class="spot-card" data-area="roppongi" data-wifi="100" data-noise="2" data-late="22" data-tags="gallery,art,quiet">
+        <div class="card-header">
+            <div>
+                <div class="card-name">National Art Center Café</div>
+                <div class="card-name-jp">国立新美術館カフェ</div>
+            </div>
+            <span class="card-area-badge badge-roppongi">Roppongi</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">100 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">6</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">60</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">2/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">10:00–18:00 (Fri 20:00)</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥500–¥1,000</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Weekday PM</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">museum</span><span class="tag">iconic architecture</span><span class="tag">quiet</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 24 ── -->
+    <div class="spot-card" data-area="roppongi" data-wifi="95" data-noise="3" data-late="22" data-tags="brunch,western,spacious">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Lauderdale Café</div>
+                <div class="card-name-jp">ローダーデールカフェ</div>
+            </div>
+            <span class="card-area-badge badge-roppongi">Roppongi</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">95 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">12</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">50</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">3/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">8:00–22:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥550–¥900</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Morning</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">brunch</span><span class="tag">terrace</span><span class="tag">Midtown area</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 25 ── -->
+    <div class="spot-card" data-area="akihabara" data-wifi="300" data-noise="1" data-late="24" data-tags="internet-cafe,24h,gaming">
+        <div class="card-header">
+            <div>
+                <div class="card-name">DiCE Akihabara</div>
+                <div class="card-name-jp">ダイス 秋葉原</div>
+            </div>
+            <span class="card-area-badge badge-akihabara">Akihabara</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">300 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">100+</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">200</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">1/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">24 Hours</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥0 (free bar)</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Late night</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">¥250/30min</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">24h</span><span class="tag">private booth</span><span class="tag">shower</span><span class="tag">gaming PC</span><span class="tag">manga</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 26 ── -->
+    <div class="spot-card" data-area="akihabara" data-wifi="80" data-noise="4" data-late="22" data-tags="maid,themed,otaku">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Cure Maid Café</div>
+                <div class="card-name-jp">キュアメイドカフェ</div>
+            </div>
+            <span class="card-area-badge badge-akihabara">Akihabara</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">80 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">4</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">30</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">4/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">11:00–22:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥600–¥1,200</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Weekday PM</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">90 min</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">classic maid café</span><span class="tag">otaku culture</span><span class="tag">experience</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 27 ── -->
+    <div class="spot-card" data-area="akihabara" data-wifi="150" data-noise="2" data-late="22" data-tags="specialty,third-wave,modern">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Yanaka Coffee Akihabara</div>
+                <div class="card-name-jp">やなかコーヒー 秋葉原</div>
+            </div>
+            <span class="card-area-badge badge-akihabara">Akihabara</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">150 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">10</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">25</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">2/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">10:00–22:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥350–¥600</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">All day</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">fresh roast</span><span class="tag">affordable</span><span class="tag">calm oasis</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 28 ── -->
+    <div class="spot-card" data-area="akihabara" data-wifi="90" data-noise="3" data-late="23" data-tags="retro,game,nostalgia">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Café & Bar 16shots</div>
+                <div class="card-name-jp">カフェ＆バー 16ショッツ</div>
+            </div>
+            <span class="card-area-badge badge-akihabara">Akihabara</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">90 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">8</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">20</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">3/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">12:00–23:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥500–¥900</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Afternoon</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">retro gaming</span><span class="tag">board games</span><span class="tag">geek hub</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 29 ── -->
+    <div class="spot-card" data-area="ginza" data-wifi="180" data-noise="1" data-late="22" data-tags="premium,kissaten,luxury">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Café Paulista</div>
+                <div class="card-name-jp">カフェーパウリスタ</div>
+            </div>
+            <span class="card-area-badge badge-ginza">Ginza</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">180 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">8</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">50</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">1/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">8:30–22:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥500–¥1,000</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Morning</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">since 1911</span><span class="tag">historic</span><span class="tag">John Lennon visited</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 30 ── -->
+    <div class="spot-card" data-area="ginza" data-wifi="200" data-noise="2" data-late="23" data-tags="modern,premium,design">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Ginza Six Tsutaya</div>
+                <div class="card-name-jp">銀座シックス蔦屋書店</div>
+            </div>
+            <span class="card-area-badge badge-ginza">Ginza</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">200 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">25</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">60</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">2/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">10:00–23:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥600–¥1,200</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Weekday AM</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">art books</span><span class="tag">Starbucks</span><span class="tag">6F views</span><span class="tag">luxury mall</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 31 ── -->
+    <div class="spot-card" data-area="ginza" data-wifi="120" data-noise="1" data-late="20" data-tags="kissaten,classic,quiet">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Tricolore Ginza</div>
+                <div class="card-name-jp">トリコロール銀座</div>
+            </div>
+            <span class="card-area-badge badge-ginza">Ginza</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">120 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">4</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">35</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">1/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">8:00–20:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥600–¥950</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Weekday morning</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">classic kissaten</span><span class="tag">siphon coffee</span><span class="tag">Showa elegance</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 32 ── -->
+    <div class="spot-card" data-area="ginza" data-wifi="160" data-noise="2" data-late="21" data-tags="specialty,roastery,premium">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Maruyama Coffee Ginza</div>
+                <div class="card-name-jp">丸山珈琲 銀座店</div>
+            </div>
+            <span class="card-area-badge badge-ginza">Ginza</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">160 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">10</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">30</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">2/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">10:00–21:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥600–¥1,500</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Afternoon</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">Karuizawa origin</span><span class="tag">competition coffee</span><span class="tag">premium beans</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 33 ── -->
+    <div class="spot-card" data-area="ikebukuro" data-wifi="250" data-noise="1" data-late="24" data-tags="manga-cafe,24h,booth">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Manga Kissa Popeye Ikebukuro</div>
+                <div class="card-name-jp">まんが喫茶ポパイ池袋</div>
+            </div>
+            <span class="card-area-badge badge-ikebukuro">Ikebukuro</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">250 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">80+</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">180</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">1/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">24 Hours</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥0 (free drinks)</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Overnight</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">¥200/30min</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">24h</span><span class="tag">cheap overnight</span><span class="tag">shower</span><span class="tag">flat booth</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 34 ── -->
+    <div class="spot-card" data-area="ikebukuro" data-wifi="100" data-noise="3" data-late="22" data-tags="chain,spacious,reliable">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Komeda's Coffee Ikebukuro</div>
+                <div class="card-name-jp">コメダ珈琲 池袋店</div>
+            </div>
+            <span class="card-area-badge badge-ikebukuro">Ikebukuro</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">100 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">20</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">80</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">3/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">7:00–22:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥450–¥700</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Morning set (free toast!)</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">morning set</span><span class="tag">Nagoya chain</span><span class="tag">booth seating</span><span class="tag">spacious</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 35 ── -->
+    <div class="spot-card" data-area="ikebukuro" data-wifi="90" data-noise="4" data-late="23" data-tags="anime,themed,otaku">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Animate Café Ikebukuro</div>
+                <div class="card-name-jp">アニメイトカフェ 池袋</div>
+            </div>
+            <span class="card-area-badge badge-ikebukuro">Ikebukuro</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">90 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">6</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">40</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">4/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">10:00–23:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥600–¥1,000</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Weekday open</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">80 min</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">anime collabs</span><span class="tag">themed drinks</span><span class="tag">otome road</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 36 ── -->
+    <div class="spot-card" data-area="ikebukuro" data-wifi="110" data-noise="2" data-late="22" data-tags="specialty,quiet,craft">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Café Pause Ikebukuro</div>
+                <div class="card-name-jp">カフェ ポーズ 池袋</div>
+            </div>
+            <span class="card-area-badge badge-ikebukuro">Ikebukuro</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">110 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">12</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">30</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">2/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">10:00–22:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥450–¥750</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">All day</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">specialty</span><span class="tag">nomad-friendly</span><span class="tag">west exit</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 37 ── -->
+    <div class="spot-card" data-area="nakameguro" data-wifi="130" data-noise="2" data-late="22" data-tags="specialty,roaster,canal">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Onibus Coffee Nakameguro</div>
+                <div class="card-name-jp">オニバスコーヒー 中目黒</div>
+            </div>
+            <span class="card-area-badge badge-nakameguro">Nakameguro</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">130 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">10</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">20</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">2/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">9:00–22:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥450–¥800</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Weekday AM</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">canal-side</span><span class="tag">own roastery</span><span class="tag">minimal</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 38 ── -->
+    <div class="spot-card" data-area="nakameguro" data-wifi="95" data-noise="2" data-late="21" data-tags="artisan,bakery,quiet">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Traveler's Factory</div>
+                <div class="card-name-jp">トラベラーズファクトリー</div>
+            </div>
+            <span class="card-area-badge badge-nakameguro">Nakameguro</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">95 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">4</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">15</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">2/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">12:00–21:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥400–¥650</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Afternoon</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">stationery</span><span class="tag">notebooks</span><span class="tag">traveler vibes</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 39 ── -->
+    <div class="spot-card" data-area="nakameguro" data-wifi="140" data-noise="3" data-late="23" data-tags="modern,hip,brunch">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Sidewalk Stand Nakameguro</div>
+                <div class="card-name-jp">サイドウォークスタンド 中目黒</div>
+            </div>
+            <span class="card-area-badge badge-nakameguro">Nakameguro</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">140 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">8</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">25</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">3/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">8:00–23:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥500–¥850</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Morning</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">open air</span><span class="tag">brunch</span><span class="tag">riverside</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 40 ── -->
+    <div class="spot-card" data-area="koenji" data-wifi="60" data-noise="2" data-late="22" data-tags="punk,vinyl,underground">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Yonchome Café</div>
+                <div class="card-name-jp">四丁目カフェ</div>
+            </div>
+            <span class="card-area-badge badge-koenji">Koenji</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">60 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">6</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">20</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">2/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">12:00–22:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥350–¥600</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Afternoon</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">local community</span><span class="tag">cheap</span><span class="tag">chill</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 41 ── -->
+    <div class="spot-card" data-area="koenji" data-wifi="75" data-noise="3" data-late="23" data-tags="live-music,beer,community">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Café Ananda</div>
+                <div class="card-name-jp">カフェ アナンダ</div>
+            </div>
+            <span class="card-area-badge badge-koenji">Koenji</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">75 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">6</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">25</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">3/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">11:00–23:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥400–¥700</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Daytime (quiet)</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">organic</span><span class="tag">community events</span><span class="tag">south exit</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 42 ── -->
+    <div class="spot-card" data-area="koenji" data-wifi="100" data-noise="2" data-late="21" data-tags="specialty,roaster,quiet">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Amp Café</div>
+                <div class="card-name-jp">アンプカフェ</div>
+            </div>
+            <span class="card-area-badge badge-koenji">Koenji</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">100 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">8</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">18</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">2/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">10:00–21:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥400–¥700</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">All day</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">hand drip</span><span class="tag">minimal</span><span class="tag">local gem</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 43 ── -->
+    <div class="spot-card" data-area="daikanyama" data-wifi="200" data-noise="2" data-late="22" data-tags="books,premium,design">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Tsutaya T-Site Daikanyama</div>
+                <div class="card-name-jp">蔦屋書店 代官山T-SITE</div>
+            </div>
+            <span class="card-area-badge badge-daikanyama">Daikanyama</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">200 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">30</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">100</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">2/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">7:00–22:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥500–¥900</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Early morning</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">iconic</span><span class="tag">Anjin lounge</span><span class="tag">architecture</span><span class="tag">Starbucks</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 44 ── -->
+    <div class="spot-card" data-area="daikanyama" data-wifi="110" data-noise="2" data-late="20" data-tags="specialty,quiet,artisan">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Sign Daikanyama</div>
+                <div class="card-name-jp">サイン代官山</div>
+            </div>
+            <span class="card-area-badge badge-daikanyama">Daikanyama</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">110 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">10</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">35</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">2/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">9:00–20:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥550–¥900</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Weekday AM</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">terrace</span><span class="tag">brunch</span><span class="tag">upscale casual</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 45 ── -->
+    <div class="spot-card" data-area="daikanyama" data-wifi="85" data-noise="1" data-late="19" data-tags="matcha,japanese,zen">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Saryo Tsujiri Daikanyama</div>
+                <div class="card-name-jp">茶寮 都路里 代官山</div>
+            </div>
+            <span class="card-area-badge badge-daikanyama">Daikanyama</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">85 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">4</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">25</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">1/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">10:00–19:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥600–¥1,200</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Weekday afternoon</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">matcha</span><span class="tag">Uji tea</span><span class="tag">zen quiet</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 46 ── -->
+    <div class="spot-card" data-area="aoyama" data-wifi="170" data-noise="2" data-late="22" data-tags="blue-bottle,specialty,minimal">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Blue Bottle Coffee Aoyama</div>
+                <div class="card-name-jp">ブルーボトルコーヒー 青山</div>
+            </div>
+            <span class="card-area-badge badge-aoyama">Aoyama</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">170 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">15</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">50</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">2/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">8:00–22:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥500–¥850</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Weekday AM</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">Blue Bottle</span><span class="tag">flagship</span><span class="tag">minimal design</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 47 ── -->
+    <div class="spot-card" data-area="aoyama" data-wifi="130" data-noise="2" data-late="21" data-tags="gallery,art,quiet">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Spiral Café Aoyama</div>
+                <div class="card-name-jp">スパイラルカフェ 青山</div>
+            </div>
+            <span class="card-area-badge badge-aoyama">Aoyama</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">130 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">8</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">40</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">2/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">10:00–21:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥550–¥950</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Afternoon</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">Fumihiko Maki building</span><span class="tag">art gallery</span><span class="tag">Omotesando</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 48 ── -->
+    <div class="spot-card" data-area="asakusa" data-wifi="100" data-noise="2" data-late="21" data-tags="craft,artisan,kuramae">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Leaves Coffee Kuramae</div>
+                <div class="card-name-jp">リーブスコーヒー 蔵前</div>
+            </div>
+            <span class="card-area-badge badge-asakusa">Asakusa</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">100 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">8</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">20</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">2/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">9:00–21:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥450–¥750</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Morning</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">Kuramae craft district</span><span class="tag">single origin</span><span class="tag">local roast</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 49 ── -->
+    <div class="spot-card" data-area="asakusa" data-wifi="80" data-noise="3" data-late="22" data-tags="traditional,cultural,matcha">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Kaminarimon Saryo</div>
+                <div class="card-name-jp">雷門茶寮</div>
+            </div>
+            <span class="card-area-badge badge-asakusa">Asakusa</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">80 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">6</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">35</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">3/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">10:00–22:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥500–¥900</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Afternoon</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">temple view</span><span class="tag">matcha</span><span class="tag">wagashi</span>
+        </div>
+    </div>
+
+    <!-- ── CAFE 50 ── -->
+    <div class="spot-card" data-area="nihonbashi" data-wifi="180" data-noise="2" data-late="22" data-tags="business,premium,station">
+        <div class="card-header">
+            <div>
+                <div class="card-name">Marunouchi Café × WIRED</div>
+                <div class="card-name-jp">丸の内カフェ × WIRED</div>
+            </div>
+            <span class="card-area-badge badge-nihonbashi">Nihonbashi</span>
+        </div>
+        <div class="card-specs">
+            <div class="spec"><div class="spec-icon">📶</div><div class="spec-val">180 Mbps</div><div class="spec-label">WiFi</div></div>
+            <div class="spec"><div class="spec-icon">🔌</div><div class="spec-val">25</div><div class="spec-label">Outlets</div></div>
+            <div class="spec"><div class="spec-icon">💺</div><div class="spec-val">65</div><div class="spec-label">Seats</div></div>
+            <div class="spec"><div class="spec-icon">🔊</div><div class="spec-val">2/5</div><div class="spec-label">Noise</div></div>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Hours:</span><span class="detail-val">7:00–22:00</span></div>
+            <div class="detail-item"><span class="detail-label">Drinks:</span><span class="detail-val">¥500–¥900</span></div>
+            <div class="detail-item"><span class="detail-label">Best Time:</span><span class="detail-val">Morning</span></div>
+            <div class="detail-item"><span class="detail-label">Stay Limit:</span><span class="detail-val">None</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">Tokyo Station 2min</span><span class="tag">Shinkansen access</span><span class="tag">business</span>
+        </div>
+    </div>
+
+</div>
+<!-- End of Café Grid -->
+
+<!-- ══════════════════════════════════════════════════════════════════
+     COWORKING SPACES — TOP 20
+     ══════════════════════════════════════════════════════════════════ -->
+<div class="glow-divider"></div>
+<h2 class="section-title">
+    <span class="en">Coworking Spaces — Top 20</span>
+    <span class="jp-sub">コワーキングスペース 厳選20</span>
+</h2>
+<p class="section-desc">Dedicated desks, meeting rooms, and fast internet. Drop-in or monthly — your Tokyo office awaits.</p>
+
+<div class="filter-bar" id="cwFilterBar">
+    <div class="filter-group">
+        <label>Area エリア</label>
+        <select id="filterCwArea" onchange="applyCwFilters()">
+            <option value="all">All Areas</option>
+            <option value="shibuya">Shibuya</option>
+            <option value="shinjuku">Shinjuku</option>
+            <option value="roppongi">Roppongi</option>
+            <option value="akihabara">Akihabara</option>
+            <option value="ginza">Ginza</option>
+            <option value="ikebukuro">Ikebukuro</option>
+            <option value="shimokita">Shimokitazawa</option>
+            <option value="nakameguro">Nakameguro</option>
+            <option value="koenji">Koenji</option>
+            <option value="daikanyama">Daikanyama</option>
+            <option value="aoyama">Aoyama</option>
+            <option value="asakusa">Asakusa</option>
+        </select>
+    </div>
+    <div class="filter-group">
+        <label>Drop-in</label>
+        <select id="filterDropin" onchange="applyCwFilters()">
+            <option value="all">Any</option>
+            <option value="yes">Drop-in OK</option>
+        </select>
+    </div>
+</div>
+<div class="results-count" id="cwCount">Showing <span>20</span> of 20 spaces</div>
+
+<div class="cards-grid" id="cwGrid">
+
+    <!-- ── CW 1 ── -->
+    <div class="cw-card" data-area="shibuya" data-dropin="yes">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div><div class="cw-name">WeWork Shibuya Scramble Square</div><div class="cw-name-jp">WeWork 渋谷スクランブルスクエア</div></div>
+            <span class="card-area-badge badge-shibuya">Shibuya</span>
+        </div>
+        <div class="cw-specs">
+            <div class="cw-spec"><div class="cw-spec-val">500 Mbps</div><div class="cw-spec-label">WiFi</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">300+</div><div class="cw-spec-label">Seats</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">24H</div><div class="cw-spec-label">Access</div></div>
+        </div>
+        <div class="cw-pricing">
+            <span class="price-tag"><span class="amount">¥1,200</span><span class="period">/day</span></span>
+            <span class="price-tag"><span class="amount">¥40,000</span><span class="period">/month</span></span>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Outlets:</span><span class="detail-val">Every desk</span></div>
+            <div class="detail-item"><span class="detail-label">Meeting Rooms:</span><span class="detail-val">12</span></div>
+            <div class="detail-item"><span class="detail-label">Noise:</span><span class="detail-val">2/5</span></div>
+            <div class="detail-item"><span class="detail-label">Best For:</span><span class="detail-val">Remote teams</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">drop-in OK</span><span class="tag">phone booths</span><span class="tag">beer tap</span><span class="tag">sky view</span>
+        </div>
+    </div>
+
+    <!-- ── CW 2 ── -->
+    <div class="cw-card" data-area="shibuya" data-dropin="yes">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div><div class="cw-name">and Co Shibuya</div><div class="cw-name-jp">アンドコ渋谷</div></div>
+            <span class="card-area-badge badge-shibuya">Shibuya</span>
+        </div>
+        <div class="cw-specs">
+            <div class="cw-spec"><div class="cw-spec-val">300 Mbps</div><div class="cw-spec-label">WiFi</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">80</div><div class="cw-spec-label">Seats</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">9-22</div><div class="cw-spec-label">Hours</div></div>
+        </div>
+        <div class="cw-pricing">
+            <span class="price-tag"><span class="amount">¥800</span><span class="period">/day</span></span>
+            <span class="price-tag"><span class="amount">¥20,000</span><span class="period">/month</span></span>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Outlets:</span><span class="detail-val">Every seat</span></div>
+            <div class="detail-item"><span class="detail-label">Meeting Rooms:</span><span class="detail-val">4</span></div>
+            <div class="detail-item"><span class="detail-label">Noise:</span><span class="detail-val">2/5</span></div>
+            <div class="detail-item"><span class="detail-label">Best For:</span><span class="detail-val">Freelancers</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">drop-in OK</span><span class="tag">community events</span><span class="tag">budget-friendly</span>
+        </div>
+    </div>
+
+    <!-- ── CW 3 ── -->
+    <div class="cw-card" data-area="shibuya" data-dropin="yes">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div><div class="cw-name">COIN SPACE Shibuya Mark City</div><div class="cw-name-jp">コインスペース渋谷マークシティ</div></div>
+            <span class="card-area-badge badge-shibuya">Shibuya</span>
+        </div>
+        <div class="cw-specs">
+            <div class="cw-spec"><div class="cw-spec-val">200 Mbps</div><div class="cw-spec-label">WiFi</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">60</div><div class="cw-spec-label">Seats</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">10-22</div><div class="cw-spec-label">Hours</div></div>
+        </div>
+        <div class="cw-pricing">
+            <span class="price-tag"><span class="amount">¥500</span><span class="period">/2hr</span></span>
+            <span class="price-tag"><span class="amount">¥1,500</span><span class="period">/day</span></span>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Outlets:</span><span class="detail-val">Every desk</span></div>
+            <div class="detail-item"><span class="detail-label">Meeting Rooms:</span><span class="detail-val">2</span></div>
+            <div class="detail-item"><span class="detail-label">Noise:</span><span class="detail-val">2/5</span></div>
+            <div class="detail-item"><span class="detail-label">Best For:</span><span class="detail-val">Quick sessions</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">drop-in OK</span><span class="tag">coin-operated</span><span class="tag">no reservation</span>
+        </div>
+    </div>
+
+    <!-- ── CW 4 ── -->
+    <div class="cw-card" data-area="shinjuku" data-dropin="yes">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div><div class="cw-name">SPACES Shinjuku</div><div class="cw-name-jp">スペーシーズ新宿</div></div>
+            <span class="card-area-badge badge-shinjuku">Shinjuku</span>
+        </div>
+        <div class="cw-specs">
+            <div class="cw-spec"><div class="cw-spec-val">400 Mbps</div><div class="cw-spec-label">WiFi</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">200</div><div class="cw-spec-label">Seats</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">24H</div><div class="cw-spec-label">Access</div></div>
+        </div>
+        <div class="cw-pricing">
+            <span class="price-tag"><span class="amount">¥2,000</span><span class="period">/day</span></span>
+            <span class="price-tag"><span class="amount">¥45,000</span><span class="period">/month</span></span>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Outlets:</span><span class="detail-val">Every desk</span></div>
+            <div class="detail-item"><span class="detail-label">Meeting Rooms:</span><span class="detail-val">8</span></div>
+            <div class="detail-item"><span class="detail-label">Noise:</span><span class="detail-val">2/5</span></div>
+            <div class="detail-item"><span class="detail-label">Best For:</span><span class="detail-val">Enterprise teams</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">drop-in OK</span><span class="tag">IWG network</span><span class="tag">professional</span>
+        </div>
+    </div>
+
+    <!-- ── CW 5 ── -->
+    <div class="cw-card" data-area="shinjuku" data-dropin="yes">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div><div class="cw-name">Basis Point Shinjuku</div><div class="cw-name-jp">ベーシスポイント新宿</div></div>
+            <span class="card-area-badge badge-shinjuku">Shinjuku</span>
+        </div>
+        <div class="cw-specs">
+            <div class="cw-spec"><div class="cw-spec-val">250 Mbps</div><div class="cw-spec-label">WiFi</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">100</div><div class="cw-spec-label">Seats</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">7-23</div><div class="cw-spec-label">Hours</div></div>
+        </div>
+        <div class="cw-pricing">
+            <span class="price-tag"><span class="amount">¥600</span><span class="period">/hr</span></span>
+            <span class="price-tag"><span class="amount">¥2,500</span><span class="period">/day</span></span>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Outlets:</span><span class="detail-val">Every seat</span></div>
+            <div class="detail-item"><span class="detail-label">Meeting Rooms:</span><span class="detail-val">5</span></div>
+            <div class="detail-item"><span class="detail-label">Noise:</span><span class="detail-val">1/5</span></div>
+            <div class="detail-item"><span class="detail-label">Best For:</span><span class="detail-val">Deep work</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">drop-in OK</span><span class="tag">quiet zones</span><span class="tag">finance pros</span>
+        </div>
+    </div>
+
+    <!-- ── CW 6 ── -->
+    <div class="cw-card" data-area="shinjuku" data-dropin="yes">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div><div class="cw-name">STATION WORK Shinjuku</div><div class="cw-name-jp">ステーションワーク新宿</div></div>
+            <span class="card-area-badge badge-shinjuku">Shinjuku</span>
+        </div>
+        <div class="cw-specs">
+            <div class="cw-spec"><div class="cw-spec-val">200 Mbps</div><div class="cw-spec-label">WiFi</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">30</div><div class="cw-spec-label">Booths</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">6-24</div><div class="cw-spec-label">Hours</div></div>
+        </div>
+        <div class="cw-pricing">
+            <span class="price-tag"><span class="amount">¥275</span><span class="period">/15min</span></span>
+            <span class="price-tag"><span class="amount">¥1,100</span><span class="period">/hr</span></span>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Outlets:</span><span class="detail-val">Every booth</span></div>
+            <div class="detail-item"><span class="detail-label">Meeting Rooms:</span><span class="detail-val">0</span></div>
+            <div class="detail-item"><span class="detail-label">Noise:</span><span class="detail-val">1/5</span></div>
+            <div class="detail-item"><span class="detail-label">Best For:</span><span class="detail-val">Quick calls</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">drop-in OK</span><span class="tag">JR East</span><span class="tag">station booth</span><span class="tag">soundproof</span>
+        </div>
+    </div>
+
+    <!-- ── CW 7 ── -->
+    <div class="cw-card" data-area="roppongi" data-dropin="yes">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div><div class="cw-name">DMM.make AKIBA Roppongi</div><div class="cw-name-jp">DMM.make 六本木</div></div>
+            <span class="card-area-badge badge-roppongi">Roppongi</span>
+        </div>
+        <div class="cw-specs">
+            <div class="cw-spec"><div class="cw-spec-val">1 Gbps</div><div class="cw-spec-label">WiFi</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">150</div><div class="cw-spec-label">Seats</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">24H</div><div class="cw-spec-label">Access</div></div>
+        </div>
+        <div class="cw-pricing">
+            <span class="price-tag"><span class="amount">¥3,000</span><span class="period">/day</span></span>
+            <span class="price-tag"><span class="amount">¥50,000</span><span class="period">/month</span></span>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Outlets:</span><span class="detail-val">Every desk</span></div>
+            <div class="detail-item"><span class="detail-label">Meeting Rooms:</span><span class="detail-val">6</span></div>
+            <div class="detail-item"><span class="detail-label">Noise:</span><span class="detail-val">2/5</span></div>
+            <div class="detail-item"><span class="detail-label">Best For:</span><span class="detail-val">Tech startups</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">drop-in OK</span><span class="tag">hardware lab</span><span class="tag">3D printers</span><span class="tag">startup scene</span>
+        </div>
+    </div>
+
+    <!-- ── CW 8 ── -->
+    <div class="cw-card" data-area="roppongi" data-dropin="yes">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div><div class="cw-name">Servcorp Roppongi Hills</div><div class="cw-name-jp">サーブコープ六本木ヒルズ</div></div>
+            <span class="card-area-badge badge-roppongi">Roppongi</span>
+        </div>
+        <div class="cw-specs">
+            <div class="cw-spec"><div class="cw-spec-val">500 Mbps</div><div class="cw-spec-label">WiFi</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">80</div><div class="cw-spec-label">Seats</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">8-20</div><div class="cw-spec-label">Hours</div></div>
+        </div>
+        <div class="cw-pricing">
+            <span class="price-tag"><span class="amount">¥4,000</span><span class="period">/day</span></span>
+            <span class="price-tag"><span class="amount">¥80,000</span><span class="period">/month</span></span>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Outlets:</span><span class="detail-val">Every desk</span></div>
+            <div class="detail-item"><span class="detail-label">Meeting Rooms:</span><span class="detail-val">10</span></div>
+            <div class="detail-item"><span class="detail-label">Noise:</span><span class="detail-val">1/5</span></div>
+            <div class="detail-item"><span class="detail-label">Best For:</span><span class="detail-val">Client meetings</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">drop-in OK</span><span class="tag">premium</span><span class="tag">receptionist</span><span class="tag">virtual office</span>
+        </div>
+    </div>
+
+    <!-- ── CW 9 ── -->
+    <div class="cw-card" data-area="akihabara" data-dropin="yes">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div><div class="cw-name">LIFORK Akihabara</div><div class="cw-name-jp">ライフォーク秋葉原</div></div>
+            <span class="card-area-badge badge-akihabara">Akihabara</span>
+        </div>
+        <div class="cw-specs">
+            <div class="cw-spec"><div class="cw-spec-val">300 Mbps</div><div class="cw-spec-label">WiFi</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">100</div><div class="cw-spec-label">Seats</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">7-22</div><div class="cw-spec-label">Hours</div></div>
+        </div>
+        <div class="cw-pricing">
+            <span class="price-tag"><span class="amount">¥700</span><span class="period">/hr</span></span>
+            <span class="price-tag"><span class="amount">¥25,000</span><span class="period">/month</span></span>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Outlets:</span><span class="detail-val">Every seat</span></div>
+            <div class="detail-item"><span class="detail-label">Meeting Rooms:</span><span class="detail-val">4</span></div>
+            <div class="detail-item"><span class="detail-label">Noise:</span><span class="detail-val">2/5</span></div>
+            <div class="detail-item"><span class="detail-label">Best For:</span><span class="detail-val">Tech workers</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">drop-in OK</span><span class="tag">JR building</span><span class="tag">tech district</span>
+        </div>
+    </div>
+
+    <!-- ── CW 10 ── -->
+    <div class="cw-card" data-area="akihabara" data-dropin="yes">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div><div class="cw-name">Regus Akihabara</div><div class="cw-name-jp">リージャス秋葉原</div></div>
+            <span class="card-area-badge badge-akihabara">Akihabara</span>
+        </div>
+        <div class="cw-specs">
+            <div class="cw-spec"><div class="cw-spec-val">350 Mbps</div><div class="cw-spec-label">WiFi</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">120</div><div class="cw-spec-label">Seats</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">8-21</div><div class="cw-spec-label">Hours</div></div>
+        </div>
+        <div class="cw-pricing">
+            <span class="price-tag"><span class="amount">¥2,500</span><span class="period">/day</span></span>
+            <span class="price-tag"><span class="amount">¥55,000</span><span class="period">/month</span></span>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Outlets:</span><span class="detail-val">Every desk</span></div>
+            <div class="detail-item"><span class="detail-label">Meeting Rooms:</span><span class="detail-val">6</span></div>
+            <div class="detail-item"><span class="detail-label">Noise:</span><span class="detail-val">1/5</span></div>
+            <div class="detail-item"><span class="detail-label">Best For:</span><span class="detail-val">Corporate remote</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">drop-in OK</span><span class="tag">IWG network</span><span class="tag">business address</span>
+        </div>
+    </div>
+
+    <!-- ── CW 11 ── -->
+    <div class="cw-card" data-area="ginza" data-dropin="yes">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div><div class="cw-name">TIMESPACE Ginza</div><div class="cw-name-jp">タイムスペース銀座</div></div>
+            <span class="card-area-badge badge-ginza">Ginza</span>
+        </div>
+        <div class="cw-specs">
+            <div class="cw-spec"><div class="cw-spec-val">400 Mbps</div><div class="cw-spec-label">WiFi</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">60</div><div class="cw-spec-label">Seats</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">9-21</div><div class="cw-spec-label">Hours</div></div>
+        </div>
+        <div class="cw-pricing">
+            <span class="price-tag"><span class="amount">¥1,500</span><span class="period">/3hr</span></span>
+            <span class="price-tag"><span class="amount">¥35,000</span><span class="period">/month</span></span>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Outlets:</span><span class="detail-val">Every desk</span></div>
+            <div class="detail-item"><span class="detail-label">Meeting Rooms:</span><span class="detail-val">3</span></div>
+            <div class="detail-item"><span class="detail-label">Noise:</span><span class="detail-val">1/5</span></div>
+            <div class="detail-item"><span class="detail-label">Best For:</span><span class="detail-val">Solo focus</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">drop-in OK</span><span class="tag">elegant</span><span class="tag">Ginza Chuo-dori</span>
+        </div>
+    </div>
+
+    <!-- ── CW 12 ── -->
+    <div class="cw-card" data-area="ginza" data-dropin="yes">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div><div class="cw-name">The Hub Ginza</div><div class="cw-name-jp">ザ・ハブ銀座</div></div>
+            <span class="card-area-badge badge-ginza">Ginza</span>
+        </div>
+        <div class="cw-specs">
+            <div class="cw-spec"><div class="cw-spec-val">300 Mbps</div><div class="cw-spec-label">WiFi</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">90</div><div class="cw-spec-label">Seats</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">8-22</div><div class="cw-spec-label">Hours</div></div>
+        </div>
+        <div class="cw-pricing">
+            <span class="price-tag"><span class="amount">¥1,800</span><span class="period">/day</span></span>
+            <span class="price-tag"><span class="amount">¥42,000</span><span class="period">/month</span></span>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Outlets:</span><span class="detail-val">Every desk</span></div>
+            <div class="detail-item"><span class="detail-label">Meeting Rooms:</span><span class="detail-val">5</span></div>
+            <div class="detail-item"><span class="detail-label">Noise:</span><span class="detail-val">2/5</span></div>
+            <div class="detail-item"><span class="detail-label">Best For:</span><span class="detail-val">Business pros</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">drop-in OK</span><span class="tag">global network</span><span class="tag">locker storage</span>
+        </div>
+    </div>
+
+    <!-- ── CW 13 ── -->
+    <div class="cw-card" data-area="ikebukuro" data-dropin="yes">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div><div class="cw-name">Open Office FOREST Ikebukuro</div><div class="cw-name-jp">オープンオフィス フォレスト池袋</div></div>
+            <span class="card-area-badge badge-ikebukuro">Ikebukuro</span>
+        </div>
+        <div class="cw-specs">
+            <div class="cw-spec"><div class="cw-spec-val">200 Mbps</div><div class="cw-spec-label">WiFi</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">70</div><div class="cw-spec-label">Seats</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">8-21</div><div class="cw-spec-label">Hours</div></div>
+        </div>
+        <div class="cw-pricing">
+            <span class="price-tag"><span class="amount">¥600</span><span class="period">/hr</span></span>
+            <span class="price-tag"><span class="amount">¥18,000</span><span class="period">/month</span></span>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Outlets:</span><span class="detail-val">Every desk</span></div>
+            <div class="detail-item"><span class="detail-label">Meeting Rooms:</span><span class="detail-val">3</span></div>
+            <div class="detail-item"><span class="detail-label">Noise:</span><span class="detail-val">2/5</span></div>
+            <div class="detail-item"><span class="detail-label">Best For:</span><span class="detail-val">Budget nomads</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">drop-in OK</span><span class="tag">budget</span><span class="tag">east exit</span>
+        </div>
+    </div>
+
+    <!-- ── CW 14 ── -->
+    <div class="cw-card" data-area="ikebukuro" data-dropin="yes">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div><div class="cw-name">BIZcomfort Ikebukuro</div><div class="cw-name-jp">ビズコンフォート池袋</div></div>
+            <span class="card-area-badge badge-ikebukuro">Ikebukuro</span>
+        </div>
+        <div class="cw-specs">
+            <div class="cw-spec"><div class="cw-spec-val">250 Mbps</div><div class="cw-spec-label">WiFi</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">50</div><div class="cw-spec-label">Seats</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">24H</div><div class="cw-spec-label">Access</div></div>
+        </div>
+        <div class="cw-pricing">
+            <span class="price-tag"><span class="amount">¥500</span><span class="period">/hr</span></span>
+            <span class="price-tag"><span class="amount">¥15,000</span><span class="period">/month</span></span>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Outlets:</span><span class="detail-val">Every seat</span></div>
+            <div class="detail-item"><span class="detail-label">Meeting Rooms:</span><span class="detail-val">2</span></div>
+            <div class="detail-item"><span class="detail-label">Noise:</span><span class="detail-val">1/5</span></div>
+            <div class="detail-item"><span class="detail-label">Best For:</span><span class="detail-val">Night owls</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">drop-in OK</span><span class="tag">24h access</span><span class="tag">cheapest monthly</span>
+        </div>
+    </div>
+
+    <!-- ── CW 15-20 remaining ── -->
+    <div class="cw-card" data-area="shimokita" data-dropin="yes">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div><div class="cw-name">SYCL by Keio Shimokitazawa</div><div class="cw-name-jp">SYCL 下北沢</div></div>
+            <span class="card-area-badge badge-shimokita">Shimokita</span>
+        </div>
+        <div class="cw-specs">
+            <div class="cw-spec"><div class="cw-spec-val">250 Mbps</div><div class="cw-spec-label">WiFi</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">60</div><div class="cw-spec-label">Seats</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">7-22</div><div class="cw-spec-label">Hours</div></div>
+        </div>
+        <div class="cw-pricing">
+            <span class="price-tag"><span class="amount">¥660</span><span class="period">/hr</span></span>
+            <span class="price-tag"><span class="amount">¥22,000</span><span class="period">/month</span></span>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Outlets:</span><span class="detail-val">Every desk</span></div>
+            <div class="detail-item"><span class="detail-label">Meeting Rooms:</span><span class="detail-val">3</span></div>
+            <div class="detail-item"><span class="detail-label">Noise:</span><span class="detail-val">2/5</span></div>
+            <div class="detail-item"><span class="detail-label">Best For:</span><span class="detail-val">Creatives</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">drop-in OK</span><span class="tag">Keio Line direct</span><span class="tag">new facility</span>
+        </div>
+    </div>
+
+    <div class="cw-card" data-area="nakameguro" data-dropin="yes">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div><div class="cw-name">THE WORKS Nakameguro</div><div class="cw-name-jp">ザ・ワークス中目黒</div></div>
+            <span class="card-area-badge badge-nakameguro">Nakameguro</span>
+        </div>
+        <div class="cw-specs">
+            <div class="cw-spec"><div class="cw-spec-val">300 Mbps</div><div class="cw-spec-label">WiFi</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">40</div><div class="cw-spec-label">Seats</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">9-22</div><div class="cw-spec-label">Hours</div></div>
+        </div>
+        <div class="cw-pricing">
+            <span class="price-tag"><span class="amount">¥1,500</span><span class="period">/day</span></span>
+            <span class="price-tag"><span class="amount">¥28,000</span><span class="period">/month</span></span>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Outlets:</span><span class="detail-val">Every desk</span></div>
+            <div class="detail-item"><span class="detail-label">Meeting Rooms:</span><span class="detail-val">2</span></div>
+            <div class="detail-item"><span class="detail-label">Noise:</span><span class="detail-val">2/5</span></div>
+            <div class="detail-item"><span class="detail-label">Best For:</span><span class="detail-val">Designers</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">drop-in OK</span><span class="tag">canal view</span><span class="tag">aesthetic</span>
+        </div>
+    </div>
+
+    <div class="cw-card" data-area="koenji" data-dropin="yes">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div><div class="cw-name">Koenji Coworking HIVE</div><div class="cw-name-jp">高円寺コワーキング HIVE</div></div>
+            <span class="card-area-badge badge-koenji">Koenji</span>
+        </div>
+        <div class="cw-specs">
+            <div class="cw-spec"><div class="cw-spec-val">150 Mbps</div><div class="cw-spec-label">WiFi</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">30</div><div class="cw-spec-label">Seats</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">10-21</div><div class="cw-spec-label">Hours</div></div>
+        </div>
+        <div class="cw-pricing">
+            <span class="price-tag"><span class="amount">¥500</span><span class="period">/hr</span></span>
+            <span class="price-tag"><span class="amount">¥12,000</span><span class="period">/month</span></span>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Outlets:</span><span class="detail-val">Every seat</span></div>
+            <div class="detail-item"><span class="detail-label">Meeting Rooms:</span><span class="detail-val">1</span></div>
+            <div class="detail-item"><span class="detail-label">Noise:</span><span class="detail-val">2/5</span></div>
+            <div class="detail-item"><span class="detail-label">Best For:</span><span class="detail-val">Budget creatives</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">drop-in OK</span><span class="tag">cheapest in Tokyo</span><span class="tag">community</span>
+        </div>
+    </div>
+
+    <div class="cw-card" data-area="daikanyama" data-dropin="yes">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div><div class="cw-name">SHARE LOUNGE Daikanyama</div><div class="cw-name-jp">シェアラウンジ代官山</div></div>
+            <span class="card-area-badge badge-daikanyama">Daikanyama</span>
+        </div>
+        <div class="cw-specs">
+            <div class="cw-spec"><div class="cw-spec-val">350 Mbps</div><div class="cw-spec-label">WiFi</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">50</div><div class="cw-spec-label">Seats</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">9-21</div><div class="cw-spec-label">Hours</div></div>
+        </div>
+        <div class="cw-pricing">
+            <span class="price-tag"><span class="amount">¥1,650</span><span class="period">/2hr</span></span>
+            <span class="price-tag"><span class="amount">¥30,000</span><span class="period">/month</span></span>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Outlets:</span><span class="detail-val">Every seat</span></div>
+            <div class="detail-item"><span class="detail-label">Meeting Rooms:</span><span class="detail-val">2</span></div>
+            <div class="detail-item"><span class="detail-label">Noise:</span><span class="detail-val">1/5</span></div>
+            <div class="detail-item"><span class="detail-label">Best For:</span><span class="detail-val">Premium nomads</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">drop-in OK</span><span class="tag">free drinks</span><span class="tag">T-Site connected</span>
+        </div>
+    </div>
+
+    <div class="cw-card" data-area="aoyama" data-dropin="yes">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div><div class="cw-name">COMMUNE Aoyama</div><div class="cw-name-jp">コミューン青山</div></div>
+            <span class="card-area-badge badge-aoyama">Aoyama</span>
+        </div>
+        <div class="cw-specs">
+            <div class="cw-spec"><div class="cw-spec-val">250 Mbps</div><div class="cw-spec-label">WiFi</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">45</div><div class="cw-spec-label">Seats</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">10-22</div><div class="cw-spec-label">Hours</div></div>
+        </div>
+        <div class="cw-pricing">
+            <span class="price-tag"><span class="amount">¥2,000</span><span class="period">/day</span></span>
+            <span class="price-tag"><span class="amount">¥38,000</span><span class="period">/month</span></span>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Outlets:</span><span class="detail-val">Every desk</span></div>
+            <div class="detail-item"><span class="detail-label">Meeting Rooms:</span><span class="detail-val">3</span></div>
+            <div class="detail-item"><span class="detail-label">Noise:</span><span class="detail-val">2/5</span></div>
+            <div class="detail-item"><span class="detail-label">Best For:</span><span class="detail-val">Creative teams</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">drop-in OK</span><span class="tag">food trucks</span><span class="tag">open-air area</span>
+        </div>
+    </div>
+
+    <div class="cw-card" data-area="asakusa" data-dropin="yes">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div><div class="cw-name">Co-Edo Kuramae</div><div class="cw-name-jp">コエド蔵前</div></div>
+            <span class="card-area-badge badge-asakusa">Asakusa</span>
+        </div>
+        <div class="cw-specs">
+            <div class="cw-spec"><div class="cw-spec-val">200 Mbps</div><div class="cw-spec-label">WiFi</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">35</div><div class="cw-spec-label">Seats</div></div>
+            <div class="cw-spec"><div class="cw-spec-val">10-22</div><div class="cw-spec-label">Hours</div></div>
+        </div>
+        <div class="cw-pricing">
+            <span class="price-tag"><span class="amount">¥600</span><span class="period">/hr</span></span>
+            <span class="price-tag"><span class="amount">¥16,000</span><span class="period">/month</span></span>
+        </div>
+        <div class="card-details">
+            <div class="detail-item"><span class="detail-label">Outlets:</span><span class="detail-val">Every seat</span></div>
+            <div class="detail-item"><span class="detail-label">Meeting Rooms:</span><span class="detail-val">1</span></div>
+            <div class="detail-item"><span class="detail-label">Noise:</span><span class="detail-val">2/5</span></div>
+            <div class="detail-item"><span class="detail-label">Best For:</span><span class="detail-val">Indie devs</span></div>
+        </div>
+        <div class="card-tags">
+            <span class="tag">drop-in OK</span><span class="tag">craft district</span><span class="tag">community-run</span>
+        </div>
+    </div>
+
+</div>
+<!-- End of Coworking Grid -->
+
+<!-- ══════════════════════════════════════════════════════════════════
+     DIGITAL NOMAD TIPS
+     ══════════════════════════════════════════════════════════════════ -->
+<div class="glow-divider"></div>
+<h2 class="section-title">
+    <span class="en">Digital Nomad Survival Guide</span>
+    <span class="jp-sub">デジタルノマド サバイバルガイド</span>
+</h2>
+<p class="section-desc">Practical tips for working remotely in Tokyo. Tested by nomads, verified at 3AM.</p>
+
+<div class="tips-grid">
+
+    <div class="tip-card">
+        <div class="tip-icon">📡</div>
+        <div class="tip-title">Pocket WiFi vs. SIM</div>
+        <div class="tip-text">Rent a pocket WiFi at the airport (¥500–900/day) for multi-device coverage. If you only need phone data, grab an eSIM from Ubigi or Airalo before landing. Unlimited data SIMs run ¥3,000–5,000 for 30 days. Always have a backup — café WiFi can drop during peak hours.</div>
+    </div>
+
+    <div class="tip-card">
+        <div class="tip-icon">🔌</div>
+        <div class="tip-title">Power Adapter Reality</div>
+        <div class="tip-text">Japan uses Type A plugs (same as US/Canada). Voltage is 100V — most modern laptop chargers handle 100–240V automatically. Check your charger's label. No adapter needed for US plugs. EU/UK travelers need a simple adapter, not a converter. Carry a small power strip — outlets in cafés are precious.</div>
+    </div>
+
+    <div class="tip-card">
+        <div class="tip-icon">🕐</div>
+        <div class="tip-title">Time Zone Hacking</div>
+        <div class="tip-text">Tokyo is JST (UTC+9). If your clients are in the US, your overlap window is 7–10AM JST (ET evening). Europe overlap: 4–7PM JST. Use jet lag to your advantage — wake up at 4AM, crush deep work before Tokyo opens. Many manga cafés are 24h if you need a 3AM workspace.</div>
+    </div>
+
+    <div class="tip-card">
+        <div class="tip-icon">💴</div>
+        <div class="tip-title">Cash Still Matters</div>
+        <div class="tip-text">Many smaller cafés are cash-only. 7-Eleven and Family Mart ATMs accept international cards with no issues. Withdraw ¥10,000–20,000 at a time. IC cards (Suica/PASMO) work at chain cafés, convenience stores, and trains. Load them at any station.</div>
+    </div>
+
+    <div class="tip-card">
+        <div class="tip-icon">🤫</div>
+        <div class="tip-title">Café Etiquette</div>
+        <div class="tip-text">Phone calls in cafés are a hard no in Japan. Step outside or use a phone booth. Many coworking spaces have designated phone areas. Don't spread across multiple seats during peak hours. Order at least one drink per 2 hours as a courtesy. Some kissaten (traditional cafés) frown on laptops — read the room.</div>
+    </div>
+
+    <div class="tip-card">
+        <div class="tip-icon">🏠</div>
+        <div class="tip-title">Accommodation for Nomads</div>
+        <div class="tip-text">Monthly apartments via Sakura House or Weekly Mansion start at ¥80,000/month. Hostels with coworking areas (like UNPLAN Shinjuku) offer ¥3,000–5,000/night. AirBnb is legal in Japan but regulated — look for licensed listings. Stay near a JR Yamanote Line station for easy café-hopping access.</div>
+    </div>
+
+    <div class="tip-card">
+        <div class="tip-icon">🚃</div>
+        <div class="tip-title">Getting Between Spots</div>
+        <div class="tip-text">The Yamanote Line connects most café areas in this guide. Average commute between areas: 10–20 minutes. A PASMO/Suica card auto-charges and works everywhere. Google Maps transit directions are extremely accurate in Tokyo — trust them. Last train is around 12:00–12:30AM. After that: taxi, night bus, or 24h café.</div>
+    </div>
+
+    <div class="tip-card">
+        <div class="tip-icon">🍙</div>
+        <div class="tip-title">Fuel Your Work Session</div>
+        <div class="tip-text">Convenience store onigiri (¥120–200) is the perfect desk snack. Family Mart's iced coffee (¥150) rivals most cafés. Bento boxes at any konbini run ¥400–700. For a proper lunch break, look for teishoku (set meal) restaurants near your café — typically ¥800–1,200 for a complete meal with rice, soup, and sides.</div>
+    </div>
+
+    <div class="tip-card">
+        <div class="tip-icon">🔋</div>
+        <div class="tip-title">Battery Emergency Kit</div>
+        <div class="tip-text">Rent a mobile battery from ChargeSPOT (red stations in every convenience store and station). ¥300 for the first hour, ¥150/hr after. Return at any ChargeSPOT station. Keep a 10,000mAh power bank as permanent EDC. Most manga/internet cafés provide USB charging at every booth.</div>
+    </div>
+
+    <div class="tip-card">
+        <div class="tip-icon">🗣️</div>
+        <div class="tip-title">Language Barrier Tips</div>
+        <div class="tip-text">Google Translate's camera mode reads Japanese menus and signs in real-time. Learn basics: sumimasen (excuse me), WiFi arimasu ka? (is there WiFi?), kochira de ii desu ka? (is it OK to sit here?). Most chain cafés have English menus. DeepL works better than Google for longer text translation.</div>
+    </div>
+
+    <div class="tip-card">
+        <div class="tip-icon">📱</div>
+        <div class="tip-title">Essential Apps</div>
+        <div class="tip-text">Japan Transit (train routes), Google Maps (everything else), Tabelog (restaurant ratings — the Japanese Yelp), PayPay (mobile payments accepted widely), LINE (messaging — Japan's WhatsApp). Download offline maps before arriving. Suica app works on iPhone — add it to Apple Wallet.</div>
+    </div>
+
+    <div class="tip-card">
+        <div class="tip-icon">🌙</div>
+        <div class="tip-title">Jet Lag Work Strategy</div>
+        <div class="tip-text">Days 1–3: Embrace the early wake-ups. Hit a 24h café or manga kissa at 4AM for distraction-free deep work. Days 4–7: Your body adjusts — shift to normal hours but keep an early morning routine. Use afternoon slumps for admin tasks, meetings, or exploration. Evening: wind down at a bar with WiFi — some izakaya have outlets.</div>
+    </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     FOOTER
+     ══════════════════════════════════════════════════════════════════ -->
+<div class="glow-divider"></div>
+<footer>
+    <div class="logo-foot">TOKYO JET LAG</div>
+    <p>Café & Workspace Guide — Built for digital nomads running on coffee and adrenaline.</p>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="food-guide.html">Food</a>
+        <a href="nightlife.html">Nightlife</a>
+        <a href="transport-guide.html">Transport</a>
+        <a href="hidden-gems.html">Hidden Gems</a>
+    </nav>
+    <p style="margin-top:1rem;font-size:0.65rem;color:var(--text-dim)">Data reflects typical conditions. WiFi speeds and hours may vary. Always verify before relying on a spot for critical work.</p>
+</footer>
+
+<!-- Back to top button -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     JAVASCRIPT — Filters & Interactions
+     ══════════════════════════════════════════════════════════════════ -->
+<script>
+/* ── Café Filters ── */
+function applyFilters() {
+    const area = document.getElementById('filterArea').value;
+    const wifi = document.getElementById('filterWifi').value;
+    const noise = document.getElementById('filterNoise').value;
+    const late = document.getElementById('filterLate').value;
+    const search = document.getElementById('filterSearch').value.toLowerCase();
+
+    const cards = document.querySelectorAll('#cafeGrid .spot-card');
+    let visible = 0;
+
+    cards.forEach(card => {
+        const cardArea = card.dataset.area;
+        const cardWifi = parseInt(card.dataset.wifi);
+        const cardNoise = parseInt(card.dataset.noise);
+        const cardLate = parseInt(card.dataset.late);
+        const cardTags = card.dataset.tags || '';
+        const cardText = card.textContent.toLowerCase();
+
+        let show = true;
+
+        if (area !== 'all' && cardArea !== area) show = false;
+        if (wifi === 'fast' && cardWifi < 50) show = false;
+        if (wifi === 'blazing' && cardWifi < 100) show = false;
+        if (noise === 'quiet' && cardNoise > 2) show = false;
+        if (noise === 'moderate' && cardNoise !== 3) show = false;
+        if (noise === 'lively' && cardNoise < 4) show = false;
+        if (late === 'late' && cardLate < 23) show = false;
+        if (late === '24h' && cardLate < 24) show = false;
+        if (search && !cardText.includes(search) && !cardTags.includes(search)) show = false;
+
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+    });
+
+    document.querySelector('#cafeCount span').textContent = visible;
+}
+
+/* ── Coworking Filters ── */
+function applyCwFilters() {
+    const area = document.getElementById('filterCwArea').value;
+    const dropin = document.getElementById('filterDropin').value;
+
+    const cards = document.querySelectorAll('#cwGrid .cw-card');
+    let visible = 0;
+
+    cards.forEach(card => {
+        const cardArea = card.dataset.area;
+        const cardDropin = card.dataset.dropin;
+
+        let show = true;
+        if (area !== 'all' && cardArea !== area) show = false;
+        if (dropin === 'yes' && cardDropin !== 'yes') show = false;
+
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+    });
+
+    document.querySelector('#cwCount span').textContent = visible;
+}
+
+/* ── Area Map Filter ── */
+function filterByArea(area) {
+    document.getElementById('filterArea').value = area;
+    applyFilters();
+
+    // Also filter coworking
+    document.getElementById('filterCwArea').value = area;
+    applyCwFilters();
+
+    // Scroll to café section
+    document.getElementById('cafeFilterBar').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    // Update area tab active state
+    document.querySelectorAll('.area-map-card').forEach(c => {
+        c.style.borderColor = '';
+        c.style.boxShadow = '';
+    });
+    event.currentTarget.style.borderColor = 'var(--neon-blue)';
+    event.currentTarget.style.boxShadow = '0 0 20px rgba(0,240,255,0.2)';
+}
+
+/* ── Back to Top visibility ── */
+window.addEventListener('scroll', () => {
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 600) {
+        btn.classList.add('visible');
+    } else {
+        btn.classList.remove('visible');
+    }
+});
+
+/* ── Smooth reveal on scroll ── */
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.spot-card, .cw-card, .tip-card, .area-map-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+});
+
+/* ── Glitch effect on hero title ── */
+const heroTitle = document.querySelector('.hero h1');
+if (heroTitle) {
+    setInterval(() => {
+        heroTitle.style.textShadow = `
+            ${Math.random() * 4 - 2}px ${Math.random() * 4 - 2}px 0 rgba(255,0,128,0.3),
+            ${Math.random() * 4 - 2}px ${Math.random() * 4 - 2}px 0 rgba(0,240,255,0.3)
+        `;
+        setTimeout(() => {
+            heroTitle.style.textShadow = 'none';
+        }, 50);
+    }, 4000);
+}
+
+/* ── Console Easter Egg ── */
+console.log('%c TOKYO JET LAG ', 'background: #04040f; color: #00f0ff; font-size: 24px; font-weight: bold; padding: 10px 20px; border: 2px solid #00f0ff;');
+console.log('%c カフェ＆ワークスペース完全ガイド ', 'background: #04040f; color: #ff0080; font-size: 14px; padding: 5px 15px;');
+console.log('%c 50 cafés + 20 coworking spaces ', 'color: #7070a0; font-size: 12px;');
+</script>
+
+</body>
+</html>

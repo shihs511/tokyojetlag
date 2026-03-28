@@ -1,0 +1,362 @@
+/* Tokyo Jet Lag — Skeleton Loading Animations
+ * Dark theme skeleton shimmer UI for fast perceived performance
+ */
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes skeleton-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Base skeleton class */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #18181b 0%,
+    #27272a 50%,
+    #18181b 100%
+  );
+  background-size: 2000px 100%;
+  animation: skeleton-shimmer 2s infinite;
+  border-radius: 0.375rem;
+  height: 1rem;
+}
+
+/* Text skeleton — multiple lines */
+.skeleton-text {
+  background: linear-gradient(
+    90deg,
+    #18181b 0%,
+    #27272a 50%,
+    #18181b 100%
+  );
+  background-size: 2000px 100%;
+  animation: skeleton-shimmer 2s infinite;
+  border-radius: 0.375rem;
+  height: 0.875rem;
+  margin-bottom: 0.75rem;
+}
+
+.skeleton-text:last-child {
+  margin-bottom: 0;
+}
+
+.skeleton-text.short {
+  width: 60%;
+}
+
+.skeleton-text.medium {
+  width: 80%;
+}
+
+.skeleton-text.long {
+  width: 100%;
+}
+
+/* Image skeleton */
+.skeleton-image {
+  background: linear-gradient(
+    90deg,
+    #18181b 0%,
+    #27272a 50%,
+    #18181b 100%
+  );
+  background-size: 2000px 100%;
+  animation: skeleton-shimmer 2s infinite;
+  border-radius: 0.5rem;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+}
+
+.skeleton-image.square {
+  aspect-ratio: 1 / 1;
+}
+
+.skeleton-image.small {
+  height: 150px;
+  width: 150px;
+}
+
+/* Card skeleton — mimics venue card layout */
+.skeleton-card {
+  background-color: #09090b;
+  border: 1px solid #27272a;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.skeleton-card-image {
+  background: linear-gradient(
+    90deg,
+    #18181b 0%,
+    #27272a 50%,
+    #18181b 100%
+  );
+  background-size: 2000px 100%;
+  animation: skeleton-shimmer 2s infinite;
+  border-radius: 0.375rem;
+  height: 200px;
+  width: 100%;
+}
+
+.skeleton-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.skeleton-card-title {
+  flex: 1;
+  background: linear-gradient(
+    90deg,
+    #18181b 0%,
+    #27272a 50%,
+    #18181b 100%
+  );
+  background-size: 2000px 100%;
+  animation: skeleton-shimmer 2s infinite;
+  border-radius: 0.375rem;
+  height: 1.25rem;
+}
+
+.skeleton-card-badge {
+  background: linear-gradient(
+    90deg,
+    #18181b 0%,
+    #27272a 50%,
+    #18181b 100%
+  );
+  background-size: 2000px 100%;
+  animation: skeleton-shimmer 2s infinite;
+  border-radius: 0.25rem;
+  height: 1.5rem;
+  width: 60px;
+  flex-shrink: 0;
+}
+
+.skeleton-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.skeleton-card-text {
+  background: linear-gradient(
+    90deg,
+    #18181b 0%,
+    #27272a 50%,
+    #18181b 100%
+  );
+  background-size: 2000px 100%;
+  animation: skeleton-shimmer 2s infinite;
+  border-radius: 0.375rem;
+  height: 0.875rem;
+}
+
+.skeleton-card-text.long {
+  width: 100%;
+}
+
+.skeleton-card-text.short {
+  width: 70%;
+}
+
+.skeleton-card-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.skeleton-card-meta {
+  background: linear-gradient(
+    90deg,
+    #18181b 0%,
+    #27272a 50%,
+    #18181b 100%
+  );
+  background-size: 2000px 100%;
+  animation: skeleton-shimmer 2s infinite;
+  border-radius: 0.375rem;
+  height: 0.75rem;
+  flex: 1;
+}
+
+/* Avatar skeleton */
+.skeleton-avatar {
+  background: linear-gradient(
+    90deg,
+    #18181b 0%,
+    #27272a 50%,
+    #18181b 100%
+  );
+  background-size: 2000px 100%;
+  animation: skeleton-shimmer 2s infinite;
+  border-radius: 9999px;
+  aspect-ratio: 1 / 1;
+}
+
+.skeleton-avatar.small {
+  height: 32px;
+  width: 32px;
+}
+
+.skeleton-avatar.medium {
+  height: 48px;
+  width: 48px;
+}
+
+.skeleton-avatar.large {
+  height: 64px;
+  width: 64px;
+}
+
+/* Title skeleton */
+.skeleton-title {
+  background: linear-gradient(
+    90deg,
+    #18181b 0%,
+    #27272a 50%,
+    #18181b 100%
+  );
+  background-size: 2000px 100%;
+  animation: skeleton-shimmer 2s infinite;
+  border-radius: 0.375rem;
+  height: 2rem;
+  width: 50%;
+  margin-bottom: 1.5rem;
+}
+
+/* Pulse animation variant */
+.skeleton.pulse,
+.skeleton-text.pulse,
+.skeleton-image.pulse,
+.skeleton-avatar.pulse,
+.skeleton-title.pulse {
+  animation: skeleton-pulse 2s ease-in-out infinite;
+}
+
+/* Grid layout for multiple skeletons */
+.skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.skeleton-grid .skeleton-card {
+  min-height: 400px;
+}
+
+/* Skeleton list layout */
+.skeleton-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.skeleton-list-item {
+  background-color: #09090b;
+  border: 1px solid #27272a;
+  border-radius: 0.375rem;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.skeleton-list-avatar {
+  background: linear-gradient(
+    90deg,
+    #18181b 0%,
+    #27272a 50%,
+    #18181b 100%
+  );
+  background-size: 2000px 100%;
+  animation: skeleton-shimmer 2s infinite;
+  border-radius: 9999px;
+  height: 48px;
+  width: 48px;
+  flex-shrink: 0;
+}
+
+.skeleton-list-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.skeleton-list-title {
+  background: linear-gradient(
+    90deg,
+    #18181b 0%,
+    #27272a 50%,
+    #18181b 100%
+  );
+  background-size: 2000px 100%;
+  animation: skeleton-shimmer 2s infinite;
+  border-radius: 0.375rem;
+  height: 1rem;
+  width: 70%;
+}
+
+.skeleton-list-text {
+  background: linear-gradient(
+    90deg,
+    #18181b 0%,
+    #27272a 50%,
+    #18181b 100%
+  );
+  background-size: 2000px 100%;
+  animation: skeleton-shimmer 2s infinite;
+  border-radius: 0.375rem;
+  height: 0.75rem;
+  width: 50%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .skeleton-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .skeleton-card {
+    padding: 0.75rem;
+  }
+
+  .skeleton-title {
+    height: 1.5rem;
+    width: 70%;
+  }
+}
+
+@media (max-width: 480px) {
+  .skeleton-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .skeleton-card-image {
+    height: 150px;
+  }
+
+  .skeleton-list-item {
+    padding: 0.75rem;
+  }
+}

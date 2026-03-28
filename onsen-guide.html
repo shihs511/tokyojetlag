@@ -1,0 +1,2783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Tokyo Jet Lag — 東京温泉＆銭湯 Complete Guide</title>
+  <meta name="description" content="The ultimate cyberpunk guide to 50 onsen, sento & super sento in Tokyo. Tattoo-friendly, late-night, rotenburo — find your perfect soak." />
+  <meta name="theme-color" content="#04040f" />
+  <meta name="author" content="Tokyo Jet Lag" />
+  <link rel="canonical" href="https://tokyojetlag.com/onsen-guide.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Tokyo Jet Lag — 東京温泉＆銭湯 Complete Guide" />
+  <meta property="og:description" content="50 onsen, sento & super sento in Tokyo. Cyberpunk bathing guide for jet-lagged travelers." />
+  <meta property="og:url" content="https://tokyojetlag.com/onsen-guide.html" />
+  <meta property="og:site_name" content="Tokyo Jet Lag" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "東京温泉＆銭湯 Complete Guide — 50 Onsen for Jet-Lagged Travelers",
+    "author": { "@type": "Organization", "name": "Tokyo Jet Lag" },
+    "publisher": { "@type": "Organization", "name": "Tokyo Jet Lag" },
+    "description": "Comprehensive guide to 50 onsen, sento, and super sento across Tokyo with bathing etiquette, jet lag recovery tips, and late-night options."
+  }
+  </script>
+
+  <style>
+    /* ========================================
+       CSS RESET & BASE
+       ======================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* Cyberpunk Palette */
+      --bg-primary: #04040f;
+      --bg-secondary: #0a0a1a;
+      --bg-card: #0d0d20;
+      --bg-card-hover: #12122a;
+      --bg-glass: rgba(10, 10, 26, 0.85);
+
+      --neon-cyan: #00f0ff;
+      --neon-magenta: #ff00aa;
+      --neon-purple: #a855f7;
+      --neon-blue: #3b82f6;
+      --neon-green: #10b981;
+      --neon-yellow: #fbbf24;
+      --neon-orange: #f97316;
+      --neon-red: #ef4444;
+      --neon-pink: #ec4899;
+
+      --text-primary: #e0e0f0;
+      --text-secondary: #8888aa;
+      --text-muted: #555577;
+
+      --border-subtle: rgba(0, 240, 255, 0.1);
+      --border-glow: rgba(0, 240, 255, 0.3);
+
+      --font-main: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Noto Sans JP', sans-serif;
+      --font-mono: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+      --font-jp: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+
+      --shadow-glow: 0 0 20px rgba(0, 240, 255, 0.15);
+      --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+      --shadow-neon: 0 0 30px rgba(0, 240, 255, 0.2), 0 0 60px rgba(0, 240, 255, 0.1);
+
+      --transition-fast: 0.2s ease;
+      --transition-med: 0.4s ease;
+      --transition-slow: 0.6s ease;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: var(--neon-cyan) var(--bg-secondary);
+    }
+
+    body {
+      font-family: var(--font-main);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg-secondary); }
+    ::-webkit-scrollbar-thumb { background: var(--neon-cyan); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--neon-magenta); }
+
+    /* ========================================
+       ANIMATED BACKGROUND
+       ======================================== */
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridScroll 20s linear infinite;
+    }
+    @keyframes gridScroll {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(60px); }
+    }
+
+    .bg-gradient-orbs {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .bg-gradient-orbs::before,
+    .bg-gradient-orbs::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.15;
+      animation: orbFloat 15s ease-in-out infinite alternate;
+    }
+    .bg-gradient-orbs::before {
+      width: 600px; height: 600px;
+      background: var(--neon-cyan);
+      top: -200px; left: -100px;
+    }
+    .bg-gradient-orbs::after {
+      width: 500px; height: 500px;
+      background: var(--neon-magenta);
+      bottom: -200px; right: -100px;
+      animation-delay: -7s;
+    }
+    @keyframes orbFloat {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(80px, 60px) scale(1.2); }
+    }
+
+    /* ========================================
+       NAVIGATION
+       ======================================== */
+    .top-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(4, 4, 15, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0 24px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--neon-cyan);
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    .nav-brand span { font-family: var(--font-jp); color: var(--text-secondary); font-size: 0.8rem; }
+    .nav-links {
+      display: flex;
+      gap: 4px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      transition: var(--transition-fast);
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--neon-cyan);
+      background: rgba(0, 240, 255, 0.08);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: 1px solid var(--border-subtle);
+      color: var(--neon-cyan);
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 60px; left: 0; right: 0;
+        background: rgba(4, 4, 15, 0.98);
+        padding: 16px;
+        border-bottom: 1px solid var(--border-subtle);
+      }
+      .mobile-menu-btn { display: block; }
+    }
+
+    /* ========================================
+       LAYOUT & CONTAINERS
+       ======================================== */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    main {
+      padding-top: 80px;
+    }
+
+    section {
+      padding: 60px 0;
+    }
+
+    /* ========================================
+       HERO SECTION
+       ======================================== */
+    .hero {
+      text-align: center;
+      padding: 100px 0 60px;
+      position: relative;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid var(--border-glow);
+      border-radius: 50px;
+      padding: 6px 20px;
+      font-size: 0.8rem;
+      color: var(--neon-cyan);
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 6vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero h1 .jp {
+      display: block;
+      font-family: var(--font-jp);
+      font-size: 0.5em;
+      background: linear-gradient(135deg, var(--neon-magenta), var(--neon-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-top: 8px;
+    }
+    .hero-subtitle {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto 32px;
+    }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-top: 40px;
+    }
+    .hero-stat {
+      text-align: center;
+    }
+    .hero-stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--neon-cyan);
+      font-family: var(--font-mono);
+      text-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+    }
+    .hero-stat-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Steam animation */
+    .steam-container {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 100px;
+      pointer-events: none;
+    }
+    .steam {
+      position: absolute;
+      bottom: 0;
+      width: 8px;
+      height: 80px;
+      background: linear-gradient(to top, rgba(0, 240, 255, 0.3), transparent);
+      border-radius: 50%;
+      animation: steamRise 3s ease-in-out infinite;
+      filter: blur(4px);
+    }
+    .steam:nth-child(1) { left: 30%; animation-delay: 0s; }
+    .steam:nth-child(2) { left: 45%; animation-delay: 0.5s; }
+    .steam:nth-child(3) { left: 60%; animation-delay: 1s; }
+    .steam:nth-child(4) { left: 75%; animation-delay: 1.5s; }
+    @keyframes steamRise {
+      0% { opacity: 0; transform: translateY(0) scaleX(1); }
+      50% { opacity: 0.6; transform: translateY(-40px) scaleX(1.5); }
+      100% { opacity: 0; transform: translateY(-80px) scaleX(2); }
+    }
+
+    /* ========================================
+       SECTION HEADERS
+       ======================================== */
+    .section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .section-header h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .section-header h2 .gradient-text {
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .section-header p {
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .section-divider {
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta));
+      border-radius: 3px;
+      margin: 16px auto 0;
+    }
+
+    /* ========================================
+       FILTER BAR
+       ======================================== */
+    .filter-bar {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      margin-bottom: 32px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+    .filter-bar-title {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-right: 8px;
+    }
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .filter-btn {
+      background: rgba(0, 240, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: var(--transition-fast);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: inherit;
+    }
+    .filter-btn:hover {
+      border-color: var(--neon-cyan);
+      color: var(--neon-cyan);
+      background: rgba(0, 240, 255, 0.1);
+    }
+    .filter-btn.active {
+      background: rgba(0, 240, 255, 0.15);
+      border-color: var(--neon-cyan);
+      color: var(--neon-cyan);
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 200px;
+      position: relative;
+    }
+    .search-box input {
+      width: 100%;
+      background: rgba(0, 240, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      padding: 10px 16px 10px 40px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-family: inherit;
+      outline: none;
+      transition: var(--transition-fast);
+    }
+    .search-box input:focus {
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
+    }
+    .search-box input::placeholder { color: var(--text-muted); }
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .area-filter {
+      background: rgba(0, 240, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      font-family: inherit;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238888aa'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 32px;
+    }
+    .area-filter:focus { border-color: var(--neon-cyan); }
+    .area-filter option { background: var(--bg-card); color: var(--text-primary); }
+
+    .results-count {
+      width: 100%;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* ========================================
+       ONSEN CARDS GRID
+       ======================================== */
+    .onsen-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 20px;
+    }
+    @media (max-width: 480px) {
+      .onsen-grid { grid-template-columns: 1fr; }
+    }
+
+    .onsen-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: var(--transition-med);
+      position: relative;
+    }
+    .onsen-card:hover {
+      border-color: var(--border-glow);
+      box-shadow: var(--shadow-glow);
+      transform: translateY(-4px);
+    }
+    .onsen-card.hidden { display: none; }
+
+    .card-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+      background: var(--bg-secondary);
+      position: relative;
+    }
+    .card-image-placeholder {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, var(--bg-secondary), var(--bg-card));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      position: relative;
+    }
+
+    .card-badges {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      z-index: 2;
+    }
+    .badge {
+      font-size: 0.65rem;
+      padding: 3px 10px;
+      border-radius: 50px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .badge-24h { background: var(--neon-green); color: #000; }
+    .badge-tattoo { background: var(--neon-magenta); color: #fff; }
+    .badge-rotenburo { background: var(--neon-blue); color: #fff; }
+    .badge-sauna { background: var(--neon-orange); color: #000; }
+    .badge-latenight { background: var(--neon-purple); color: #fff; }
+    .badge-sento { background: var(--neon-yellow); color: #000; }
+    .badge-super { background: var(--neon-cyan); color: #000; }
+    .badge-onsen { background: var(--neon-red); color: #fff; }
+
+    .card-favorite {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.3rem;
+      cursor: pointer;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-fast);
+      z-index: 2;
+      backdrop-filter: blur(10px);
+    }
+    .card-favorite:hover { color: var(--neon-magenta); transform: scale(1.1); }
+    .card-favorite.favorited { color: var(--neon-magenta); text-shadow: 0 0 10px var(--neon-magenta); }
+
+    .card-content {
+      padding: 20px;
+    }
+    .card-type {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--neon-cyan);
+      margin-bottom: 4px;
+    }
+    .card-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+    .card-name-jp {
+      font-family: var(--font-jp);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+
+    .card-details {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 6px 12px;
+      font-size: 0.82rem;
+      margin-bottom: 16px;
+    }
+    .card-detail-icon {
+      color: var(--neon-cyan);
+      width: 16px;
+      text-align: center;
+    }
+    .card-detail-text {
+      color: var(--text-secondary);
+    }
+
+    .card-features {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .feature-tag {
+      font-size: 0.7rem;
+      padding: 3px 10px;
+      border-radius: 50px;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+    }
+    .feature-tag.yes { border-color: var(--neon-green); color: var(--neon-green); }
+    .feature-tag.no { border-color: var(--neon-red); color: var(--neon-red); opacity: 0.5; }
+
+    .card-description {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ========================================
+       FAVORITES DRAWER
+       ======================================== */
+    .favorites-toggle {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 900;
+      background: linear-gradient(135deg, var(--neon-magenta), var(--neon-purple));
+      border: none;
+      color: #fff;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      font-size: 1.4rem;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(255, 0, 170, 0.4);
+      transition: var(--transition-fast);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .favorites-toggle:hover { transform: scale(1.1); }
+    .favorites-count {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      background: var(--neon-cyan);
+      color: #000;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      font-size: 0.7rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .favorites-panel {
+      position: fixed;
+      top: 0;
+      right: -420px;
+      width: 400px;
+      max-width: 90vw;
+      height: 100vh;
+      background: var(--bg-secondary);
+      border-left: 1px solid var(--border-glow);
+      z-index: 1001;
+      transition: var(--transition-med);
+      overflow-y: auto;
+      padding: 24px;
+    }
+    .favorites-panel.open { right: 0; }
+    .favorites-panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    .favorites-panel h3 {
+      font-size: 1.3rem;
+      color: var(--neon-magenta);
+    }
+    .favorites-close {
+      background: none;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-fast);
+    }
+    .favorites-close:hover { border-color: var(--neon-cyan); color: var(--neon-cyan); }
+
+    .fav-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .fav-item-name { font-weight: 600; font-size: 0.9rem; }
+    .fav-item-area { font-size: 0.75rem; color: var(--text-muted); }
+    .fav-remove {
+      background: none;
+      border: none;
+      color: var(--neon-red);
+      cursor: pointer;
+      font-size: 1.1rem;
+      padding: 4px;
+      transition: var(--transition-fast);
+    }
+    .fav-remove:hover { transform: scale(1.2); }
+    .fav-empty {
+      text-align: center;
+      color: var(--text-muted);
+      padding: 40px 0;
+      font-size: 0.9rem;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition-med);
+    }
+    .overlay.visible { opacity: 1; pointer-events: all; }
+
+    /* ========================================
+       ETIQUETTE GUIDE
+       ======================================== */
+    .etiquette-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .etiquette-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      text-align: center;
+      transition: var(--transition-med);
+    }
+    .etiquette-card:hover {
+      border-color: var(--border-glow);
+      box-shadow: var(--shadow-glow);
+    }
+    .etiquette-icon {
+      margin: 0 auto 16px;
+    }
+    .etiquette-card h3 {
+      font-size: 1rem;
+      margin-bottom: 4px;
+      color: var(--neon-cyan);
+    }
+    .etiquette-card .jp-label {
+      font-family: var(--font-jp);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .etiquette-card p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ========================================
+       JET LAG RECOVERY
+       ======================================== */
+    .jetlag-timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .jetlag-timeline::before {
+      content: '';
+      position: absolute;
+      left: 24px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--neon-cyan), var(--neon-magenta), var(--neon-purple));
+    }
+    .timeline-item {
+      padding-left: 60px;
+      margin-bottom: 32px;
+      position: relative;
+    }
+    .timeline-dot {
+      position: absolute;
+      left: 16px;
+      top: 4px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid var(--neon-cyan);
+      background: var(--bg-primary);
+    }
+    .timeline-time {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--neon-cyan);
+      margin-bottom: 4px;
+    }
+    .timeline-item h3 {
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+    }
+    .timeline-item p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ========================================
+       LATE NIGHT FEATURE
+       ======================================== */
+    .latenight-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 20px;
+    }
+    .latenight-card {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(0, 240, 255, 0.05));
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      transition: var(--transition-med);
+    }
+    .latenight-card:hover {
+      border-color: var(--neon-purple);
+      box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
+    }
+    .latenight-card h3 { font-size: 1.1rem; margin-bottom: 4px; }
+    .latenight-card .jp { font-family: var(--font-jp); font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px; }
+    .latenight-card .hours {
+      font-family: var(--font-mono);
+      color: var(--neon-purple);
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+    }
+    .latenight-card p { font-size: 0.85rem; color: var(--text-secondary); }
+
+    /* ========================================
+       AREA MAP
+       ======================================== */
+    .area-map-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .area-map-svg {
+      width: 100%;
+      height: auto;
+    }
+    .area-map-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 24px;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      padding: 6px 14px;
+      border-radius: 50px;
+      border: 1px solid var(--border-subtle);
+      transition: var(--transition-fast);
+    }
+    .legend-item:hover { border-color: var(--neon-cyan); }
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    /* ========================================
+       FOOTER
+       ======================================== */
+    .site-footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 40px 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 16px;
+      list-style: none;
+    }
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: var(--transition-fast);
+    }
+    .footer-links a:hover { color: var(--neon-cyan); }
+
+    /* ========================================
+       ANIMATIONS & UTILITIES
+       ======================================== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .glow-text {
+      text-shadow: 0 0 10px currentColor;
+    }
+
+    .neon-border {
+      border: 1px solid var(--neon-cyan);
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.2), inset 0 0 10px rgba(0, 240, 255, 0.05);
+    }
+
+    /* ========================================
+       BACK TO TOP
+       ======================================== */
+    .back-to-top {
+      position: fixed;
+      bottom: 90px;
+      right: 24px;
+      z-index: 900;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--neon-cyan);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-fast);
+    }
+    .back-to-top.show { display: flex; }
+    .back-to-top:hover { border-color: var(--neon-cyan); box-shadow: var(--shadow-glow); }
+
+    /* ========================================
+       NO RESULTS
+       ======================================== */
+    .no-results {
+      text-align: center;
+      padding: 60px 0;
+      display: none;
+    }
+    .no-results.show { display: block; }
+    .no-results h3 {
+      font-size: 1.3rem;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+    .no-results p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* Print styles */
+    @media print {
+      .top-nav, .filter-bar, .favorites-toggle, .back-to-top, .bg-grid, .bg-gradient-orbs { display: none !important; }
+      body { background: #fff; color: #000; }
+      .onsen-card { break-inside: avoid; border-color: #ccc; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Animated Background -->
+<div class="bg-grid"></div>
+<div class="bg-gradient-orbs"></div>
+
+<!-- Navigation -->
+<nav class="top-nav">
+  <a href="index.html" class="nav-brand">
+    &#x2728; Tokyo Jet Lag <span>東京ジェットラグ</span>
+  </a>
+  <button class="mobile-menu-btn" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">&#9776;</button>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="food-guide.html">Food</a></li>
+    <li><a href="nightlife.html">Nightlife</a></li>
+    <li><a href="transport-guide.html">Transport</a></li>
+    <li><a href="onsen-guide.html" class="active">Onsen ♨</a></li>
+    <li><a href="hidden-gems.html">Hidden Gems</a></li>
+    <li><a href="apps.html">Apps</a></li>
+  </ul>
+</nav>
+
+<!-- Overlay for panels -->
+<div class="overlay" id="overlay" onclick="closeFavoritesPanel()"></div>
+
+<main>
+  <!-- ===== HERO SECTION ===== -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge">♨ 温泉 &amp; 銭湯 完全ガイド</div>
+      <h1>
+        Tokyo Onsen Guide
+        <span class="jp">東京の温泉＆銭湯完全ガイド</span>
+      </h1>
+      <p class="hero-subtitle">
+        From neighborhood sento to luxury super sento — 50 hand-picked bathing spots
+        across Tokyo, curated for the jet-lagged, the curious, and the cold.
+      </p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-number">50</div>
+          <div class="hero-stat-label">Bathing Spots</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-number">23</div>
+          <div class="hero-stat-label">Wards Covered</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-number">12</div>
+          <div class="hero-stat-label">Late-Night / 24h</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-number">15</div>
+          <div class="hero-stat-label">Tattoo-Friendly</div>
+        </div>
+      </div>
+      <div class="steam-container">
+        <div class="steam"></div>
+        <div class="steam"></div>
+        <div class="steam"></div>
+        <div class="steam"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BATHING ETIQUETTE ===== -->
+  <section id="etiquette">
+    <div class="container">
+      <div class="section-header">
+        <h2><span class="gradient-text">Bathing Etiquette</span> 入浴マナー</h2>
+        <p>Master these essentials before your first soak. Respect the water, respect the culture.</p>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="etiquette-grid">
+        <!-- Step 1: Shoes Off -->
+        <div class="etiquette-card fade-in">
+          <svg class="etiquette-icon" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="80" height="80" rx="16" fill="rgba(0,240,255,0.05)"/>
+            <path d="M20 55 L25 40 Q30 35 35 38 L40 42 Q42 44 45 43 L55 38 Q60 36 62 40 L60 55 Z" stroke="#00f0ff" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <line x1="15" y1="58" x2="65" y2="58" stroke="#00f0ff" stroke-width="2" opacity="0.4"/>
+            <path d="M22 30 L58 60" stroke="#ef4444" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="40" cy="45" r="22" stroke="#ef4444" stroke-width="2" fill="none"/>
+          </svg>
+          <h3>1. Remove Shoes</h3>
+          <div class="jp-label">靴を脱ぐ（くつをぬぐ）</div>
+          <p>Leave shoes in the getabako (shoe locker) at the entrance. Many facilities provide slippers for indoor use. Never wear outdoor shoes beyond the entrance.</p>
+        </div>
+
+        <!-- Step 2: Get Naked -->
+        <div class="etiquette-card fade-in">
+          <svg class="etiquette-icon" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="80" height="80" rx="16" fill="rgba(0,240,255,0.05)"/>
+            <circle cx="40" cy="24" r="8" stroke="#00f0ff" stroke-width="2" fill="none"/>
+            <path d="M28 38 Q40 46 52 38 L50 62 L44 62 L42 48 L38 48 L36 62 L30 62 Z" stroke="#00f0ff" stroke-width="2" fill="none" stroke-linejoin="round"/>
+            <rect x="48" y="44" width="12" height="16" rx="2" stroke="#fbbf24" stroke-width="1.5" fill="none"/>
+            <text x="54" y="56" text-anchor="middle" font-size="8" fill="#fbbf24">♨</text>
+          </svg>
+          <h3>2. Get Fully Undressed</h3>
+          <div class="jp-label">全裸になる（ぜんらになる）</div>
+          <p>In the changing room (脱衣所), remove all clothing and place in a locker or basket. You will enter the bathing area completely nude — swimsuits are not allowed.</p>
+        </div>
+
+        <!-- Step 3: Wash First -->
+        <div class="etiquette-card fade-in">
+          <svg class="etiquette-icon" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="80" height="80" rx="16" fill="rgba(0,240,255,0.05)"/>
+            <rect x="22" y="38" width="16" height="12" rx="2" stroke="#00f0ff" stroke-width="2" fill="none"/>
+            <circle cx="30" cy="30" r="6" stroke="#00f0ff" stroke-width="2" fill="none"/>
+            <path d="M44 30 Q48 26 52 30 Q56 34 52 38 Q48 42 44 38 Q40 34 44 30Z" fill="rgba(0,240,255,0.2)" stroke="#00f0ff" stroke-width="1.5"/>
+            <path d="M46 42 L50 56" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
+            <path d="M42 48 L56 48" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
+            <ellipse cx="40" cy="62" rx="20" ry="4" fill="rgba(59,130,246,0.15)" stroke="#3b82f6" stroke-width="1"/>
+          </svg>
+          <h3>3. Wash Thoroughly First</h3>
+          <div class="jp-label">体を洗う（からだをあらう）</div>
+          <p>Sit on the low stool at a washing station (洗い場). Use soap and shampoo to scrub your entire body and rinse completely before entering any bath.</p>
+        </div>
+
+        <!-- Step 4: Towel Etiquette -->
+        <div class="etiquette-card fade-in">
+          <svg class="etiquette-icon" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="80" height="80" rx="16" fill="rgba(0,240,255,0.05)"/>
+            <rect x="20" y="25" width="40" height="6" rx="3" stroke="#00f0ff" stroke-width="2" fill="none"/>
+            <path d="M20 31 L20 50 Q20 55 25 55 L55 55 Q60 55 60 50 L60 31" stroke="#00f0ff" stroke-width="2" fill="none"/>
+            <circle cx="40" cy="18" r="6" stroke="#a855f7" stroke-width="1.5" fill="none"/>
+            <path d="M34 18 L46 18" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+            <text x="40" y="68" text-anchor="middle" font-size="7" fill="#8888aa">on head only</text>
+          </svg>
+          <h3>4. Keep Towel Out of Water</h3>
+          <div class="jp-label">タオルを湯に入れない</div>
+          <p>Your small towel (手拭い) must never touch the bath water. Fold it and place it on your head or on the edge of the bath.</p>
+        </div>
+
+        <!-- Step 5: Enter Slowly -->
+        <div class="etiquette-card fade-in">
+          <svg class="etiquette-icon" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="80" height="80" rx="16" fill="rgba(0,240,255,0.05)"/>
+            <rect x="15" y="40" width="50" height="25" rx="4" stroke="#3b82f6" stroke-width="2" fill="rgba(59,130,246,0.08)"/>
+            <circle cx="40" cy="32" r="6" stroke="#00f0ff" stroke-width="2" fill="none"/>
+            <path d="M34 38 L34 52" stroke="#00f0ff" stroke-width="2" stroke-linecap="round"/>
+            <path d="M46 38 L46 52" stroke="#00f0ff" stroke-width="2" stroke-linecap="round"/>
+            <path d="M18 42 Q40 38 62 42" stroke="#3b82f6" stroke-width="1.5" fill="none" opacity="0.5"/>
+            <path d="M20 48 Q40 44 60 48" stroke="#3b82f6" stroke-width="1" fill="none" opacity="0.3"/>
+          </svg>
+          <h3>5. Enter Slowly &amp; Quietly</h3>
+          <div class="jp-label">静かに入る（しずかにはいる）</div>
+          <p>Lower yourself into the water slowly. Never jump, splash, or make excessive noise. Onsen is a place of tranquility and meditation.</p>
+        </div>
+
+        <!-- Step 6: No Swimming -->
+        <div class="etiquette-card fade-in">
+          <svg class="etiquette-icon" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="80" height="80" rx="16" fill="rgba(0,240,255,0.05)"/>
+            <circle cx="28" cy="30" r="5" stroke="#00f0ff" stroke-width="2" fill="none"/>
+            <path d="M28 35 L28 46 L22 56 M28 46 L34 56 M28 40 L38 36" stroke="#00f0ff" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <path d="M18 60 Q28 54 38 60 Q48 66 58 60" stroke="#3b82f6" stroke-width="2" fill="none"/>
+            <circle cx="40" cy="44" r="18" stroke="#ef4444" stroke-width="2.5" fill="none"/>
+            <path d="M28 34 L52 54" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          <h3>6. No Swimming or Diving</h3>
+          <div class="jp-label">泳がない（およがない）</div>
+          <p>Baths are for soaking, not swimming. Keep your movements calm. Submerge your body but consider keeping long hair tied up and out of the water.</p>
+        </div>
+
+        <!-- Step 7: Tattoo Awareness -->
+        <div class="etiquette-card fade-in">
+          <svg class="etiquette-icon" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="80" height="80" rx="16" fill="rgba(255,0,170,0.05)"/>
+            <path d="M30 25 Q40 20 50 25 L52 55 Q40 60 28 55 Z" stroke="#ff00aa" stroke-width="2" fill="none"/>
+            <path d="M35 32 Q40 28 45 32 Q48 38 40 42 Q32 38 35 32Z" stroke="#ff00aa" stroke-width="1.5" fill="rgba(255,0,170,0.1)"/>
+            <path d="M36 44 L44 44 M38 48 L42 48" stroke="#ff00aa" stroke-width="1.5" stroke-linecap="round"/>
+            <text x="40" y="70" text-anchor="middle" font-size="7" fill="#ff00aa">check policy!</text>
+          </svg>
+          <h3>7. Tattoo Policy Check</h3>
+          <div class="jp-label">入れ墨確認（いれずみかくにん）</div>
+          <p>Many onsen still prohibit tattoos (入れ墨). Some offer cover-up stickers or private baths. Always check beforehand — we've marked tattoo-friendly spots in this guide.</p>
+        </div>
+
+        <!-- Step 8: Hydrate -->
+        <div class="etiquette-card fade-in">
+          <svg class="etiquette-icon" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="80" height="80" rx="16" fill="rgba(0,240,255,0.05)"/>
+            <rect x="30" y="22" width="20" height="38" rx="4" stroke="#00f0ff" stroke-width="2" fill="none"/>
+            <rect x="32" y="38" width="16" height="20" rx="2" fill="rgba(59,130,246,0.2)"/>
+            <path d="M38 30 Q40 26 42 30" stroke="#3b82f6" stroke-width="1.5" fill="none"/>
+            <path d="M36 34 Q40 30 44 34" stroke="#3b82f6" stroke-width="1.5" fill="none"/>
+            <text x="40" y="68" text-anchor="middle" font-size="7" fill="#fbbf24">牛乳!</text>
+          </svg>
+          <h3>8. Hydrate After</h3>
+          <div class="jp-label">水分補給（すいぶんほきゅう）</div>
+          <p>After bathing, drink water or the classic post-onsen milk (牛乳) from the vending machines. Hot baths dehydrate you — especially important when jet-lagged.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== JET LAG RECOVERY ===== -->
+  <section id="jetlag-recovery">
+    <div class="container">
+      <div class="section-header">
+        <h2><span class="gradient-text">Jet Lag Recovery</span> 時差ボケ解消法</h2>
+        <p>How to use Tokyo's bathing culture to reset your body clock and beat jet lag.</p>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="jetlag-timeline">
+        <div class="timeline-item fade-in">
+          <div class="timeline-dot" style="border-color: var(--neon-cyan);"></div>
+          <div class="timeline-time">Day 1 — Arrival Evening (18:00–21:00)</div>
+          <h3>Warm Soak to Wind Down</h3>
+          <p>After landing, resist napping. Instead, visit a neighborhood sento around 7–8 PM. A 38–40°C bath will raise your core body temperature; the subsequent cooling triggers melatonin production and natural drowsiness. Aim for 15–20 minutes in the main bath. Pair with a light meal afterward — ramen near the sento is a classic move.</p>
+        </div>
+        <div class="timeline-item fade-in">
+          <div class="timeline-dot" style="border-color: var(--neon-magenta);"></div>
+          <div class="timeline-time">Day 1 — Can't Sleep (02:00–05:00)</div>
+          <h3>Late-Night Onsen Rescue</h3>
+          <p>Wide awake at 2 AM? That's jet lag. Head to a 24-hour super sento like Thermae-Yu in Shinjuku or Spa LaQua in Bunkyo. The combination of hot baths and cool-down rest areas creates a powerful sleep pressure effect. Many offer reclining chairs where you can rest (仮眠) until morning trains start at 5 AM.</p>
+        </div>
+        <div class="timeline-item fade-in">
+          <div class="timeline-dot" style="border-color: var(--neon-purple);"></div>
+          <div class="timeline-time">Day 2 — Morning (06:00–09:00)</div>
+          <h3>Cold Plunge Wake-Up</h3>
+          <p>Start day two with a cold water bath (水風呂, mizuburo) alternated with hot. The temperature contrast shocks your system awake, boosts cortisol (good in the morning), and resets your circadian rhythm. Many sento open at 6 AM — perfect for an early recalibration session. Follow with a Japanese breakfast.</p>
+        </div>
+        <div class="timeline-item fade-in">
+          <div class="timeline-dot" style="border-color: var(--neon-green);"></div>
+          <div class="timeline-time">Day 2 — Afternoon (14:00–16:00)</div>
+          <h3>Avoid the Afternoon Crash</h3>
+          <p>The dreaded 2 PM slump hits hard with jet lag. Instead of napping (which would reset your clock wrong), try a brief 10-minute sauna session followed by a cool shower. The endorphin rush and skin stimulation will carry you through to evening. Find a sento with a good sauna — we've tagged them all in this guide.</p>
+        </div>
+        <div class="timeline-item fade-in">
+          <div class="timeline-dot" style="border-color: var(--neon-yellow);"></div>
+          <div class="timeline-time">Day 3 — Evening Routine (20:00–22:00)</div>
+          <h3>Establish the Ritual</h3>
+          <p>By day three, you should be locking in a consistent bathing routine. Visit a sento at the same time each evening — this ritual signals to your body that sleep time approaches. The Japanese concept of "湯治" (toji, bathing therapy) has centuries of wisdom behind it. Gradually your body adjusts, and the sento becomes your Tokyo rhythm anchor.</p>
+        </div>
+        <div class="timeline-item fade-in">
+          <div class="timeline-dot" style="border-color: var(--neon-orange);"></div>
+          <div class="timeline-time">Pro Tips</div>
+          <h3>Science-Backed Bathing Protocol</h3>
+          <p>Research shows bathing 1–2 hours before sleep at 40–42.5°C for 10+ minutes can improve sleep onset by 36%. Combine with bright light exposure during Tokyo daytime, avoid screens after your evening bath, and drink the post-bath milk. Your body will thank you — and your jet lag will vanish days faster than without the hot soak protocol.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== AREA MAP ===== -->
+  <section id="area-map">
+    <div class="container">
+      <div class="section-header">
+        <h2><span class="gradient-text">Tokyo Bathing Map</span> エリアマップ</h2>
+        <p>Find onsen and sento across Tokyo's key neighborhoods.</p>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="area-map-container">
+        <svg class="area-map-svg" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+          <!-- Background -->
+          <rect width="800" height="500" fill="#0a0a1a" rx="12"/>
+
+          <!-- Tokyo Bay -->
+          <path d="M500 420 Q600 380 750 400 L800 500 L400 500 Q450 460 500 420Z" fill="rgba(59,130,246,0.08)" stroke="rgba(59,130,246,0.2)" stroke-width="1"/>
+          <text x="620" y="470" fill="rgba(59,130,246,0.3)" font-size="14" font-family="monospace">Tokyo Bay 東京湾</text>
+
+          <!-- Train Lines (simplified) -->
+          <path d="M100 100 Q400 80 700 200" stroke="rgba(16,185,129,0.2)" stroke-width="2" fill="none" stroke-dasharray="8,4"/>
+          <path d="M350 50 L400 250 L380 450" stroke="rgba(168,85,247,0.2)" stroke-width="2" fill="none" stroke-dasharray="8,4"/>
+          <path d="M150 200 Q400 180 650 300" stroke="rgba(249,115,22,0.2)" stroke-width="2" fill="none" stroke-dasharray="8,4"/>
+
+          <!-- Area Labels & Dots -->
+          <!-- Shinjuku -->
+          <circle cx="280" cy="180" r="6" fill="#00f0ff" opacity="0.9"/>
+          <circle cx="280" cy="180" r="12" fill="none" stroke="#00f0ff" opacity="0.3" stroke-width="1"/>
+          <text x="280" y="168" text-anchor="middle" fill="#00f0ff" font-size="11" font-weight="bold">Shinjuku</text>
+          <text x="280" y="205" text-anchor="middle" fill="#555577" font-size="9">8 spots</text>
+
+          <!-- Shibuya -->
+          <circle cx="260" cy="270" r="6" fill="#ff00aa" opacity="0.9"/>
+          <circle cx="260" cy="270" r="12" fill="none" stroke="#ff00aa" opacity="0.3" stroke-width="1"/>
+          <text x="260" y="258" text-anchor="middle" fill="#ff00aa" font-size="11" font-weight="bold">Shibuya</text>
+          <text x="260" y="295" text-anchor="middle" fill="#555577" font-size="9">4 spots</text>
+
+          <!-- Bunkyo / Korakuen -->
+          <circle cx="420" cy="140" r="6" fill="#a855f7" opacity="0.9"/>
+          <circle cx="420" cy="140" r="12" fill="none" stroke="#a855f7" opacity="0.3" stroke-width="1"/>
+          <text x="420" y="128" text-anchor="middle" fill="#a855f7" font-size="11" font-weight="bold">Bunkyo</text>
+          <text x="420" y="165" text-anchor="middle" fill="#555577" font-size="9">3 spots</text>
+
+          <!-- Roppongi / Minato -->
+          <circle cx="380" cy="300" r="6" fill="#f97316" opacity="0.9"/>
+          <circle cx="380" cy="300" r="12" fill="none" stroke="#f97316" opacity="0.3" stroke-width="1"/>
+          <text x="380" y="288" text-anchor="middle" fill="#f97316" font-size="11" font-weight="bold">Minato</text>
+          <text x="380" y="325" text-anchor="middle" fill="#555577" font-size="9">4 spots</text>
+
+          <!-- Nerima -->
+          <circle cx="200" cy="100" r="5" fill="#10b981" opacity="0.9"/>
+          <text x="200" y="88" text-anchor="middle" fill="#10b981" font-size="10" font-weight="bold">Nerima</text>
+          <text x="200" y="122" text-anchor="middle" fill="#555577" font-size="9">3 spots</text>
+
+          <!-- Koto / Odaiba -->
+          <circle cx="560" cy="340" r="6" fill="#fbbf24" opacity="0.9"/>
+          <circle cx="560" cy="340" r="12" fill="none" stroke="#fbbf24" opacity="0.3" stroke-width="1"/>
+          <text x="560" y="328" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="bold">Koto / Odaiba</text>
+          <text x="560" y="365" text-anchor="middle" fill="#555577" font-size="9">3 spots</text>
+
+          <!-- Sumida / Asakusa -->
+          <circle cx="520" cy="190" r="6" fill="#ec4899" opacity="0.9"/>
+          <circle cx="520" cy="190" r="12" fill="none" stroke="#ec4899" opacity="0.3" stroke-width="1"/>
+          <text x="520" y="178" text-anchor="middle" fill="#ec4899" font-size="11" font-weight="bold">Sumida</text>
+          <text x="520" y="215" text-anchor="middle" fill="#555577" font-size="9">4 spots</text>
+
+          <!-- Ota -->
+          <circle cx="360" cy="400" r="5" fill="#3b82f6" opacity="0.9"/>
+          <text x="360" y="388" text-anchor="middle" fill="#3b82f6" font-size="10" font-weight="bold">Ota</text>
+          <text x="360" y="422" text-anchor="middle" fill="#555577" font-size="9">3 spots</text>
+
+          <!-- Toshima / Ikebukuro -->
+          <circle cx="340" cy="100" r="6" fill="#ef4444" opacity="0.9"/>
+          <circle cx="340" cy="100" r="12" fill="none" stroke="#ef4444" opacity="0.3" stroke-width="1"/>
+          <text x="340" y="88" text-anchor="middle" fill="#ef4444" font-size="11" font-weight="bold">Toshima</text>
+          <text x="340" y="125" text-anchor="middle" fill="#555577" font-size="9">3 spots</text>
+
+          <!-- Chiyoda -->
+          <circle cx="430" cy="230" r="5" fill="#00f0ff" opacity="0.7"/>
+          <text x="430" y="218" text-anchor="middle" fill="#00f0ff" font-size="10" font-weight="bold">Chiyoda</text>
+          <text x="430" y="252" text-anchor="middle" fill="#555577" font-size="9">2 spots</text>
+
+          <!-- Meguro -->
+          <circle cx="300" cy="340" r="5" fill="#a855f7" opacity="0.7"/>
+          <text x="300" y="328" text-anchor="middle" fill="#a855f7" font-size="10" font-weight="bold">Meguro</text>
+          <text x="300" y="362" text-anchor="middle" fill="#555577" font-size="9">2 spots</text>
+
+          <!-- Suginami -->
+          <circle cx="150" cy="200" r="5" fill="#10b981" opacity="0.7"/>
+          <text x="150" y="188" text-anchor="middle" fill="#10b981" font-size="10" font-weight="bold">Suginami</text>
+          <text x="150" y="222" text-anchor="middle" fill="#555577" font-size="9">3 spots</text>
+
+          <!-- Nakano -->
+          <circle cx="210" cy="160" r="5" fill="#fbbf24" opacity="0.7"/>
+          <text x="210" y="148" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="bold">Nakano</text>
+          <text x="210" y="182" text-anchor="middle" fill="#555577" font-size="9">2 spots</text>
+
+          <!-- Setagaya -->
+          <circle cx="180" cy="310" r="5" fill="#ec4899" opacity="0.7"/>
+          <text x="180" y="298" text-anchor="middle" fill="#ec4899" font-size="10" font-weight="bold">Setagaya</text>
+          <text x="180" y="332" text-anchor="middle" fill="#555577" font-size="9">2 spots</text>
+
+          <!-- Taito -->
+          <circle cx="490" cy="150" r="5" fill="#f97316" opacity="0.7"/>
+          <text x="490" y="138" text-anchor="middle" fill="#f97316" font-size="10" font-weight="bold">Taito</text>
+          <text x="490" y="172" text-anchor="middle" fill="#555577" font-size="9">3 spots</text>
+
+          <!-- Edogawa -->
+          <circle cx="640" cy="250" r="5" fill="#3b82f6" opacity="0.7"/>
+          <text x="640" y="238" text-anchor="middle" fill="#3b82f6" font-size="10" font-weight="bold">Edogawa</text>
+          <text x="640" y="272" text-anchor="middle" fill="#555577" font-size="9">1 spot</text>
+
+          <!-- Map Border -->
+          <rect x="2" y="2" width="796" height="496" rx="12" fill="none" stroke="rgba(0,240,255,0.15)" stroke-width="1"/>
+        </svg>
+
+        <div class="area-map-legend">
+          <div class="legend-item" onclick="filterByArea('Shinjuku')"><div class="legend-dot" style="background:#00f0ff"></div>Shinjuku</div>
+          <div class="legend-item" onclick="filterByArea('Shibuya')"><div class="legend-dot" style="background:#ff00aa"></div>Shibuya</div>
+          <div class="legend-item" onclick="filterByArea('Bunkyo')"><div class="legend-dot" style="background:#a855f7"></div>Bunkyo</div>
+          <div class="legend-item" onclick="filterByArea('Minato')"><div class="legend-dot" style="background:#f97316"></div>Minato</div>
+          <div class="legend-item" onclick="filterByArea('Sumida')"><div class="legend-dot" style="background:#ec4899"></div>Sumida</div>
+          <div class="legend-item" onclick="filterByArea('Toshima')"><div class="legend-dot" style="background:#ef4444"></div>Toshima</div>
+          <div class="legend-item" onclick="filterByArea('Koto')"><div class="legend-dot" style="background:#fbbf24"></div>Koto / Odaiba</div>
+          <div class="legend-item" onclick="filterByArea('All')"><div class="legend-dot" style="background:#8888aa"></div>Show All</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LATE NIGHT FEATURE ===== -->
+  <section id="late-night">
+    <div class="container">
+      <div class="section-header">
+        <h2><span class="gradient-text">Late Night &amp; 24-Hour</span> 深夜営業特集</h2>
+        <p>When jet lag strikes at 2 AM, these spots have your back.</p>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="latenight-grid" id="latenight-grid">
+        <!-- Populated by JS from main data -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MAIN ONSEN DIRECTORY ===== -->
+  <section id="directory">
+    <div class="container">
+      <div class="section-header">
+        <h2><span class="gradient-text">Complete Directory</span> 全50施設</h2>
+        <p>Every onsen, sento, and super sento — filtered, searchable, saveable.</p>
+        <div class="section-divider"></div>
+      </div>
+
+      <!-- Filter Bar -->
+      <div class="filter-bar">
+        <span class="filter-bar-title">Filter:</span>
+        <div class="filter-group">
+          <button class="filter-btn" data-filter="is24h" onclick="toggleFilter('is24h', this)">&#x1f551; 24-Hour</button>
+          <button class="filter-btn" data-filter="tattooOk" onclick="toggleFilter('tattooOk', this)">&#x1f3a8; Tattoo OK</button>
+          <button class="filter-btn" data-filter="rotenburo" onclick="toggleFilter('rotenburo', this)">&#x1f343; Rotenburo</button>
+          <button class="filter-btn" data-filter="sauna" onclick="toggleFilter('sauna', this)">&#x1f525; Sauna</button>
+          <button class="filter-btn" data-filter="lateNight" onclick="toggleFilter('lateNight', this)">&#x1f319; Late Night</button>
+          <button class="filter-btn" data-filter="favorites" onclick="toggleFilter('favorites', this)">&#x2764; Favorites</button>
+        </div>
+        <select class="area-filter" id="areaSelect" onchange="applyFilters()">
+          <option value="">All Areas</option>
+          <option value="Shinjuku">Shinjuku 新宿</option>
+          <option value="Shibuya">Shibuya 渋谷</option>
+          <option value="Bunkyo">Bunkyo 文京</option>
+          <option value="Minato">Minato 港</option>
+          <option value="Nerima">Nerima 練馬</option>
+          <option value="Koto">Koto 江東</option>
+          <option value="Sumida">Sumida 墨田</option>
+          <option value="Ota">Ota 大田</option>
+          <option value="Toshima">Toshima 豊島</option>
+          <option value="Chiyoda">Chiyoda 千代田</option>
+          <option value="Meguro">Meguro 目黒</option>
+          <option value="Suginami">Suginami 杉並</option>
+          <option value="Nakano">Nakano 中野</option>
+          <option value="Setagaya">Setagaya 世田谷</option>
+          <option value="Taito">Taito 台東</option>
+          <option value="Edogawa">Edogawa 江戸川</option>
+        </select>
+        <div class="search-box">
+          <span class="search-icon">&#x1f50d;</span>
+          <input type="text" id="searchInput" placeholder="Search by name, station, area..." oninput="applyFilters()" />
+        </div>
+        <div class="results-count" id="resultsCount">Showing 50 of 50 spots</div>
+      </div>
+
+      <!-- Cards Grid -->
+      <div class="onsen-grid" id="onsenGrid">
+        <!-- Populated by JavaScript -->
+      </div>
+
+      <div class="no-results" id="noResults">
+        <h3>No results found</h3>
+        <p>Try adjusting your filters or search terms.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Favorites Panel -->
+<div class="favorites-panel" id="favoritesPanel">
+  <div class="favorites-panel-header">
+    <h3>&#x2764; Favorites</h3>
+    <button class="favorites-close" onclick="closeFavoritesPanel()">&#x2715;</button>
+  </div>
+  <div id="favoritesList"></div>
+</div>
+
+<!-- Favorites FAB -->
+<button class="favorites-toggle" onclick="openFavoritesPanel()" title="View Favorites">
+  &#x2764;
+  <span class="favorites-count" id="favCount">0</span>
+</button>
+
+<!-- Back to Top -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">&#x2191;</button>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="food-guide.html">Food Guide</a></li>
+      <li><a href="nightlife.html">Nightlife</a></li>
+      <li><a href="transport-guide.html">Transport</a></li>
+      <li><a href="hidden-gems.html">Hidden Gems</a></li>
+    </ul>
+    <p>&copy; 2026 Tokyo Jet Lag. ♨ Soak responsibly.</p>
+  </div>
+</footer>
+
+<script>
+// ============================================================
+// ONSEN DATA — 50 Spots
+// ============================================================
+const onsenData = [
+  {
+    id: 1,
+    name: "Thermae-Yu",
+    nameJp: "テルマー湯",
+    type: "Super Sento",
+    area: "Shinjuku",
+    address: "1-1-2 Kabukicho, Shinjuku-ku, Tokyo 160-0021",
+    addressJp: "東京都新宿区歌舞伎町1-1-2",
+    price: "¥2,405 (weekday) / ¥2,635 (weekend)",
+    hours: "11:00–翌09:00",
+    is24h: false,
+    lateNight: true,
+    tattooOk: false,
+    rotenburo: true,
+    sauna: true,
+    station: "Shinjuku Station (5 min walk)",
+    stationJp: "新宿駅 徒歩5分",
+    photo: "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=600&h=400&fit=crop",
+    description: "Massive multi-floor complex right in Kabukicho. Natural hot spring water from 1,500m underground. Multiple bath types including silk bath, jet bath, and open-air rotenburo. Perfect late-night jet lag escape."
+  },
+  {
+    id: 2,
+    name: "Spa LaQua",
+    nameJp: "スパ ラクーア",
+    type: "Super Sento",
+    area: "Bunkyo",
+    address: "1-1-1 Kasuga, Bunkyo-ku, Tokyo 112-0003",
+    addressJp: "東京都文京区春日1-1-1 ラクーアビル",
+    price: "¥3,230 (adults)",
+    hours: "11:00–翌09:00",
+    is24h: false,
+    lateNight: true,
+    tattooOk: false,
+    rotenburo: true,
+    sauna: true,
+    station: "Korakuen Station (1 min walk)",
+    stationJp: "後楽園駅 徒歩1分",
+    photo: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=600&h=400&fit=crop",
+    description: "Upscale super sento complex at Tokyo Dome City. Features natural hot spring sourced from 1,700m deep. Includes a stunning open-air bath area, low-temperature sauna, and relaxation zones. Late-night surcharge after 01:00."
+  },
+  {
+    id: 3,
+    name: "Oedo Onsen Monogatari Atami",
+    nameJp: "大江戸温泉物語（お台場跡地系列）",
+    type: "Super Sento",
+    area: "Koto",
+    address: "2-6-3 Aomi, Koto-ku, Tokyo 135-0064",
+    addressJp: "東京都江東区青海2-6-3",
+    price: "¥2,768 (adults, weekday)",
+    hours: "11:00–翌09:00",
+    is24h: false,
+    lateNight: true,
+    tattooOk: false,
+    rotenburo: true,
+    sauna: true,
+    station: "Telecom Center Station (2 min walk)",
+    stationJp: "テレコムセンター駅 徒歩2分",
+    photo: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=600&h=400&fit=crop",
+    description: "Edo-period themed onsen theme park on Odaiba's waterfront. Features foot baths, multiple indoor baths, an outdoor garden area, game arcades, and festival food stalls. Wear yukata and wander the recreated old-Tokyo streets."
+  },
+  {
+    id: 4,
+    name: "Jakotsu-yu",
+    nameJp: "蛇骨湯",
+    type: "Sento",
+    area: "Taito",
+    address: "1-11-11 Asakusa, Taito-ku, Tokyo 111-0032",
+    addressJp: "東京都台東区浅草1-11-11",
+    price: "¥520",
+    hours: "13:00–24:00 (Closed Tue)",
+    is24h: false,
+    lateNight: false,
+    tattooOk: true,
+    rotenburo: true,
+    sauna: false,
+    station: "Asakusa Station (5 min walk)",
+    stationJp: "浅草駅 徒歩5分",
+    photo: "https://images.unsplash.com/photo-1480796927426-f609979314bd?w=600&h=400&fit=crop",
+    description: "Historic Asakusa sento using natural hot spring water — rare for a neighborhood sento. Tattoo-friendly and tourist-welcoming. Features a small but lovely open-air bath. One of Tokyo's most famous traditional bathhouses."
+  },
+  {
+    id: 5,
+    name: "Myoho-yu",
+    nameJp: "妙法湯",
+    type: "Sento",
+    area: "Toshima",
+    address: "4-14-3 Nishi-Ikebukuro, Toshima-ku, Tokyo 171-0021",
+    addressJp: "東京都豊島区西池袋4-14-3",
+    price: "¥520",
+    hours: "15:30–25:00 (Closed Mon)",
+    is24h: false,
+    lateNight: true,
+    tattooOk: true,
+    rotenburo: false,
+    sauna: true,
+    station: "Ikebukuro Station (8 min walk)",
+    stationJp: "池袋駅 徒歩8分",
+    photo: "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?w=600&h=400&fit=crop",
+    description: "Beautifully renovated designer sento near Ikebukuro. Modern minimalist interior with excellent water quality. Features a powerful jet bath and dry sauna. Open until 1 AM and tattoo-friendly — perfect for late-night wind-down."
+  },
+  {
+    id: 6,
+    name: "Shimizu-yu",
+    nameJp: "清水湯",
+    type: "Sento",
+    area: "Minato",
+    address: "3-12-3 Minami-Aoyama, Minato-ku, Tokyo 107-0062",
+    addressJp: "東京都港区南青山3-12-3",
+    price: "¥520",
+    hours: "12:00–24:00 (Closed Fri)",
+    is24h: false,
+    lateNight: false,
+    tattooOk: true,
+    rotenburo: false,
+    sauna: true,
+    station: "Omotesando Station (3 min walk)",
+    stationJp: "表参道駅 徒歩3分",
+    photo: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&h=400&fit=crop",
+    description: "Chic sento in the heart of fashionable Omotesando. Draws natural hot spring water from two different sources — a dark 'black water' (黒湯) and a silky golden spring. Modern design makes this a favorite among young locals."
+  },
+  {
+    id: 7,
+    name: "Saya no Yudokoro",
+    nameJp: "さやの湯処",
+    type: "Onsen",
+    area: "Nerima",
+    address: "3-25-1 Maeno-cho, Itabashi-ku, Tokyo 174-0063",
+    addressJp: "東京都板橋区前野町3-25-1",
+    price: "¥1,000 (weekday) / ¥1,200 (weekend)",
+    hours: "10:00–25:00",
+    is24h: false,
+    lateNight: true,
+    tattooOk: false,
+    rotenburo: true,
+    sauna: true,
+    station: "Shimura-Sakaue Station (8 min walk)",
+    stationJp: "志村坂上駅 徒歩8分",
+    photo: "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=600&h=400&fit=crop",
+    description: "Stunning traditional Japanese-style onsen with a beautiful garden rotenburo. Natural hot spring with a green-tinged mineral-rich water. Includes a gorgeous tatami rest area and an on-site soba restaurant. One of Tokyo's hidden gems."
+  },
+  {
+    id: 8,
+    name: "Ooedo Onsen Monogatari (Kinugawa branch)",
+    nameJp: "天然温泉 久松湯",
+    type: "Sento",
+    area: "Nerima",
+    address: "3-32-5 Sakuradai, Nerima-ku, Tokyo 176-0002",
+    addressJp: "東京都練馬区桜台3-32-5",
+    price: "¥520",
+    hours: "11:00–23:00 (Closed Mon)",
+    is24h: false,
+    lateNight: false,
+    tattooOk: true,
+    rotenburo: true,
+    sauna: true,
+    station: "Sakuradai Station (5 min walk)",
+    stationJp: "桜台駅 徒歩5分",
+    photo: "https://images.unsplash.com/photo-1542640244-7e672d6cef4e?w=600&h=400&fit=crop",
+    description: "Award-winning designer sento (Hisamatsu-yu) with a projection-mapped bathing experience. Concrete and glass architecture by Takeshi Igarashi, featuring seasonal digital art on the bathroom walls. Tattoo-friendly and truly unique."
+  },
+  {
+    id: 9,
+    name: "Mikoku-yu",
+    nameJp: "御谷湯",
+    type: "Sento",
+    area: "Sumida",
+    address: "1-6-2 Ishiwara, Sumida-ku, Tokyo 130-0011",
+    addressJp: "東京都墨田区石原1-6-2",
+    price: "¥520",
+    hours: "15:30–24:30 (Closed Sat)",
+    is24h: false,
+    lateNight: false,
+    tattooOk: true,
+    rotenburo: false,
+    sauna: true,
+    station: "Ryogoku Station (8 min walk)",
+    stationJp: "両国駅 徒歩8分",
+    photo: "https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?w=600&h=400&fit=crop",
+    description: "Multi-story sento with a rooftop bath offering views of Tokyo Skytree. Uses natural black spring water (黒湯) from underground. Massage jets, electric bath, and a stunning panoramic bathing experience. Tattoo-friendly."
+  },
+  {
+    id: 10,
+    name: "Yushin Nagareyama-no-Yu (RAKU SPA 1010)",
+    nameJp: "RAKU SPA 1010 神田",
+    type: "Super Sento",
+    area: "Chiyoda",
+    address: "1-4-4 Kanda-Awajicho, Chiyoda-ku, Tokyo 101-0063",
+    addressJp: "東京都千代田区神田淡路町1-4-4",
+    price: "¥1,460 (3h) / ¥1,790 (full day)",
+    hours: "11:00–翌08:00",
+    is24h: false,
+    lateNight: true,
+    tattooOk: false,
+    rotenburo: false,
+    sauna: true,
+    station: "Awajicho Station (1 min walk)",
+    stationJp: "淡路町駅 徒歩1分",
+    photo: "https://images.unsplash.com/photo-1551641506-ee5bf4cb45f1?w=600&h=400&fit=crop",
+    description: "Modern co-working meets bathing. Features saunas, baths, hammocks, manga library, and work desks — all for one price. Popular with digital nomads and freelancers who want to work and soak. Open until 8 AM next day."
+  },
+  {
+    id: 11,
+    name: "Ensen-Kanagonsen",
+    nameJp: "万年湯",
+    type: "Sento",
+    area: "Shinjuku",
+    address: "2-12-3 Okubo, Shinjuku-ku, Tokyo 169-0072",
+    addressJp: "東京都新宿区大久保2-12-3",
+    price: "¥520",
+    hours: "15:00–24:30 (Closed Wed)",
+    is24h: false,
+    lateNight: false,
+    tattooOk: true,
+    rotenburo: false,
+    sauna: true,
+    station: "Higashi-Shinjuku Station (3 min walk)",
+    stationJp: "東新宿駅 徒歩3分",
+    photo: "https://images.unsplash.com/photo-1583416750470-965b2707b355?w=600&h=400&fit=crop",
+    description: "Cozy neighborhood sento in Okubo's international district. Recently renovated with clean modern interiors. Friendly to foreigners and those with tattoos. A nice quiet escape from Shinjuku's chaos."
+  },
+  {
+    id: 12,
+    name: "Konjaku-no-Yu Kosugiyu",
+    nameJp: "金春湯",
+    type: "Sento",
+    area: "Minato",
+    address: "8-10-12 Ginza, Chuo-ku, Tokyo 104-0061",
+    addressJp: "東京都中央区銀座8-10-12",
+    price: "¥520",
+    hours: "14:00–22:00 (Closed Sun)",
+    is24h: false,
+    lateNight: false,
+    tattooOk: true,
+    rotenburo: false,
+    sauna: false,
+    station: "Shinbashi Station (5 min walk)",
+    stationJp: "新橋駅 徒歩5分",
+    photo: "https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?w=600&h=400&fit=crop",
+    description: "A hidden sento in the backstreets of Ginza — one of Tokyo's most expensive neighborhoods. Simple, no-frills traditional bathing. The contrast of a ¥520 sento surrounded by luxury boutiques is quintessentially Tokyo."
+  },
+  {
+    id: 13,
+    name: "Bunkyo-ku Bunka Onsen",
+    nameJp: "文化浴泉",
+    type: "Sento",
+    area: "Meguro",
+    address: "1-6-1 Aobadai, Meguro-ku, Tokyo 153-0042",
+    addressJp: "東京都目黒区青葉台1-6-1",
+    price: "¥520",
+    hours: "15:30–25:00 (Closed Mon)",
+    is24h: false,
+    lateNight: true,
+    tattooOk: true,
+    rotenburo: false,
+    sauna: true,
+    station: "Naka-Meguro Station (8 min walk)",
+    stationJp: "中目黒駅 徒歩8分",
+    photo: "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=600&h=400&fit=crop",
+    description: "Stylish renovated sento in trendy Nakameguro. Features a modern facade, milk bath (ミルク風呂), and good sauna. Open until 1 AM. Tattoos welcome. Great post-dinner option after exploring the Meguro River area."
+  },
+  {
+    id: 14,
+    name: "Takenoyu",
+    nameJp: "竹の湯",
+    type: "Sento",
+    area: "Suginami",
+    address: "1-24-6 Nishi-Ogikubo, Suginami-ku, Tokyo 167-0042",
+    addressJp: "東京都杉並区西荻窪1-24-6",
+    price: "¥520",
+    hours: "15:30–23:30 (Closed Tue)",
+    is24h: false,
+    lateNight: false,
+    tattooOk: true,
+    rotenburo: false,
+    sauna: false,
+    station: "Nishi-Ogikubo Station (5 min walk)",
+    stationJp: "西荻窪駅 徒歩5分",
+    photo: "https://images.unsplash.com/photo-1528164344705-47542687000d?w=600&h=400&fit=crop",
+    description: "Classic neighborhood sento in the artsy Nishi-Ogikubo area. Traditional tile work, hot and cold baths, and a welcoming local atmosphere. Popular with young residents and artists from the surrounding galleries."
+  },
+  {
+    id: 15,
+    name: "Times Spa Resta",
+    nameJp: "タイムズ スパ・レスタ",
+    type: "Super Sento",
+    area: "Toshima",
+    address: "1-29-1 Higashi-Ikebukuro, Toshima-ku, Tokyo 170-0013",
+    addressJp: "東京都豊島区東池袋1-29-1",
+    price: "¥2,850 (adults)",
+    hours: "11:30–翌09:00",
+    is24h: false,
+    lateNight: true,
+    tattooOk: false,
+    rotenburo: true,
+    sauna: true,
+    station: "Ikebukuro Station (5 min walk)",
+    stationJp: "池袋駅 徒歩5分",
+    photo: "https://images.unsplash.com/photo-1492571350019-22de08371f60?w=600&h=400&fit=crop",
+    description: "Premium adults-only (18+) spa on the rooftop of Sunshine City. Open-air bath with night views, Finnish sauna, and a chic lounge. Open until 9 AM next day with reclining rest areas. Excellent late-night option near Ikebukuro."
+  },
+  {
+    id: 16,
+    name: "Daikoku-yu",
+    nameJp: "大黒湯",
+    type: "Sento",
+    area: "Sumida",
+    address: "3-12-14 Yokokawa, Sumida-ku, Tokyo 130-0003",
+    addressJp: "東京都墨田区横川3-12-14",
+    price: "¥520",
+    hours: "15:00–24:00 (Closed Mon)",
+    is24h: false,
+    lateNight: false,
+    tattooOk: true,
+    rotenburo: true,
+    sauna: true,
+    station: "Oshiage Station (8 min walk)",
+    stationJp: "押上駅 徒歩8分",
+    photo: "https://images.unsplash.com/photo-1476234251651-f353703a034d?w=600&h=400&fit=crop",
+    description: "Beloved Skytree-area sento with a beautiful karahafu (唐破風) temple-style roof. Features open-air bath, sauna, and electric bath. Retro atmosphere with friendly regulars. A perfect complement to a Skytree visit."
+  },
+  {
+    id: 17,
+    name: "Hasunuma Onsen",
+    nameJp: "はすぬま温泉",
+    type: "Sento",
+    area: "Ota",
+    address: "6-16-11 Nishi-Kamata, Ota-ku, Tokyo 144-0051",
+    addressJp: "東京都大田区西蒲田6-16-11",
+    price: "¥520",
+    hours: "15:00–24:00 (Closed Tue)",
+    is24h: false,
+    lateNight: false,
+    tattooOk: true,
+    rotenburo: false,
+    sauna: true,
+    station: "Hasunuma Station (3 min walk)",
+    stationJp: "蓮沼駅 徒歩3分",
+    photo: "https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?w=600&h=400&fit=crop",
+    description: "Award-winning sento in Ota ward, known for its beautiful natural black spring water (黒湯). Ota ward is famous for black-water sento, and Hasunuma Onsen is one of the best. Friendly to newcomers and tattoos."
+  },
+  {
+    id: 18,
+    name: "Musashi-Koyama Onsen Shimizu-yu",
+    nameJp: "武蔵小山温泉 清水湯",
+    type: "Sento",
+    area: "Meguro",
+    address: "3-9-3 Koyama, Shinagawa-ku, Tokyo 142-0062",
+    addressJp: "東京都品川区小山3-9-3",
+    price: "¥520",
+    hours: "12:00–24:00 (Closed Mon)",
+    is24h: false,
+    lateNight: false,
+    tattooOk: false,
+    rotenburo: true,
+    sauna: true,
+    station: "Musashi-Koyama Station (5 min walk)",
+    stationJp: "武蔵小山駅 徒歩5分",
+    photo: "https://images.unsplash.com/photo-1550850839-8dc894ed385a?w=600&h=400&fit=crop",
+    description: "Modern sento with two types of natural spring — golden spring and black spring. The sleek contemporary design draws visitors from across Tokyo. Popular for its powerful jet baths and pristine facilities."
+  },
+  {
+    id: 19,
+    name: "Yomiuriland Yomiu-no-Yu",
+    nameJp: "よみうりランド 丘の湯",
+    type: "Super Sento",
+    area: "Setagaya",
+    address: "4015-1 Yanokuchi, Inagi-shi, Tokyo 206-0812",
+    addressJp: "東京都稲城市矢野口4015-1",
+    price: "¥750 (weekday) / ¥850 (weekend)",
+    hours: "10:00–24:00",
+    is24h: false,
+    lateNight: false,
+    tattooOk: false,
+    rotenburo: true,
+    sauna: true,
+    station: "Yomiuri-Land-Mae Station (shuttle bus)",
+    stationJp: "読売ランド前駅 バス",
+    photo: "https://images.unsplash.com/photo-1509023464722-18d996393ca8?w=600&h=400&fit=crop",
+    description: "Spacious super sento adjacent to Yomiuriland amusement park. Features a stunning hilltop open-air bath with panoramic views. Excellent for families after a day at the park. Multiple sauna types and relaxation rooms."
+  },
+  {
+    id: 20,
+    name: "Sento Daikoku-yu (Asakusa)",
+    nameJp: "大黒湯（浅草）",
+    type: "Sento",
+    area: "Taito",
+    address: "2-16-12 Senzoku, Taito-ku, Tokyo 111-0031",
+    addressJp: "東京都台東区千束2-16-12",
+    price: "¥520",
+    hours: "14:30–24:00 (Closed Thu)",
+    is24h: false,
+    lateNight: false,
+    tattooOk: true,
+    rotenburo: false,
+    sauna: true,
+    station: "Iriya Station (10 min walk)",
+    stationJp: "入谷駅 徒歩10分",
+    photo: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600&h=400&fit=crop",
+    description: "Classic old-school sento with a magnificent Mt. Fuji mural (富士山ペンキ絵) on the wall — the quintessential Tokyo sento experience. The mural is repainted by one of Japan's last remaining sento artists."
+  },
+  {
+    id: 21,
+    name: "Toshimaen Niwa-no-Yu",
+    nameJp: "豊島園 庭の湯",
+    type: "Onsen",
+    area: "Nerima",
+    address: "3-25-1 Koyama, Nerima-ku, Tokyo 176-0023",
+    addressJp: "東京都練馬区向山3-25-1",
+    price: "¥1,320 (weekday) / ¥1,650 (weekend)",
+    hours: "10:00–23:00",
+    is24h: false,
+    lateNight: false,
+    tattooOk: false,
+    rotenburo: true,
+    sauna: true,
+    station: "Toshimaen Station (2 min walk)",
+    stationJp: "豊島園駅 徒歩2分",
+    photo: "https://images.unsplash.com/photo-1471899236350-e3016bf1e69e?w=600&h=400&fit=crop",
+    description: "Beautiful garden-style onsen near the former Toshimaen park. Adults-only (18+) facility with a stunning Japanese garden surrounding the outdoor baths. Finnish sauna, lounging areas, and a refined atmosphere."
+  },
+  {
+    id: 22,
+    name: "Maenohara Onsen Saya-no-Yudokoro",
+    nameJp: "前野原温泉 さやの湯処",
+    type: "Onsen",
+    area: "Toshima",
+    address: "3-41-1 Maeno-cho, Itabashi-ku, Tokyo 174-0063",
+    addressJp: "東京都板橋区前野町3-41-1",
+    price: "¥980 (weekday)",
+    hours: "10:00–25:00",
+    is24h: false,
+    lateNight: true,
+    tattooOk: false,
+    rotenburo: true,
+    sauna: true,
+    station: "Shimura-Sakaue Station (10 min walk)",
+    stationJp: "志村坂上駅 徒歩10分",
+    photo: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=600&h=400&fit=crop",
+    description: "Beautiful onsen facility set around a traditional Japanese garden. The source water has a distinctive greenish tint from its mineral content. Features an in-house soba restaurant overlooking the garden."
+  },
+  {
+    id: 23,
+    name: "Myojin-no-Yu Dormy Inn Akihabara",
+    nameJp: "明神の湯 ドーミーインAKIBAデラックス",
+    type: "Onsen",
+    area: "Chiyoda",
+    address: "2-4-1 Kanda-Sudacho, Chiyoda-ku, Tokyo 101-0041",
+    addressJp: "東京都千代田区神田須田町2-4-1",
+    price: "Free (hotel guests only)",
+    hours: "15:00–翌10:00",
+    is24h: false,
+    lateNight: true,
+    tattooOk: true,
+    rotenburo: true,
+    sauna: true,
+    station: "Akihabara Station (5 min walk)",
+    stationJp: "秋葉原駅 徒歩5分",
+    photo: "https://images.unsplash.com/photo-1565618754154-c8986a6fa7d8?w=600&h=400&fit=crop",
+    description: "Rooftop onsen at the Dormy Inn hotel in Akihabara. Open to hotel guests only, but worth booking a room for. Open-air bath on the roof, free late-night ramen, and the perfect otaku-meets-onsen experience."
+  },
+  {
+    id: 24,
+    name: "Tokyo Somei Onsen Sakura",
+    nameJp: "東京染井温泉 Sakura",
+    type: "Onsen",
+    area: "Toshima",
+    address: "5-4-24 Komagome, Toshima-ku, Tokyo 170-0003",
+    addressJp: "東京都豊島区駒込5-4-24",
+    price: "¥1,320",
+    hours: "10:00–23:00",
+    is24h: false,
+    lateNight: false,
+    tattooOk: false,
+    rotenburo: true,
+    sauna: true,
+    station: "Komagome Station (6 min walk)",
+    stationJp: "駒込駅 徒歩6分",
+    photo: "https://images.unsplash.com/photo-1504198453319-5ce911bafcde?w=600&h=400&fit=crop",
+    description: "Elegant onsen in a residential area near Rikugien Garden. Named after the area's famous cherry blossoms. Natural amber-colored spring water with a silky texture. Peaceful atmosphere away from tourist crowds."
+  },
+  {
+    id: 25,
+    name: "Tenjin-yu",
+    nameJp: "天神湯",
+    type: "Sento",
+    area: "Shinagawa",
+    address: "2-9-14 Kitashinagawa, Shinagawa-ku, Tokyo 140-0001",
+    addressJp: "東京都品川区北品川2-9-14",
+    price: "¥520",
+    hours: "15:00–24:00 (Closed Fri)",
+    is24h: false,
+    lateNight: false,
+    tattooOk: true,
+    rotenburo: false,
+    sauna: false,
+    station: "Shinbanba Station (3 min walk)",
+    stationJp: "新馬場駅 徒歩3分",
+    photo: "https://images.unsplash.com/photo-1513407030348-c983a97b98d8?w=600&h=400&fit=crop",
+    description: "Traditional sento on the historic Tokaido road in Shinagawa. Uses natural black spring water. Simple, authentic, and deeply local. The kind of place where you'll be the only tourist and neighbors greet each other by name."
+  },
+  {
+    id: 26,
+    name: "Shin-Nai-Yu Sento",
+    nameJp: "新内湯",
+    type: "Sento",
+    area: "Nakano",
+    address: "5-22-15 Nakano, Nakano-ku, Tokyo 164-0001",
+    addressJp: "東京都中野区中野5-22-15",
+    price: "¥520",
+    hours: "15:00–23:00 (Closed Thu)",
+    is24h: false,
+    lateNight: false,
+    tattooOk: true,
+    rotenburo: false,
+    sauna: false,
+    station: "Nakano Station (5 min walk)",
+    stationJp: "中野駅 徒歩5分",
+    photo: "https://images.unsplash.com/photo-1512552288940-3a300922a275?w=600&h=400&fit=crop",
+    description: "A humble neighborhood sento near Nakano Broadway (the otaku paradise). Simple baths, hot and cold, no frills. The kind of authentic Tokyo experience that pairs perfectly with afternoon manga shopping."
+  },
+  {
+    id: 27,
+    name: "Fuji-no-Yu",
+    nameJp: "富士の湯",
+    type: "Sento",
+    area: "Nakano",
+    address: "2-12-4 Arai, Nakano-ku, Tokyo 165-0026",
+    addressJp: "東京都中野区新井2-12-4",
+    price: "¥520",
+    hours: "15:00–24:30 (Closed Wed)",
+    is24h: false,
+    lateNight: false,
+    tattooOk: true,
+    rotenburo: false,
+    sauna: true,
+    station: "Araiyakushi-Mae Station (3 min walk)",
+    stationJp: "新井薬師前駅 徒歩3分",
+    photo: "https://images.unsplash.com/photo-1504198453319-5ce911bafcde?w=600&h=400&fit=crop",
+    description: "Clean and well-maintained sento near Araiyakushi temple. Features a beautiful painted Mt. Fuji mural and a well-regarded dry sauna. Tatami rest area for post-bath relaxation."
+  },
+  {
+    id: 28,
+    name: "Spa World Odaiba",
+    nameJp: "東京お台場 大江戸温泉物語",
+    type: "Super Sento",
+    area: "Koto",
+    address: "2-6-3 Aomi, Koto-ku, Tokyo 135-0064",
+    addressJp: "東京都江東区青海2-6-3",
+    price: "¥2,768",
+    hours: "11:00–翌09:00",
+    is24h: false,
+    lateNight: true,
+    tattooOk: false,
+    rotenburo: true,
+    sauna: true,
+    station: "Tokyo Teleport Station (5 min walk)",
+    stationJp: "東京テレポート駅 徒歩5分",
+    photo: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=600&h=400&fit=crop",
+    description: "Large-scale Edo-themed bathing facility on Odaiba. Features festival-style food stalls, foot baths, multiple indoor and outdoor baths, and rest areas. Don yukata and enjoy the matsuri atmosphere until morning."
+  },
+  {
+    id: 29,
+    name: "Yamato-yu",
+    nameJp: "大和湯",
+    type: "Sento",
+    area: "Suginami",
+    address: "1-25-12 Koenji-Kita, Suginami-ku, Tokyo 166-0002",
+    addressJp: "東京都杉並区高円寺北1-25-12",
+    price: "¥520",
+    hours: "15:30–24:00 (Closed Wed)",
+    is24h: false,
+    lateNight: false,
+    tattooOk: true,
+    rotenburo: false,
+    sauna: false,
+    station: "Koenji Station (4 min walk)",
+    stationJp: "高円寺駅 徒歩4分",
+    photo: "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=600&h=400&fit=crop",
+    description: "Artsy sento in bohemian Koenji. The neighborhood is known for its vintage shops, live music venues, and countercultural spirit — and the local sento fits right in. Simple, authentic, and welcoming."
+  },
+  {
+    id: 30,
+    name: "Shimizu-yu Kagurazaka",
+    nameJp: "清水湯（神楽坂）",
+    type: "Sento",
+    area: "Shinjuku",
+    address: "6-32-6 Kagurazaka, Shinjuku-ku, Tokyo 162-0825",
+    addressJp: "東京都新宿区神楽坂6-32-6",
+    price: "¥520",
+    hours: "15:00–24:00 (Closed Mon)",
+    is24h: false,
+    lateNight: false,
+    tattooOk: true,
+    rotenburo: false,
+    sauna: false,
+    station: "Kagurazaka Station (3 min walk)",
+    stationJp: "神楽坂駅 徒歩3分",
+    photo: "https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?w=600&h=400&fit=crop",
+    description: "Charming sento tucked away in the narrow lanes of Kagurazaka, Tokyo's 'Little Paris.' After exploring the French-Japanese fusion restaurants and cobblestone alleys, wind down with a simple hot soak."
+  },
+  {
+    id: 31,
+    name: "Kabukicho Tower Thermae-Yu Annex",
+    nameJp: "歌舞伎町タワー テルマー湯別館",
+    type: "Super Sento",
+    area: "Shinjuku",
+    address: "1-29-1 Kabukicho, Shinjuku-ku, Tokyo 160-0021",
+    addressJp: "東京都新宿区歌舞伎町1-29-1",
+    price: "¥2,900",
+    hours: "10:00–翌09:00",
+    is24h: false,
+    lateNight: true,
+    tattooOk: false,
+    rotenburo: true,
+    sauna: true,
+    station: "Shinjuku Station (7 min walk)",
+    stationJp: "新宿駅 徒歩7分",
+    photo: "https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=600&h=400&fit=crop",
+    description: "Newer annex in the Kabukicho Tower entertainment complex. Multiple Finnish-style saunas, outdoor deck, and cold plunge pools. The modern space attracts a younger crowd. Excellent food hall and manga library on-site."
+  },
+  {
+    id: 32,
+    name: "Oji Onsen Oji-juku Kagari",
+    nameJp: "王子温泉 王子宿かがり",
+    type: "Onsen",
+    area: "Kita",
+    address: "1-13-1 Oji, Kita-ku, Tokyo 114-0002",
+    addressJp: "東京都北区王子1-13-1",
+    price: "¥1,300",
+    hours: "11:00–24:00",
+    is24h: false,
+    lateNight: false,
+    tattooOk: false,
+    rotenburo: true,
+    sauna: true,
+    station: "Oji Station (3 min walk)",
+    stationJp: "王子駅 徒歩3分",
+    photo: "https://images.unsplash.com/photo-1478436127897-769e1b3f0f36?w=600&h=400&fit=crop",
+    description: "Modern onsen facility near the historic Asukayama Park. Features both indoor and outdoor baths with natural hot spring water. A good option for combining cultural sightseeing with onsen relaxation."
+  },
+  {
+    id: 33,
+    name: "Shimizuyu Roppongi",
+    nameJp: "清水湯（六本木）",
+    type: "Sento",
+    area: "Minato",
+    address: "1-6-12 Roppongi, Minato-ku, Tokyo 106-0032",
+    addressJp: "東京都港区六本木1-6-12",
+    price: "¥520",
+    hours: "14:00–23:00 (Closed Sun)",
+    is24h: false,
+    lateNight: false,
+    tattooOk: true,
+    rotenburo: false,
+    sauna: false,
+    station: "Roppongi-Itchome Station (2 min walk)",
+    stationJp: "六本木一丁目駅 徒歩2分",
+    photo: "https://images.unsplash.com/photo-1554797589-7241bb691973?w=600&h=400&fit=crop",
+    description: "Tiny traditional sento hiding in the shadows of Roppongi's skyscrapers. A surreal contrast — ¥520 for a bath in one of Tokyo's most expensive districts. Authentic old-Tokyo atmosphere minutes from Roppongi Hills."
+  },
+  {
+    id: 34,
+    name: "Nu Land Sagami-yu",
+    nameJp: "ニューランド相模湯",
+    type: "Super Sento",
+    area: "Ota",
+    address: "2-5-14 Nakanobu, Shinagawa-ku, Tokyo 142-0053",
+    addressJp: "東京都品川区中延2-5-14",
+    price: "¥900",
+    hours: "11:00–24:00 (Closed Tue)",
+    is24h: false,
+    lateNight: false,
+    tattooOk: true,
+    rotenburo: false,
+    sauna: true,
+    station: "Nakanobu Station (2 min walk)",
+    stationJp: "中延駅 徒歩2分",
+    photo: "https://images.unsplash.com/photo-1471899236350-e3016bf1e69e?w=600&h=400&fit=crop",
+    description: "Retro super sento with a surprisingly extensive facility: multiple bath types, strong sauna, cold plunge, and a rest area. The entrance through a narrow alley adds to the hidden-gem feeling."
+  },
+  {
+    id: 35,
+    name: "Kotobuki-yu",
+    nameJp: "寿湯",
+    type: "Sento",
+    area: "Taito",
+    address: "2-16-4 Higashi-Ueno, Taito-ku, Tokyo 110-0015",
+    addressJp: "東京都台東区東上野2-16-4",
+    price: "¥520",
+    hours: "11:00–25:30 (Closed Mon)",
+    is24h: false,
+    lateNight: true,
+    tattooOk: true,
+    rotenburo: true,
+    sauna: true,
+    station: "Ueno Station (7 min walk)",
+    stationJp: "上野駅 徒歩7分",
+    photo: "https://images.unsplash.com/photo-1480796927426-f609979314bd?w=600&h=400&fit=crop",
+    description: "Outstanding renovated sento near Ueno. Features open-air bath, strong sauna, and multiple bath types — rare for a ¥520 sento. Open until 1:30 AM and tattoo-friendly. Arguably the best value sento in all of Tokyo."
+  },
+  {
+    id: 36,
+    name: "Asahi-yu (Shinjuku-Sanchome)",
+    nameJp: "朝日湯（新宿三丁目）",
+    type: "Sento",
+    area: "Shinjuku",
+    address: "2-3-14 Shinjuku, Shinjuku-ku, Tokyo 160-0022",
+    addressJp: "東京都新宿区新宿2-3-14",
+    price: "¥520",
+    hours: "14:00–24:30 (Closed Sun)",
+    is24h: false,
+    lateNight: false,
+    tattooOk: true,
+    rotenburo: false,
+    sauna: false,
+    station: "Shinjuku-Sanchome Station (2 min walk)",
+    stationJp: "新宿三丁目駅 徒歩2分",
+    photo: "https://images.unsplash.com/photo-1551641506-ee5bf4cb45f1?w=600&h=400&fit=crop",
+    description: "Retro sento in the heart of Shinjuku's Ni-chome (LGBTQ+ district). A welcoming, no-judgment space that's been serving the neighborhood for decades. Basic but clean, with a genuine community feel."
+  },
+  {
+    id: 37,
+    name: "Yuno-Mori no Sato",
+    nameJp: "湯の森の里",
+    type: "Super Sento",
+    area: "Edogawa",
+    address: "7-2-1 Funabori, Edogawa-ku, Tokyo 134-0091",
+    addressJp: "東京都江戸川区船堀7-2-1",
+    price: "¥750",
+    hours: "10:00–24:00",
+    is24h: false,
+    lateNight: false,
+    tattooOk: false,
+    rotenburo: true,
+    sauna: true,
+    station: "Funabori Station (5 min walk)",
+    stationJp: "船堀駅 徒歩5分",
+    photo: "https://images.unsplash.com/photo-1509023464722-18d996393ca8?w=600&h=400&fit=crop",
+    description: "Affordable super sento in Edogawa ward with a surprisingly large outdoor bath area. Includes jet baths, herbal baths, and multiple sauna types. Great value at ¥750 for a full-service facility."
+  },
+  {
+    id: 38,
+    name: "Spa Heals Yokohama (Day-trip from Tokyo)",
+    nameJp: "SKYSpa YOKOHAMA",
+    type: "Super Sento",
+    area: "Shibuya",
+    address: "2-24-12 Sakuragaoka-cho, Shibuya-ku, Tokyo 150-0031",
+    addressJp: "東京都渋谷区桜丘町2-24-12",
+    price: "¥1,480 (3h) / ¥2,370 (full day)",
+    hours: "10:00–翌08:00",
+    is24h: false,
+    lateNight: true,
+    tattooOk: false,
+    rotenburo: false,
+    sauna: true,
+    station: "Shibuya Station (5 min walk)",
+    stationJp: "渋谷駅 徒歩5分",
+    photo: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&h=400&fit=crop",
+    description: "Shibuya's premier spa facility with excellent Finnish sauna, aufguss events, cold baths, and co-working space. The Shibuya skyline views from the lounge are spectacular. Open until 8 AM — ideal for all-night recovery."
+  },
+  {
+    id: 39,
+    name: "Kin-no-Yu",
+    nameJp: "金の湯",
+    type: "Sento",
+    area: "Setagaya",
+    address: "1-25-25 Daizawa, Setagaya-ku, Tokyo 155-0032",
+    addressJp: "東京都世田谷区代沢1-25-25",
+    price: "¥520",
+    hours: "15:00–24:00 (Closed Fri)",
+    is24h: false,
+    lateNight: false,
+    tattooOk: true,
+    rotenburo: false,
+    sauna: true,
+    station: "Shimokitazawa Station (8 min walk)",
+    stationJp: "下北沢駅 徒歩8分",
+    photo: "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=600&h=400&fit=crop",
+    description: "Neighborhood sento near bustling Shimokitazawa. After exploring the vintage shops and live music venues, duck into Kin-no-Yu for a simple, affordable soak among the locals."
+  },
+  {
+    id: 40,
+    name: "Sunshine Sento (RAKU SPA)",
+    nameJp: "RAKU SPA",
+    type: "Super Sento",
+    area: "Shinjuku",
+    address: "3-7-2 Nishi-Shinjuku, Shinjuku-ku, Tokyo 160-0023",
+    addressJp: "東京都新宿区西新宿3-7-2",
+    price: "¥1,590 (3h) / ¥2,190 (full day)",
+    hours: "11:00–翌08:00",
+    is24h: false,
+    lateNight: true,
+    tattooOk: false,
+    rotenburo: false,
+    sauna: true,
+    station: "Shinjuku Station (10 min walk)",
+    stationJp: "新宿駅 徒歩10分",
+    photo: "https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=600&h=400&fit=crop",
+    description: "Chill super sento with hammock zones, manga library, saunas, and baths. Attracts a creative crowd with its laid-back atmosphere. Open until 8 AM with rest areas for overnighting. Great jet-lag strategy spot."
+  },
+  {
+    id: 41,
+    name: "Kosugi-yu Koenji",
+    nameJp: "小杉湯（高円寺）",
+    type: "Sento",
+    area: "Suginami",
+    address: "3-32-17 Koenji-Kita, Suginami-ku, Tokyo 166-0002",
+    addressJp: "東京都杉並区高円寺北3-32-17",
+    price: "¥520",
+    hours: "15:30–25:30 (Closed Thu)",
+    is24h: false,
+    lateNight: true,
+    tattooOk: true,
+    rotenburo: false,
+    sauna: false,
+    station: "Koenji Station (5 min walk)",
+    stationJp: "高円寺駅 徒歩5分",
+    photo: "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=600&h=400&fit=crop",
+    description: "Historic sento that's become a cultural landmark in Koenji. Features a milk bath (ミルク風呂) with a silky smooth texture, and seasonal herbal baths. Open until 1:30 AM. Has inspired a community co-working space next door."
+  },
+  {
+    id: 42,
+    name: "Tennen Onsen Heiwajima",
+    nameJp: "天然温泉 平和島",
+    type: "Super Sento",
+    area: "Ota",
+    address: "1-1-1 Heiwajima, Ota-ku, Tokyo 143-0006",
+    addressJp: "東京都大田区平和島1-1-1",
+    price: "¥2,200",
+    hours: "24 hours",
+    is24h: true,
+    lateNight: true,
+    tattooOk: false,
+    rotenburo: true,
+    sauna: true,
+    station: "Heiwajima Station (5 min walk)",
+    stationJp: "平和島駅 徒歩5分",
+    photo: "https://images.unsplash.com/photo-1478436127897-769e1b3f0f36?w=600&h=400&fit=crop",
+    description: "True 24-hour super sento near Haneda Airport. Natural hot spring water, multiple baths, saunas, and rest areas for sleeping. Perfect for early morning flights or late arrivals. Free shuttle to/from Haneda Airport terminal."
+  },
+  {
+    id: 43,
+    name: "Myoken-yu Matsuri",
+    nameJp: "妙見湯 まつり",
+    type: "Sento",
+    area: "Shibuya",
+    address: "4-5-12 Ebisu-Nishi, Shibuya-ku, Tokyo 150-0021",
+    addressJp: "東京都渋谷区恵比寿西4-5-12",
+    price: "¥520",
+    hours: "14:00–25:30 (Closed Tue)",
+    is24h: false,
+    lateNight: true,
+    tattooOk: true,
+    rotenburo: false,
+    sauna: true,
+    station: "Ebisu Station (8 min walk)",
+    stationJp: "恵比寿駅 徒歩8分",
+    photo: "https://images.unsplash.com/photo-1550850839-8dc894ed385a?w=600&h=400&fit=crop",
+    description: "Renovated sento in upscale Ebisu area. Features a capsule-style sauna and strong jet baths. Open until 1:30 AM and tattoo-friendly. A great late-night option after dinner in Ebisu's restaurant row."
+  },
+  {
+    id: 44,
+    name: "Nishi-Shinjuku Tennen Onsen Terunoyu",
+    nameJp: "西新宿天然温泉 テルノ湯",
+    type: "Super Sento",
+    area: "Shinjuku",
+    address: "7-13-5 Nishi-Shinjuku, Shinjuku-ku, Tokyo 160-0023",
+    addressJp: "東京都新宿区西新宿7-13-5",
+    price: "¥2,100",
+    hours: "11:00–翌09:00",
+    is24h: false,
+    lateNight: true,
+    tattooOk: false,
+    rotenburo: true,
+    sauna: true,
+    station: "Shinjuku-Nishiguchi Station (3 min walk)",
+    stationJp: "新宿西口駅 徒歩3分",
+    photo: "https://images.unsplash.com/photo-1583416750470-965b2707b355?w=600&h=400&fit=crop",
+    description: "Natural hot spring super sento in the business hotel district of Nishi-Shinjuku. Convenient location, good facilities, and stays open until morning. Popular with business travelers and late-night workers."
+  },
+  {
+    id: 45,
+    name: "Asakusa Kannon Onsen",
+    nameJp: "浅草観音温泉",
+    type: "Onsen",
+    area: "Taito",
+    address: "2-7-26 Asakusa, Taito-ku, Tokyo 111-0032",
+    addressJp: "東京都台東区浅草2-7-26",
+    price: "¥700",
+    hours: "06:30–18:00 (Closed Thu)",
+    is24h: false,
+    lateNight: false,
+    tattooOk: true,
+    rotenburo: false,
+    sauna: false,
+    station: "Asakusa Station (5 min walk)",
+    stationJp: "浅草駅 徒歩5分",
+    photo: "https://images.unsplash.com/photo-1480796927426-f609979314bd?w=600&h=400&fit=crop",
+    description: "Historic onsen right next to Sensoji temple. Opens at 6:30 AM — ideal for early morning jet lag bathing before the temple gets crowded. Uses natural brown-tinted spring water. No-frills, deeply authentic."
+  },
+  {
+    id: 46,
+    name: "SOLA SPA Sumida-ku",
+    nameJp: "SOLA SPA 墨田区",
+    type: "Super Sento",
+    area: "Sumida",
+    address: "3-11-7 Narihira, Sumida-ku, Tokyo 130-0002",
+    addressJp: "東京都墨田区業平3-11-7",
+    price: "¥2,200",
+    hours: "10:00–翌08:00",
+    is24h: false,
+    lateNight: true,
+    tattooOk: false,
+    rotenburo: true,
+    sauna: true,
+    station: "Oshiage (Skytree) Station (3 min walk)",
+    stationJp: "押上（スカイツリー前）駅 徒歩3分",
+    photo: "https://images.unsplash.com/photo-1476234251651-f353703a034d?w=600&h=400&fit=crop",
+    description: "Modern super sento with rooftop open-air bath and direct Skytree views. Multiple sauna rooms with aufguss sessions. Rock bath, silk bath, and a well-appointed rest area. Open until 8 AM for all-night soaking."
+  },
+  {
+    id: 47,
+    name: "Shibuya Kumin Complex Sento",
+    nameJp: "渋谷区民総合センター 銭湯",
+    type: "Sento",
+    area: "Shibuya",
+    address: "1-1 Udagawacho, Shibuya-ku, Tokyo 150-0042",
+    addressJp: "東京都渋谷区宇田川町1-1",
+    price: "¥520",
+    hours: "15:00–22:00 (Closed Wed)",
+    is24h: false,
+    lateNight: false,
+    tattooOk: false,
+    rotenburo: false,
+    sauna: false,
+    station: "Shibuya Station (5 min walk)",
+    stationJp: "渋谷駅 徒歩5分",
+    photo: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&h=400&fit=crop",
+    description: "Public sento inside the Shibuya ward community complex. Extremely basic but clean, and the cheapest bath option right in the center of Shibuya. Gets busy with locals after work."
+  },
+  {
+    id: 48,
+    name: "Bunka-Yokusen",
+    nameJp: "文化浴泉",
+    type: "Sento",
+    area: "Shinjuku",
+    address: "4-32-3 Yotsuya, Shinjuku-ku, Tokyo 160-0004",
+    addressJp: "東京都新宿区四谷4-32-3",
+    price: "¥520",
+    hours: "15:00–24:00 (Closed Sun)",
+    is24h: false,
+    lateNight: false,
+    tattooOk: true,
+    rotenburo: false,
+    sauna: true,
+    station: "Yotsuya-Sanchome Station (3 min walk)",
+    stationJp: "四谷三丁目駅 徒歩3分",
+    photo: "https://images.unsplash.com/photo-1512552288940-3a300922a275?w=600&h=400&fit=crop",
+    description: "Quiet residential-area sento with a loyal local following. Clean facilities, good water temperature, and a pleasant sauna. The Yotsuya neighborhood offers great izakaya options for post-bath dining."
+  },
+  {
+    id: 49,
+    name: "An Spa Shibuya",
+    nameJp: "アンスパ 渋谷",
+    type: "Super Sento",
+    area: "Shibuya",
+    address: "1-17-7 Jinnan, Shibuya-ku, Tokyo 150-0041",
+    addressJp: "東京都渋谷区神南1-17-7",
+    price: "¥3,500",
+    hours: "10:00–翌09:00",
+    is24h: false,
+    lateNight: true,
+    tattooOk: true,
+    rotenburo: true,
+    sauna: true,
+    station: "Shibuya Station (3 min walk)",
+    stationJp: "渋谷駅 徒歩3分",
+    photo: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&h=400&fit=crop",
+    description: "Premium spa in the heart of Shibuya with tattoo-friendly policy. Features multiple sauna types, open-air baths, and luxurious rest areas. The rooftop space with city views is particularly impressive at night."
+  },
+  {
+    id: 50,
+    name: "Koto Yumenoshima Tropical Greenhouse Onsen",
+    nameJp: "夢の島熱帯植物館温泉",
+    type: "Super Sento",
+    area: "Koto",
+    address: "2-1-2 Yumenoshima, Koto-ku, Tokyo 136-0081",
+    addressJp: "東京都江東区夢の島2-1-2",
+    price: "¥1,200",
+    hours: "10:00–23:00",
+    is24h: false,
+    lateNight: false,
+    tattooOk: false,
+    rotenburo: true,
+    sauna: true,
+    station: "Shin-Kiba Station (10 min walk)",
+    stationJp: "新木場駅 徒歩10分",
+    photo: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=600&h=400&fit=crop",
+    description: "Unique bathing facility adjacent to the Yumenoshima Tropical Greenhouse. The outdoor baths are surrounded by lush tropical plants heated by waste energy from the nearby waste processing plant — circular sustainability in action."
+  }
+];
+
+// ============================================================
+// STATE
+// ============================================================
+let activeFilters = new Set();
+let favorites = JSON.parse(localStorage.getItem('onsen-favorites') || '[]');
+
+// ============================================================
+// RENDER FUNCTIONS
+// ============================================================
+
+function getTypeLabel(type) {
+  const map = {
+    'Super Sento': 'super',
+    'Sento': 'sento',
+    'Onsen': 'onsen'
+  };
+  return map[type] || 'sento';
+}
+
+function renderCard(spot) {
+  const isFav = favorites.includes(spot.id);
+  const badges = [];
+
+  if (spot.is24h) badges.push('<span class="badge badge-24h">24H</span>');
+  if (spot.lateNight && !spot.is24h) badges.push('<span class="badge badge-latenight">Late Night</span>');
+  if (spot.tattooOk) badges.push('<span class="badge badge-tattoo">Tattoo OK</span>');
+  badges.push(`<span class="badge badge-${getTypeLabel(spot.type)}">${spot.type}</span>`);
+
+  return `
+    <div class="onsen-card" data-id="${spot.id}" data-area="${spot.area}"
+         data-24h="${spot.is24h}" data-tattoo="${spot.tattooOk}"
+         data-rotenburo="${spot.rotenburo}" data-sauna="${spot.sauna}"
+         data-latenight="${spot.lateNight}"
+         data-name="${spot.name.toLowerCase()} ${spot.nameJp}" data-station="${spot.station.toLowerCase()}">
+      <div style="position:relative;">
+        <div class="card-image-placeholder">
+          <div style="font-size:2rem;">♨</div>
+        </div>
+        <div class="card-badges">${badges.join('')}</div>
+        <button class="card-favorite ${isFav ? 'favorited' : ''}" onclick="toggleFavorite(${spot.id}, this)" title="Add to favorites">
+          ${isFav ? '&#x2764;' : '&#x2661;'}
+        </button>
+      </div>
+      <div class="card-content">
+        <div class="card-type">${spot.type}</div>
+        <div class="card-name">${spot.name}</div>
+        <div class="card-name-jp">${spot.nameJp}</div>
+        <div class="card-details">
+          <span class="card-detail-icon">&#x1f4cd;</span>
+          <span class="card-detail-text">${spot.address}</span>
+          <span class="card-detail-icon">&#x1f552;</span>
+          <span class="card-detail-text">${spot.hours}</span>
+          <span class="card-detail-icon">&#x1f4b4;</span>
+          <span class="card-detail-text">${spot.price}</span>
+          <span class="card-detail-icon">&#x1f689;</span>
+          <span class="card-detail-text">${spot.station}</span>
+        </div>
+        <div class="card-features">
+          <span class="feature-tag ${spot.rotenburo ? 'yes' : 'no'}">${spot.rotenburo ? '&#x2713;' : '&#x2717;'} Rotenburo</span>
+          <span class="feature-tag ${spot.sauna ? 'yes' : 'no'}">${spot.sauna ? '&#x2713;' : '&#x2717;'} Sauna</span>
+          <span class="feature-tag ${spot.tattooOk ? 'yes' : 'no'}">${spot.tattooOk ? '&#x2713;' : '&#x2717;'} Tattoo</span>
+          ${spot.is24h ? '<span class="feature-tag yes">&#x2713; 24h</span>' : ''}
+        </div>
+        <div class="card-description">${spot.description}</div>
+      </div>
+    </div>
+  `;
+}
+
+function renderAllCards() {
+  const grid = document.getElementById('onsenGrid');
+  grid.innerHTML = onsenData.map(renderCard).join('');
+}
+
+function renderLateNight() {
+  const lateNightSpots = onsenData.filter(s => s.lateNight || s.is24h);
+  const grid = document.getElementById('latenight-grid');
+  grid.innerHTML = lateNightSpots.map(spot => `
+    <div class="latenight-card fade-in">
+      <h3>${spot.name}</h3>
+      <div class="jp">${spot.nameJp} — ${spot.area}</div>
+      <div class="hours">${spot.hours}</div>
+      <p>${spot.description.substring(0, 150)}...</p>
+      <div style="margin-top:10px;">
+        <a href="#directory" onclick="scrollToCard(${spot.id})" style="color:var(--neon-purple);font-size:0.85rem;text-decoration:none;">View details &rarr;</a>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderFavoritesList() {
+  const list = document.getElementById('favoritesList');
+  const favSpots = onsenData.filter(s => favorites.includes(s.id));
+
+  if (favSpots.length === 0) {
+    list.innerHTML = '<div class="fav-empty">No favorites yet.<br>Tap the heart icon on any onsen to save it.</div>';
+    return;
+  }
+
+  list.innerHTML = favSpots.map(spot => `
+    <div class="fav-item">
+      <div>
+        <div class="fav-item-name">${spot.name}</div>
+        <div class="fav-item-area">${spot.area} — ${spot.type}</div>
+      </div>
+      <button class="fav-remove" onclick="removeFavorite(${spot.id})">&#x2715;</button>
+    </div>
+  `).join('');
+}
+
+// ============================================================
+// FILTER LOGIC
+// ============================================================
+
+function toggleFilter(filter, btn) {
+  if (activeFilters.has(filter)) {
+    activeFilters.delete(filter);
+    btn.classList.remove('active');
+  } else {
+    activeFilters.add(filter);
+    btn.classList.add('active');
+  }
+  applyFilters();
+}
+
+function applyFilters() {
+  const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+  const areaVal = document.getElementById('areaSelect').value;
+  const cards = document.querySelectorAll('.onsen-card');
+  let visible = 0;
+
+  cards.forEach(card => {
+    let show = true;
+
+    // Text search
+    if (searchTerm) {
+      const name = card.dataset.name || '';
+      const station = card.dataset.station || '';
+      const area = (card.dataset.area || '').toLowerCase();
+      if (!name.includes(searchTerm) && !station.includes(searchTerm) && !area.includes(searchTerm)) {
+        show = false;
+      }
+    }
+
+    // Area filter
+    if (areaVal && card.dataset.area !== areaVal) {
+      show = false;
+    }
+
+    // Feature filters
+    if (activeFilters.has('is24h') && card.dataset['24h'] !== 'true') show = false;
+    if (activeFilters.has('tattooOk') && card.dataset.tattoo !== 'true') show = false;
+    if (activeFilters.has('rotenburo') && card.dataset.rotenburo !== 'true') show = false;
+    if (activeFilters.has('sauna') && card.dataset.sauna !== 'true') show = false;
+    if (activeFilters.has('lateNight') && card.dataset.latenight !== 'true') show = false;
+    if (activeFilters.has('favorites') && !favorites.includes(parseInt(card.dataset.id))) show = false;
+
+    card.classList.toggle('hidden', !show);
+    if (show) visible++;
+  });
+
+  document.getElementById('resultsCount').textContent = `Showing ${visible} of 50 spots`;
+  document.getElementById('noResults').classList.toggle('show', visible === 0);
+}
+
+function filterByArea(area) {
+  const select = document.getElementById('areaSelect');
+  if (area === 'All') {
+    select.value = '';
+  } else {
+    select.value = area;
+  }
+  applyFilters();
+  document.getElementById('directory').scrollIntoView({ behavior: 'smooth' });
+}
+
+// ============================================================
+// FAVORITES
+// ============================================================
+
+function toggleFavorite(id, btn) {
+  const idx = favorites.indexOf(id);
+  if (idx > -1) {
+    favorites.splice(idx, 1);
+    btn.classList.remove('favorited');
+    btn.innerHTML = '&#x2661;';
+  } else {
+    favorites.push(id);
+    btn.classList.add('favorited');
+    btn.innerHTML = '&#x2764;';
+  }
+  localStorage.setItem('onsen-favorites', JSON.stringify(favorites));
+  updateFavCount();
+  renderFavoritesList();
+
+  // Re-apply filters if favorites filter is active
+  if (activeFilters.has('favorites')) applyFilters();
+}
+
+function removeFavorite(id) {
+  favorites = favorites.filter(f => f !== id);
+  localStorage.setItem('onsen-favorites', JSON.stringify(favorites));
+  updateFavCount();
+  renderFavoritesList();
+
+  // Update card button
+  const card = document.querySelector(`.onsen-card[data-id="${id}"] .card-favorite`);
+  if (card) {
+    card.classList.remove('favorited');
+    card.innerHTML = '&#x2661;';
+  }
+  if (activeFilters.has('favorites')) applyFilters();
+}
+
+function updateFavCount() {
+  document.getElementById('favCount').textContent = favorites.length;
+}
+
+function openFavoritesPanel() {
+  renderFavoritesList();
+  document.getElementById('favoritesPanel').classList.add('open');
+  document.getElementById('overlay').classList.add('visible');
+}
+
+function closeFavoritesPanel() {
+  document.getElementById('favoritesPanel').classList.remove('open');
+  document.getElementById('overlay').classList.remove('visible');
+}
+
+function scrollToCard(id) {
+  const card = document.querySelector(`.onsen-card[data-id="${id}"]`);
+  if (card) {
+    // Clear filters first
+    activeFilters.clear();
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('areaSelect').value = '';
+    document.getElementById('searchInput').value = '';
+    applyFilters();
+
+    setTimeout(() => {
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      card.style.boxShadow = '0 0 30px rgba(0, 240, 255, 0.4)';
+      setTimeout(() => { card.style.boxShadow = ''; }, 2000);
+    }, 100);
+  }
+}
+
+// ============================================================
+// SCROLL OBSERVER & ANIMATIONS
+// ============================================================
+
+function initObserver() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+}
+
+function initBackToTop() {
+  const btn = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('show', window.scrollY > 600);
+  });
+}
+
+// ============================================================
+// INIT
+// ============================================================
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderAllCards();
+  renderLateNight();
+  renderFavoritesList();
+  updateFavCount();
+  initObserver();
+  initBackToTop();
+});
+</script>
+
+</body>
+</html>

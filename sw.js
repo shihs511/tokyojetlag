@@ -8,6 +8,7 @@ const OFFLINE_URL = '/';
 const PRECACHE_URLS = [
   '/',
   '/index.html',
+  '/offline.html',
   '/manifest.json',
   '/icon-192.svg',
   '/icon-512.svg'
@@ -48,7 +49,7 @@ self.addEventListener('fetch', event => {
   // Skip non-GET requests
   if (request.method !== 'GET') return;
 
-  // Navigation requests: network first, fallback to cache
+  // Navigation requests: network first, fallback to cache/offline page
   if (request.mode === 'navigate') {
     event.respondWith(
       fetch(request)
@@ -57,7 +58,11 @@ self.addEventListener('fetch', event => {
           caches.open(CACHE_NAME).then(cache => cache.put(request, clone));
           return response;
         })
-        .catch(() => caches.match(OFFLINE_URL))
+        .catch(() => {
+          // Fallback to offline.html for failed navigation requests
+          return caches.match('/offline.html')
+            .then(response => response || caches.match(OFFLINE_URL));
+        })
     );
     return;
   }

@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nightlife | Tokyo Jet Lag</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;600;700&family=Noto+Sans+JP:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-blue: #00f0ff;
+            --neon-purple: #bf00ff;
+            --neon-pink: #ff0080;
+            --neon-yellow: #ffe000;
+            --neon-green: #00ff88;
+            --bg-dark: #04040f;
+            --bg-card: #0a0a1e;
+            --bg-card-hover: #0f0f2a;
+            --text-main: #e8e8f0;
+            --text-dim: #7070a0;
+            --text-bright: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Scanline overlay effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            z-index: 999;
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(4, 4, 15, 0.95);
+            border-bottom: 2px solid var(--neon-blue);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 2rem;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--text-bright);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            position: relative;
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--neon-blue);
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.8);
+        }
+
+        nav {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-blue);
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        nav a.active {
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), rgba(191, 0, 255, 0.1));
+            border-bottom: 3px solid var(--neon-purple);
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(0, 240, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(191, 0, 255, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(0, 240, 255, 0.5);
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.2); }
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--neon-blue);
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            animation: pulse-text 2s ease-in-out infinite;
+            margin-bottom: 2rem;
+        }
+
+        @keyframes pulse-text {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        .hero-subtitle {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            letter-spacing: 0.1em;
+            margin-bottom: 3rem;
+        }
+
+        /* Filter Section */
+        .filters {
+            background-color: rgba(4, 4, 15, 0.8);
+            border-bottom: 2px solid var(--neon-green);
+            padding: 2rem;
+            position: sticky;
+            top: 80px;
+            z-index: 50;
+            backdrop-filter: blur(10px);
+        }
+
+        .filters-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .filter-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .filter-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--neon-green);
+            margin-bottom: 0.8rem;
+            display: block;
+            letter-spacing: 0.15em;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-btn {
+            background-color: var(--bg-card);
+            border: 1.5px solid var(--text-dim);
+            color: var(--text-main);
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--neon-blue);
+            color: var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background-color: var(--neon-blue);
+            border-color: var(--neon-blue);
+            color: var(--bg-dark);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
+            font-weight: 700;
+        }
+
+        /* Main Content */
+        .content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Area Section */
+        .area-section {
+            margin-bottom: 4rem;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+            background-color: rgba(10, 10, 30, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .area-section:hover {
+            background-color: rgba(10, 10, 30, 0.8);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.15);
+        }
+
+        .area-header {
+            background: linear-gradient(90deg, rgba(0, 240, 255, 0.15), rgba(191, 0, 255, 0.1));
+            border-bottom: 2px solid var(--neon-blue);
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .area-header h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--neon-blue);
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+            margin: 0;
+        }
+
+        .area-header-jp {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 1.5rem;
+            color: var(--neon-purple);
+            margin-left: 1rem;
+            text-shadow: 0 0 15px rgba(191, 0, 255, 0.4);
+        }
+
+        .area-venues {
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Venue Card */
+        .venue-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--neon-blue);
+            border-radius: 4px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .venue-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+            z-index: 0;
+        }
+
+        .venue-card:hover::before {
+            left: 100%;
+        }
+
+        .venue-card:hover {
+            background-color: var(--bg-card-hover);
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.3), inset 0 0 20px rgba(191, 0, 255, 0.05);
+            transform: translateY(-8px);
+        }
+
+        .venue-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .venue-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .venue-names {
+            flex: 1;
+        }
+
+        .venue-name {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-bright);
+            margin-bottom: 0.3rem;
+            letter-spacing: 0.05em;
+        }
+
+        .venue-name-jp {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 0.95rem;
+            color: var(--neon-pink);
+            margin-bottom: 0.8rem;
+        }
+
+        .venue-tag {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-family: 'Space Mono', monospace;
+            white-space: nowrap;
+        }
+
+        .venue-tag.bar {
+            background-color: rgba(0, 240, 255, 0.2);
+            color: var(--neon-blue);
+            border: 1px solid var(--neon-blue);
+        }
+
+        .venue-tag.club {
+            background-color: rgba(191, 0, 255, 0.2);
+            color: var(--neon-purple);
+            border: 1px solid var(--neon-purple);
+        }
+
+        .venue-tag.karaoke {
+            background-color: rgba(255, 0, 128, 0.2);
+            color: var(--neon-pink);
+            border: 1px solid var(--neon-pink);
+        }
+
+        .venue-tag.live {
+            background-color: rgba(0, 255, 136, 0.2);
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+        }
+
+        .venue-hours {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--neon-yellow);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .venue-hours::before {
+            content: '⏰';
+            font-size: 1rem;
+        }
+
+        .venue-description {
+            color: var(--text-main);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        /* Safety Tips Section */
+        .tips-section {
+            background-color: rgba(10, 10, 30, 0.8);
+            border: 1px solid var(--neon-green);
+            border-radius: 4px;
+            padding: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .tips-section h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--neon-green);
+            text-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
+            margin-bottom: 2rem;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .tip-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--neon-green);
+            border-radius: 4px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .tip-card:hover {
+            background-color: var(--bg-card-hover);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+            border-color: var(--neon-yellow);
+        }
+
+        .tip-card h3 {
+            font-family: 'Space Mono', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--neon-yellow);
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        .tip-card p {
+            color: var(--text-main);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            background-color: rgba(10, 10, 30, 0.8);
+            border: 1px solid var(--neon-pink);
+            border-radius: 4px;
+            padding: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .timeline-section h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--neon-pink);
+            text-shadow: 0 0 15px rgba(255, 0, 128, 0.4);
+            margin-bottom: 2rem;
+        }
+
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        .timeline-time {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--neon-pink);
+            min-width: 100px;
+            text-align: right;
+            padding-top: 0.3rem;
+        }
+
+        .timeline-content {
+            flex: 1;
+            border-left: 3px solid var(--neon-pink);
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 8px;
+            width: 13px;
+            height: 13px;
+            background-color: var(--neon-pink);
+            border: 2px solid var(--bg-dark);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255, 0, 128, 0.6);
+        }
+
+        .timeline-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-bright);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-description {
+            color: var(--text-main);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgba(4, 4, 15, 0.95);
+            border-top: 2px solid var(--neon-blue);
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: var(--neon-blue);
+            text-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+        }
+
+        .footer-sub {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .footer-social a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--neon-blue);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--neon-blue);
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .footer-social a:hover {
+            background-color: var(--neon-blue);
+            color: var(--bg-dark);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
+        }
+
+        .footer-contact {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        .footer-contact a {
+            color: var(--neon-blue);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-contact a:hover {
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav {
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            nav a {
+                font-size: 0.8rem;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero {
+                padding: 3rem 1rem;
+            }
+
+            .filters {
+                top: 100px;
+            }
+
+            .area-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .area-header h2 {
+                font-size: 2rem;
+            }
+
+            .area-header-jp {
+                margin-left: 0;
+            }
+
+            .area-venues {
+                grid-template-columns: 1fr;
+            }
+
+            .content {
+                padding: 2rem 1rem;
+            }
+
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-item {
+                gap: 1rem;
+            }
+
+            .timeline-time {
+                min-width: 70px;
+                font-size: 1rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .filter-buttons {
+                gap: 0.5rem;
+            }
+
+            .filter-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.75rem;
+            }
+
+            .area-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .venue-name {
+                font-size: 0.95rem;
+            }
+
+            .venue-description {
+                font-size: 0.85rem;
+            }
+
+            .tips-section {
+                padding: 1.5rem;
+            }
+
+            .timeline-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header role="banner">
+        <div class="header-content">
+            <a href="index.html" class="logo">Tokyo<span>JetLag</span></a>
+            <nav aria-label="Main navigation">
+                <a href="index.html">Home</a>
+                <a href="index.html#venues">Venues</a>
+                <a href="index.html#seasonal">Seasonal</a>
+                <a href="food-guide.html">Food Guide</a>
+                <a href="nightlife.html" class="active">Nightlife</a>
+                <a href="index.html#day-trips">Day Trips</a>
+                <a href="apps.html">Apps</a>
+                <a href="itinerary.html">Itinerary</a>
+                <a href="index.html#faq">FAQ</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>TOKYO AFTER DARK</h1>
+            <p>NIGHTLIFE MAP</p>
+            <div class="hero-subtitle">// WHERE THE NIGHT SHIFT NEVER ENDS //</div>
+        </div>
+    </section>
+
+    <div class="filters">
+        <div class="filters-content">
+            <div class="filter-group">
+                <label class="filter-label">AREA</label>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all-areas">All Areas</button>
+                    <button class="filter-btn" data-filter="shinjuku">Shinjuku</button>
+                    <button class="filter-btn" data-filter="shibuya">Shibuya</button>
+                    <button class="filter-btn" data-filter="roppongi">Roppongi</button>
+                    <button class="filter-btn" data-filter="ginza">Ginza</button>
+                    <button class="filter-btn" data-filter="shimokitazawa">Shimokitazawa</button>
+                    <button class="filter-btn" data-filter="nakano">Nakano</button>
+                    <button class="filter-btn" data-filter="ikebukuro">Ikebukuro</button>
+                </div>
+            </div>
+            <div class="filter-group">
+                <label class="filter-label">TYPE</label>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all-types">All Types</button>
+                    <button class="filter-btn" data-filter="type-bar">Bars</button>
+                    <button class="filter-btn" data-filter="type-club">Clubs</button>
+                    <button class="filter-btn" data-filter="type-karaoke">Karaoke</button>
+                    <button class="filter-btn" data-filter="type-live">Live Houses</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <!-- SHINJUKU -->
+        <section class="area-section" data-area="shinjuku">
+            <div class="area-header">
+                <h2>Shinjuku</h2>
+                <div class="area-header-jp">新宿</div>
+            </div>
+            <div class="area-venues">
+                <div class="venue-card" data-type="bar">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Golden Gai</div>
+                            <div class="venue-name-jp">新宿ゴールデン街</div>
+                        </div>
+                        <span class="venue-tag bar">Bar</span>
+                    </div>
+                    <div class="venue-hours">Varies</div>
+                    <div class="venue-description">200+ micro-bars hidden in narrow alley. Legendary local haunt, each bar seats 5-10 people. Dive into Tokyo's most authentic drinking culture.</div>
+                </div>
+
+                <div class="venue-card" data-type="bar">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Albatross</div>
+                            <div class="venue-name-jp">アルバトロス</div>
+                        </div>
+                        <span class="venue-tag bar">Bar</span>
+                    </div>
+                    <div class="venue-hours">18:00-late</div>
+                    <div class="venue-description">Iconic Golden Gai institution. 3-floor bar with spiraling stairs, vintage neon, and Tokyo's most character-filled bartenders. A time capsule.</div>
+                </div>
+
+                <div class="venue-card" data-type="bar">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Zoetrope</div>
+                            <div class="venue-name-jp">ゾエトロープ</div>
+                        </div>
+                        <span class="venue-tag bar">Bar</span>
+                    </div>
+                    <div class="venue-hours">18:00-midnight</div>
+                    <div class="venue-description">Whiskey heaven with 300+ Japanese selections. Minimalist counter bar, intimate vibe, and master bartender with 30+ years experience.</div>
+                </div>
+
+                <div class="venue-card" data-type="club">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Robot Restaurant</div>
+                            <div class="venue-name-jp">ロボットレストラン</div>
+                        </div>
+                        <span class="venue-tag club">Club</span>
+                    </div>
+                    <div class="venue-hours">16:00-23:00</div>
+                    <div class="venue-description">Insane neon cabaret with giant robots, lasers, dancers on neon bikes. Tourist spectacle but genuine Tokyo madness. Reservations essential.</div>
+                </div>
+
+                <div class="venue-card" data-type="club">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">WARP SHINJUKU</div>
+                            <div class="venue-name-jp">ワープ新宿</div>
+                        </div>
+                        <span class="venue-tag club">Club</span>
+                    </div>
+                    <div class="venue-hours">22:00-5:00</div>
+                    <div class="venue-description">Underground techno cathedral. Multi-room venue with serious DJs and 4-story dance floor. Industrial concrete aesthetic, sweaty and pure.</div>
+                </div>
+
+                <div class="venue-card" data-type="karaoke">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Karaoke Kan</div>
+                            <div class="venue-name-jp">カラオケ館</div>
+                        </div>
+                        <span class="venue-tag karaoke">Karaoke</span>
+                    </div>
+                    <div class="venue-hours">11:00-6:00</div>
+                    <div class="venue-description">Where Bill Murray sang in Lost in Translation. Private booth karaoke, all-night option, cheap drinks. Tokyo karaoke made famous.</div>
+                </div>
+
+                <div class="venue-card" data-type="live">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Loft</div>
+                            <div class="venue-name-jp">ロフト新宿</div>
+                        </div>
+                        <span class="venue-tag live">Live House</span>
+                    </div>
+                    <div class="venue-hours">Varies</div>
+                    <div class="venue-description">Legendary punk/indie venue. Hosted everyone. Sweaty, intimate, uncompromising. Check schedule for tonight's show.</div>
+                </div>
+
+                <div class="venue-card" data-type="bar">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Berg</div>
+                            <div class="venue-name-jp">ベルク</div>
+                        </div>
+                        <span class="venue-tag bar">Bar</span>
+                    </div>
+                    <div class="venue-hours">7:00-23:00</div>
+                    <div class="venue-description">Tiny standing bar inside Shinjuku Station. Squeeze in, grab a drink, watch salarymen. Weirdly fun. Always packed.</div>
+                </div>
+
+                <div class="venue-card" data-type="bar">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Champion</div>
+                            <div class="venue-name-jp">チャンピオン</div>
+                        </div>
+                        <span class="venue-tag bar">Bar</span>
+                    </div>
+                    <div class="venue-hours">16:00-midnight</div>
+                    <div class="venue-description">Omoide Yokocho (Memory Lane) classic since 1951. Yakitori smoke, neon glow, locals, tiny tables. Authentic old Tokyo.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SHIBUYA -->
+        <section class="area-section" data-area="shibuya">
+            <div class="area-header">
+                <h2>Shibuya</h2>
+                <div class="area-header-jp">渋谷</div>
+            </div>
+            <div class="area-venues">
+                <div class="venue-card" data-type="club">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">WOMB</div>
+                            <div class="venue-name-jp">ウーム</div>
+                        </div>
+                        <span class="venue-tag club">Club</span>
+                    </div>
+                    <div class="venue-hours">22:00-5:00</div>
+                    <div class="venue-description">World top-100 club. 4-floor mega-venue with international DJs. State-of-the-art sound and laser systems. Tokyo's flagship dancefloor.</div>
+                </div>
+
+                <div class="venue-card" data-type="club">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Vision</div>
+                            <div class="venue-name-jp">ヴィジョン</div>
+                        </div>
+                        <span class="venue-tag club">Club</span>
+                    </div>
+                    <div class="venue-hours">22:00-5:00</div>
+                    <div class="venue-description">Multi-genre club nights: techno, house, hip-hop, more. Rotating international and local DJs. Younger crowd, high energy.</div>
+                </div>
+
+                <div class="venue-card" data-type="club">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Contact</div>
+                            <div class="venue-name-jp">コンタクト</div>
+                        </div>
+                        <span class="venue-tag club">Club</span>
+                    </div>
+                    <div class="venue-hours">22:00-5:00</div>
+                    <div class="venue-description">Underground electronic specialists. Minimal production, serious gear. For the sound-system purists. Industrial vibes.</div>
+                </div>
+
+                <div class="venue-card" data-type="bar">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Nonbei Yokocho</div>
+                            <div class="venue-name-jp">のんべい横丁</div>
+                        </div>
+                        <span class="venue-tag bar">Bar</span>
+                    </div>
+                    <div class="venue-hours">Varies</div>
+                    <div class="venue-description">Hidden alley of tiny bars behind Shibuya Station. Old-school drinking dens, locals, cheap, authentic. Step through the curtain.</div>
+                </div>
+
+                <div class="venue-card" data-type="bar">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Oath</div>
+                            <div class="venue-name-jp">オース</div>
+                        </div>
+                        <span class="venue-tag bar">Bar</span>
+                    </div>
+                    <div class="venue-hours">19:00-5:00</div>
+                    <div class="venue-description">Vinyl-only DJ bar. Intimate. Rare funk, soul, jazz records. Crate digger paradise. One drink per record side.</div>
+                </div>
+
+                <div class="venue-card" data-type="karaoke">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Karaoke Rainbow</div>
+                            <div class="venue-name-jp">カラオケレインボー</div>
+                        </div>
+                        <span class="venue-tag karaoke">Karaoke</span>
+                    </div>
+                    <div class="venue-hours">24h</div>
+                    <div class="venue-description">24-hour private booth karaoke. Student haunt. Cheap, cheerful, always packed. Perfect for 3am decisions.</div>
+                </div>
+
+                <div class="venue-card" data-type="live">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">O-East</div>
+                            <div class="venue-name-jp">O-イースト</div>
+                        </div>
+                        <span class="venue-tag live">Live House</span>
+                    </div>
+                    <div class="venue-hours">Varies</div>
+                    <div class="venue-description">Major mid-size live venue. 700-cap. Rock, indie, pop, hip-hop. Launching pad for Japanese and international acts.</div>
+                </div>
+
+                <div class="venue-card" data-type="bar">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Bar Tram</div>
+                            <div class="venue-name-jp">バー・トラム</div>
+                        </div>
+                        <span class="venue-tag bar">Bar</span>
+                    </div>
+                    <div class="venue-hours">18:00-2:00</div>
+                    <div class="venue-description">Absinthe specialist bar. Historic spirits collection. Knowledgeable staff. Sophisticated cocktails in moody setting.</div>
+                </div>
+
+                <div class="venue-card" data-type="bar">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Rhythm Cafe</div>
+                            <div class="venue-name-jp">リズムカフェ</div>
+                        </div>
+                        <span class="venue-tag bar">Bar</span>
+                    </div>
+                    <div class="venue-hours">18:00-2:00</div>
+                    <div class="venue-description">Music-focused lounge bar. Vinyl on rotation, knowledgeable bartenders, groovy atmosphere. Soul meets cocktails.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ROPPONGI -->
+        <section class="area-section" data-area="roppongi">
+            <div class="area-header">
+                <h2>Roppongi</h2>
+                <div class="area-header-jp">六本木</div>
+            </div>
+            <div class="area-venues">
+                <div class="venue-card" data-type="club">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">V2 Tokyo</div>
+                        </div>
+                        <span class="venue-tag club">Club</span>
+                    </div>
+                    <div class="venue-hours">22:00-5:00</div>
+                    <div class="venue-description">Premium club for serious clubbers. Tight guest lists, high cover charge, world-class sound. Dress code enforced.</div>
+                </div>
+
+                <div class="venue-card" data-type="club">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">1OAK Tokyo</div>
+                        </div>
+                        <span class="venue-tag club">Club</span>
+                    </div>
+                    <div class="venue-hours">22:00-5:00</div>
+                    <div class="venue-description">Celebrity nightclub. High-end venue, expensive drinks, beautiful people, gossip magazine favorite. See and be seen.</div>
+                </div>
+
+                <div class="venue-card" data-type="bar">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">These</div>
+                            <div class="venue-name-jp">ジーズ</div>
+                        </div>
+                        <span class="venue-tag bar">Bar</span>
+                    </div>
+                    <div class="venue-hours">18:00-2:00</div>
+                    <div class="venue-description">Craft cocktails by master mixologist. Seasonal creations, housemade syrups, elevated drinking. High-end but unpretentious.</div>
+                </div>
+
+                <div class="venue-card" data-type="bar">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">BrewDog Roppongi</div>
+                            <div class="venue-name-jp">ブリュードッグ</div>
+                        </div>
+                        <span class="venue-tag bar">Bar</span>
+                    </div>
+                    <div class="venue-hours">12:00-midnight</div>
+                    <div class="venue-description">Craft beer from Scotland. On-tap selection, food pairing, expat-friendly. British brewery in Tokyo.</div>
+                </div>
+
+                <div class="venue-card" data-type="live">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Billboard Live</div>
+                            <div class="venue-name-jp">ビルボードライブ</div>
+                        </div>
+                        <span class="venue-tag live">Live House</span>
+                    </div>
+                    <div class="venue-hours">Varies</div>
+                    <div class="venue-description">World-class jazz and soul venue. International acts. Dinner and show package. Professional, high-caliber performances.</div>
+                </div>
+
+                <div class="venue-card" data-type="karaoke">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Fiesta Karaoke</div>
+                            <div class="venue-name-jp">フィエスタ</div>
+                        </div>
+                        <span class="venue-tag karaoke">Karaoke</span>
+                    </div>
+                    <div class="venue-hours">18:00-5:00</div>
+                    <div class="venue-description">International karaoke. English, Japanese, Korean, Spanish libraries. International crowd. Late-night party central.</div>
+                </div>
+
+                <div class="venue-card" data-type="bar">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Hobgoblin</div>
+                            <div class="venue-name-jp">ホブゴブリン</div>
+                        </div>
+                        <span class="venue-tag bar">Bar</span>
+                    </div>
+                    <div class="venue-hours">17:00-2:00</div>
+                    <div class="venue-description">British pub in Tokyo. Ales on tap, pub food, familiar vibe. Expat favorite, easy atmosphere.</div>
+                </div>
+
+                <div class="venue-card" data-type="club">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Alife</div>
+                            <div class="venue-name-jp">エーライフ</div>
+                        </div>
+                        <span class="venue-tag club">Club</span>
+                    </div>
+                    <div class="venue-hours">22:00-5:00</div>
+                    <div class="venue-description">Multi-floor party spot. Different vibes each level. Hip-hop, house, techno. Diverse crowd.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GINZA -->
+        <section class="area-section" data-area="ginza">
+            <div class="area-header">
+                <h2>Ginza</h2>
+                <div class="area-header-jp">銀座</div>
+            </div>
+            <div class="area-venues">
+                <div class="venue-card" data-type="bar">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Star Bar</div>
+                            <div class="venue-name-jp">スターバー</div>
+                        </div>
+                        <span class="venue-tag bar">Bar</span>
+                    </div>
+                    <div class="venue-hours">17:00-midnight</div>
+                    <div class="venue-description">Legendary cocktail bar since 1966. Mastery. Classic drinks, storied bartender, whisky collection. Tokyo institution.</div>
+                </div>
+
+                <div class="venue-card" data-type="bar">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">High Five</div>
+                            <div class="venue-name-jp">ハイファイブ</div>
+                        </div>
+                        <span class="venue-tag bar">Bar</span>
+                    </div>
+                    <div class="venue-hours">18:00-midnight</div>
+                    <div class="venue-description">On World's Best Bar lists. Counter only. Precision cocktails. Blink and miss entrance. Book ahead.</div>
+                </div>
+
+                <div class="venue-card" data-type="bar">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Gen Yamamoto</div>
+                        </div>
+                        <span class="venue-tag bar">Bar</span>
+                    </div>
+                    <div class="venue-hours">15:00-midnight</div>
+                    <div class="venue-description">4-seat cocktail omakase. Bartender chef creates your drink journey. Expensive. Unforgettable.</div>
+                </div>
+
+                <div class="venue-card" data-type="bar">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Ginza Music Bar</div>
+                        </div>
+                        <span class="venue-tag bar">Bar</span>
+                    </div>
+                    <div class="venue-hours">18:00-midnight</div>
+                    <div class="venue-description">Audiophile vinyl bar. Curated collection, high-end sound system. Jazz, soul, classics. Sit, listen, sip.</div>
+                </div>
+
+                <div class="venue-card" data-type="club">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Club Velours</div>
+                            <div class="venue-name-jp">クラブベロア</div>
+                        </div>
+                        <span class="venue-tag club">Club</span>
+                    </div>
+                    <div class="venue-hours">22:00-5:00</div>
+                    <div class="venue-description">Upscale intimate club. Sophisticated crowd. House, deep house. Classy vibe, high standards.</div>
+                </div>
+
+                <div class="venue-card" data-type="bar">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">300 Bar</div>
+                            <div class="venue-name-jp">スリーハンドレッドバー</div>
+                        </div>
+                        <span class="venue-tag bar">Bar</span>
+                    </div>
+                    <div class="venue-hours">17:00-midnight</div>
+                    <div class="venue-description">Everything ¥300. Cheap drinks, expensive vibe. Where salarymen unwind. Democracy in a glass.</div>
+                </div>
+
+                <div class="venue-card" data-type="karaoke">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Karaoke Big Echo</div>
+                            <div class="venue-name-jp">ビッグエコー</div>
+                        </div>
+                        <span class="venue-tag karaoke">Karaoke</span>
+                    </div>
+                    <div class="venue-hours">11:00-6:00</div>
+                    <div class="venue-description">National chain but great quality. Modern booths, huge library, food/drink available. Reliable choice.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SHIMOKITAZAWA -->
+        <section class="area-section" data-area="shimokitazawa">
+            <div class="area-header">
+                <h2>Shimokitazawa</h2>
+                <div class="area-header-jp">下北沢</div>
+            </div>
+            <div class="area-venues">
+                <div class="venue-card" data-type="live">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Shelter</div>
+                            <div class="venue-name-jp">シェルター</div>
+                        </div>
+                        <span class="venue-tag live">Live House</span>
+                    </div>
+                    <div class="venue-hours">Varies</div>
+                    <div class="venue-description">Underground live house icon. Basement venue, 200-cap, raw acoustics. Punk, indie, experimental. Unpolished and authentic.</div>
+                </div>
+
+                <div class="venue-card" data-type="bar">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Mother</div>
+                            <div class="venue-name-jp">マザー</div>
+                        </div>
+                        <span class="venue-tag bar">Bar</span>
+                    </div>
+                    <div class="venue-hours">19:00-2:00</div>
+                    <div class="venue-description">Bar/live space hybrid. Small stage upstairs, drinking downstairs. Community venue, open mic nights, eclectic crowd.</div>
+                </div>
+
+                <div class="venue-card" data-type="bar">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Trouble Peach</div>
+                            <div class="venue-name-jp">トラブルピーチ</div>
+                        </div>
+                        <span class="venue-tag bar">Bar</span>
+                    </div>
+                    <div class="venue-hours">19:00-late</div>
+                    <div class="venue-description">Indie music bar. Eclectic vinyl, local bands context, artsy crowd. Shimokitazawa character distilled.</div>
+                </div>
+
+                <div class="venue-card" data-type="bar">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Three</div>
+                            <div class="venue-name-jp">スリー</div>
+                        </div>
+                        <span class="venue-tag bar">Bar</span>
+                    </div>
+                    <div class="venue-hours">20:00-5:00</div>
+                    <div class="venue-description">DJ bar with vinyl focus. Late night dancing, affordable, neighborhood feel. Where residents drink.</div>
+                </div>
+
+                <div class="venue-card" data-type="bar">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Bear Pond Coffee</div>
+                        </div>
+                        <span class="venue-tag bar">Bar</span>
+                    </div>
+                    <div class="venue-hours">19:00-midnight</div>
+                    <div class="venue-description">Coffee by day, bar by night. Evening cocktails in minimalist space. Smooth transition. Local haunt.</div>
+                </div>
+
+                <div class="venue-card" data-type="live">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Shimokitazawa Garage</div>
+                            <div class="venue-name-jp">下北沢ガレージ</div>
+                        </div>
+                        <span class="venue-tag live">Live House</span>
+                    </div>
+                    <div class="venue-hours">Varies</div>
+                    <div class="venue-description">Punk venue. Small stage, loud bands, loyal crowd. Where Japanese punk happens. No frills, all passion.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NAKANO -->
+        <section class="area-section" data-area="nakano">
+            <div class="area-header">
+                <h2>Nakano</h2>
+                <div class="area-header-jp">中野</div>
+            </div>
+            <div class="area-venues">
+                <div class="venue-card" data-type="bar">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Brick Lane</div>
+                            <div class="venue-name-jp">ブリックレーン</div>
+                        </div>
+                        <span class="venue-tag bar">Bar</span>
+                    </div>
+                    <div class="venue-hours">19:00-late</div>
+                    <div class="venue-description">Subculture bar in otaku heartland. Mixed crowd of artists, musicians, eccentric locals. Weird and wonderful.</div>
+                </div>
+
+                <div class="venue-card" data-type="bar">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Bar Zingaro</div>
+                            <div class="venue-name-jp">バーZINGARO</div>
+                        </div>
+                        <span class="venue-tag bar">Bar</span>
+                    </div>
+                    <div class="venue-hours">18:00-midnight</div>
+                    <div class="venue-description">Art/music bar with avant-garde aesthetic. Creative space, experimental DJs, art on walls. Tokyo underground spirit.</div>
+                </div>
+
+                <div class="venue-card" data-type="live">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Heavy Sick</div>
+                            <div class="venue-name-jp">ヘヴィシック</div>
+                        </div>
+                        <span class="venue-tag live">Live House</span>
+                    </div>
+                    <div class="venue-hours">Varies</div>
+                    <div class="venue-description">Garage and psychedelic live house. Noisy, loud, raw. Japanese indie and alternative. Sweaty basement gigs.</div>
+                </div>
+
+                <div class="venue-card" data-type="karaoke">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Karaoke Pasela</div>
+                            <div class="venue-name-jp">パセラ</div>
+                        </div>
+                        <span class="venue-tag karaoke">Karaoke</span>
+                    </div>
+                    <div class="venue-hours">11:00-6:00</div>
+                    <div class="venue-description">Premium themed karaoke. Fancy booths, excellent sound, all-night packages. Professional quality.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- IKEBUKURO -->
+        <section class="area-section" data-area="ikebukuro">
+            <div class="area-header">
+                <h2>Ikebukuro</h2>
+                <div class="area-header-jp">池袋</div>
+            </div>
+            <div class="area-venues">
+                <div class="venue-card" data-type="live">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Mixalive Tokyo</div>
+                            <div class="venue-name-jp">ミクサライブ東京</div>
+                        </div>
+                        <span class="venue-tag live">Live House</span>
+                    </div>
+                    <div class="venue-hours">Varies</div>
+                    <div class="venue-description">Mixed entertainment venue. Live bands, DJ nights, variety shows. Large capacity, major venue.</div>
+                </div>
+
+                <div class="venue-card" data-type="bar">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Café & Bar CHARACRO</div>
+                        </div>
+                        <span class="venue-tag bar">Bar</span>
+                    </div>
+                    <div class="venue-hours">11:30-22:00</div>
+                    <div class="venue-description">Anime-themed bar in otaku central. Collectible drinks, themed decor, character merch. Fun novelty Tokyo.</div>
+                </div>
+
+                <div class="venue-card" data-type="karaoke">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">Seibu Karaoke</div>
+                            <div class="venue-name-jp">西武カラオケ</div>
+                        </div>
+                        <span class="venue-tag karaoke">Karaoke</span>
+                    </div>
+                    <div class="venue-hours">11:00-5:00</div>
+                    <div class="venue-description">Budget late night option. Basic but functional booths. Students and night workers. Cheap drinks, no fuss.</div>
+                </div>
+
+                <div class="venue-card" data-type="club">
+                    <div class="venue-header">
+                        <div class="venue-names">
+                            <div class="venue-name">P'Parco</div>
+                            <div class="venue-name-jp">パルコ</div>
+                        </div>
+                        <span class="venue-tag club">Club</span>
+                    </div>
+                    <div class="venue-hours">Varies</div>
+                    <div class="venue-description">Club events space. Various themed nights, pop-up events, collaborative programming. Check schedule.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Safety Tips -->
+        <section class="tips-section">
+            <h2>Safety & Etiquette Tips</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h3>Cover Charges</h3>
+                    <p>Most clubs charge ¥2,000-5,000 cover (includes one drink). Live houses ¥2,000-3,500. Bars and karaoke charge hourly (¥300-800/hour). Always ask before sitting down in small bars.</p>
+                </div>
+                <div class="tip-card">
+                    <h3>Last Train Times</h3>
+                    <p>Last train is 11:45pm-12:30am on most lines. After that: taxis, night buses, or stay out until first train at 5:00am. Plan your exit strategy. Taxis are pricey after midnight.</p>
+                </div>
+                <div class="tip-card">
+                    <h3>Tipping Culture</h3>
+                    <p>NO TIPPING in Tokyo. Ever. Not in bars, not in clubs, not in restaurants. Servers refuse it. Tips are included in prices. Don't be the tourist who tries.</p>
+                </div>
+                <div class="tip-card">
+                    <h3>Drink Prices</h3>
+                    <p>Bars: ¥500-1,500/drink. Golden Gai: ¥1,000-3,000. High-end cocktail bars: ¥1,500-3,000. Clubs: drinks ¥1,000-2,000 (expensive). Golden Rule: have cash, ATMs exist everywhere.</p>
+                </div>
+                <div class="tip-card">
+                    <h3>Dress Code</h3>
+                    <p>Casual fine for most bars, Shimokitazawa, live houses. Clubs: smart casual (no flip-flops, athletic wear). High-end bars: business casual. When in doubt, dress nice.</p>
+                </div>
+                <div class="tip-card">
+                    <h3>Language & Manners</h3>
+                    <p>English is limited outside major tourist areas. Download Google Translate. Respect personal space. No smoking indoors (designated areas only). Don't yell. Bartenders are artists, treat them with respect.</p>
+                </div>
+                <div class="tip-card">
+                    <h3>Safety</h3>
+                    <p>Tokyo is extremely safe. Walk anywhere, anytime. Don't flash valuables. Keep your phone close. Drunk harassment is rare but avoid empty streets alone drunk. Stay with friends if possible.</p>
+                </div>
+                <div class="tip-card">
+                    <h3>Golden Gai Etiquette</h3>
+                    <p>Golden Gai bars are tiny and intimate. Don't be loud. Bartenders are telling stories. Join the conversation. Respect locals. Don't take photos. Tip is included—just be cool.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline -->
+        <section class="timeline-section">
+            <h2>Tokyo Nightlife Timeline</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-time">12:00am</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Midnight Rush</div>
+                        <div class="timeline-description">Clubs are hitting stride. WOMB, Contact, WARP Shinjuku pumping. Most bars still full. Golden Gai in full swing. Karaoke rooms packed with groups.</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-time">1:00am</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Peak Energy</div>
+                        <div class="timeline-description">Clubs at maximum capacity. Dancefloors packed. Bars transition from solo drinkers to groups. Some restaurants shutting down, more clubs opening. Street vendors appear.</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-time">2:00am</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">The Late Crowd</div>
+                        <div class="timeline-description">Serious night owls emerge. Club energy intensifying. Golden Gai gets rowdier. Karaoke still full. First-train crew shows up for last round. Streets busy with night workers.</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-time">3:00am</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">The Commitment Zone</div>
+                        <div class="timeline-description">You're staying up or you're not. Clubs at full throttle. Some venues hitting closing time. Ramen shops opening for hungry drinkers. Shimokitazawa still going. Nakano bars deep into night.</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-time">4:00am</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Hardcore Hours</div>
+                        <div class="timeline-description">Only the committed remain. Top clubs still going. After-parties forming. All-night bars filling up for dawn drinkers. Night shift workers, hospital staff, insomniacs gather.</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-time">5:00am</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">First Train Hour</div>
+                        <div class="timeline-description">Last clubs close. First train arrives—exodus to outer wards. Some venues do after-parties. All-night ramen packed. City transitions to morning shift workers. Clean-up crews begin.</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-time">6:00am</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Sunrise Shift</div>
+                        <div class="timeline-description">Most clubs officially closed. Last drunk people heading home. Early bars open for salarymen. Coffee shops filling up. Night becomes day. Cycle begins again.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-logo">TokyoJetLag.com</div>
+            <div class="footer-sub">For the wide-awake, the displaced, and the thoroughly confused.<br>Tokyo · 東京 · All hours · All nights</div>
+            <div class="footer-social">
+                <a href="#">📷</a>
+                <a href="#">𝕏</a>
+                <a href="#">🎵</a>
+                <a href="#">▶</a>
+            </div>
+            <div class="footer-contact"><a href="mailto:hello@tokyojetlag.com">hello@tokyojetlag.com</a> · Tokyo, Japan</div>
+        </div>
+    </footer>
+
+    <script>
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const areaSections = document.querySelectorAll('.area-section');
+        const venueCards = document.querySelectorAll('.venue-card');
+
+        let activeAreaFilter = 'all-areas';
+        let activeTypeFilter = 'all-types';
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const filterValue = this.dataset.filter;
+
+                // Handle area filters
+                if (filterValue.startsWith('all-areas') || !filterValue.includes('type-')) {
+                    document.querySelectorAll('[data-filter^="shinjuku"], [data-filter^="shibuya"], [data-filter^="roppongi"], [data-filter^="ginza"], [data-filter^="shimokitazawa"], [data-filter^="nakano"], [data-filter^="ikebukuro"], [data-filter="all-areas"]').forEach(btn => {
+                        if (!btn.dataset.filter.includes('type-')) btn.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    activeAreaFilter = filterValue;
+                }
+                // Handle type filters
+                else if (filterValue.startsWith('type-') || filterValue === 'all-types') {
+                    document.querySelectorAll('[data-filter^="type-"], [data-filter="all-types"]').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    activeTypeFilter = filterValue;
+                }
+
+                applyFilters();
+            });
+        });
+
+        function applyFilters() {
+            // Show/hide area sections
+            areaSections.forEach(section => {
+                let showSection = true;
+
+                if (activeAreaFilter !== 'all-areas') {
+                    showSection = section.dataset.area === activeAreaFilter.replace(/^(?!all-)/, '');
+                }
+
+                section.style.display = showSection ? 'block' : 'none';
+
+                // Filter venues within section
+                if (showSection) {
+                    const venues = section.querySelectorAll('.venue-card');
+                    venues.forEach(venue => {
+                        let showVenue = true;
+
+                        if (activeTypeFilter !== 'all-types') {
+                            const typeFilter = activeTypeFilter.replace('type-', '');
+                            showVenue = venue.dataset.type === typeFilter;
+                        }
+
+                        venue.style.display = showVenue ? 'block' : 'none';
+                    });
+                }
+            });
+
+            // If all venues in a section are hidden, hide the section
+            areaSections.forEach(section => {
+                if (section.style.display !== 'none') {
+                    const visibleVenues = section.querySelectorAll('.venue-card[style="display: block"], .venue-card:not([style])');
+                    const totalVenues = section.querySelectorAll('.venue-card');
+                    const allHidden = visibleVenues.length === 0 && totalVenues.length > 0;
+                    if (allHidden) {
+                        section.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

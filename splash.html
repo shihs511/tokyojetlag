@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#04040f" />
+  <title>Tokyo Jet Lag — Loading</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: #04040f;
+      overflow: hidden;
+    }
+
+    .splash-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(
+        180deg,
+        #04040f 0%,
+        #0a0a14 50%,
+        #000000 100%
+      );
+    }
+
+    .splash-content {
+      text-align: center;
+      z-index: 10;
+      animation: fade-in 0.8s ease-out;
+    }
+
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .moon-icon {
+      font-size: 6rem;
+      margin-bottom: 2rem;
+      display: block;
+      animation: moon-glow 2s ease-in-out infinite;
+    }
+
+    @keyframes moon-glow {
+      0%, 100% {
+        text-shadow: 0 0 10px rgba(249, 115, 22, 0.3),
+                      0 0 20px rgba(0, 240, 255, 0.2),
+                      0 0 40px rgba(191, 0, 255, 0.1);
+        transform: scale(1);
+      }
+      50% {
+        text-shadow: 0 0 30px rgba(249, 115, 22, 0.6),
+                      0 0 60px rgba(0, 240, 255, 0.4),
+                      0 0 80px rgba(191, 0, 255, 0.3);
+        transform: scale(1.05);
+      }
+    }
+
+    .app-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 8vw, 3.5rem);
+      letter-spacing: 0.15em;
+      font-weight: 700;
+      background: linear-gradient(135deg, #f97316 0%, #00f0ff 50%, #bf00ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+
+    .app-subtitle {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 1.125rem;
+      color: #a1a1a6;
+      letter-spacing: 0.05em;
+      margin-bottom: 3rem;
+      animation: subtitle-fade-in 1.2s ease-out 0.3s both;
+    }
+
+    @keyframes subtitle-fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .loading-bar-container {
+      width: 200px;
+      height: 4px;
+      background-color: #18181b;
+      border-radius: 2px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(249, 115, 22, 0.2);
+    }
+
+    .loading-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #f97316, #00f0ff);
+      border-radius: 2px;
+      animation: loading-progress 2.5s cubic-bezier(0.4, 0, 0.6, 1) forwards;
+      box-shadow: 0 0 10px rgba(249, 115, 22, 0.6);
+    }
+
+    @keyframes loading-progress {
+      0% {
+        width: 0%;
+      }
+      50% {
+        width: 70%;
+      }
+      100% {
+        width: 100%;
+      }
+    }
+
+    /* Fade-out animation before redirect */
+    body.fade-out .splash-container {
+      animation: splash-fade-out 0.6s ease-in forwards;
+    }
+
+    @keyframes splash-fade-out {
+      from {
+        opacity: 1;
+      }
+      to {
+        opacity: 0;
+      }
+    }
+
+    /* Animated background gradient */
+    .gradient-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        45deg,
+        #04040f 0%,
+        #1a0a2e 25%,
+        #04040f 50%,
+        #0f0a1a 75%,
+        #04040f 100%
+      );
+      background-size: 400% 400%;
+      animation: gradient-shift 15s ease infinite;
+      z-index: 0;
+    }
+
+    @keyframes gradient-shift {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* Responsive design */
+    @media (max-width: 480px) {
+      .moon-icon {
+        font-size: 4rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .app-title {
+        font-size: 1.75rem;
+        letter-spacing: 0.12em;
+      }
+
+      .app-subtitle {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .loading-bar-container {
+        width: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="gradient-bg"></div>
+  <div class="splash-container">
+    <div class="splash-content">
+      <span class="moon-icon">🌙</span>
+      <h1 class="app-title">Tokyo Jet Lag</h1>
+      <p class="app-subtitle">It's 2AM. Now What?</p>
+      <div class="loading-bar-container">
+        <div class="loading-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Redirect to index.html after loading animation completes
+    (function() {
+      const SPLASH_DURATION = 2500; // ms, matches loading-progress animation
+
+      setTimeout(() => {
+        // Add fade-out animation
+        document.body.classList.add('fade-out');
+
+        // Redirect after fade completes
+        setTimeout(() => {
+          window.location.href = '/index.html';
+        }, 600);
+      }, SPLASH_DURATION);
+    })();
+  </script>
+</body>
+</html>

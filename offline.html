@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Offline — Tokyo Jet Lag</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Bebas+Neue&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background-color: #04040f;
+      color: #e4e4e7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .offline-container {
+      text-align: center;
+      padding: 2rem;
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .moon-glow {
+      font-size: 5rem;
+      margin-bottom: 2rem;
+      display: inline-block;
+      animation: neon-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes neon-pulse {
+      0%, 100% {
+        text-shadow: 0 0 10px rgba(249, 115, 22, 0.3),
+                      0 0 20px rgba(0, 240, 255, 0.2),
+                      0 0 30px rgba(191, 0, 255, 0.1);
+        transform: scale(1);
+      }
+      50% {
+        text-shadow: 0 0 20px rgba(249, 115, 22, 0.6),
+                      0 0 40px rgba(0, 240, 255, 0.4),
+                      0 0 60px rgba(191, 0, 255, 0.2);
+        transform: scale(1.05);
+      }
+    }
+
+    .offline-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 8vw, 3.5rem);
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #f97316 0%, #00f0ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .offline-japanese {
+      font-size: 1.25rem;
+      color: #a1a1a6;
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+    }
+
+    .offline-subtext {
+      font-size: 1rem;
+      color: #a1a1a6;
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
+      font-weight: 400;
+    }
+
+    .retry-button {
+      display: inline-block;
+      padding: 0.875rem 2rem;
+      background-color: #f97316;
+      color: #04040f;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 0.375rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+
+    .retry-button:hover {
+      background-color: #ea580c;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4);
+    }
+
+    .retry-button:active {
+      transform: translateY(0);
+    }
+
+    .offline-info {
+      margin-top: 3rem;
+      font-size: 0.875rem;
+      color: #71717a;
+      border-top: 1px solid #27272a;
+      padding-top: 2rem;
+    }
+
+    .offline-info p {
+      margin: 0.5rem 0;
+    }
+
+    @media (max-width: 480px) {
+      .offline-container {
+        padding: 1.5rem;
+      }
+
+      .moon-glow {
+        font-size: 3.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .offline-subtext {
+        font-size: 0.9rem;
+      }
+
+      .retry-button {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.875rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="offline-container">
+    <div class="moon-glow">🌙</div>
+    <h1 class="offline-heading">You're Offline</h1>
+    <div class="offline-japanese">接続がありません</div>
+    <p class="offline-subtext">Looks like you've lost connection. Even Tokyo sleeps sometimes.</p>
+    <button class="retry-button" onclick="window.location.reload()">Retry Connection</button>
+    <div class="offline-info">
+      <p>While you wait, here's a fun fact:</p>
+      <p>Tokyo is 13 hours ahead of New York and 16 hours ahead of Los Angeles. No wonder you're awake.</p>
+    </div>
+  </div>
+<script data-analytics="micro-tracker">(function(){var K='_ma_',L=localStorage,J=JSON,N=Date.now(),P=location.pathname,U=navigator.userAgent;function g(k){try{return J.parse(L.getItem(K+k))||{}}catch(e){return{}}}function s(k,v){try{L.setItem(K+k,J.stringify(v))}catch(e){}}var i=sessionStorage.getItem(K+'s');if(!i){i=N.toString(36);sessionStorage.setItem(K+'s',i);var x=g('ss');x[i]={s:N,p:[]};s('ss',x)}var p=g('pv');p[P]=(p[P]||0)+1;s('pv',p);var x=g('ss');if(x[i]){x[i].p.push({u:P,t:N});s('ss',x)}var d=g('dv'),b='Other',m=/Mobile|Android|iPhone/i.test(U)?'Mobile':'Desktop';if(/Chrome/i.test(U)&&!/Edg/i.test(U))b='Chrome';else if(/Safari/i.test(U)&&!/Chrome/i.test(U))b='Safari';else if(/Firefox/i.test(U))b='Firefox';else if(/Edg/i.test(U))b='Edge';d[b]=(d[b]||0)+1;s('dv',d);var t=g('dt');t[m]=(t[m]||0)+1;s('dt',t);document.addEventListener('click',function(e){var h=g('cl'),k=P+'|'+((e.clientX/10|0)*10)+'|'+((e.clientY/10|0)*10);h[k]=(h[k]||0)+1;s('cl',h)});addEventListener('beforeunload',function(){var x=g('ss');if(x[i]){x[i].e=Date.now();s('ss',x)}});var y=new Date().toISOString().slice(0,10),z=g('dy');z[y]=(z[y]||0)+1;s('dy',z)})()</script>
+</body>
+</html>

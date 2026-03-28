@@ -1,0 +1,318 @@
+/**
+ * Tokyo Jet Lag — View Transitions API Styles
+ * Smooth page navigation with fade + slide animations
+ * Supports modern browsers; graceful fallback for others
+ */
+
+/* Enable view transitions on all navigation */
+@supports (view-transition-name: root) {
+  ::view-transition {
+    animation-duration: 0.6s;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.6s;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Cross-fade transition for root */
+  ::view-transition-old(root) {
+    animation: fade-out 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  ::view-transition-new(root) {
+    animation: fade-in 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  /* Hero section transition */
+  @view-transition {
+    type: reveal;
+  }
+
+  .hero {
+    view-transition-name: hero-section;
+  }
+
+  ::view-transition-old(hero-section) {
+    animation: slide-up 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  ::view-transition-new(hero-section) {
+    animation: slide-down 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  /* Card transitions */
+  .venue-card,
+  [data-card] {
+    view-transition-name: card;
+  }
+
+  ::view-transition-old(card) {
+    animation: scale-down-fade 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  ::view-transition-new(card) {
+    animation: scale-up-fade 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  /* Navigation transitions */
+  nav,
+  header {
+    view-transition-name: nav-header;
+  }
+
+  ::view-transition-old(nav-header) {
+    animation: nav-slide-up 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  ::view-transition-new(nav-header) {
+    animation: nav-slide-down 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  /* Content area transitions */
+  main,
+  [role='main'] {
+    view-transition-name: main-content;
+  }
+
+  ::view-transition-old(main-content) {
+    animation: content-fade-out 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  ::view-transition-new(main-content) {
+    animation: content-fade-in 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+}
+
+/* Fallback for browsers without View Transitions API */
+@supports not (view-transition-name: root) {
+  body {
+    transition: opacity 0.3s ease-in-out;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FADE ANIMATIONS
+   ═══════════════════════════════════════════════════════════════ */
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes content-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes content-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SLIDE ANIMATIONS
+   ═══════════════════════════════════════════════════════════════ */
+
+@keyframes slide-up {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+}
+
+@keyframes slide-down {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes nav-slide-up {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+}
+
+@keyframes nav-slide-down {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SCALE ANIMATIONS
+   ═══════════════════════════════════════════════════════════════ */
+
+@keyframes scale-down-fade {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+}
+
+@keyframes scale-up-fade {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ELEMENT-SPECIFIC TRANSITIONS
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Image transitions */
+img {
+  view-transition-name: image-element;
+}
+
+@supports (view-transition-name: root) {
+  ::view-transition-old(image-element) {
+    animation: image-fade-out 0.4s ease-out forwards;
+  }
+
+  ::view-transition-new(image-element) {
+    animation: image-fade-in 0.4s ease-in forwards;
+  }
+}
+
+@keyframes image-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes image-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* Button transitions */
+button,
+[role='button'],
+a {
+  view-transition-name: interactive-element;
+}
+
+@supports (view-transition-name: root) {
+  ::view-transition-old(interactive-element) {
+    animation: interactive-fade-out 0.3s ease-out forwards;
+  }
+
+  ::view-transition-new(interactive-element) {
+    animation: interactive-fade-in 0.3s ease-in forwards;
+  }
+}
+
+@keyframes interactive-fade-out {
+  to {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+}
+
+@keyframes interactive-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PERFORMANCE OPTIMIZATIONS
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  @supports (view-transition-name: root) {
+    ::view-transition-old(root),
+    ::view-transition-new(root),
+    ::view-transition-old(hero-section),
+    ::view-transition-new(hero-section),
+    ::view-transition-old(card),
+    ::view-transition-new(card),
+    ::view-transition-old(nav-header),
+    ::view-transition-new(nav-header),
+    ::view-transition-old(main-content),
+    ::view-transition-new(main-content),
+    ::view-transition-old(image-element),
+    ::view-transition-new(image-element),
+    ::view-transition-old(interactive-element),
+    ::view-transition-new(interactive-element) {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+}
+
+/* GPU acceleration */
+@supports (view-transition-name: root) {
+  ::view-transition-group(*) {
+    transform: translate(0);
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  @supports (view-transition-name: root) {
+    ::view-transition {
+      animation-duration: 0.4s;
+    }
+
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation-duration: 0.4s;
+    }
+  }
+}
