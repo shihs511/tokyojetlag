@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Stories | Tokyo Jet Lag</title>
+  <meta name="description" content="Immersive photo stories from the streets of Tokyo — Shinjuku nights, Tsukiji dawn, Golden Gai bar crawls.">
+  <meta name="theme-color" content="#04040f">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-192.svg">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Stories | Tokyo Jet Lag">
+  <meta property="og:description" content="Immersive photo stories from the streets of Tokyo.">
+  <meta property="og:url" content="https://tokyojetlag.com/stories.html">
+  <meta property="og:image" content="https://tokyojetlag.com/ogp-image.svg">
+
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;600;700&family=Noto+Sans+JP:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── Design tokens (matching site) ── */
+    :root {
+      --neon-blue: #00f0ff;
+      --neon-purple: #bf00ff;
+      --neon-pink: #ff0080;
+      --neon-yellow: #ffe000;
+      --neon-green: #00ff88;
+      --bg-dark: #04040f;
+      --bg-card: #0a0a1e;
+      --bg-card-hover: #0f0f2a;
+      --text-main: #e8e8f0;
+      --text-dim: #7070a0;
+      --text-bright: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-snap-type: y proximity;
+    }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Inter', 'Noto Sans JP', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Scanline overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(0deg,
+        rgba(0,0,0,.08), rgba(0,0,0,.08) 1px,
+        transparent 1px, transparent 2px);
+      z-index: 9999;
+    }
+
+    /* ── Header ── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 1rem 2rem;
+      background: rgba(4,4,15,.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 2px solid var(--neon-blue);
+      box-shadow: 0 0 30px rgba(0,240,255,.15);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: transform .4s ease;
+    }
+    header.hidden { transform: translateY(-110%); }
+
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: .12em;
+      color: var(--neon-blue);
+      text-decoration: none;
+      text-shadow: 0 0 12px rgba(0,240,255,.5);
+    }
+
+    nav { display: flex; gap: 1.5rem; align-items: center; }
+    nav a {
+      font-family: 'Space Mono', monospace;
+      font-size: .75rem;
+      color: var(--text-dim);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      transition: color .3s, text-shadow .3s;
+    }
+    nav a:hover, nav a.active {
+      color: var(--neon-blue);
+      text-shadow: 0 0 8px rgba(0,240,255,.5);
+    }
+
+    /* ── Progress bar ── */
+    .progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple), var(--neon-pink));
+      z-index: 1001;
+      width: 0%;
+      transition: width .1s linear;
+    }
+
+    /* ── Story TOC / landing ── */
+    .stories-landing {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 6rem 2rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stories-landing::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(0,240,255,.06) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 30%, rgba(191,0,255,.06) 0%, transparent 60%);
+    }
+
+    /* Floating kanji background */
+    .stories-landing::after {
+      content: '物語';
+      position: absolute;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: clamp(15rem, 30vw, 40rem);
+      color: rgba(0,240,255,.025);
+      font-weight: 700;
+      pointer-events: none;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+    }
+
+    .stories-landing h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      letter-spacing: .15em;
+      color: var(--text-bright);
+      text-shadow: 0 0 40px rgba(0,240,255,.25);
+      position: relative;
+    }
+    .stories-landing h1 span {
+      display: block;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: .35em;
+      letter-spacing: .3em;
+      color: var(--text-dim);
+      margin-top: .5rem;
+    }
+
+    .stories-landing p {
+      max-width: 520px;
+      color: var(--text-dim);
+      font-size: 1.05rem;
+      margin-top: 1.5rem;
+      position: relative;
+    }
+
+    /* Story cards grid */
+    .story-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      max-width: 1100px;
+      width: 100%;
+      margin-top: 3rem;
+      position: relative;
+      padding: 0 1rem;
+    }
+
+    .story-card {
+      position: relative;
+      height: 420px;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform .5s cubic-bezier(.25,.8,.25,1), box-shadow .5s;
+      text-decoration: none;
+    }
+    .story-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 60px rgba(0,0,0,.5), 0 0 40px rgba(0,240,255,.15);
+    }
+
+    .story-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform .8s cubic-bezier(.25,.8,.25,1);
+    }
+    .story-card:hover img { transform: scale(1.08); }
+
+    .story-card .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(4,4,15,.95) 0%, rgba(4,4,15,.3) 50%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem;
+    }
+
+    .story-card .tag {
+      font-family: 'Space Mono', monospace;
+      font-size: .65rem;
+      text-transform: uppercase;
+      letter-spacing: .2em;
+      color: var(--neon-blue);
+      margin-bottom: .5rem;
+    }
+    .story-card:nth-child(2) .tag { color: var(--neon-yellow); }
+    .story-card:nth-child(3) .tag { color: var(--neon-pink); }
+
+    .story-card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: .08em;
+      color: var(--text-bright);
+    }
+    .story-card .subtitle {
+      color: var(--text-dim);
+      font-size: .85rem;
+      margin-top: .4rem;
+    }
+    .story-card .read-time {
+      font-family: 'Space Mono', monospace;
+      font-size: .7rem;
+      color: var(--text-dim);
+      margin-top: .8rem;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+
+    /* ── Full-screen story sections ── */
+    .story {
+      position: relative;
+    }
+
+    .story-anchor {
+      position: absolute;
+      top: -80px;
+    }
+
+    /* Chapter = one full-screen frame */
+    .chapter {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      scroll-snap-align: start;
+      overflow: hidden;
+    }
+
+    .chapter-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .chapter-bg img,
+    .chapter-bg video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
+    /* Parallax shift via JS */
+    .chapter-bg.parallax img,
+    .chapter-bg.parallax video {
+      height: 130%;
+      will-change: transform;
+    }
+
+    .chapter-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    /* Text panel */
+    .chapter-content {
+      position: relative;
+      z-index: 2;
+      max-width: 680px;
+      padding: 3rem 2rem;
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+    .chapter-content.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Alignment variations */
+    .chapter.align-left .chapter-content { margin-right: auto; margin-left: 6vw; }
+    .chapter.align-right .chapter-content { margin-left: auto; margin-right: 6vw; }
+    .chapter.align-center .chapter-content { text-align: center; margin: 0 auto; }
+
+    .chapter-content .chapter-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: .9rem;
+      letter-spacing: .25em;
+      color: var(--neon-blue);
+      margin-bottom: 1rem;
+      text-shadow: 0 0 10px currentColor;
+    }
+
+    .chapter-content h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      letter-spacing: .1em;
+      color: var(--text-bright);
+      line-height: 1.1;
+      text-shadow: 0 0 30px rgba(0,0,0,.8);
+    }
+
+    .chapter-content p {
+      margin-top: 1.2rem;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: rgba(232,232,240,.9);
+      text-shadow: 0 2px 20px rgba(0,0,0,.9);
+    }
+
+    .chapter-content .jp {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: .85rem;
+      color: var(--text-dim);
+      margin-top: .5rem;
+    }
+
+    /* ── Photo strip between chapters ── */
+    .photo-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      height: 35vh;
+      min-height: 250px;
+      overflow: hidden;
+      position: relative;
+    }
+    .photo-strip.two-col {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .photo-strip img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .6s ease, filter .6s ease;
+      filter: brightness(.85) saturate(1.1);
+    }
+    .photo-strip img:hover {
+      transform: scale(1.05);
+      filter: brightness(1) saturate(1.2);
+      z-index: 2;
+    }
+    .photo-strip .strip-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(4,4,15,.4) 0%, transparent 30%, transparent 70%, rgba(4,4,15,.4) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .photo-strip .strip-caption {
+      position: absolute;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Space Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: rgba(232,232,240,.5);
+      z-index: 2;
+      white-space: nowrap;
+    }
+
+    /* ── Cinematic letterbox chapter ── */
+    .chapter.cinematic {
+      min-height: 70vh;
+    }
+    .chapter.cinematic::before,
+    .chapter.cinematic::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      height: 12%;
+      background: var(--bg-dark);
+      z-index: 3;
+      pointer-events: none;
+    }
+    .chapter.cinematic::before { top: 0; }
+    .chapter.cinematic::after { bottom: 0; }
+
+    /* ── Pull quote ── */
+    .pull-quote {
+      position: relative;
+      z-index: 2;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 2rem;
+      text-align: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 1.3rem;
+      font-style: italic;
+      line-height: 1.9;
+      color: rgba(232,232,240,.85);
+      letter-spacing: .02em;
+    }
+    .pull-quote::before {
+      content: '"';
+      display: block;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 4rem;
+      font-style: normal;
+      color: var(--neon-blue);
+      opacity: .4;
+      line-height: 1;
+      margin-bottom: .5rem;
+    }
+
+    /* Overlays per mood */
+    .overlay-dark {
+      background: linear-gradient(135deg, rgba(4,4,15,.75) 0%, rgba(4,4,15,.45) 100%);
+    }
+    .overlay-vignette {
+      background: radial-gradient(ellipse at center, transparent 30%, rgba(4,4,15,.8) 100%);
+    }
+    .overlay-gradient-bottom {
+      background: linear-gradient(to top, rgba(4,4,15,.9) 0%, transparent 60%);
+    }
+    .overlay-neon-tint {
+      background: linear-gradient(135deg, rgba(0,240,255,.08) 0%, rgba(191,0,255,.08) 100%);
+    }
+    .overlay-warm {
+      background: linear-gradient(135deg, rgba(255,224,0,.06) 0%, rgba(255,0,128,.08) 100%);
+    }
+    .overlay-deep {
+      background: linear-gradient(to bottom, rgba(4,4,15,.6) 0%, rgba(4,4,15,.85) 100%);
+    }
+
+    /* ── Story divider ── */
+    .story-divider {
+      height: 20vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      gap: .8rem;
+    }
+    .story-divider::before {
+      content: '';
+      width: 60px;
+      height: 1px;
+      background: var(--neon-blue);
+      box-shadow: 0 0 10px var(--neon-blue);
+    }
+    .story-divider .divider-kanji {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: .75rem;
+      color: var(--text-dim);
+      letter-spacing: .3em;
+      opacity: .5;
+    }
+
+    /* ── Share button ── */
+    .share-bar {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .btn-share {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .65rem 1.4rem;
+      border: 1px solid rgba(0,240,255,.3);
+      background: rgba(0,240,255,.06);
+      color: var(--neon-blue);
+      font-family: 'Space Mono', monospace;
+      font-size: .72rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all .3s;
+      backdrop-filter: blur(8px);
+    }
+    .btn-share:hover {
+      background: rgba(0,240,255,.15);
+      box-shadow: 0 0 20px rgba(0,240,255,.2);
+    }
+    .btn-share svg {
+      width: 14px; height: 14px;
+      fill: none; stroke: currentColor; stroke-width: 2;
+    }
+
+    .share-toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--bg-card);
+      border: 1px solid var(--neon-blue);
+      color: var(--neon-blue);
+      font-family: 'Space Mono', monospace;
+      font-size: .75rem;
+      padding: .7rem 1.5rem;
+      border-radius: 6px;
+      z-index: 2000;
+      opacity: 0;
+      transition: all .4s cubic-bezier(.25,.8,.25,1);
+      pointer-events: none;
+    }
+    .share-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ── Story nav (next story) — Enhanced ── */
+    .next-story {
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .next-story::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(0,240,255,.03) 0%, transparent 70%);
+    }
+
+    .next-story-inner {
+      position: relative;
+      z-index: 2;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+    .next-story-inner.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .next-story-label {
+      font-family: 'Space Mono', monospace;
+      font-size: .7rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+    }
+
+    .next-story-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      letter-spacing: .1em;
+      color: var(--text-bright);
+      text-decoration: none;
+      display: inline-block;
+      transition: text-shadow .3s, color .3s;
+    }
+    .next-story-title:hover {
+      text-shadow: 0 0 30px rgba(0,240,255,.4);
+      color: var(--neon-blue);
+    }
+
+    .next-story-preview {
+      display: block;
+      max-width: 400px;
+      margin: 1rem auto 0;
+      font-size: .85rem;
+      color: var(--text-dim);
+      font-style: italic;
+    }
+
+    .next-story-arrow {
+      display: block;
+      margin-top: 1.5rem;
+      animation: bobArrow 2s ease-in-out infinite;
+    }
+    .next-story-arrow svg {
+      width: 32px; height: 32px;
+      stroke: var(--neon-blue);
+      fill: none; stroke-width: 2;
+    }
+    @keyframes bobArrow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(10px); }
+    }
+
+    /* ── Footer ── */
+    footer {
+      padding: 3rem 2rem;
+      text-align: center;
+      border-top: 1px solid rgba(0,240,255,.1);
+    }
+    footer p {
+      font-family: 'Space Mono', monospace;
+      font-size: .7rem;
+      color: var(--text-dim);
+      letter-spacing: .1em;
+    }
+    footer a {
+      color: var(--neon-blue);
+      text-decoration: none;
+    }
+
+    /* ── Scroll indicator ── */
+    .scroll-indicator {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      opacity: 1;
+      transition: opacity .5s;
+      pointer-events: none;
+    }
+    .scroll-indicator.hide { opacity: 0; }
+    .scroll-indicator span {
+      display: block;
+      width: 2px;
+      height: 40px;
+      background: var(--neon-blue);
+      margin: 0 auto;
+      border-radius: 2px;
+      animation: scrollPulse 2s ease-in-out infinite;
+      box-shadow: 0 0 8px var(--neon-blue);
+    }
+    .scroll-indicator p {
+      font-family: 'Space Mono', monospace;
+      font-size: .6rem;
+      color: var(--text-dim);
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      margin-top: .5rem;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: .3; transform: scaleY(.6); }
+      50% { opacity: 1; transform: scaleY(1); }
+    }
+
+    /* ── Back to top ── */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 500;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,240,255,.3);
+      background: rgba(4,4,15,.85);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--neon-blue);
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all .4s;
+      pointer-events: none;
+    }
+    .back-to-top.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .back-to-top:hover {
+      background: rgba(0,240,255,.12);
+      box-shadow: 0 0 20px rgba(0,240,255,.2);
+    }
+    .back-to-top svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    /* ── Side story dots nav ── */
+    .story-dots {
+      position: fixed;
+      right: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 500;
+      display: flex;
+      flex-direction: column;
+      gap: .8rem;
+      opacity: 0;
+      transition: opacity .5s;
+    }
+    .story-dots.show { opacity: 1; }
+
+    .story-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      border: 1.5px solid var(--text-dim);
+      background: transparent;
+      cursor: pointer;
+      transition: all .3s;
+      position: relative;
+    }
+    .story-dot.active {
+      border-color: var(--neon-blue);
+      background: var(--neon-blue);
+      box-shadow: 0 0 10px var(--neon-blue);
+    }
+    .story-dot::after {
+      content: attr(data-label);
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Space Mono', monospace;
+      font-size: .6rem;
+      color: var(--text-dim);
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity .3s;
+      pointer-events: none;
+    }
+    .story-dot:hover::after { opacity: 1; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      header { padding: .8rem 1rem; }
+      .logo { font-size: 1.2rem; }
+      nav a { font-size: .65rem; }
+      .chapter-content { padding: 2rem 1.2rem; }
+      .chapter.align-left .chapter-content,
+      .chapter.align-right .chapter-content { margin: 0 1rem; }
+      .story-cards { grid-template-columns: 1fr; }
+      .story-card { height: 320px; }
+      .story-dots { display: none; }
+      .photo-strip {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+      .photo-strip img {
+        height: 30vh;
+        min-height: 180px;
+      }
+      .photo-strip.two-col {
+        grid-template-columns: 1fr;
+      }
+      .pull-quote {
+        font-size: 1.1rem;
+        padding: 1.5rem 1rem;
+      }
+      .chapter.cinematic::before,
+      .chapter.cinematic::after {
+        height: 8%;
+      }
+      .next-story { min-height: 50vh; }
+    }
+
+    /* ── Fade-in utility ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Slide-in from sides ── */
+    .slide-left {
+      opacity: 0;
+      transform: translateX(-60px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+    .slide-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .slide-right {
+      opacity: 0;
+      transform: translateX(60px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+    .slide-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ── Loading shimmer ── */
+    .chapter-bg img {
+      background: var(--bg-card);
+    }
+
+    /* ── Kenburns animation for key images ── */
+    @keyframes kenburns {
+      0% { transform: scale(1.1) translate(0, 0); }
+      50% { transform: scale(1.15) translate(-1%, -1%); }
+      100% { transform: scale(1.1) translate(0, 0); }
+    }
+    .chapter-bg.kenburns img {
+      animation: kenburns 20s ease-in-out infinite;
+      height: 130%;
+    }
+
+    /* ── Image counter ── */
+    .img-counter {
+      position: absolute;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .15em;
+      color: rgba(232,232,240,.4);
+      z-index: 5;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Progress bar -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Header -->
+<header id="siteHeader">
+  <a href="index.html" class="logo">TOKYO JET LAG</a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="nightlife.html">Nightlife</a>
+    <a href="food-guide.html">Food</a>
+    <a href="stories.html" class="active">Stories</a>
+    <a href="gallery.html">Gallery</a>
+  </nav>
+</header>
+
+<!-- Side dot navigation -->
+<nav class="story-dots" id="storyDots">
+  <button class="story-dot active" data-target="landing" data-label="Top" aria-label="Back to top"></button>
+  <button class="story-dot" data-target="shinjuku" data-label="Shinjuku" aria-label="A Night in Shinjuku"></button>
+  <button class="story-dot" data-target="tsukiji" data-label="Tsukiji" aria-label="Dawn at Tsukiji"></button>
+  <button class="story-dot" data-target="golden-gai" data-label="Golden Gai" aria-label="Golden Gai Crawl"></button>
+</nav>
+
+<!-- Scroll indicator -->
+<div class="scroll-indicator" id="scrollIndicator">
+  <span></span>
+  <p>Scroll</p>
+</div>
+
+<!-- Back to top -->
+<button class="back-to-top" id="backToTop" aria-label="Back to top">
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<!-- Share toast -->
+<div class="share-toast" id="shareToast">Link copied to clipboard</div>
+
+
+<!-- ════════════════════════════════════════════ -->
+<!-- LANDING                                      -->
+<!-- ════════════════════════════════════════════ -->
+<section class="stories-landing" id="landing">
+  <h1 class="fade-in">
+    STORIES
+    <span>東京物語</span>
+  </h1>
+  <p class="fade-in">Three nights. Three dawns. Three lifetimes compressed into the neon pulse of the world's most electric city. These aren't travel guides — they're confessions.</p>
+
+  <div class="story-cards">
+    <!-- Card 1 -->
+    <a class="story-card fade-in" href="#shinjuku" aria-label="Read A Night in Shinjuku">
+      <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&q=80" alt="Neon-lit streets of Shinjuku at night" loading="lazy">
+      <div class="overlay">
+        <div class="tag">Story 01</div>
+        <h3>A Night in Shinjuku</h3>
+        <div class="subtitle">Neon cathedrals and midnight wanderers</div>
+        <div class="read-time">
+          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          7 min read
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 2 -->
+    <a class="story-card fade-in" href="#tsukiji" aria-label="Read Dawn at Tsukiji">
+      <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?w=800&q=80" alt="Early morning at Tsukiji fish market" loading="lazy">
+      <div class="overlay">
+        <div class="tag">Story 02</div>
+        <h3>Dawn at Tsukiji</h3>
+        <div class="subtitle">Where Tokyo wakes before the sun</div>
+        <div class="read-time">
+          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          6 min read
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 3 -->
+    <a class="story-card fade-in" href="#golden-gai" aria-label="Read Golden Gai Crawl">
+      <img src="https://images.unsplash.com/photo-1554797589-7241bb691973?w=800&q=80" alt="Golden Gai narrow alleyway with warm lights" loading="lazy">
+      <div class="overlay">
+        <div class="tag">Story 03</div>
+        <h3>Golden Gai Crawl</h3>
+        <div class="subtitle">Six bars, six stories, one legendary alley</div>
+        <div class="read-time">
+          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          8 min read
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════ -->
+<!-- STORY 1 — A NIGHT IN SHINJUKU               -->
+<!-- ════════════════════════════════════════════ -->
+<section class="story" id="story-shinjuku">
+  <div class="story-anchor" id="shinjuku"></div>
+
+  <!-- Chapter 1.1: Title card -->
+  <div class="chapter align-center">
+    <div class="chapter-bg kenburns">
+      <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=1920&q=85" alt="Shinjuku neon skyline at night" loading="lazy">
+    </div>
+    <div class="chapter-overlay overlay-vignette"></div>
+    <div class="chapter-content">
+      <div class="chapter-number">Story 01</div>
+      <h2>A Night in Shinjuku</h2>
+      <p class="jp">新宿の夜</p>
+      <div class="share-bar">
+        <button class="btn-share" data-story="shinjuku" aria-label="Share this story">
+          <svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+          Share this story
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chapter 1.2 -->
+  <div class="chapter align-left">
+    <div class="chapter-bg parallax">
+      <img src="https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=1920&q=85" alt="Crowded Shinjuku crossing at night" loading="lazy">
+    </div>
+    <div class="chapter-overlay overlay-dark"></div>
+    <div class="chapter-content slide-left">
+      <div class="chapter-number">01 / 06</div>
+      <h2>11:47 PM — The Crossing</h2>
+      <p>I step out of the south exit and the city swallows me whole. A hundred thousand LED panels paint the night in electric blue and screaming pink. The crowd moves like one living, breathing organism — salarymen loosening ties, tourists fumbling with maps they'll never fold correctly, teens in harajuku layers that defy gravity and good taste in equal measure. My jet lag is gone. Replaced by something louder.</p>
+      <p class="jp">新宿駅南口。東京の鼓動が全身に響く。</p>
+    </div>
+  </div>
+
+  <!-- Photo strip: Shinjuku neon montage -->
+  <div class="photo-strip fade-in">
+    <img src="https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?w=800&q=80" alt="Shinjuku neon signs glowing" loading="lazy">
+    <img src="https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?w=800&q=80" alt="Tokyo Tower at night with city lights" loading="lazy">
+    <img src="https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800&q=80" alt="Japanese temple gate at dusk" loading="lazy">
+    <div class="strip-overlay"></div>
+    <div class="strip-caption">Shinjuku after midnight — where every surface speaks</div>
+  </div>
+
+  <!-- Chapter 1.3 -->
+  <div class="chapter align-right">
+    <div class="chapter-bg parallax">
+      <img src="https://images.unsplash.com/photo-1551641506-ee5bf4cb45f1?w=1920&q=85" alt="Rain-slicked neon streets of Kabukicho" loading="lazy">
+    </div>
+    <div class="chapter-overlay overlay-neon-tint"></div>
+    <div class="chapter-content slide-right">
+      <div class="chapter-number">02 / 06</div>
+      <h2>12:30 AM — Kabukicho Gate</h2>
+      <p>The famous red arch materializes through a veil of warm rain. Kabukicho — Tokyo's most notorious entertainment district. Every surface screams at me in katakana. Touts whisper deals in fragmented English. But I look past the noise, and I find it — a poetry hiding in the chaos. Each doorway a portal. Each neon sign a promise. The rain turns the streets into mirrors, and for a moment I'm walking through two Tokyos at once: one above, one below.</p>
+    </div>
+  </div>
+
+  <!-- Chapter 1.4 — Godzilla/Kabukicho -->
+  <div class="chapter align-center cinematic">
+    <div class="chapter-bg parallax">
+      <img src="https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=1920&q=85" alt="Shibuya crossing aerial view at night" loading="lazy">
+    </div>
+    <div class="chapter-overlay overlay-deep"></div>
+    <div class="chapter-content">
+      <div class="chapter-number">03 / 06</div>
+      <h2>12:55 AM — The Godzilla Corner</h2>
+      <p>I round a corner and there it is — the giant Godzilla head, perched atop the Toho Cinema building like a guardian deity of chaos. Tourists pose for photos. A drunk salaryman salutes it. I stand there looking up, rain dripping off my jacket, and I understand something about this city: Tokyo doesn't just embrace its contradictions — it mounts them on rooftops and lights them up in neon.</p>
+      <p class="jp">歌舞伎町のゴジラ。東京の矛盾を象徴する守り神。</p>
+    </div>
+    <div class="img-counter">03/06</div>
+  </div>
+
+  <!-- Photo strip: night streets -->
+  <div class="photo-strip two-col fade-in">
+    <img src="https://images.unsplash.com/photo-1549693578-d683be217e58?w=800&q=80" alt="Tokyo station platform at night" loading="lazy">
+    <img src="https://images.unsplash.com/photo-1590559899731-a382839e5549?w=800&q=80" alt="Quiet Tokyo alley with vending machines" loading="lazy">
+    <div class="strip-overlay"></div>
+    <div class="strip-caption">Between the noise — Tokyo breathes</div>
+  </div>
+
+  <!-- Chapter 1.5 — Ramen -->
+  <div class="chapter align-left">
+    <div class="chapter-bg parallax">
+      <img src="https://images.unsplash.com/photo-1557872943-16a5ac26437e?w=1920&q=85" alt="Steaming ramen bowl close-up" loading="lazy">
+    </div>
+    <div class="chapter-overlay overlay-warm"></div>
+    <div class="chapter-content slide-left">
+      <div class="chapter-number">04 / 06</div>
+      <h2>1:15 AM — The Ramen Salvation</h2>
+      <p>Down a corridor barely wide enough for two shoulders, steam rises from a dozen tiny counters. I choose by instinct — the one with the longest line of suited locals. I don't speak. I press a button on the vending machine. Ticket in hand, I sit. The tonkotsu broth arrives and hits my soul like a warm embrace from a city I've only known for hours. The noodles are perfect. The silence is perfect. Outside, the rain picks up. I don't care. I'm home in a place I've never been.</p>
+      <p class="jp">一杯のラーメン。それだけで救われる夜がある。</p>
+    </div>
+  </div>
+
+  <!-- Chapter 1.6 — The quiet hour -->
+  <div class="chapter align-right">
+    <div class="chapter-bg parallax">
+      <img src="https://images.unsplash.com/photo-1590559899731-a382839e5549?w=1920&q=85" alt="Quiet Tokyo side street at 3am" loading="lazy">
+    </div>
+    <div class="chapter-overlay overlay-gradient-bottom"></div>
+    <div class="chapter-content slide-right">
+      <div class="chapter-number">05 / 06</div>
+      <h2>3:00 AM — The Quiet Hour</h2>
+      <p>Somewhere between Kabukicho and the station, the city exhales. Streets that screamed now whisper. A vending machine hums its lonely lullaby — the only conversation for blocks. A cat watches me from a fire escape with the practiced indifference of someone who's seen a thousand lost tourists. This is the Tokyo they don't put in the guidebooks — the pause between heartbeats, the silence between songs. I take a photo. The flash ruins it. Some things only exist when you don't try to capture them.</p>
+    </div>
+  </div>
+
+  <!-- Pull quote -->
+  <div class="chapter align-center" style="min-height:60vh; background: var(--bg-dark);">
+    <div class="chapter-content">
+      <div class="pull-quote">
+        The city peeled back its neon skin and showed me something fragile underneath. Tokyo at 3AM isn't a place — it's a confession.
+      </div>
+    </div>
+  </div>
+
+  <!-- Chapter 1.7 — First train -->
+  <div class="chapter align-center">
+    <div class="chapter-bg kenburns">
+      <img src="https://images.unsplash.com/photo-1549693578-d683be217e58?w=1920&q=85" alt="First trains at dawn in Shinjuku Station" loading="lazy">
+    </div>
+    <div class="chapter-overlay overlay-vignette"></div>
+    <div class="chapter-content">
+      <div class="chapter-number">06 / 06</div>
+      <h2>5:00 AM — First Train</h2>
+      <p>The announcement chime echoes through the empty platform — that melody everyone in Tokyo knows by heart, but nobody wrote down. The first train of the morning slides in with mechanical grace. I board. The seats are warm. My reflection stares back from the window, superimposed on the passing city. Shinjuku didn't beat me. Or maybe it did. Either way, I carry the neon in my retinas and the broth in my bones. Tomorrow I'll do it all again. And the night after that.</p>
+      <p class="jp">始発電車。夜は終わった。でもまた必ず来る。</p>
+      <div class="share-bar">
+        <button class="btn-share" data-story="shinjuku" aria-label="Share this story">
+          <svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+          Share this story
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Next story link -->
+  <div class="next-story">
+    <div class="next-story-inner">
+      <div class="next-story-label">Next Story</div>
+      <a href="#tsukiji" class="next-story-title">Dawn at Tsukiji</a>
+      <div class="next-story-preview">The alarm rings at 4 AM. This is not a mistake.</div>
+      <div class="next-story-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+    </div>
+  </div>
+</section>
+
+
+<div class="story-divider">
+  <div class="divider-kanji">次の物語</div>
+</div>
+
+
+<!-- ════════════════════════════════════════════ -->
+<!-- STORY 2 — DAWN AT TSUKIJI                    -->
+<!-- ════════════════════════════════════════════ -->
+<section class="story" id="story-tsukiji">
+  <div class="story-anchor" id="tsukiji"></div>
+
+  <!-- Chapter 2.1: Title -->
+  <div class="chapter align-center">
+    <div class="chapter-bg kenburns">
+      <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?w=1920&q=85" alt="Tsukiji outer market at dawn" loading="lazy">
+    </div>
+    <div class="chapter-overlay overlay-vignette"></div>
+    <div class="chapter-content">
+      <div class="chapter-number">Story 02</div>
+      <h2>Dawn at Tsukiji</h2>
+      <p class="jp">築地の夜明け</p>
+      <div class="share-bar">
+        <button class="btn-share" data-story="tsukiji" aria-label="Share this story">
+          <svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+          Share this story
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chapter 2.2 -->
+  <div class="chapter align-left">
+    <div class="chapter-bg parallax">
+      <img src="https://images.unsplash.com/photo-1580442151529-343f2f6e0e27?w=1920&q=85" alt="Dark Tokyo street before dawn" loading="lazy">
+    </div>
+    <div class="chapter-overlay overlay-dark"></div>
+    <div class="chapter-content slide-left">
+      <div class="chapter-number">01 / 05</div>
+      <h2>4:30 AM — Still Dark</h2>
+      <p>The taxi drops me at the edge of Tsukiji and disappears into darkness. The streets are empty but the air is thick with purpose — that unmistakable feeling of a world waking up two hours before everyone else. Somewhere behind steel shutters, the city's food supply chain is already humming. Forklifts beep in the distance. A single fluorescent strip lights a doorway where workers in rubber boots sip canned coffee from a vending machine, their breath fogging in the cold. They look at me. I look at them. We share a nod. Early risers recognize their own.</p>
+    </div>
+  </div>
+
+  <!-- Photo strip: Tsukiji market life -->
+  <div class="photo-strip fade-in">
+    <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=800&q=80" alt="Fresh sushi platter" loading="lazy">
+    <img src="https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?w=800&q=80" alt="Japanese seafood market" loading="lazy">
+    <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?w=800&q=80" alt="Tsukiji market stalls" loading="lazy">
+    <div class="strip-overlay"></div>
+    <div class="strip-caption">Tsukiji — where Tokyo's day begins in fish and fire</div>
+  </div>
+
+  <!-- Chapter 2.3 -->
+  <div class="chapter align-right">
+    <div class="chapter-bg parallax">
+      <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=1920&q=85" alt="Fresh sushi and fish at market" loading="lazy">
+    </div>
+    <div class="chapter-overlay overlay-warm"></div>
+    <div class="chapter-content slide-right">
+      <div class="chapter-number">02 / 05</div>
+      <h2>5:15 AM — The Master's Counter</h2>
+      <p>Shutters roll up in sequence like a mechanical dawn chorus. The first sushi counter opens and the master behind the bar has been doing this for forty years. His knife moves with the confidence of ten thousand mornings — each cut a meditation, each slice a love letter to the sea. I sit down. I don't order. He looks at my eyes. He knows. The first piece arrives: hirame, translucent, shimmering like a sliver of the Pacific itself. I close my eyes and taste the ocean.</p>
+      <p class="jp">「おまかせ」— 信頼だけで繋がる、職人と旅人の約束。</p>
+    </div>
+  </div>
+
+  <!-- Chapter 2.4 — Tamagoyaki -->
+  <div class="chapter align-center cinematic">
+    <div class="chapter-bg parallax">
+      <img src="https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?w=1920&q=85" alt="Japanese market food stalls" loading="lazy">
+    </div>
+    <div class="chapter-overlay overlay-gradient-bottom"></div>
+    <div class="chapter-content">
+      <div class="chapter-number">03 / 05</div>
+      <h2>6:00 AM — Tamagoyaki & Green Tea</h2>
+      <p>I walk the narrow lanes now bustling with locals carrying bulging shopping bags. At a tiny stall wedged between two shuttered shops, a woman flips tamagoyaki — sweet, layered egg — with choreographed precision that would make a conductor jealous. Each fold is timed to the second. She's been doing this since before I was born. I eat it on a stick while steam curls around my fingers like a warm secret. Green tea from a paper cup. No milk. No sugar. Nothing but leaves and hot water. The simplest breakfast I've ever had. The best breakfast I'll ever have.</p>
+    </div>
+  </div>
+
+  <!-- Photo strip: morning Tokyo -->
+  <div class="photo-strip two-col fade-in">
+    <img src="https://images.unsplash.com/photo-1480796927426-f609979314bd?w=800&q=80" alt="Tokyo Bay at sunrise" loading="lazy">
+    <img src="https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=800&q=80" alt="Tokyo cityscape morning light" loading="lazy">
+    <div class="strip-overlay"></div>
+    <div class="strip-caption">First light on Tokyo Bay</div>
+  </div>
+
+  <!-- Chapter 2.5 -->
+  <div class="chapter align-left">
+    <div class="chapter-bg parallax">
+      <img src="https://images.unsplash.com/photo-1480796927426-f609979314bd?w=1920&q=85" alt="Sun rising over Tokyo Bay" loading="lazy">
+    </div>
+    <div class="chapter-overlay overlay-vignette"></div>
+    <div class="chapter-content slide-left">
+      <div class="chapter-number">04 / 05</div>
+      <h2>6:45 AM — Sunrise Over the Bay</h2>
+      <p>I walk east toward the water, past the last market stalls, past the delivery trucks, past the rhythms of commerce into something quieter. The Sumida River catches the first orange light and fractures it into a thousand shimmering fragments, each one a tiny fire on the water's surface. Behind me, Tsukiji hums with full morning energy. Ahead, the rest of Tokyo is just waking up, reaching for alarm clocks, brewing coffee, checking phones. But I've already lived a whole day. I've tasted the ocean and the earth and the patience of a thousand mornings. It's not even seven.</p>
+      <p class="jp">朝日が昇る。東京の一日が始まる。私の一日はもう終わりに近い。</p>
+    </div>
+  </div>
+
+  <!-- Pull quote -->
+  <div class="chapter align-center" style="min-height:60vh; background: var(--bg-dark);">
+    <div class="chapter-content">
+      <div class="pull-quote">
+        Tsukiji taught me that the most extraordinary moments hide in the most ordinary rituals. A fish. A knife. A sunrise. That's all you need.
+      </div>
+    </div>
+  </div>
+
+  <!-- Chapter 2.6 — Closing reflection -->
+  <div class="chapter align-center">
+    <div class="chapter-bg kenburns">
+      <img src="https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?w=1920&q=85" alt="Tokyo skyline at golden hour" loading="lazy">
+    </div>
+    <div class="chapter-overlay overlay-gradient-bottom"></div>
+    <div class="chapter-content">
+      <div class="chapter-number">05 / 05</div>
+      <h2>7:15 AM — Walking Home</h2>
+      <p>The streets fill with commuters now — suits, briefcases, the quiet determination of a city getting to work. I walk against the current, heading back to my hotel, and I feel like I carry a secret they don't know yet. That the best part of their city happened while they were sleeping. That the fish they'll eat tonight was blessed by the dawn. That somewhere in Tsukiji, a woman is still flipping tamagoyaki, one perfect fold at a time.</p>
+      <p class="jp">築地の朝。世界が目覚める前の、静かな奇跡。</p>
+      <div class="share-bar">
+        <button class="btn-share" data-story="tsukiji" aria-label="Share this story">
+          <svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+          Share this story
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Next story -->
+  <div class="next-story">
+    <div class="next-story-inner">
+      <div class="next-story-label">Next Story</div>
+      <a href="#golden-gai" class="next-story-title">Golden Gai Crawl</a>
+      <div class="next-story-preview">Six bars. Six stools. Two hundred lifetimes.</div>
+      <div class="next-story-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+    </div>
+  </div>
+</section>
+
+
+<div class="story-divider">
+  <div class="divider-kanji">次の物語</div>
+</div>
+
+
+<!-- ════════════════════════════════════════════ -->
+<!-- STORY 3 — GOLDEN GAI CRAWL                   -->
+<!-- ════════════════════════════════════════════ -->
+<section class="story" id="story-golden-gai">
+  <div class="story-anchor" id="golden-gai"></div>
+
+  <!-- Chapter 3.1: Title -->
+  <div class="chapter align-center">
+    <div class="chapter-bg kenburns">
+      <img src="https://images.unsplash.com/photo-1554797589-7241bb691973?w=1920&q=85" alt="Golden Gai alleyway entrance" loading="lazy">
+    </div>
+    <div class="chapter-overlay overlay-vignette"></div>
+    <div class="chapter-content">
+      <div class="chapter-number">Story 03</div>
+      <h2>Golden Gai Crawl</h2>
+      <p class="jp">ゴールデン街巡り</p>
+      <div class="share-bar">
+        <button class="btn-share" data-story="golden-gai" aria-label="Share this story">
+          <svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+          Share this story
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chapter 3.2 -->
+  <div class="chapter align-left">
+    <div class="chapter-bg parallax">
+      <img src="https://images.unsplash.com/photo-1581349485608-9469926a8e5e?w=1920&q=85" alt="Narrow Golden Gai alley with lanterns" loading="lazy">
+    </div>
+    <div class="chapter-overlay overlay-warm"></div>
+    <div class="chapter-content slide-left">
+      <div class="chapter-number">01 / 07</div>
+      <h2>9:00 PM — Finding the Way In</h2>
+      <p>Two hundred bars crammed into six alleys barely wider than my wingspan. Golden Gai is a defiant relic — Tokyo's stubbornly analog answer to the algorithm age. No website. No app. No reservation system. No Michelin stars. You just walk in, duck under a curtain, and hope there's a stool with your name on it. Tonight, I have one rule: six bars, one drink each. A crawl through six tiny universes. I take a breath. I step in. The alley swallows me whole.</p>
+    </div>
+  </div>
+
+  <!-- Photo strip: Golden Gai atmosphere -->
+  <div class="photo-strip fade-in">
+    <img src="https://images.unsplash.com/photo-1554797589-7241bb691973?w=800&q=80" alt="Golden Gai lanterns and signs" loading="lazy">
+    <img src="https://images.unsplash.com/photo-1601042879364-f3947d3f9c16?w=800&q=80" alt="Cozy bar interior with bottles" loading="lazy">
+    <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800&q=80" alt="Atmospheric bar with warm lighting" loading="lazy">
+    <div class="strip-overlay"></div>
+    <div class="strip-caption">Golden Gai — where every door is a different universe</div>
+  </div>
+
+  <!-- Chapter 3.3 — Jazz bar -->
+  <div class="chapter align-right">
+    <div class="chapter-bg parallax">
+      <img src="https://images.unsplash.com/photo-1601042879364-f3947d3f9c16?w=1920&q=85" alt="Tiny bar interior with bottles" loading="lazy">
+    </div>
+    <div class="chapter-overlay overlay-dark"></div>
+    <div class="chapter-content slide-right">
+      <div class="chapter-number">02 / 07</div>
+      <h2>Bar One — The Jazz Corner</h2>
+      <p>Five stools. A Miles Davis record crackling through speakers older than me. The bartender — silver hair, immaculate vest, hands that have seen fifty years of whisky — pours with the precision of a surgeon and the soul of a poet. There is no menu. You get what he thinks you need. A single malt, neat, with one perfect ice sphere that catches the lamplight. I take a sip. He nods. I nod back. That's the whole conversation. It's the best conversation I've had all week.</p>
+      <p class="jp">マスターの一杯に、言葉はいらない。沈黙が語る。</p>
+    </div>
+  </div>
+
+  <!-- Chapter 3.4 — Film bar -->
+  <div class="chapter align-center cinematic">
+    <div class="chapter-bg parallax">
+      <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1920&q=85" alt="Atmospheric bar interior" loading="lazy">
+    </div>
+    <div class="chapter-overlay overlay-neon-tint"></div>
+    <div class="chapter-content">
+      <div class="chapter-number">03 / 07</div>
+      <h2>Bar Three — The Film Buff's Den</h2>
+      <p>Every inch of wall is covered in movie posters — Kurosawa next to Lynch, Ozu beside Tarantino, as if cinema history itself got drunk and decided to redecorate. The owner quizzes me between pours: "Name the Ozu film where the father drinks sake alone." I hesitate. The Japanese couple beside me whispers the answer. We become instant allies. Together we nail three more questions. The shochu is on the house. I don't even like shochu. Tonight I love it.</p>
+    </div>
+  </div>
+
+  <!-- Chapter 3.5 — Mama-san -->
+  <div class="chapter align-left">
+    <div class="chapter-bg parallax">
+      <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1920&q=85" alt="Warm bar counter with sake bottles" loading="lazy">
+    </div>
+    <div class="chapter-overlay overlay-warm"></div>
+    <div class="chapter-content slide-left">
+      <div class="chapter-number">04 / 07</div>
+      <h2>Bar Four — Mama-san's Place</h2>
+      <p>I duck through a noren curtain into a bar run by a woman everyone calls Mama. She's been behind this counter since 1978, through earthquakes and recessions and the complete digital transformation of human civilization, and her bar still doesn't have Wi-Fi. She pours warm sake and tells me about the night a famous rock star fell asleep on this exact stool — the one I'm sitting on. "I let him sleep," she says, refilling my cup without asking. "Good tippers can do what they want." I tip generously. Just in case.</p>
+    </div>
+  </div>
+
+  <!-- Photo strip: night details -->
+  <div class="photo-strip two-col fade-in">
+    <img src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=800&q=80" alt="Shinjuku rooftop neon view" loading="lazy">
+    <img src="https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?w=800&q=80" alt="Tokyo neon reflections" loading="lazy">
+    <div class="strip-overlay"></div>
+    <div class="strip-caption">Above and below — Golden Gai's electric glow</div>
+  </div>
+
+  <!-- Chapter 3.6 — Rooftop -->
+  <div class="chapter align-right">
+    <div class="chapter-bg parallax">
+      <img src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=1920&q=85" alt="Rooftop view of neon-lit Shinjuku" loading="lazy">
+    </div>
+    <div class="chapter-overlay overlay-gradient-bottom"></div>
+    <div class="chapter-content slide-right">
+      <div class="chapter-number">05 / 07</div>
+      <h2>Bar Six — The Rooftop</h2>
+      <p>My last stop isn't even a proper bar — it's a landing on the top floor of a crumbling building where a guy with a cooler and a folding chair sells Asahi tallboys at a markup I'm deliriously happy to pay. Because from up here, I can see everything. All of Shinjuku pulsing below me like a living circuit board. The neon. The chaos. The beautiful, relentless heartbeat of a city that turned sleeplessness into an art form. I crack the can. The foam runs over my fingers. I don't wipe it off. I just stand here. Breathing. Watching. Belonging.</p>
+    </div>
+  </div>
+
+  <!-- Pull quote -->
+  <div class="chapter align-center" style="min-height:60vh; background: var(--bg-dark);">
+    <div class="chapter-content">
+      <div class="pull-quote">
+        In Golden Gai I learned that the best bars aren't the ones with the most bottles. They're the ones with the most stories. And six stools is plenty.
+      </div>
+    </div>
+  </div>
+
+  <!-- Chapter 3.7: Closing -->
+  <div class="chapter align-center">
+    <div class="chapter-bg kenburns">
+      <img src="https://images.unsplash.com/photo-1554797589-7241bb691973?w=1920&q=85" alt="Golden Gai alleyway at closing time" loading="lazy">
+    </div>
+    <div class="chapter-overlay overlay-vignette"></div>
+    <div class="chapter-content">
+      <div class="chapter-number">07 / 07</div>
+      <h2>1:00 AM — Last Call</h2>
+      <p>Six bars. Six worlds. Six strangers who, for the length of one drink, became something more. In Golden Gai, every door opens to someone's entire universe — curated with love, decorated with obsession, maintained with defiance against a world that wants everything bigger, faster, louder. I step back into the alley. The lanterns sway. Somewhere behind me, a bottle clinks against a glass. Somewhere ahead, the next alley waits. I'll come back. Everyone comes back. That's the thing about Golden Gai — it's not a place you visit. It's a place that visits you, in your dreams, until you return.</p>
+      <p class="jp">ゴールデン街。一度来たら、必ず戻る。それが、この街の魔法。</p>
+      <div class="share-bar">
+        <button class="btn-share" data-story="golden-gai" aria-label="Share this story">
+          <svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+          Share this story
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to stories -->
+  <div class="next-story">
+    <div class="next-story-inner">
+      <div class="next-story-label">The End — Back to All Stories</div>
+      <a href="#landing" class="next-story-title">Return to Top</a>
+      <div class="next-story-preview">Three stories. One city. Infinite nights.</div>
+      <div class="next-story-arrow"><svg viewBox="0 0 24 24" style="transform:rotate(180deg)"><polyline points="6 9 12 15 18 9"/></svg></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Footer -->
+<footer>
+  <p>&copy; 2026 <a href="index.html">Tokyo Jet Lag</a> — It's 2AM. Now what?</p>
+</footer>
+
+
+<!-- ═══════════════════════ JS ═══════════════════════ -->
+<script>
+(function() {
+  'use strict';
+
+  /* ── Intersection Observer: fade-in + chapter reveals + slides ── */
+  const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+
+  // Observe all animated elements
+  document.querySelectorAll('.fade-in, .chapter-content, .next-story-inner, .slide-left, .slide-right, .pull-quote').forEach(el => {
+    revealObserver.observe(el);
+  });
+
+
+  /* ── Enhanced Parallax on scroll ── */
+  let ticking = false;
+  function updateParallax() {
+    const windowH = window.innerHeight;
+
+    document.querySelectorAll('.chapter-bg.parallax').forEach(bg => {
+      const chapter = bg.parentElement;
+      const rect = chapter.getBoundingClientRect();
+      if (rect.bottom > 0 && rect.top < windowH) {
+        const progress = (windowH - rect.top) / (windowH + rect.height);
+        const offset = (progress - 0.5) * -120; // stronger parallax
+        const child = bg.querySelector('img, video');
+        if (child) {
+          child.style.transform = `translateY(${offset}px) scale(1.15)`;
+        }
+      }
+    });
+
+    // Photo strip parallax (subtle)
+    document.querySelectorAll('.photo-strip').forEach(strip => {
+      const rect = strip.getBoundingClientRect();
+      if (rect.bottom > 0 && rect.top < windowH) {
+        const progress = (windowH - rect.top) / (windowH + rect.height);
+        const imgs = strip.querySelectorAll('img');
+        imgs.forEach((img, i) => {
+          const offset = (progress - 0.5) * (-15 - i * 5);
+          img.style.transform = `translateY(${offset}px)`;
+        });
+      }
+    });
+
+    ticking = false;
+  }
+
+
+  /* ── Header hide on scroll down, show on scroll up ── */
+  let lastScroll = 0;
+  const header = document.getElementById('siteHeader');
+
+  function handleScroll() {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const scrollY = window.scrollY;
+
+        // Progress bar
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
+        document.getElementById('progressBar').style.width = progress + '%';
+
+        // Header
+        if (scrollY > lastScroll && scrollY > 100) {
+          header.classList.add('hidden');
+        } else {
+          header.classList.remove('hidden');
+        }
+        lastScroll = scrollY;
+
+        // Scroll indicator
+        const indicator = document.getElementById('scrollIndicator');
+        if (scrollY > 200) {
+          indicator.classList.add('hide');
+        } else {
+          indicator.classList.remove('hide');
+        }
+
+        // Back to top
+        const btt = document.getElementById('backToTop');
+        if (scrollY > window.innerHeight) {
+          btt.classList.add('show');
+        } else {
+          btt.classList.remove('show');
+        }
+
+        // Story dots visibility
+        const dots = document.getElementById('storyDots');
+        if (scrollY > window.innerHeight * 0.5) {
+          dots.classList.add('show');
+        } else {
+          dots.classList.remove('show');
+        }
+
+        // Parallax
+        updateParallax();
+
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+
+
+  /* ── Story dot navigation: active state ── */
+  const sections = [
+    { id: 'landing', el: document.getElementById('landing') },
+    { id: 'shinjuku', el: document.getElementById('story-shinjuku') },
+    { id: 'tsukiji', el: document.getElementById('story-tsukiji') },
+    { id: 'golden-gai', el: document.getElementById('story-golden-gai') }
+  ];
+
+  const dotObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id === 'landing' ? 'landing' :
+                   entry.target.id.replace('story-', '');
+        document.querySelectorAll('.story-dot').forEach(d => d.classList.remove('active'));
+        const dot = document.querySelector(`.story-dot[data-target="${id}"]`);
+        if (dot) dot.classList.add('active');
+      }
+    });
+  }, { threshold: 0.3 });
+
+  sections.forEach(s => { if (s.el) dotObserver.observe(s.el); });
+
+  // Dot click
+  document.querySelectorAll('.story-dot').forEach(dot => {
+    dot.addEventListener('click', () => {
+      const target = dot.dataset.target;
+      const el = document.getElementById(target);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+
+  /* ── Back to top ── */
+  document.getElementById('backToTop').addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+
+  /* ── Share buttons ── */
+  const shareToast = document.getElementById('shareToast');
+  let toastTimer;
+
+  document.querySelectorAll('.btn-share').forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const story = btn.dataset.story;
+      const url = `${window.location.origin}${window.location.pathname}#${story}`;
+      const titles = {
+        shinjuku: 'A Night in Shinjuku — Tokyo Jet Lag',
+        tsukiji: 'Dawn at Tsukiji — Tokyo Jet Lag',
+        'golden-gai': 'Golden Gai Crawl — Tokyo Jet Lag'
+      };
+
+      if (navigator.share) {
+        try {
+          await navigator.share({ title: titles[story] || 'Tokyo Jet Lag', url });
+        } catch (err) {
+          // User cancelled
+        }
+      } else {
+        try {
+          await navigator.clipboard.writeText(url);
+          shareToast.classList.add('show');
+          clearTimeout(toastTimer);
+          toastTimer = setTimeout(() => shareToast.classList.remove('show'), 2500);
+        } catch {
+          const tmp = document.createElement('textarea');
+          tmp.value = url;
+          document.body.appendChild(tmp);
+          tmp.select();
+          document.execCommand('copy');
+          document.body.removeChild(tmp);
+          shareToast.classList.add('show');
+          clearTimeout(toastTimer);
+          toastTimer = setTimeout(() => shareToast.classList.remove('show'), 2500);
+        }
+      }
+    });
+  });
+
+
+  /* ── Lazy video play/pause ── */
+  const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const video = entry.target.querySelector('video');
+      if (!video) return;
+      if (entry.isIntersecting) {
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    });
+  }, { threshold: 0.25 });
+
+  document.querySelectorAll('.chapter-bg').forEach(bg => {
+    if (bg.querySelector('video')) videoObserver.observe(bg);
+  });
+
+
+  /* ── Smooth story card navigation ── */
+  document.querySelectorAll('.story-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = card.getAttribute('href');
+      if (target) {
+        const el = document.querySelector(target);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          history.pushState(null, '', target);
+        }
+      }
+    });
+  });
+
+  /* ── Next story smooth scroll ── */
+  document.querySelectorAll('.next-story-title').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = link.getAttribute('href');
+      if (target) {
+        const el = document.querySelector(target);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          history.pushState(null, '', target);
+        }
+      }
+    });
+  });
+
+
+  /* ── Initial state ── */
+  handleScroll();
+
+  /* ── Handle hash on load ── */
+  if (window.location.hash) {
+    const target = document.querySelector(window.location.hash);
+    if (target) {
+      setTimeout(() => {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }, 300);
+    }
+  }
+
+})();
+</script>
+
+</body>
+</html>

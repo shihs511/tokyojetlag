@@ -1223,17 +1223,8 @@
         transition-duration: 0.01ms !important;
       }
       html { scroll-behavior: auto; }
-      .hero-video { display: none !important; }
-      .hero-video-overlay { background: linear-gradient(180deg, rgba(4,4,15,0.7) 0%, rgba(4,4,15,0.3) 50%, rgba(4,4,15,1) 100%) !important; }
-      .hero-img-bg { opacity: 0.25 !important; }
+      .hero-video { transition: none; }
       .grid-bg { animation: none; }
-    }
-
-    /* Mobile: disable video background for performance, show static image only */
-    @media (max-width: 768px) {
-      .hero-video { display: none !important; }
-      .hero-video-overlay { background: linear-gradient(180deg, rgba(4,4,15,0.7) 0%, rgba(4,4,15,0.2) 40%, rgba(4,4,15,0.5) 70%, rgba(4,4,15,1) 100%) !important; }
-      .hero-img-bg { opacity: 0.25 !important; }
     }
 
     /* ─── MOBILE FONT MINIMUM ─── */
@@ -2557,22 +2548,16 @@
     <canvas id="cityCanvas"></canvas>
 
     <!--
-      ★ TIME-BASED VIDEO BACKGROUND (HD 1080p)
+      ★ TIME-BASED VIDEO BACKGROUND
       動画は東京の時間帯に応じて自動切り替え（朝・昼・夜）。
-      Pexelsの無料HD動画を使用（全て横向き1920×1080）。
-      読み込みに失敗した場合はUnsplash静止画背景にフォールバック。
-
-      パフォーマンス最適化:
-      - モバイル (≤768px): 動画を無効化、静止画のみ表示
-      - prefers-reduced-motion: 動画を非表示
-      - タブ非アクティブ時: 動画を一時停止
+      Pexelsの無料動画を使用。読み込みに失敗した場合は静止画背景にフォールバック。
 
       手動で動画URLを差し替える場合は以下のIDを変更してください：
       - heroVideo: メインの<video>要素
       - JS内の VIDEO_SOURCES オブジェクト:
-        morning: 朝の動画URL (5:00-11:59 Tokyo time) — Pexels #35462656
-        day:     昼の動画URL (12:00-17:59 Tokyo time) — Pexels #29195779
-        night:   夜の動画URL (18:00-4:59 Tokyo time) — Pexels #9396326
+        morning: 朝の動画URL (5:00-11:59 Tokyo time)
+        day:     昼の動画URL (12:00-17:59 Tokyo time)
+        night:   夜の動画URL (18:00-4:59 Tokyo time)
     -->
     <video class="hero-video" id="heroVideo" autoplay muted loop playsinline></video>
     <div class="hero-video-overlay"></div>
@@ -5209,9 +5194,9 @@
 
     // ─── TIME-BASED VIDEO SWITCHING ───
     var VIDEO_SOURCES = {
-      morning: 'https://videos.pexels.com/video-files/35462656/15024368_1920_1080_30fps.mp4',   // Aerial View of Tokyo City Skyline (Pexels #35462656)
-      day:     'https://videos.pexels.com/video-files/29195779/12606309_1920_1080_60fps.mp4',   // Tokyo Skyline with Skytree at Sunset (Pexels #29195779)
-      night:   'https://videos.pexels.com/video-files/9396326/9396326-hd_1920_1080_30fps.mp4',  // Drone Footage of Tokyo Skytree at Night (Pexels #9396326)
+      morning: 'https://videos.pexels.com/video-files/4434242/4434242-sd_640_360_24fps.mp4',
+      day:     'https://videos.pexels.com/video-files/2614602/2614602-sd_640_360_25fps.mp4',
+      night:   'https://videos.pexels.com/video-files/3942468/3942468-sd_640_360_30fps.mp4',
     };
 
     var BG_FALLBACKS = {
@@ -5232,9 +5217,6 @@
       return 'night';
     }
 
-    // Mobile detection: disable video on narrow viewports or touch-primary devices for performance
-    var isMobileDevice = (window.innerWidth <= 768) || (window.matchMedia('(pointer: coarse)').matches && window.innerWidth <= 1024);
-
     function loadTimeBasedVideo() {
       var tokyoHour = getTokyoHour();
       var tod = getTimeOfDay(tokyoHour);
@@ -5243,10 +5225,8 @@
 
       imgBg.style.backgroundImage = "url('" + BG_FALLBACKS[tod] + "')";
 
-      // Skip video on mobile (performance) or reduced-motion preference
-      if (isMobileDevice || prefersReducedMotion) {
+      if (prefersReducedMotion) {
         imgBg.style.opacity = '0.25';
-        if (video) video.style.display = 'none';
         return;
       }
 
@@ -5261,12 +5241,6 @@
 
       video.addEventListener('error', function() {
         imgBg.style.opacity = '0.25';
-      });
-
-      // Pause video when tab is hidden (save resources)
-      document.addEventListener('visibilitychange', function() {
-        if (document.hidden) { video.pause(); }
-        else if (!prefersReducedMotion && !isMobileDevice) { video.play(); }
       });
 
       setInterval(function() {
